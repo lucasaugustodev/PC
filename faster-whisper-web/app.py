@@ -76,7 +76,11 @@ def tts():
         communicate = edge_tts.Communicate(text, voice)
         await communicate.save(tmp.name)
 
-    asyncio.run(generate())
+    try:
+        asyncio.run(generate())
+    except Exception as e:
+        os.unlink(tmp.name)
+        return jsonify({"error": str(e)}), 500
 
     def send_and_cleanup():
         with open(tmp.name, "rb") as f:
