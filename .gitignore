@@ -1,0 +1,107 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Windows
+NTUSER.DAT*
+*.regtrans-ms
+*.blf
+
+# User-specific files
+Desktop/
+Documents/
+Downloads/
+Pictures/
+Music/
+Videos/
+Favorites/
+Links/
+Contacts/
+Saved Games/
+Searches/
+AppData/
+3D Objects/
+"OneDrive/"
+
+# Temporary files
+*.tmp
+*.temp
+
+# Application data
+.ssh/
+.config/
+.cache/
+.local/
+.m2/
+.matplotlib/
+.bun/
+.aws/
+.playwright/
+.playwright-cli/
+.playwright-mcp/
+.lmstudio/
+.trae/
+.trae-aicc/
+.fly/
+.gemini/
+.openfang/
+.kiro/
+.basic-memory/
+.ansel/
+.icube-remote-ssh/
+.apm/
+.chocolatey/
+.claude-mem/
+.scoop/
+.pack/
+
+# Project specific
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.json
+*.txt
+!package.json
+!package-lock.json
+!cnae.json
+!municipio.json
+claude-launcher-web/
+bloons-td-3d/
+dyad-apps/
+landing-page-ai-hub/
+new-project/
+vultr-vm-creator/
+ansel/
+basic-memory/
+DataGripProjects/
+node_modules/
+screenshots/
+test-*.png
+playwright-cli-docs.md
+playwright-cli-snapshot.md
+teste-cline*.txt
+docs-part*.txt
+faster-whisper-test.py
+scraper.js
+screenshot.js
