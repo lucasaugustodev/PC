@@ -1,7 +1,18 @@
-from flask import Flask, request, jsonify, send_file
-from faster_whisper import WhisperModel
-import tempfile
 import os
+import sys
+import asyncio
+
+# Add NVIDIA DLL paths before importing anything CUDA-related
+nvidia_path = os.path.join(sys.prefix, "Lib", "site-packages", "nvidia")
+for lib in ["cublas", "cudnn"]:
+    bin_path = os.path.join(nvidia_path, lib, "bin")
+    if os.path.isdir(bin_path):
+        os.environ["PATH"] = bin_path + os.pathsep + os.environ.get("PATH", "")
+
+from flask import Flask, request, jsonify, send_file, Response
+from faster_whisper import WhisperModel
+import edge_tts
+import tempfile
 import time
 
 app = Flask(__name__)
@@ -48,6 +59,42 @@ def transcribe():
         })
     finally:
         os.unlink(tmp.name)
+
+@app.route("/tts", methods=["POST"])
+def tts():
+    data = request.get_json()
+    text = data.get("text", "").strip()
+    voice = data.get("voice", "pt-BR-AntonioNeural")
+
+    if not text:
+        return jsonify({"error": "Texto vazio"}), 400
+
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
+    tmp.close()
+
+    async def generate():
+        communicate = edge_tts.Communicate(text, voice)
+        await communicate.save(tmp.name)
+
+    asyncio.run(generate())
+
+    def send_and_cleanup():
+        with open(tmp.name, "rb") as f:
+            data = f.read()
+        os.unlink(tmp.name)
+        return data
+
+    audio_data = send_and_cleanup()
+    return Response(audio_data, mimetype="audio/mpeg")
+
+@app.route("/voices")
+def voices():
+    async def get_voices():
+        return await edge_tts.list_voices()
+
+    all_voices = asyncio.run(get_voices())
+    pt_voices = [v for v in all_voices if v["Locale"].startswith("pt-")]
+    return jsonify(pt_voices)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5555, debug=False)
