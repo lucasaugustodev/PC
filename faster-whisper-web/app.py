@@ -7,7 +7,7 @@ import time
 app = Flask(__name__)
 
 print("Carregando modelo large-v3 na GPU... (pode demorar na primeira vez)")
-model = WhisperModel("large-v3", device="cuda", compute_type="float16")
+model = WhisperModel("C:/Users/PC/.cache/faster-whisper-large-v3", device="cuda", compute_type="float16")
 print("Modelo carregado e pronto!")
 
 @app.route("/")
