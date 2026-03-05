@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faster Whisper - Transcritor</title>
+<title>Whisper + TTS</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -15,164 +15,177 @@
     flex-direction: column;
     align-items: center;
   }
-  h1 {
-    margin-top: 40px;
-    font-size: 28px;
-    font-weight: 300;
-    color: #fff;
-  }
+  h1 { margin-top: 30px; font-size: 28px; font-weight: 300; color: #fff; }
   h1 span { color: #4fc3f7; font-weight: 600; }
-  .subtitle {
-    color: #666;
-    font-size: 14px;
-    margin-top: 6px;
-  }
-  .controls {
-    margin-top: 40px;
+  .subtitle { color: #666; font-size: 14px; margin-top: 6px; }
+
+  .tabs {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    gap: 0;
+    margin-top: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
   }
-  #recordBtn {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid #333;
-    background: #1a1a1a;
-    color: #fff;
-    font-size: 14px;
+  .tab {
+    padding: 10px 32px;
+    background: #141414;
+    color: #888;
     cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
+    font-size: 14px;
+    border: none;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: #ccc; }
+  .tab.active { background: #1e2a30; color: #4fc3f7; }
+
+  .panel { display: none; width: 90%; max-width: 800px; }
+  .panel.active { display: flex; flex-direction: column; align-items: center; }
+
+  /* STT */
+  .controls { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  #recordBtn {
+    width: 120px; height: 120px; border-radius: 50%; border: 3px solid #333;
+    background: #1a1a1a; color: #fff; font-size: 14px; cursor: pointer;
+    transition: all 0.3s; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px;
   }
   #recordBtn:hover { border-color: #4fc3f7; background: #1e2a30; }
-  #recordBtn.recording {
-    border-color: #ef5350;
-    background: #2a1515;
-    animation: pulse 1.5s infinite;
-  }
+  #recordBtn.recording { border-color: #ef5350; background: #2a1515; animation: pulse 1.5s infinite; }
   #recordBtn .icon { font-size: 32px; }
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(239,83,80,0.4); }
     50% { box-shadow: 0 0 0 20px rgba(239,83,80,0); }
   }
-  .status {
-    font-size: 14px;
-    color: #888;
-    min-height: 20px;
-  }
+
+  .status { font-size: 14px; color: #888; min-height: 20px; }
   .status.processing { color: #ffd54f; }
   .status.error { color: #ef5350; }
   .status.success { color: #66bb6a; }
-  .result-container {
-    margin-top: 30px;
-    width: 90%;
-    max-width: 800px;
-    flex: 1;
-    padding-bottom: 40px;
-  }
+  .timer { font-family: monospace; font-size: 24px; color: #ef5350; min-height: 30px; }
+
+  .result-container { margin-top: 20px; width: 100%; padding-bottom: 40px; }
   .result-card {
-    background: #141414;
-    border: 1px solid #222;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 16px;
+    background: #141414; border: 1px solid #222; border-radius: 12px;
+    padding: 24px; margin-bottom: 16px;
   }
-  .result-card .meta {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
+  .result-card .meta { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
   .result-card .meta .tag {
-    background: #1e1e1e;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #aaa;
+    background: #1e1e1e; padding: 4px 12px; border-radius: 20px;
+    font-size: 12px; color: #aaa;
   }
   .result-card .meta .tag b { color: #4fc3f7; }
-  .result-card .text {
-    font-size: 18px;
-    line-height: 1.7;
-    color: #fff;
-    white-space: pre-wrap;
+  .result-card .text { font-size: 18px; line-height: 1.7; color: #fff; white-space: pre-wrap; }
+  .segments { margin-top: 16px; border-top: 1px solid #222; padding-top: 16px; }
+  .segments summary { cursor: pointer; color: #666; font-size: 13px; }
+  .seg-line { display: flex; gap: 12px; padding: 6px 0; font-size: 14px; border-bottom: 1px solid #1a1a1a; }
+  .seg-line .time { color: #4fc3f7; font-family: monospace; font-size: 12px; min-width: 120px; padding-top: 2px; }
+
+  /* TTS */
+  .tts-box { margin-top: 30px; width: 100%; }
+  .tts-box textarea {
+    width: 100%; min-height: 120px; background: #141414; border: 1px solid #333;
+    border-radius: 8px; color: #fff; font-size: 16px; padding: 16px;
+    font-family: inherit; resize: vertical;
   }
-  .segments {
-    margin-top: 16px;
-    border-top: 1px solid #222;
-    padding-top: 16px;
+  .tts-box textarea:focus { outline: none; border-color: #4fc3f7; }
+  .tts-controls { display: flex; gap: 12px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+  .tts-controls select {
+    background: #1a1a1a; border: 1px solid #333; color: #e0e0e0;
+    padding: 10px 14px; border-radius: 8px; font-size: 14px;
   }
-  .segments summary {
-    cursor: pointer;
-    color: #666;
-    font-size: 13px;
+  .tts-controls select:focus { outline: none; border-color: #4fc3f7; }
+  #speakBtn {
+    padding: 10px 28px; background: #4fc3f7; color: #000; border: none;
+    border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
   }
-  .seg-line {
-    display: flex;
-    gap: 12px;
-    padding: 6px 0;
-    font-size: 14px;
-    border-bottom: 1px solid #1a1a1a;
+  #speakBtn:hover { background: #81d4fa; }
+  #speakBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ttsStatus { font-size: 14px; color: #888; min-height: 20px; margin-top: 12px; }
+  .tts-player { margin-top: 16px; width: 100%; }
+  .tts-player audio { width: 100%; }
+  .tts-history { margin-top: 20px; padding-bottom: 40px; }
+  .tts-card {
+    background: #141414; border: 1px solid #222; border-radius: 12px;
+    padding: 20px; margin-bottom: 12px;
   }
-  .seg-line .time {
-    color: #4fc3f7;
-    font-family: monospace;
-    font-size: 12px;
-    min-width: 120px;
-    padding-top: 2px;
-  }
-  .history-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #444;
-    margin-bottom: 12px;
-  }
-  .timer {
-    font-family: monospace;
-    font-size: 24px;
-    color: #ef5350;
-    min-height: 30px;
-  }
+  .tts-card .tts-text { color: #ccc; font-size: 15px; margin-bottom: 12px; line-height: 1.5; }
+  .tts-card .tts-meta { font-size: 12px; color: #666; margin-bottom: 10px; }
+  .tts-card audio { width: 100%; }
 </style>
 </head>
 <body>
 
-<h1>Faster <span>Whisper</span></h1>
-<p class="subtitle">large-v3 | CUDA GPU | Tempo real</p>
+<h1>Faster <span>Whisper</span> + <span>TTS</span></h1>
+<p class="subtitle">large-v3 CUDA | Edge TTS</p>
 
-<div class="controls">
-  <button id="recordBtn" onclick="toggleRecord()">
-    <span class="icon">🎙️</span>
-    <span id="btnLabel">Gravar</span>
-  </button>
-  <div id="timer" class="timer"></div>
-  <div id="status" class="status">Clique para gravar</div>
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('stt')">Voz para Texto</button>
+  <button class="tab" onclick="switchTab('tts')">Texto para Voz</button>
 </div>
 
-<div class="result-container">
-  <div id="results"></div>
+<!-- STT Panel -->
+<div id="stt-panel" class="panel active">
+  <div class="controls">
+    <button id="recordBtn" onclick="toggleRecord()">
+      <span class="icon">&#127908;</span>
+      <span id="btnLabel">Gravar</span>
+    </button>
+    <div id="timer" class="timer"></div>
+    <div id="status" class="status">Clique para gravar</div>
+  </div>
+  <div class="result-container">
+    <div id="results"></div>
+  </div>
+</div>
+
+<!-- TTS Panel -->
+<div id="tts-panel" class="panel">
+  <div class="tts-box">
+    <textarea id="ttsText" placeholder="Digite o texto para converter em fala..."></textarea>
+    <div class="tts-controls">
+      <select id="voiceSelect">
+        <option value="pt-BR-AntonioNeural">Antonio (Masculino)</option>
+        <option value="pt-BR-FranciscaNeural" selected>Francisca (Feminino)</option>
+        <option value="pt-BR-ThalitaNeural">Thalita (Feminino)</option>
+        <option value="pt-BR-GiovannaNeural">Giovanna (Feminino)</option>
+        <option value="pt-BR-ValerioNeural">Valerio (Masculino)</option>
+        <option value="pt-BR-LeticiaNeural">Leticia (Feminino)</option>
+        <option value="pt-BR-NicolauNeural">Nicolau (Masculino)</option>
+        <option value="pt-BR-MacerioNeural">Macerio (Masculino)</option>
+        <option value="pt-BR-DonatoNeural">Donato (Masculino)</option>
+        <option value="pt-BR-FabioNeural">Fabio (Masculino)</option>
+        <option value="pt-BR-BrendaNeural">Brenda (Feminino)</option>
+        <option value="pt-BR-EliasNeural">Elias (Masculino)</option>
+        <option value="pt-BR-HumbertoNeural">Humberto (Masculino)</option>
+        <option value="pt-BR-JulioNeural">Julio (Masculino)</option>
+        <option value="pt-BR-LeilaNeural">Leila (Feminino)</option>
+        <option value="pt-BR-ManuelaNeural">Manuela (Feminino)</option>
+        <option value="pt-BR-YaraNeural">Yara (Feminino)</option>
+      </select>
+      <button id="speakBtn" onclick="speak()">Falar</button>
+    </div>
+    <div id="ttsStatus"></div>
+  </div>
+  <div class="tts-history" id="ttsHistory"></div>
 </div>
 
 <script>
-let mediaRecorder = null;
-let audioChunks = [];
-let isRecording = false;
-let timerInterval = null;
-let startTime = 0;
+// Tab switching
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', (tab === 'stt' && i === 0) || (tab === 'tts' && i === 1));
+  });
+  document.getElementById('stt-panel').classList.toggle('active', tab === 'stt');
+  document.getElementById('tts-panel').classList.toggle('active', tab === 'tts');
+}
+
+// =================== STT ===================
+let mediaRecorder = null, audioChunks = [], isRecording = false, timerInterval = null, startTime = 0;
 
 async function toggleRecord() {
-  if (isRecording) {
-    stopRecording();
-  } else {
-    await startRecording();
-  }
+  isRecording ? stopRecording() : await startRecording();
 }
 
 async function startRecording() {
@@ -180,45 +193,26 @@ async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
     audioChunks = [];
-
     mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-    mediaRecorder.onstop = () => {
-      stream.getTracks().forEach(t => t.stop());
-      sendAudio();
-    };
-
+    mediaRecorder.onstop = () => { stream.getTracks().forEach(t => t.stop()); sendAudio(); };
     mediaRecorder.start();
     isRecording = true;
     document.getElementById('recordBtn').classList.add('recording');
     document.getElementById('btnLabel').textContent = 'Parar';
     setStatus('Gravando...', '');
-    startTimer();
-  } catch (err) {
-    setStatus('Erro ao acessar microfone: ' + err.message, 'error');
-  }
+    startTime = Date.now();
+    timerInterval = setInterval(() => {
+      const s = Math.floor((Date.now() - startTime) / 1000);
+      document.getElementById('timer').textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+    }, 200);
+  } catch (err) { setStatus('Erro ao acessar microfone: ' + err.message, 'error'); }
 }
 
 function stopRecording() {
-  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-    mediaRecorder.stop();
-  }
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
   isRecording = false;
   document.getElementById('recordBtn').classList.remove('recording');
   document.getElementById('btnLabel').textContent = 'Gravar';
-  stopTimer();
-}
-
-function startTimer() {
-  startTime = Date.now();
-  timerInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    const min = String(Math.floor(elapsed / 60)).padStart(2, '0');
-    const sec = String(elapsed % 60).padStart(2, '0');
-    document.getElementById('timer').textContent = min + ':' + sec;
-  }, 200);
-}
-
-function stopTimer() {
   clearInterval(timerInterval);
   document.getElementById('timer').textContent = '';
 }
@@ -226,23 +220,15 @@ function stopTimer() {
 async function sendAudio() {
   setStatus('Transcrevendo com GPU...', 'processing');
   const blob = new Blob(audioChunks, { type: 'audio/webm' });
-  const formData = new FormData();
-  formData.append('audio', blob, 'recording.webm');
-
+  const fd = new FormData();
+  fd.append('audio', blob, 'recording.webm');
   try {
-    const resp = await fetch('/transcribe', { method: 'POST', body: formData });
+    const resp = await fetch('/transcribe', { method: 'POST', body: fd });
     const data = await resp.json();
-
-    if (data.error) {
-      setStatus('Erro: ' + data.error, 'error');
-      return;
-    }
-
-    setStatus(`Pronto! ${data.processing_time}s de processamento`, 'success');
+    if (data.error) { setStatus('Erro: ' + data.error, 'error'); return; }
+    setStatus('Pronto! ' + data.processing_time + 's de processamento', 'success');
     addResult(data);
-  } catch (err) {
-    setStatus('Erro de conexao: ' + err.message, 'error');
-  }
+  } catch (err) { setStatus('Erro de conexao: ' + err.message, 'error'); }
 }
 
 function setStatus(msg, cls) {
@@ -255,35 +241,84 @@ function addResult(data) {
   const container = document.getElementById('results');
   const card = document.createElement('div');
   card.className = 'result-card';
-
-  let segmentsHtml = '';
+  let segHtml = '';
   if (data.segments && data.segments.length > 0) {
-    segmentsHtml = '<div class="segments"><details><summary>Segmentos (' + data.segments.length + ')</summary>';
+    segHtml = '<div class="segments"><details><summary>Segmentos (' + data.segments.length + ')</summary>';
     data.segments.forEach(s => {
-      segmentsHtml += '<div class="seg-line"><span class="time">' + s.start.toFixed(2) + 's → ' + s.end.toFixed(2) + 's</span><span>' + escapeHtml(s.text) + '</span></div>';
+      segHtml += '<div class="seg-line"><span class="time">' + s.start.toFixed(2) + 's -> ' + s.end.toFixed(2) + 's</span><span>' + esc(s.text) + '</span></div>';
     });
-    segmentsHtml += '</details></div>';
+    segHtml += '</details></div>';
   }
-
   const now = new Date().toLocaleTimeString('pt-BR');
   card.innerHTML =
     '<div class="meta">' +
-      '<span class="tag">🕐 ' + now + '</span>' +
-      '<span class="tag">🌐 <b>' + data.language + '</b> (' + (data.language_probability * 100).toFixed(0) + '%)</span>' +
-      '<span class="tag">⏱️ Audio: <b>' + data.duration + 's</b></span>' +
-      '<span class="tag">⚡ GPU: <b>' + data.processing_time + 's</b></span>' +
+      '<span class="tag">&#128336; ' + now + '</span>' +
+      '<span class="tag">&#127760; <b>' + data.language + '</b> (' + (data.language_probability*100).toFixed(0) + '%)</span>' +
+      '<span class="tag">&#9201; Audio: <b>' + data.duration + 's</b></span>' +
+      '<span class="tag">&#9889; GPU: <b>' + data.processing_time + 's</b></span>' +
     '</div>' +
-    '<div class="text">' + escapeHtml(data.text || '(silencio)') + '</div>' +
-    segmentsHtml;
-
+    '<div class="text">' + esc(data.text || '(silencio)') + '</div>' + segHtml;
   container.insertBefore(card, container.firstChild);
 }
 
-function escapeHtml(text) {
-  const d = document.createElement('div');
-  d.textContent = text;
-  return d.innerHTML;
+// =================== TTS ===================
+async function speak() {
+  const text = document.getElementById('ttsText').value.trim();
+  if (!text) return;
+  const voice = document.getElementById('voiceSelect').value;
+  const btn = document.getElementById('speakBtn');
+  const statusEl = document.getElementById('ttsStatus');
+
+  btn.disabled = true;
+  btn.textContent = 'Gerando...';
+  statusEl.textContent = 'Gerando audio...';
+  statusEl.style.color = '#ffd54f';
+
+  try {
+    const resp = await fetch('/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, voice })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      statusEl.textContent = 'Erro: ' + (err.error || 'desconhecido');
+      statusEl.style.color = '#ef5350';
+      return;
+    }
+
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+
+    // Auto play
+    const audio = new Audio(url);
+    audio.play();
+
+    statusEl.textContent = 'Audio gerado!';
+    statusEl.style.color = '#66bb6a';
+
+    // Add to history
+    const history = document.getElementById('ttsHistory');
+    const card = document.createElement('div');
+    card.className = 'tts-card';
+    const voiceName = document.getElementById('voiceSelect').selectedOptions[0].textContent;
+    const now = new Date().toLocaleTimeString('pt-BR');
+    card.innerHTML =
+      '<div class="tts-meta">&#128336; ' + now + ' | Voz: ' + esc(voiceName) + '</div>' +
+      '<div class="tts-text">' + esc(text) + '</div>' +
+      '<audio controls src="' + url + '"></audio>';
+    history.insertBefore(card, history.firstChild);
+  } catch (err) {
+    statusEl.textContent = 'Erro: ' + err.message;
+    statusEl.style.color = '#ef5350';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Falar';
+  }
 }
+
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 </script>
 </body>
 </html>
