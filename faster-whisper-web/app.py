@@ -1,6 +1,7 @@
 import os
 import sys
 import asyncio
+import base64
 
 # Add NVIDIA DLL paths before importing anything CUDA-related
 nvidia_path = os.path.join(sys.prefix, "Lib", "site-packages", "nvidia")
@@ -9,7 +10,7 @@ for lib in ["cublas", "cudnn"]:
     if os.path.isdir(bin_path):
         os.environ["PATH"] = bin_path + os.pathsep + os.environ.get("PATH", "")
 
-from flask import Flask, request, jsonify, send_file, Response
+from flask import Flask, request, jsonify, send_file, send_from_directory, Response
 from faster_whisper import WhisperModel
 import edge_tts
 import tempfile
@@ -25,6 +26,10 @@ print("Modelo carregado e pronto!")
 def index():
     return send_file("index.html")
 
+@app.route("/avatars/<path:filename>")
+def serve_avatar(filename):
+    return send_from_directory("avatars", filename)
+
 @app.route("/transcribe", methods=["POST"])
 def transcribe():
     if "audio" not in request.files:
@@ -37,7 +42,8 @@ def transcribe():
 
     try:
         start = time.time()
-        segments, info = model.transcribe(tmp.name, beam_size=5)
+        language = request.form.get("language", "pt")
+        segments, info = model.transcribe(tmp.name, beam_size=5, language=language)
         results = []
         full_text = ""
         for seg in segments:
@@ -65,6 +71,7 @@ def tts():
     data = request.get_json()
     text = data.get("text", "").strip()
     voice = data.get("voice", "pt-BR-AntonioNeural")
+    with_lipsync = data.get("lipsync", False)
 
     if not text:
         return jsonify({"error": "Texto vazio"}), 400
@@ -72,30 +79,64 @@ def tts():
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
     tmp.close()
 
-    async def generate():
-        communicate = edge_tts.Communicate(text, voice)
-        await communicate.save(tmp.name)
-
     try:
+        async def generate():
+            communicate = edge_tts.Communicate(text, voice)
+            await communicate.save(tmp.name)
         asyncio.run(generate())
     except Exception as e:
         os.unlink(tmp.name)
         return jsonify({"error": str(e)}), 500
 
-    def send_and_cleanup():
+    if not with_lipsync:
         with open(tmp.name, "rb") as f:
-            data = f.read()
+            audio_data = f.read()
         os.unlink(tmp.name)
-        return data
+        return Response(audio_data, mimetype="audio/mpeg")
 
-    audio_data = send_and_cleanup()
-    return Response(audio_data, mimetype="audio/mpeg")
+    # Lipsync mode: transcribe TTS audio to get word timestamps
+    try:
+        segments, info = model.transcribe(
+            tmp.name, beam_size=5, word_timestamps=True
+        )
+        words = []
+        wtimes = []
+        wdurations = []
+        for seg in segments:
+            if seg.words:
+                for w in seg.words:
+                    words.append(w.word.strip())
+                    wtimes.append(int(w.start * 1000))
+                    wdurations.append(int((w.end - w.start) * 1000))
+
+        with open(tmp.name, "rb") as f:
+            audio_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+        return jsonify({
+            "audio": audio_b64,
+            "words": words,
+            "wtimes": wtimes,
+            "wdurations": wdurations
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        os.unlink(tmp.name)
+
+@app.route("/upload-avatar", methods=["POST"])
+def upload_avatar():
+    if "avatar" not in request.files:
+        return jsonify({"error": "Nenhum arquivo enviado"}), 400
+    f = request.files["avatar"]
+    filename = f.filename.replace(" ", "_")
+    path = os.path.join("avatars", filename)
+    f.save(path)
+    return jsonify({"url": "/avatars/" + filename})
 
 @app.route("/voices")
 def voices():
     async def get_voices():
         return await edge_tts.list_voices()
-
     all_voices = asyncio.run(get_voices())
     pt_voices = [v for v in all_voices if v["Locale"].startswith("pt-")]
     return jsonify(pt_voices)

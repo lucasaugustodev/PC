@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Whisper + TTS</title>
+<title>Whisper + TTS + Avatar</title>
+
+<script type="importmap">
+{ "imports":
+  {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js/+esm",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+    "talkinghead": "https://cdn.jsdelivr.net/gh/met4citizen/TalkingHead@1.7/modules/talkinghead.mjs"
+  }
+}
+</script>
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -15,44 +26,32 @@
     flex-direction: column;
     align-items: center;
   }
-  h1 { margin-top: 30px; font-size: 28px; font-weight: 300; color: #fff; }
+  h1 { margin-top: 20px; font-size: 26px; font-weight: 300; color: #fff; }
   h1 span { color: #4fc3f7; font-weight: 600; }
-  .subtitle { color: #666; font-size: 14px; margin-top: 6px; }
+  .subtitle { color: #666; font-size: 13px; margin-top: 4px; }
 
-  .tabs {
-    display: flex;
-    gap: 0;
-    margin-top: 24px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #333;
-  }
+  .tabs { display: flex; gap: 0; margin-top: 16px; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
   .tab {
-    padding: 10px 32px;
-    background: #141414;
-    color: #888;
-    cursor: pointer;
-    font-size: 14px;
-    border: none;
-    transition: all 0.2s;
+    padding: 10px 32px; background: #141414; color: #888; cursor: pointer;
+    font-size: 14px; border: none; transition: all 0.2s;
   }
   .tab:hover { color: #ccc; }
   .tab.active { background: #1e2a30; color: #4fc3f7; }
 
-  .panel { display: none; width: 90%; max-width: 800px; }
+  .panel { display: none; width: 90%; max-width: 900px; }
   .panel.active { display: flex; flex-direction: column; align-items: center; }
 
   /* STT */
-  .controls { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .controls { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
   #recordBtn {
-    width: 120px; height: 120px; border-radius: 50%; border: 3px solid #333;
+    width: 100px; height: 100px; border-radius: 50%; border: 3px solid #333;
     background: #1a1a1a; color: #fff; font-size: 14px; cursor: pointer;
     transition: all 0.3s; display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 6px;
+    flex-direction: column; gap: 4px;
   }
   #recordBtn:hover { border-color: #4fc3f7; background: #1e2a30; }
   #recordBtn.recording { border-color: #ef5350; background: #2a1515; animation: pulse 1.5s infinite; }
-  #recordBtn .icon { font-size: 32px; }
+  #recordBtn .icon { font-size: 28px; }
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(239,83,80,0.4); }
     50% { box-shadow: 0 0 0 20px rgba(239,83,80,0); }
@@ -62,63 +61,86 @@
   .status.processing { color: #ffd54f; }
   .status.error { color: #ef5350; }
   .status.success { color: #66bb6a; }
-  .timer { font-family: monospace; font-size: 24px; color: #ef5350; min-height: 30px; }
+  .timer { font-family: monospace; font-size: 20px; color: #ef5350; min-height: 24px; }
 
-  .result-container { margin-top: 20px; width: 100%; padding-bottom: 40px; }
+  .result-container { margin-top: 16px; width: 100%; padding-bottom: 30px; }
   .result-card {
-    background: #141414; border: 1px solid #222; border-radius: 12px;
-    padding: 24px; margin-bottom: 16px;
-  }
-  .result-card .meta { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
-  .result-card .meta .tag {
-    background: #1e1e1e; padding: 4px 12px; border-radius: 20px;
-    font-size: 12px; color: #aaa;
-  }
-  .result-card .meta .tag b { color: #4fc3f7; }
-  .result-card .text { font-size: 18px; line-height: 1.7; color: #fff; white-space: pre-wrap; }
-  .segments { margin-top: 16px; border-top: 1px solid #222; padding-top: 16px; }
-  .segments summary { cursor: pointer; color: #666; font-size: 13px; }
-  .seg-line { display: flex; gap: 12px; padding: 6px 0; font-size: 14px; border-bottom: 1px solid #1a1a1a; }
-  .seg-line .time { color: #4fc3f7; font-family: monospace; font-size: 12px; min-width: 120px; padding-top: 2px; }
-
-  /* TTS */
-  .tts-box { margin-top: 30px; width: 100%; }
-  .tts-box textarea {
-    width: 100%; min-height: 120px; background: #141414; border: 1px solid #333;
-    border-radius: 8px; color: #fff; font-size: 16px; padding: 16px;
-    font-family: inherit; resize: vertical;
-  }
-  .tts-box textarea:focus { outline: none; border-color: #4fc3f7; }
-  .tts-controls { display: flex; gap: 12px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
-  .tts-controls select {
-    background: #1a1a1a; border: 1px solid #333; color: #e0e0e0;
-    padding: 10px 14px; border-radius: 8px; font-size: 14px;
-  }
-  .tts-controls select:focus { outline: none; border-color: #4fc3f7; }
-  #speakBtn {
-    padding: 10px 28px; background: #4fc3f7; color: #000; border: none;
-    border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
-    transition: all 0.2s;
-  }
-  #speakBtn:hover { background: #81d4fa; }
-  #speakBtn:disabled { opacity: 0.4; cursor: not-allowed; }
-  #ttsStatus { font-size: 14px; color: #888; min-height: 20px; margin-top: 12px; }
-  .tts-player { margin-top: 16px; width: 100%; }
-  .tts-player audio { width: 100%; }
-  .tts-history { margin-top: 20px; padding-bottom: 40px; }
-  .tts-card {
     background: #141414; border: 1px solid #222; border-radius: 12px;
     padding: 20px; margin-bottom: 12px;
   }
-  .tts-card .tts-text { color: #ccc; font-size: 15px; margin-bottom: 12px; line-height: 1.5; }
-  .tts-card .tts-meta { font-size: 12px; color: #666; margin-bottom: 10px; }
-  .tts-card audio { width: 100%; }
+  .result-card .meta { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .result-card .meta .tag {
+    background: #1e1e1e; padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #aaa;
+  }
+  .result-card .meta .tag b { color: #4fc3f7; }
+  .result-card .text { font-size: 17px; line-height: 1.6; color: #fff; white-space: pre-wrap; }
+  .segments { margin-top: 12px; border-top: 1px solid #222; padding-top: 12px; }
+  .segments summary { cursor: pointer; color: #666; font-size: 13px; }
+  .seg-line { display: flex; gap: 12px; padding: 4px 0; font-size: 13px; border-bottom: 1px solid #1a1a1a; }
+  .seg-line .time { color: #4fc3f7; font-family: monospace; font-size: 11px; min-width: 110px; padding-top: 2px; }
+
+  /* TTS */
+  .tts-layout { display: flex; gap: 20px; margin-top: 20px; width: 100%; }
+  .tts-left { flex: 1; min-width: 0; }
+  .tts-right { width: 350px; flex-shrink: 0; }
+
+  #avatarContainer {
+    width: 350px; height: 400px; background: #111; border-radius: 12px;
+    border: 1px solid #222; overflow: hidden; position: relative;
+  }
+  #avatarLoading {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    color: #666; font-size: 14px; z-index: 10;
+  }
+
+  .tts-box textarea {
+    width: 100%; min-height: 140px; background: #141414; border: 1px solid #333;
+    border-radius: 8px; color: #fff; font-size: 15px; padding: 14px;
+    font-family: inherit; resize: vertical;
+  }
+  .tts-box textarea:focus { outline: none; border-color: #4fc3f7; }
+  .tts-controls { display: flex; gap: 10px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+  .tts-controls select {
+    background: #1a1a1a; border: 1px solid #333; color: #e0e0e0;
+    padding: 9px 12px; border-radius: 8px; font-size: 13px;
+  }
+  .tts-controls select:focus { outline: none; border-color: #4fc3f7; }
+  #speakBtn {
+    padding: 9px 24px; background: #4fc3f7; color: #000; border: none;
+    border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  #speakBtn:hover { background: #81d4fa; }
+  #speakBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ttsStatus { font-size: 13px; color: #888; min-height: 18px; margin-top: 10px; }
+  .tts-history { margin-top: 16px; padding-bottom: 30px; }
+  .tts-card {
+    background: #141414; border: 1px solid #222; border-radius: 12px;
+    padding: 16px; margin-bottom: 10px;
+  }
+  .tts-card .tts-text { color: #ccc; font-size: 14px; margin-bottom: 10px; line-height: 1.4; }
+  .tts-card .tts-meta { font-size: 11px; color: #666; margin-bottom: 8px; }
+  .tts-card audio { width: 100%; height: 32px; }
+
+  .avatar-picker {
+    display: flex; gap: 8px; margin-top: 8px;
+  }
+  .avatar-picker select {
+    flex: 1; background: #1a1a1a; border: 1px solid #333; color: #e0e0e0;
+    padding: 7px 8px; border-radius: 6px; font-size: 12px;
+  }
+  .avatar-picker select:focus { outline: none; border-color: #4fc3f7; }
+
+  @media (max-width: 800px) {
+    .tts-layout { flex-direction: column-reverse; }
+    .tts-right { width: 100%; }
+    #avatarContainer { width: 100%; height: 350px; }
+  }
 </style>
 </head>
 <body>
 
 <h1>Faster <span>Whisper</span> + <span>TTS</span></h1>
-<p class="subtitle">large-v3 CUDA | Edge TTS</p>
+<p class="subtitle">large-v3 CUDA | Edge TTS | TalkingHead 3D</p>
 
 <div class="tabs">
   <button class="tab active" onclick="switchTab('stt')">Voz para Texto</button>
@@ -135,46 +157,326 @@
     <div id="timer" class="timer"></div>
     <div id="status" class="status">Clique para gravar</div>
   </div>
-  <div class="result-container">
-    <div id="results"></div>
-  </div>
+  <div class="result-container"><div id="results"></div></div>
 </div>
 
 <!-- TTS Panel -->
 <div id="tts-panel" class="panel">
-  <div class="tts-box">
-    <textarea id="ttsText" placeholder="Digite o texto para converter em fala..."></textarea>
-    <div class="tts-controls">
-      <select id="voiceSelect">
-        <option value="pt-BR-FranciscaNeural" selected>Francisca - BR (Feminino)</option>
-        <option value="pt-BR-AntonioNeural">Antonio - BR (Masculino)</option>
-        <option value="pt-BR-ThalitaMultilingualNeural">Thalita - BR (Feminino, Multilingual)</option>
-        <option value="pt-PT-RaquelNeural">Raquel - PT (Feminino)</option>
-        <option value="pt-PT-DuarteNeural">Duarte - PT (Masculino)</option>
-      </select>
-      <button id="speakBtn" onclick="speak()">Falar</button>
+  <div class="tts-layout">
+    <div class="tts-left">
+      <div class="tts-box">
+        <textarea id="ttsText" placeholder="Digite o texto para converter em fala..."></textarea>
+        <div class="tts-controls">
+          <select id="voiceSelect">
+            <option value="pt-BR-FranciscaNeural" selected>Francisca - BR (Feminino)</option>
+            <option value="pt-BR-AntonioNeural">Antonio - BR (Masculino)</option>
+            <option value="pt-BR-ThalitaMultilingualNeural">Thalita - BR (Multilingual)</option>
+            <option value="pt-PT-RaquelNeural">Raquel - PT (Feminino)</option>
+            <option value="pt-PT-DuarteNeural">Duarte - PT (Masculino)</option>
+          </select>
+          <button id="speakBtn" onclick="speak()">Falar</button>
+        </div>
+        <div id="ttsStatus"></div>
+      </div>
+      <div class="tts-history" id="ttsHistory"></div>
     </div>
-    <div id="ttsStatus"></div>
+    <div class="tts-right">
+      <div id="avatarContainer">
+        <div id="avatarLoading">Carregando avatar...</div>
+      </div>
+      <div class="avatar-picker">
+        <select id="avatarSelect" onchange="window.changeAvatar(this.value)">
+          <option value="/avatars/avatarsdk.glb" selected>AvatarSDK</option>
+          <option value="/avatars/avaturn.glb">Avaturn</option>
+          <option value="/avatars/brunette.glb">Brunette (RPM)</option>
+          <option value="/avatars/brunette-t.glb">Brunette T-Pose</option>
+          <option value="/avatars/avatar.glb">MPFB</option>
+          <option value="custom">Upload GLB...</option>
+        </select>
+        <input type="file" id="glbUpload" accept=".glb" style="display:none" onchange="window.uploadAvatar(this)">
+        <select id="bodyType" onchange="window.changeAvatar(document.getElementById('avatarSelect').value)">
+          <option value="F">Corpo F</option>
+          <option value="M">Corpo M</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <div class="tts-history" id="ttsHistory"></div>
 </div>
 
-<script>
-// Tab switching
-function switchTab(tab) {
+<script type="module">
+import { TalkingHead } from "talkinghead";
+
+let head = null;
+let avatarReady = false;
+
+async function initAvatar() {
+  const container = document.getElementById('avatarContainer');
+  const loading = document.getElementById('avatarLoading');
+
+  try {
+    head = new TalkingHead(container, {
+      lipsyncModules: ["en", "fi"],
+      cameraView: "head",
+      cameraRotateEnable: false,
+      cameraPanEnable: false,
+      cameraZoomEnable: false,
+      avatarIdleEyeContact: 1,
+      avatarIdleHeadMove: 0,
+      modelFPS: 30
+    });
+
+    await loadAvatar('/avatars/avatarsdk.glb', 'F');
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") head.start();
+      else head.stop();
+    });
+
+  } catch (err) {
+    console.error("Avatar error:", err);
+    loading.textContent = "Erro: " + err.message;
+  }
+}
+
+async function loadAvatar(url, body) {
+  const loading = document.getElementById('avatarLoading');
+  loading.style.display = 'block';
+  loading.textContent = 'Carregando avatar...';
+  avatarReady = false;
+
+  try {
+    // Avatar-specific configs from TalkingHead siteconfig
+    const avatarConfigs = {
+      '/avatars/avatarsdk.glb': {
+        body: 'M',
+        retarget: {
+          Neck: { z: -0.01, rx: -0.7 }, Neck1: { z: -0.01, rx: -0.7 }, Neck2: { z: -0.01, rx: -0.7 },
+          LeftShoulder: { rz: -0.3 }, RightShoulder: { rz: 0.3 },
+          scaleToEyesLevel: 1.0, origin: { y: -0.1 }
+        },
+        baseline: { headRotateX: -0.4, eyeBlinkLeft: 0.05, eyeBlinkRight: 0.05 }
+      },
+      '/avatars/avaturn.glb': {
+        body: 'F',
+        retarget: {
+          Hips: { y: 0.03 }, Spine: { y: 0.02 }, Spine1: { y: 0.02, z: 0.01 },
+          Spine2: { y: 0.02, z: 0.01 }, Neck: { z: 0.02, y: 0.01 }, Head: { z: 0.02 },
+          LeftShoulder: { rx: -0.5 }, RightShoulder: { rx: -0.5 },
+          scaleToHipsLevel: 1.0
+        },
+        baseline: { headRotateX: -0.05, eyeBlinkLeft: 0.15, eyeBlinkRight: 0.15 }
+      }
+    };
+    const cfg = avatarConfigs[url] || {};
+    await head.showAvatar({
+      url: url,
+      body: cfg.body || body || 'F',
+      avatarMood: 'neutral',
+      lipsyncLang: 'en',
+      retarget: cfg.retarget || {},
+      baseline: cfg.baseline || {}
+    }, (ev) => {
+      if (ev.lengthComputable) {
+        let pct = Math.min(100, Math.round(ev.loaded / ev.total * 100));
+        loading.textContent = "Carregando avatar " + pct + "%";
+      }
+    });
+    loading.style.display = 'none';
+    avatarReady = true;
+    head.setView("head", { cameraDistance: 0.6, cameraX: 0, cameraY: 0, cameraRotateX: 0, cameraRotateY: 0 });
+
+    // Override idle/speaking animation templates to prevent looking down
+    function patchAnimTemplates(tmpl) {
+      if (!tmpl || !tmpl.alt) return;
+      tmpl.alt.forEach(a => {
+        if (a.vs) {
+          if (a.vs.eyesRotateX) a.vs.eyesRotateX = [[0, 0]];
+          if (a.vs.eyesRotateY) a.vs.eyesRotateY = [[0, 0]];
+        }
+      });
+    }
+    if (head.animTemplateIdle) patchAnimTemplates(head.animTemplateIdle);
+    if (head.animTemplateSpeaking) patchAnimTemplates(head.animTemplateSpeaking);
+
+    // Also patch pose templates
+    if (head.poseTemplates) {
+      Object.values(head.poseTemplates).forEach(p => {
+        if (p.props) {
+          p.props.eyesRotateX = 0;
+          p.props.eyesRotateY = 0;
+          p.props.headRotateX = 0;
+        }
+      });
+    }
+
+    head.lookAtCamera(100);
+    setInterval(() => { if (avatarReady && head) head.lookAtCamera(500); }, 1000);
+  } catch (err) {
+    console.error("Avatar error:", err);
+    loading.textContent = "Erro: " + err.message;
+  }
+}
+
+window.changeAvatar = async function(value) {
+  if (value === 'custom') {
+    document.getElementById('glbUpload').click();
+    return;
+  }
+  if (!head) return;
+  const body = document.getElementById('bodyType').value;
+  await loadAvatar(value, body);
+};
+
+window.uploadAvatar = async function(input) {
+  if (!input.files.length || !head) return;
+  const file = input.files[0];
+
+  // Upload to server
+  const fd = new FormData();
+  fd.append('avatar', file);
+  try {
+    const resp = await fetch('/upload-avatar', { method: 'POST', body: fd });
+    const data = await resp.json();
+    if (data.url) {
+      const body = document.getElementById('bodyType').value;
+      await loadAvatar(data.url, body);
+      // Add to select
+      const select = document.getElementById('avatarSelect');
+      const opt = document.createElement('option');
+      opt.value = data.url;
+      opt.textContent = file.name;
+      opt.selected = true;
+      select.insertBefore(opt, select.lastElementChild);
+    }
+  } catch (err) {
+    document.getElementById('avatarLoading').textContent = 'Erro upload: ' + err.message;
+  }
+  input.value = '';
+};
+
+// TTS with avatar lip-sync
+window.speak = async function() {
+  const text = document.getElementById('ttsText').value.trim();
+  if (!text) return;
+  const voice = document.getElementById('voiceSelect').value;
+  const btn = document.getElementById('speakBtn');
+  const statusEl = document.getElementById('ttsStatus');
+
+  btn.disabled = true;
+  btn.textContent = 'Gerando...';
+  statusEl.textContent = 'Gerando audio e lip-sync...';
+  statusEl.style.color = '#ffd54f';
+
+  try {
+    const resp = await fetch('/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, voice, lipsync: avatarReady })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      statusEl.textContent = 'Erro: ' + (err.error || 'desconhecido');
+      statusEl.style.color = '#ef5350';
+      return;
+    }
+
+    if (avatarReady) {
+      // Lipsync mode: JSON with base64 audio + word timestamps
+      const data = await resp.json();
+      if (data.error) {
+        statusEl.textContent = 'Erro: ' + data.error;
+        statusEl.style.color = '#ef5350';
+        return;
+      }
+
+      // Decode base64 audio
+      const audioBytes = Uint8Array.from(atob(data.audio), c => c.charCodeAt(0));
+      const audioBuffer = await head.audioCtx.decodeAudioData(audioBytes.buffer);
+
+      // Build TalkingHead audio object
+      const audioObj = {
+        audio: audioBuffer,
+        words: data.words,
+        wtimes: data.wtimes,
+        wdurations: data.wdurations,
+        markers: [],
+        mtimes: []
+      };
+
+      // Force look at camera during speech + override eye targets
+      audioObj.markers.push(() => {
+        head.lookAtCamera(100);
+        if (head.poseTarget) {
+          head.poseTarget.eyesRotateX = 0.5;
+          head.poseTarget.headRotateX = -0.3;
+        }
+      });
+      audioObj.mtimes.push(0);
+
+      head.speakAudio(audioObj);
+      statusEl.textContent = 'Avatar falando!';
+      statusEl.style.color = '#66bb6a';
+
+      // Add to history with playable audio
+      const blob = new Blob([audioBytes], { type: 'audio/mpeg' });
+      const url = URL.createObjectURL(blob);
+      addTTSHistory(text, voice, url);
+
+    } else {
+      // No avatar: simple audio playback
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audio.play();
+      statusEl.textContent = 'Audio gerado!';
+      statusEl.style.color = '#66bb6a';
+      addTTSHistory(text, voice, url);
+    }
+
+  } catch (err) {
+    statusEl.textContent = 'Erro: ' + err.message;
+    statusEl.style.color = '#ef5350';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Falar';
+  }
+};
+
+function addTTSHistory(text, voice, audioUrl) {
+  const history = document.getElementById('ttsHistory');
+  const card = document.createElement('div');
+  card.className = 'tts-card';
+  const voiceName = document.getElementById('voiceSelect').selectedOptions[0].textContent;
+  const now = new Date().toLocaleTimeString('pt-BR');
+  card.innerHTML =
+    '<div class="tts-meta">&#128336; ' + now + ' | Voz: ' + esc(voiceName) + '</div>' +
+    '<div class="tts-text">' + esc(text) + '</div>' +
+    '<audio controls src="' + audioUrl + '"></audio>';
+  history.insertBefore(card, history.firstChild);
+}
+
+// Initialize avatar when TTS tab is first shown
+let avatarInited = false;
+const origSwitchTab = window.switchTab;
+window.switchTab = function(tab) {
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.classList.toggle('active', (tab === 'stt' && i === 0) || (tab === 'tts' && i === 1));
   });
   document.getElementById('stt-panel').classList.toggle('active', tab === 'stt');
   document.getElementById('tts-panel').classList.toggle('active', tab === 'tts');
-}
+  if (tab === 'tts' && !avatarInited) {
+    avatarInited = true;
+    initAvatar();
+  }
+};
 
 // =================== STT ===================
 let mediaRecorder = null, audioChunks = [], isRecording = false, timerInterval = null, startTime = 0;
 
-async function toggleRecord() {
+window.toggleRecord = async function() {
   isRecording ? stopRecording() : await startRecording();
-}
+};
 
 async function startRecording() {
   try {
@@ -191,7 +493,8 @@ async function startRecording() {
     startTime = Date.now();
     timerInterval = setInterval(() => {
       const s = Math.floor((Date.now() - startTime) / 1000);
-      document.getElementById('timer').textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+      document.getElementById('timer').textContent =
+        String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
     }, 200);
   } catch (err) { setStatus('Erro ao acessar microfone: ' + err.message, 'error'); }
 }
@@ -247,63 +550,6 @@ function addResult(data) {
     '</div>' +
     '<div class="text">' + esc(data.text || '(silencio)') + '</div>' + segHtml;
   container.insertBefore(card, container.firstChild);
-}
-
-// =================== TTS ===================
-async function speak() {
-  const text = document.getElementById('ttsText').value.trim();
-  if (!text) return;
-  const voice = document.getElementById('voiceSelect').value;
-  const btn = document.getElementById('speakBtn');
-  const statusEl = document.getElementById('ttsStatus');
-
-  btn.disabled = true;
-  btn.textContent = 'Gerando...';
-  statusEl.textContent = 'Gerando audio...';
-  statusEl.style.color = '#ffd54f';
-
-  try {
-    const resp = await fetch('/tts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, voice })
-    });
-
-    if (!resp.ok) {
-      const err = await resp.json();
-      statusEl.textContent = 'Erro: ' + (err.error || 'desconhecido');
-      statusEl.style.color = '#ef5350';
-      return;
-    }
-
-    const blob = await resp.blob();
-    const url = URL.createObjectURL(blob);
-
-    // Auto play
-    const audio = new Audio(url);
-    audio.play();
-
-    statusEl.textContent = 'Audio gerado!';
-    statusEl.style.color = '#66bb6a';
-
-    // Add to history
-    const history = document.getElementById('ttsHistory');
-    const card = document.createElement('div');
-    card.className = 'tts-card';
-    const voiceName = document.getElementById('voiceSelect').selectedOptions[0].textContent;
-    const now = new Date().toLocaleTimeString('pt-BR');
-    card.innerHTML =
-      '<div class="tts-meta">&#128336; ' + now + ' | Voz: ' + esc(voiceName) + '</div>' +
-      '<div class="tts-text">' + esc(text) + '</div>' +
-      '<audio controls src="' + url + '"></audio>';
-    history.insertBefore(card, history.firstChild);
-  } catch (err) {
-    statusEl.textContent = 'Erro: ' + err.message;
-    statusEl.style.color = '#ef5350';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Falar';
-  }
 }
 
 function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
