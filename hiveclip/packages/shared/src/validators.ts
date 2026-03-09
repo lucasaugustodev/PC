@@ -8,7 +8,7 @@ export const createBoardSchema = z.object({
 export const updateBoardSchema = z.object({
   name: z.string().min(1).max(100).optional(),
   description: z.string().optional(),
-  brandColor: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional(),
+  brandColor: z.string().optional(),
 });
 
 export const loginSchema = z.object({
@@ -19,7 +19,7 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  displayName: z.string().min(1).max(100).optional(),
+  displayName: z.string().optional(),
 });
 
 export type CreateBoardInput = z.infer<typeof createBoardSchema>;

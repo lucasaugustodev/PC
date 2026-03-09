@@ -1,8 +1,1 @@
-{
-  "name": "@hiveclip/vultr",
-  "version": "0.1.0",
-  "type": "module",
-  "exports": { ".": "./src/index.ts" },
-  "dependencies": { "ssh2": "^1.17.0" },
-  "devDependencies": { "typescript": "^5.9.3", "@types/ssh2": "^1.15.0" }
-}
+{"name":"@hiveclip/vultr","version":"0.1.0","type":"module","exports":{".":"./src/index.ts"},"devDependencies":{"typescript":"^5.9.3"}}

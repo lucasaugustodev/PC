@@ -2,9 +2,11 @@ node_modules/
 dist/
 .env
 *.log
+*.msi
 .vite/
 data/
 .paperclip/
 .hiveclip/
+.pgdata/
 test-results/
 playwright-report/

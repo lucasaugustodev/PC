@@ -10,22 +10,23 @@
   },
   "dependencies": {
     "@hiveclip/shared": "workspace:*",
+    "@novnc/novnc": "1.4.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tanstack/react-query": "^5.90.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.574.0",
+    "radix-ui": "^1.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
-    "@tanstack/react-query": "^5.90.21",
-    "radix-ui": "^1.4.3",
-    "lucide-react": "^0.574.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.0.2",
-    "@novnc/novnc": "^1.5.0"
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.0.7",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "@tailwindcss/vite": "^4.0.7",
     "tailwindcss": "^4.0.7",
     "typescript": "^5.9.3",
     "vite": "^6.1.0"
