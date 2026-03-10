@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="cli-anything" agent="cli-anything-drawio/1.0.0" version="24.0.0">
+  <diagram id="arch_diagram" name="Architecture">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ══════════ TITLE ══════════ -->
+        <mxCell id="title" value="&lt;b&gt;Claude Launcher Web — Architecture&lt;/b&gt;" style="text;html=1;fontSize=22;fontFamily=Inter;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="500" y="15" width="500" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ BROWSER / FRONTEND (top) ══════════ -->
+        <mxCell id="fe_group" value="&lt;b&gt;Browser (Frontend)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=13;fontStyle=1;arcSize=8;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="70" width="1380" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Frontend modules -->
+        <mxCell id="fe_app" value="&lt;b&gt;app.js&lt;/b&gt;&lt;br&gt;Router &amp; Page&lt;br&gt;Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="90" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_api" value="&lt;b&gt;api.js&lt;/b&gt;&lt;br&gt;REST + WebSocket&lt;br&gt;Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_terminal" value="&lt;b&gt;terminal.js&lt;/b&gt;&lt;br&gt;xterm.js TUI&lt;br&gt;(raw ANSI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="370" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_chatview" value="&lt;b&gt;chat-view.js&lt;/b&gt;&lt;br&gt;Structured Chat&lt;br&gt;(stream-json)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="510" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_floating" value="&lt;b&gt;floating-chat.js&lt;/b&gt;&lt;br&gt;Avatar + TTS&lt;br&gt;Voice Chat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="650" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_planning" value="&lt;b&gt;planning.js&lt;/b&gt;&lt;br&gt;BMAD Workflow&lt;br&gt;Kanban" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="790" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_components" value="&lt;b&gt;components.js&lt;/b&gt;&lt;br&gt;Reusable UI&lt;br&gt;Elements" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="930" y="105" width="120" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Frontend CSS -->
+        <mxCell id="fe_css" value="&lt;b&gt;CSS&lt;/b&gt;&lt;br&gt;style · chat-view · floating-chat · planning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="105" width="180" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_html" value="&lt;b&gt;index.html&lt;/b&gt; (SPA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="105" width="140" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Avatar GLB -->
+        <mxCell id="fe_avatar" value="&lt;b&gt;avatarsdk.glb&lt;/b&gt;&lt;br&gt;3D Avatar" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=none;imageAspect=0;aspect=fixed;imageWidth=40;imageHeight=40;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="160" width="80" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ TRANSPORT LAYER ══════════ -->
+        <mxCell id="transport_ws" value="&lt;b&gt;WebSocket /ws&lt;/b&gt;&lt;br&gt;Real-time PTY streaming" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="350" y="275" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="transport_rest" value="&lt;b&gt;REST API&lt;/b&gt;&lt;br&gt;/api/* endpoints" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="620" y="275" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="transport_tts" value="&lt;b&gt;msedge-tts&lt;/b&gt;&lt;br&gt;Text-to-Speech" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="890" y="275" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ SERVER CORE (middle) ══════════ -->
+        <mxCell id="srv_group" value="&lt;b&gt;Node.js Server (Backend)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=13;fontStyle=1;arcSize=6;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="355" width="1380" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="srv_server" value="&lt;b&gt;server.js&lt;/b&gt;&lt;br&gt;Express + WS Hub&lt;br&gt;Auth (token)&lt;br&gt;Port 3002" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="390" width="140" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_pty" value="&lt;b&gt;pty-manager.js&lt;/b&gt;&lt;br&gt;PTY Lifecycle&lt;br&gt;spawn · input · resize&lt;br&gt;listeners · replay" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="260" y="390" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_stream" value="&lt;b&gt;stream-analyzer.js&lt;/b&gt;&lt;br&gt;ANSI → Actions&lt;br&gt;State Machine&lt;br&gt;(thinking/tool/response)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="440" y="390" width="160" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_storage" value="&lt;b&gt;storage.js&lt;/b&gt;&lt;br&gt;JSON File Store&lt;br&gt;profiles · sessions&lt;br&gt;users · schedules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="630" y="390" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_scheduler" value="&lt;b&gt;scheduler.js&lt;/b&gt;&lt;br&gt;node-cron&lt;br&gt;cron · interval · once&lt;br&gt;concurrency guard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="810" y="390" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_github_sync" value="&lt;b&gt;github-sync.js&lt;/b&gt;&lt;br&gt;GitHub App JWT&lt;br&gt;Push session outputs&lt;br&gt;Branch+PR / Main" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="990" y="390" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_gitwatcher" value="&lt;b&gt;git-watcher.js&lt;/b&gt;&lt;br&gt;Auto-Commit&lt;br&gt;via Cline headless&lt;br&gt;file change detect" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="390" width="150" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Second row of backend -->
+        <mxCell id="srv_claude" value="&lt;b&gt;claude-cli.js&lt;/b&gt;&lt;br&gt;Install/Auth Check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="485" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_cline" value="&lt;b&gt;cline-cli.js&lt;/b&gt;&lt;br&gt;Install/Auth Check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="485" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_gemini" value="&lt;b&gt;gemini-cli.js&lt;/b&gt;&lt;br&gt;Install/Auth Check" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="485" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_ghcli" value="&lt;b&gt;github-cli.js&lt;/b&gt;&lt;br&gt;gh Install/Auth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="485" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ CLI PROCESSES (bottom-left) ══════════ -->
+        <mxCell id="cli_group" value="&lt;b&gt;CLI Processes (PTY)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=13;fontStyle=1;arcSize=8;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="580" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cli_claude" value="&lt;b&gt;Claude Code&lt;/b&gt;&lt;br&gt;claude --json&lt;br&gt;or TUI mode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="90" y="640" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cli_cline_proc" value="&lt;b&gt;Cline CLI&lt;/b&gt;&lt;br&gt;cline --json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="260" y="640" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cli_gemini_proc" value="&lt;b&gt;Gemini CLI&lt;/b&gt;&lt;br&gt;gemini --json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="430" y="640" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cli_interactive" value="&lt;b&gt;Interactive Shell&lt;/b&gt;&lt;br&gt;(gh auth, etc)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="710" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ DATA / STORAGE (bottom-center) ══════════ -->
+        <mxCell id="data_group" value="&lt;b&gt;Data Layer (/data/)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=13;fontStyle=1;arcSize=8;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="680" y="600" width="360" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="data_profiles" value="profiles.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="635" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_sessions" value="sessions.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="810" y="635" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_users" value="users.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="920" y="635" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_schedules" value="schedules.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="695" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_cline_s" value="cline-sessions.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="810" y="695" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_gemini_s" value="gemini-sessions.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="920" y="695" width="95" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_outputs" value="&lt;b&gt;outputs/&lt;/b&gt;&lt;br&gt;PTY output files" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="755" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="data_ghapp" value="github-app.pem&lt;br&gt;github-config.json" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="820" y="755" width="110" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ EXTERNAL SERVICES (bottom-right) ══════════ -->
+        <mxCell id="ext_group" value="&lt;b&gt;External Services&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#999999;verticalAlign=top;fontSize=13;fontStyle=1;arcSize=8;dashed=1;dashPattern=5 5;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="600" width="360" height="210" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ext_github" value="&lt;b&gt;GitHub API&lt;/b&gt;&lt;br&gt;Repos · PRs · Commits" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="640" width="140" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_anthropic" value="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;(via Claude Code)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="640" width="140" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_edge_tts" value="&lt;b&gt;Edge TTS&lt;/b&gt;&lt;br&gt;Microsoft TTS API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="715" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_google" value="&lt;b&gt;Google AI&lt;/b&gt;&lt;br&gt;(via Gemini CLI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="715" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ CONNECTIONS ══════════ -->
+
+        <!-- Frontend → Transport -->
+        <mxCell id="c1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="fe_api" target="transport_ws" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="fe_api" target="transport_rest" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d6b656;strokeWidth=1.5;dashed=1;" edge="1" source="fe_floating" target="transport_tts" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Transport → Server -->
+        <mxCell id="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;" edge="1" source="transport_ws" target="srv_server" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;" edge="1" source="transport_rest" target="srv_server" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server → PTY Manager -->
+        <mxCell id="c6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=2;" edge="1" source="srv_server" target="srv_pty" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PTY Manager → Stream Analyzer -->
+        <mxCell id="c7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="srv_pty" target="srv_stream" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server → Storage -->
+        <mxCell id="c8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="srv_server" target="srv_storage" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server → Scheduler -->
+        <mxCell id="c9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="srv_server" target="srv_scheduler" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server → GitHub Sync -->
+        <mxCell id="c10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="srv_server" target="srv_github_sync" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server → Git Watcher -->
+        <mxCell id="c11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="srv_server" target="srv_gitwatcher" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PTY Manager → CLI Processes -->
+        <mxCell id="c12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d79b00;strokeWidth=2;" edge="1" source="srv_pty" target="cli_claude" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d79b00;strokeWidth=2;" edge="1" source="srv_pty" target="cli_cline_proc" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d79b00;strokeWidth=2;" edge="1" source="srv_pty" target="cli_gemini_proc" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Scheduler → PTY Manager -->
+        <mxCell id="c15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=1.5;dashed=1;" edge="1" source="srv_scheduler" target="srv_pty" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Storage → Data files -->
+        <mxCell id="c16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1.5;" edge="1" source="srv_storage" target="data_sessions" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- GitHub Sync → External GitHub -->
+        <mxCell id="c17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" source="srv_github_sync" target="ext_github" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Claude CLI → Anthropic -->
+        <mxCell id="c18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;strokeWidth=1.5;dashed=1;" edge="1" source="cli_claude" target="ext_anthropic" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Gemini CLI → Google -->
+        <mxCell id="c19" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333333;strokeWidth=1.5;dashed=1;" edge="1" source="cli_gemini_proc" target="ext_google" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- TTS → Edge TTS -->
+        <mxCell id="c20" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="transport_tts" target="ext_edge_tts" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════ LEGEND ══════════ -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="840" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="&lt;b&gt;Legend&lt;/b&gt;" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="842" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="Frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="70" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="Backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="150" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="CLI Procs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="230" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="Transport" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;size=6;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="310" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="Avatar/TTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="390" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" value="External" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#333333;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="470" y="865" width="70" height="25" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
