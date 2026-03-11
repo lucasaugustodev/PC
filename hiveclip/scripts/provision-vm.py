@@ -186,18 +186,32 @@ def run_cmd(cmd, label=""):
         print(f"  {label}: {status} - {detail}")
     return r
 
-def install_npm_global(pkg, cmd_name, label):
-    """Install npm global package if not present"""
-    print(f"Installing {label}...")
-    r = run_cmd(f'cmd /c "set PATH={full_path} && {cmd_name} --version"', f"Check {cmd_name}")
-    if r.status_code != 0:
-        run_cmd(f'npm install -g {pkg}', f"npm install {pkg}")
-        run_cmd(f'{cmd_name} --version', label)
-    else:
-        print(f"  {label} already installed")
+# --- Install all npm CLIs in a single batch (much faster than sequential) ---
+npm_packages = {
+    '@anthropic-ai/claude-code': 'claude',
+    '@google/gemini-cli': 'gemini',
+    'cline': 'cline',
+    '@googleworkspace/cli': 'gws',
+    'playwright': 'npx playwright',
+}
 
-# --- Claude Code CLI ---
-install_npm_global('@anthropic-ai/claude-code', 'claude', 'Claude Code CLI')
+# Check which are already installed
+missing = []
+for pkg, cmd in npm_packages.items():
+    check = f'cmd /c "set PATH={full_path} && {cmd} --version"' if not cmd.startswith('npx') else f'cmd /c "set PATH={full_path} && npx playwright --version"'
+    r = s.run_cmd(check)
+    if r.status_code != 0:
+        missing.append(pkg)
+        print(f"  {pkg}: needs install")
+    else:
+        print(f"  {pkg}: already installed ({r.std_out.decode().strip()[:50]})")
+
+if missing:
+    pkg_list = ' '.join(missing)
+    print(f"Installing {len(missing)} npm packages in one batch: {pkg_list}")
+    run_cmd(f'npm install -g {pkg_list}', f"npm install batch ({len(missing)} packages)")
+else:
+    print("  All npm packages already installed")
 
 # --- GitHub CLI (MSI installer, not npm) ---
 print("Installing GitHub CLI...")
@@ -217,26 +231,9 @@ if r.status_code != 0:
     else:
         print("  WARNING: GitHub CLI download failed")
 
-# --- Gemini CLI ---
-install_npm_global('@google/gemini-cli', 'gemini', 'Gemini CLI')
-
-# --- Cline CLI ---
-install_npm_global('cline', 'cline', 'Cline CLI')
-
-# --- Google Workspace CLI ---
-install_npm_global('@googleworkspace/cli', 'gws', 'Google Workspace CLI')
-
-# --- Playwright CLI ---
-print("Installing Playwright CLI...")
-r = run_cmd('npx playwright --version', "Check playwright")
-if r.status_code != 0:
-    run_cmd('npm install -g playwright', "npm install playwright")
-    run_cmd('npx playwright install chromium', "Playwright install chromium")
-    run_cmd('npx playwright --version', "Playwright CLI")
-else:
-    print("  Playwright already installed")
-    # Ensure at least chromium is installed
-    run_cmd('npx playwright install chromium', "Playwright ensure chromium")
+# --- Playwright chromium browser ---
+print("Installing Playwright chromium...")
+run_cmd('npx playwright install chromium', "Playwright install chromium")
 
 # ========== STEP 4: Start claude-launcher-web with full PATH ==========
 print("\n=== Step 4: Start Launcher ===")
