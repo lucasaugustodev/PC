@@ -1,0 +1,1136 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e9]:
+        - button "Toggle navigation" [ref=e11] [cursor=pointer]
+        - link "Homepage" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img [ref=e18]
+        - generic [ref=e20]:
+          - link "Sign in" [ref=e21] [cursor=pointer]:
+            - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fmicrosoft%2Fplaywright-cli
+          - button "Appearance settings" [ref=e24] [cursor=pointer]:
+            - img
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - link "microsoft" [ref=e36] [cursor=pointer]:
+            - /url: /microsoft
+          - generic [ref=e37]: /
+          - strong [ref=e38]:
+            - link "playwright-cli" [ref=e39] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli
+          - generic [ref=e40]: Public
+        - generic [ref=e41]:
+          - list:
+            - listitem [ref=e42]:
+              - link "You must be signed in to change notification settings" [ref=e43] [cursor=pointer]:
+                - /url: /login?return_to=%2Fmicrosoft%2Fplaywright-cli
+                - img [ref=e44]
+                - text: Notifications
+            - listitem [ref=e46]:
+              - link "Fork 158" [ref=e47] [cursor=pointer]:
+                - /url: /login?return_to=%2Fmicrosoft%2Fplaywright-cli
+                - img [ref=e48]
+                - text: Fork
+                - generic "158" [ref=e50]
+            - listitem [ref=e51]:
+              - link "You must be signed in to star a repository" [ref=e53] [cursor=pointer]:
+                - /url: /login?return_to=%2Fmicrosoft%2Fplaywright-cli
+                - img [ref=e54]
+                - text: Star
+                - generic "4187 users starred this repository" [ref=e56]: 4.2k
+      - navigation "Repository" [ref=e57]:
+        - list [ref=e58]:
+          - listitem [ref=e59]:
+            - link "Code" [ref=e60] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli
+              - img [ref=e61]
+              - generic [ref=e63]: Code
+          - listitem [ref=e64]:
+            - link "Issues 7" [ref=e65] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/issues
+              - img [ref=e66]
+              - generic [ref=e69]: Issues
+              - generic "7" [ref=e70]
+          - listitem [ref=e71]:
+            - link "Pull requests" [ref=e72] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/pulls
+              - img [ref=e73]
+              - generic [ref=e75]: Pull requests
+          - listitem [ref=e76]:
+            - link "Actions" [ref=e77] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/actions
+              - img [ref=e78]
+              - generic [ref=e80]: Actions
+          - listitem [ref=e81]:
+            - link "Projects" [ref=e82] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/projects
+              - img [ref=e83]
+              - generic [ref=e85]: Projects
+          - listitem [ref=e86]:
+            - link "Models" [ref=e87] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/models
+              - img [ref=e88]
+              - generic [ref=e90]: Models
+          - listitem [ref=e91]:
+            - link "Security" [ref=e92] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/security
+              - img [ref=e93]
+              - generic [ref=e95]: Security
+          - listitem [ref=e96]:
+            - link "Insights" [ref=e97] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/pulse
+              - img [ref=e98]
+              - generic [ref=e100]: Insights
+    - generic [ref=e102]:
+      - heading "microsoft/playwright-cli" [level=1] [ref=e103]
+      - generic [ref=e106]:
+        - generic [ref=e110]:
+          - generic [ref=e111]:
+            - generic [ref=e112]:
+              - button "main branch" [ref=e114] [cursor=pointer]:
+                - generic [ref=e115]:
+                  - generic [ref=e117]:
+                    - img [ref=e119]
+                    - generic [ref=e122]: main
+                  - generic:
+                    - img
+              - generic [ref=e123]:
+                - link "Go to Branches page" [ref=e124] [cursor=pointer]:
+                  - /url: /microsoft/playwright-cli/branches
+                  - img [ref=e125]
+                - link "Go to Tags page" [ref=e127] [cursor=pointer]:
+                  - /url: /microsoft/playwright-cli/tags
+                  - img [ref=e128]
+            - generic [ref=e130]:
+              - button "Go to file" [ref=e133] [cursor=pointer]:
+                - generic [ref=e135]: Go to file
+              - button "Code" [ref=e136] [cursor=pointer]:
+                - generic [ref=e137]:
+                  - generic:
+                    - img
+                  - generic [ref=e138]: Code
+                  - generic:
+                    - img
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - heading "Folders and files" [level=2] [ref=e141]
+              - table "Folders and files" [ref=e142]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e143]:
+                  - 'row "Latest commit yury-s commits by yury-s chore: delete .claude-plugin folder (#280) Open commit details success Commit fa6f6bc · Feb 25, 202612 hours ago History View commit history for this file." [ref=e144]':
+                    - 'cell "Latest commit yury-s commits by yury-s chore: delete .claude-plugin folder (#280) Open commit details success Commit fa6f6bc · Feb 25, 202612 hours ago History View commit history for this file." [ref=e145]':
+                      - generic [ref=e146]:
+                        - heading "Latest commit" [level=2] [ref=e147]
+                        - generic [ref=e148]:
+                          - generic [ref=e150]:
+                            - link "yury-s" [ref=e151] [cursor=pointer]:
+                              - /url: /yury-s
+                              - img "yury-s" [ref=e152]
+                            - link "commits by yury-s" [ref=e153] [cursor=pointer]:
+                              - /url: /microsoft/playwright-cli/commits?author=yury-s
+                              - text: yury-s
+                          - generic [ref=e154]:
+                            - generic [ref=e156]:
+                              - 'link "chore: delete .claude-plugin folder (" [ref=e157] [cursor=pointer]':
+                                - /url: /microsoft/playwright-cli/commit/fa6f6bcca9c3eeb4ac71051f83ebd623ac51d765
+                              - link "#280" [ref=e158] [cursor=pointer]:
+                                - /url: https://github.com/microsoft/playwright-cli/pull/280
+                              - link ")" [ref=e159] [cursor=pointer]:
+                                - /url: /microsoft/playwright-cli/commit/fa6f6bcca9c3eeb4ac71051f83ebd623ac51d765
+                            - button "Open commit details" [ref=e160] [cursor=pointer]:
+                              - img [ref=e161]
+                            - button "success" [ref=e163] [cursor=pointer]:
+                              - img [ref=e164]
+                        - generic [ref=e166]:
+                          - generic [ref=e168]:
+                            - link "Commit fa6f6bc" [ref=e169] [cursor=pointer]:
+                              - /url: /microsoft/playwright-cli/commit/fa6f6bcca9c3eeb4ac71051f83ebd623ac51d765
+                              - text: fa6f6bc
+                            - text: ·
+                            - generic "Feb 25, 2026, 9:52 PM GMT-3" [ref=e170]: Feb 25, 202612 hours ago
+                          - generic [ref=e171]:
+                            - heading "History" [level=2] [ref=e172]
+                            - link "View commit history for this file." [ref=e174] [cursor=pointer]:
+                              - /url: /microsoft/playwright-cli/commits/main/
+                              - generic [ref=e175]:
+                                - generic:
+                                  - img
+                  - 'row ".claude/skills/dev, (Directory) chore: roll Playwright to latest (#261) Feb 14, 20262 weeks ago" [ref=e176]':
+                    - cell ".claude/skills/dev, (Directory)" [ref=e177]:
+                      - generic [ref=e178]:
+                        - img [ref=e179]
+                        - link ".claude/skills/dev, (Directory)" [ref=e184] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/tree/main/.claude/skills/dev
+                          - text: .claude/skills/dev
+                    - 'cell "chore: roll Playwright to latest (#261)" [ref=e185]':
+                      - generic [ref=e187]:
+                        - 'link "chore: roll Playwright to latest (" [ref=e188] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/4914970d43b4affa7965762412137a60ce6e4d82
+                        - link "#261" [ref=e189] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/261
+                        - link ")" [ref=e190] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/4914970d43b4affa7965762412137a60ce6e4d82
+                    - cell "Feb 14, 20262 weeks ago" [ref=e191]:
+                      - generic [ref=e192]: Feb 14, 20262 weeks ago
+                  - 'row ".github/workflows, (Directory) chore: mark v0.1.0 (#239) Feb 6, 20263 weeks ago" [ref=e193]':
+                    - cell ".github/workflows, (Directory)" [ref=e194]:
+                      - generic [ref=e195]:
+                        - img [ref=e196]
+                        - link ".github/workflows, (Directory)" [ref=e201] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/tree/main/.github/workflows
+                          - text: .github/workflows
+                    - 'cell "chore: mark v0.1.0 (#239)" [ref=e202]':
+                      - generic [ref=e204]:
+                        - 'link "chore: mark v0.1.0 (" [ref=e205] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/7ff4d6258fe9d1123a560c676bd0dad70a022aa9
+                        - link "#239" [ref=e206] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/239
+                        - link ")" [ref=e207] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/7ff4d6258fe9d1123a560c676bd0dad70a022aa9
+                    - cell "Feb 6, 20263 weeks ago" [ref=e208]:
+                      - generic [ref=e209]: Feb 6, 20263 weeks ago
+                  - 'row "scripts, (Directory) chore: roll Playwright to 1.59.0-alpha-1771104257000 (#262) Feb 14, 20262 weeks ago" [ref=e210]':
+                    - cell "scripts, (Directory)" [ref=e211]:
+                      - generic [ref=e212]:
+                        - img [ref=e213]
+                        - link "scripts, (Directory)" [ref=e218] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/tree/main/scripts
+                          - text: scripts
+                    - 'cell "chore: roll Playwright to 1.59.0-alpha-1771104257000 (#262)" [ref=e219]':
+                      - generic [ref=e221]:
+                        - 'link "chore: roll Playwright to 1.59.0-alpha-1771104257000 (" [ref=e222] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/1c9b20e0c6172a04089ead714d0022cc68997913
+                        - link "#262" [ref=e223] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/262
+                        - link ")" [ref=e224] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/1c9b20e0c6172a04089ead714d0022cc68997913
+                    - cell "Feb 14, 20262 weeks ago" [ref=e225]:
+                      - generic [ref=e226]: Feb 14, 20262 weeks ago
+                  - 'row "skills/playwright-cli, (Directory) chore: roll Playwright to 1.59.0-alpha-1771104257000 (#262) Feb 14, 20262 weeks ago" [ref=e227]':
+                    - cell "skills/playwright-cli, (Directory)" [ref=e228]:
+                      - generic [ref=e229]:
+                        - img [ref=e230]
+                        - link "skills/playwright-cli, (Directory)" [ref=e235] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/tree/main/skills/playwright-cli
+                          - text: skills/playwright-cli
+                    - 'cell "chore: roll Playwright to 1.59.0-alpha-1771104257000 (#262)" [ref=e236]':
+                      - generic [ref=e238]:
+                        - 'link "chore: roll Playwright to 1.59.0-alpha-1771104257000 (" [ref=e239] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/1c9b20e0c6172a04089ead714d0022cc68997913
+                        - link "#262" [ref=e240] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/262
+                        - link ")" [ref=e241] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/1c9b20e0c6172a04089ead714d0022cc68997913
+                    - cell "Feb 14, 20262 weeks ago" [ref=e242]:
+                      - generic [ref=e243]: Feb 14, 20262 weeks ago
+                  - 'row "tests, (Directory) devops: move npm source from playwright-mcp repo (#237) Feb 6, 20263 weeks ago" [ref=e244]':
+                    - cell "tests, (Directory)" [ref=e245]:
+                      - generic [ref=e246]:
+                        - img [ref=e247]
+                        - link "tests, (Directory)" [ref=e252] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/tree/main/tests
+                          - text: tests
+                    - 'cell "devops: move npm source from playwright-mcp repo (#237)" [ref=e253]':
+                      - generic [ref=e255]:
+                        - 'link "devops: move npm source from playwright-mcp repo (" [ref=e256] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/e53f1085f730811b803fc3cbf61d754d9a42cb9e
+                        - link "#237" [ref=e257] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/237
+                        - link ")" [ref=e258] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/e53f1085f730811b803fc3cbf61d754d9a42cb9e
+                    - cell "Feb 6, 20263 weeks ago" [ref=e259]:
+                      - generic [ref=e260]: Feb 6, 20263 weeks ago
+                  - 'row ".gitignore, (File) devops: move claude roll skill Feb 6, 20263 weeks ago" [ref=e261]':
+                    - cell ".gitignore, (File)" [ref=e262]:
+                      - generic [ref=e263]:
+                        - img [ref=e264]
+                        - link ".gitignore, (File)" [ref=e269] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/.gitignore
+                          - text: .gitignore
+                    - 'cell "devops: move claude roll skill" [ref=e270]':
+                      - 'link "devops: move claude roll skill" [ref=e273] [cursor=pointer]':
+                        - /url: /microsoft/playwright-cli/commit/cc0bf3ab6d263a5cfc72646280a1d55b5d70db14
+                    - cell "Feb 6, 20263 weeks ago" [ref=e274]:
+                      - generic [ref=e275]: Feb 6, 20263 weeks ago
+                  - 'row ".npmignore, (File) fix: include skills/ directory in npm package (#278) Feb 25, 2026yesterday" [ref=e276]':
+                    - cell ".npmignore, (File)" [ref=e277]:
+                      - generic [ref=e278]:
+                        - img [ref=e279]
+                        - link ".npmignore, (File)" [ref=e284] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/.npmignore
+                          - text: .npmignore
+                    - 'cell "fix: include skills/ directory in npm package (#278)" [ref=e285]':
+                      - generic [ref=e287]:
+                        - 'link "fix: include skills/ directory in npm package (" [ref=e288] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/bf14c9bc67acd92d5af8a96cdeda828bdaa51489
+                        - link "#278" [ref=e289] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/278
+                        - link ")" [ref=e290] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/bf14c9bc67acd92d5af8a96cdeda828bdaa51489
+                    - cell "Feb 25, 2026yesterday" [ref=e291]:
+                      - generic [ref=e292]: Feb 25, 2026yesterday
+                  - row "CONTRIBUTING.md, (File) Update contributing guidelines for clarity and structure Jan 24, 2026last month" [ref=e293]:
+                    - cell "CONTRIBUTING.md, (File)" [ref=e294]:
+                      - generic [ref=e295]:
+                        - img [ref=e296]
+                        - link "CONTRIBUTING.md, (File)" [ref=e301] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/CONTRIBUTING.md
+                          - text: CONTRIBUTING.md
+                    - cell "Update contributing guidelines for clarity and structure" [ref=e302]:
+                      - link "Update contributing guidelines for clarity and structure" [ref=e305] [cursor=pointer]:
+                        - /url: /microsoft/playwright-cli/commit/220e8a5b3e56732d575ed54b4e8ed5e3df98939b
+                    - cell "Jan 24, 2026last month" [ref=e306]:
+                      - generic [ref=e307]: Jan 24, 2026last month
+                  - 'row "LICENSE, (File) chore: added license file Jan 24, 2026last month" [ref=e308]':
+                    - cell "LICENSE, (File)" [ref=e309]:
+                      - generic [ref=e310]:
+                        - img [ref=e311]
+                        - link "LICENSE, (File)" [ref=e316] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/LICENSE
+                          - text: LICENSE
+                    - 'cell "chore: added license file" [ref=e317]':
+                      - 'link "chore: added license file" [ref=e320] [cursor=pointer]':
+                        - /url: /microsoft/playwright-cli/commit/2db417fa2490e9670005016442dee1e35ca5de0e
+                    - cell "Jan 24, 2026last month" [ref=e321]:
+                      - generic [ref=e322]: Jan 24, 2026last month
+                  - row "README.md, (File) Update reference to default config file location in README (#272) Feb 19, 2026last week" [ref=e323]:
+                    - cell "README.md, (File)" [ref=e324]:
+                      - generic [ref=e325]:
+                        - img [ref=e326]
+                        - link "README.md, (File)" [ref=e331] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/README.md
+                          - text: README.md
+                    - cell "Update reference to default config file location in README (#272)" [ref=e332]:
+                      - generic [ref=e334]:
+                        - link "Update reference to default config file location in README (" [ref=e335] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/51e004db24e541685098ffbb1501f9f4961652ab
+                        - link "#272" [ref=e336] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/272
+                        - link ")" [ref=e337] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/51e004db24e541685098ffbb1501f9f4961652ab
+                    - cell "Feb 19, 2026last week" [ref=e338]:
+                      - generic [ref=e339]: Feb 19, 2026last week
+                  - 'row "SECURITY.md, (File) chore: added security file Jan 24, 2026last month" [ref=e340]':
+                    - cell "SECURITY.md, (File)" [ref=e341]:
+                      - generic [ref=e342]:
+                        - img [ref=e343]
+                        - link "SECURITY.md, (File)" [ref=e348] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/SECURITY.md
+                          - text: SECURITY.md
+                    - 'cell "chore: added security file" [ref=e349]':
+                      - 'link "chore: added security file" [ref=e352] [cursor=pointer]':
+                        - /url: /microsoft/playwright-cli/commit/c61b4fdb9b4632afddb1dec5a76bc90182ca69c0
+                    - cell "Jan 24, 2026last month" [ref=e353]:
+                      - generic [ref=e354]: Jan 24, 2026last month
+                  - 'row "package-lock.json, (File) chore: mark v0.1.1 (#264) Feb 14, 20262 weeks ago" [ref=e355]':
+                    - cell "package-lock.json, (File)" [ref=e356]:
+                      - generic [ref=e357]:
+                        - img [ref=e358]
+                        - link "package-lock.json, (File)" [ref=e363] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/package-lock.json
+                          - text: package-lock.json
+                    - 'cell "chore: mark v0.1.1 (#264)" [ref=e364]':
+                      - generic [ref=e366]:
+                        - 'link "chore: mark v0.1.1 (" [ref=e367] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/d1c6d1113932ddcee243e8b111b6d4aea553df20
+                        - link "#264" [ref=e368] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/264
+                        - link ")" [ref=e369] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/d1c6d1113932ddcee243e8b111b6d4aea553df20
+                    - cell "Feb 14, 20262 weeks ago" [ref=e370]:
+                      - generic [ref=e371]: Feb 14, 20262 weeks ago
+                  - 'row "package.json, (File) chore: mark v0.1.1 (#264) Feb 14, 20262 weeks ago" [ref=e372]':
+                    - cell "package.json, (File)" [ref=e373]:
+                      - generic [ref=e374]:
+                        - img [ref=e375]
+                        - link "package.json, (File)" [ref=e380] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/package.json
+                          - text: package.json
+                    - 'cell "chore: mark v0.1.1 (#264)" [ref=e381]':
+                      - generic [ref=e383]:
+                        - 'link "chore: mark v0.1.1 (" [ref=e384] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/d1c6d1113932ddcee243e8b111b6d4aea553df20
+                        - link "#264" [ref=e385] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/264
+                        - link ")" [ref=e386] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/d1c6d1113932ddcee243e8b111b6d4aea553df20
+                    - cell "Feb 14, 20262 weeks ago" [ref=e387]:
+                      - generic [ref=e388]: Feb 14, 20262 weeks ago
+                  - 'row "playwright-cli.js, (File) chore: roll Playwright to latest (#261) Feb 14, 20262 weeks ago" [ref=e389]':
+                    - cell "playwright-cli.js, (File)" [ref=e390]:
+                      - generic [ref=e391]:
+                        - img [ref=e392]
+                        - link "playwright-cli.js, (File)" [ref=e397] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/playwright-cli.js
+                          - text: playwright-cli.js
+                    - 'cell "chore: roll Playwright to latest (#261)" [ref=e398]':
+                      - generic [ref=e400]:
+                        - 'link "chore: roll Playwright to latest (" [ref=e401] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/4914970d43b4affa7965762412137a60ce6e4d82
+                        - link "#261" [ref=e402] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/261
+                        - link ")" [ref=e403] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/4914970d43b4affa7965762412137a60ce6e4d82
+                    - cell "Feb 14, 20262 weeks ago" [ref=e404]:
+                      - generic [ref=e405]: Feb 14, 20262 weeks ago
+                  - 'row "playwright.config.ts, (File) devops: move npm source from playwright-mcp repo (#237) Feb 6, 20263 weeks ago" [ref=e406]':
+                    - cell "playwright.config.ts, (File)" [ref=e407]:
+                      - generic [ref=e408]:
+                        - img [ref=e409]
+                        - link "playwright.config.ts, (File)" [ref=e414] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/blob/main/playwright.config.ts
+                          - text: playwright.config.ts
+                    - 'cell "devops: move npm source from playwright-mcp repo (#237)" [ref=e415]':
+                      - generic [ref=e417]:
+                        - 'link "devops: move npm source from playwright-mcp repo (" [ref=e418] [cursor=pointer]':
+                          - /url: /microsoft/playwright-cli/commit/e53f1085f730811b803fc3cbf61d754d9a42cb9e
+                        - link "#237" [ref=e419] [cursor=pointer]:
+                          - /url: https://github.com/microsoft/playwright-cli/pull/237
+                        - link ")" [ref=e420] [cursor=pointer]:
+                          - /url: /microsoft/playwright-cli/commit/e53f1085f730811b803fc3cbf61d754d9a42cb9e
+                    - cell "Feb 6, 20263 weeks ago" [ref=e421]:
+                      - generic [ref=e422]: Feb 6, 20263 weeks ago
+            - generic [ref=e424]:
+              - generic [ref=e425]:
+                - heading "Repository files navigation" [level=2] [ref=e426]
+                - navigation "Repository files" [ref=e427]:
+                  - list [ref=e428]:
+                    - listitem [ref=e429]:
+                      - link "README" [ref=e430] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e431]: README
+                    - listitem [ref=e432]:
+                      - link "Code of conduct" [ref=e433] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e434]: Code of conduct
+                    - listitem [ref=e435]:
+                      - link "Contributing" [ref=e436] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e437]: Contributing
+                    - listitem [ref=e438]:
+                      - link "Apache-2.0 license" [ref=e439] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e440]: Apache-2.0 license
+                    - listitem [ref=e441]:
+                      - link "Security" [ref=e442] [cursor=pointer]:
+                        - /url: "#"
+                        - generic [ref=e443]: Security
+                - button "Outline" [ref=e444] [cursor=pointer]:
+                  - img [ref=e445]
+              - article [ref=e448]:
+                - generic [ref=e449]:
+                  - heading "playwright-cli" [level=1] [ref=e450]
+                  - 'link "Permalink: playwright-cli" [ref=e451] [cursor=pointer]':
+                    - /url: "#playwright-cli"
+                    - img [ref=e452]
+                - paragraph [ref=e454]: Playwright CLI with SKILLS
+                - generic [ref=e455]:
+                  - heading "Playwright CLI vs Playwright MCP" [level=3] [ref=e456]
+                  - 'link "Permalink: Playwright CLI vs Playwright MCP" [ref=e457] [cursor=pointer]':
+                    - /url: "#playwright-cli-vs-playwright-mcp"
+                    - img [ref=e458]
+                - paragraph [ref=e460]:
+                  - text: This package provides CLI interface into Playwright. If you are using
+                  - strong [ref=e461]: coding agents
+                  - text: ", that is the best fit."
+                - list [ref=e462]:
+                  - listitem [ref=e463]:
+                    - paragraph [ref=e464]:
+                      - strong [ref=e465]: CLI
+                      - text: ": Modern"
+                      - strong [ref=e466]: coding agents
+                      - text: "increasingly favor CLI–based workflows exposed as SKILLs over MCP because CLI invocations are more token-efficient: they avoid loading large tool schemas and verbose accessibility trees into the model context, allowing agents to act through concise, purpose-built commands. This makes CLI + SKILLs better suited for high-throughput coding agents that must balance browser automation with large codebases, tests, and reasoning within limited context windows."
+                  - listitem [ref=e467]:
+                    - paragraph [ref=e468]:
+                      - strong [ref=e469]: MCP
+                      - text: ": MCP remains relevant for specialized agentic loops that benefit from persistent state, rich introspection, and iterative reasoning over page structure, such as exploratory automation, self-healing tests, or long-running autonomous workflows where maintaining continuous browser context outweighs token cost concerns. Learn more about"
+                      - link "Playwright MCP" [ref=e470] [cursor=pointer]:
+                        - /url: https://github.com/microsoft/playwright-mcp
+                      - text: .
+                - generic [ref=e471]:
+                  - heading "Key Features" [level=3] [ref=e472]
+                  - 'link "Permalink: Key Features" [ref=e473] [cursor=pointer]':
+                    - /url: "#key-features"
+                    - img [ref=e474]
+                - list [ref=e476]:
+                  - listitem [ref=e477]:
+                    - strong [ref=e478]: Token-efficient
+                    - text: . Does not force page data into LLM.
+                - generic [ref=e479]:
+                  - heading "Requirements" [level=3] [ref=e480]
+                  - 'link "Permalink: Requirements" [ref=e481] [cursor=pointer]':
+                    - /url: "#requirements"
+                    - img [ref=e482]
+                - list [ref=e484]:
+                  - listitem [ref=e485]: Node.js 18 or newer
+                  - listitem [ref=e486]: Claude Code, GitHub Copilot, or any other coding agent.
+                - generic [ref=e487]:
+                  - heading "Getting Started" [level=2] [ref=e488]
+                  - 'link "Permalink: Getting Started" [ref=e489] [cursor=pointer]':
+                    - /url: "#getting-started"
+                    - img [ref=e490]
+                - generic [ref=e492]:
+                  - heading "Installation" [level=2] [ref=e493]
+                  - 'link "Permalink: Installation" [ref=e494] [cursor=pointer]':
+                    - /url: "#installation"
+                    - img [ref=e495]
+                - generic [ref=e497]:
+                  - generic [ref=e498]: npm install -g @playwright/cli@latest playwright-cli --help
+                  - button "Copy" [ref=e500] [cursor=pointer]:
+                    - img [ref=e501]
+                - generic [ref=e504]:
+                  - heading "Installing skills" [level=3] [ref=e505]
+                  - 'link "Permalink: Installing skills" [ref=e506] [cursor=pointer]':
+                    - /url: "#installing-skills"
+                    - img [ref=e507]
+                - paragraph [ref=e509]: Claude Code, GitHub Copilot and others will use the locally installed skills.
+                - generic [ref=e510]:
+                  - generic [ref=e511]: playwright-cli install --skills
+                  - button "Copy" [ref=e513] [cursor=pointer]:
+                    - img [ref=e514]
+                - generic [ref=e517]:
+                  - heading "Skills-less operation" [level=3] [ref=e518]
+                  - 'link "Permalink: Skills-less operation" [ref=e519] [cursor=pointer]':
+                    - /url: "#skills-less-operation"
+                    - img [ref=e520]
+                - paragraph [ref=e522]:
+                  - text: Point your agent at the CLI and let it cook. It'll read the skill off
+                  - code [ref=e523]: playwright-cli --help
+                  - text: "on its own:"
+                - generic [ref=e524]:
+                  - code [ref=e526]: Test the "add todo" flow on https://demo.playwright.dev/todomvc using playwright-cli. Check playwright-cli --help for available commands.
+                  - button "Copy" [ref=e528] [cursor=pointer]:
+                    - img [ref=e529]
+                - generic [ref=e532]:
+                  - heading "Demo" [level=2] [ref=e533]
+                  - 'link "Permalink: Demo" [ref=e534] [cursor=pointer]':
+                    - /url: "#demo"
+                    - img [ref=e535]
+                - generic [ref=e537]:
+                  - code [ref=e539]: "> Use playwright skills to test https://demo.playwright.dev/todomvc/. Take screenshots for all successful and failing scenarios."
+                  - button "Copy" [ref=e541] [cursor=pointer]:
+                    - img [ref=e542]
+                - paragraph [ref=e545]: "Your agent will be running commands, but it does not mean you can't play with it manually:"
+                - generic [ref=e546]:
+                  - code [ref=e548]: playwright-cli open https://demo.playwright.dev/todomvc/ --headed playwright-cli type "Buy groceries" playwright-cli press Enter playwright-cli type "Water flowers" playwright-cli press Enter playwright-cli check e21 playwright-cli check e35 playwright-cli screenshot
+                  - button "Copy" [ref=e550] [cursor=pointer]:
+                    - img [ref=e551]
+                - generic [ref=e554]:
+                  - heading "Headed operation" [level=2] [ref=e555]
+                  - 'link "Permalink: Headed operation" [ref=e556] [cursor=pointer]':
+                    - /url: "#headed-operation"
+                    - img [ref=e557]
+                - paragraph [ref=e559]:
+                  - text: Playwright CLI is headless by default. If you'd like to see the browser, pass
+                  - code [ref=e560]: "--headed"
+                  - text: to
+                  - code [ref=e561]: open
+                  - text: ":"
+                - generic [ref=e562]:
+                  - generic [ref=e563]: playwright-cli open https://playwright.dev --headed
+                  - button "Copy" [ref=e565] [cursor=pointer]:
+                    - img [ref=e566]
+                - generic [ref=e569]:
+                  - heading "Sessions" [level=2] [ref=e570]
+                  - 'link "Permalink: Sessions" [ref=e571] [cursor=pointer]':
+                    - /url: "#sessions"
+                    - img [ref=e572]
+                - paragraph [ref=e574]:
+                  - text: Playwright CLI keeps the browser profile in memory by default. Your cookies and storage state are preserved between CLI calls within the session, but lost when the browser closes. Use
+                  - code [ref=e575]: "--persistent"
+                  - text: to save the profile to disk for persistence across browser restarts.
+                - paragraph [ref=e576]:
+                  - text: You can use different instances of the browser for different projects with sessions. Pass
+                  - code [ref=e577]: "-s="
+                  - text: to the invocation to talk to a specific browser.
+                - generic [ref=e578]:
+                  - generic [ref=e579]: playwright-cli open https://playwright.dev playwright-cli -s=example open https://example.com --persistent playwright-cli list
+                  - button "Copy" [ref=e581] [cursor=pointer]:
+                    - img [ref=e582]
+                - paragraph [ref=e585]:
+                  - text: You can run your coding agent with the
+                  - code [ref=e586]: PLAYWRIGHT_CLI_SESSION
+                  - text: "environment variable:"
+                - generic [ref=e587]:
+                  - generic [ref=e588]: PLAYWRIGHT_CLI_SESSION=todo-app claude .
+                  - button "Copy" [ref=e590] [cursor=pointer]:
+                    - img [ref=e591]
+                - paragraph [ref=e594]:
+                  - text: Or instruct it to prepend
+                  - code [ref=e595]: "-s="
+                  - text: to the calls.
+                - paragraph [ref=e596]: "Manage your sessions as follows:"
+                - generic [ref=e597]:
+                  - generic [ref=e598]:
+                    - text: playwright-cli list
+                    - generic [ref=e599]: "# list all sessions"
+                    - text: playwright-cli close-all
+                    - generic [ref=e600]: "# close all browsers"
+                    - text: playwright-cli kill-all
+                    - generic [ref=e601]: "# forcefully kill all browser processes"
+                  - button "Copy" [ref=e603] [cursor=pointer]:
+                    - img [ref=e604]
+                - generic [ref=e607]:
+                  - heading "Monitoring" [level=2] [ref=e608]
+                  - 'link "Permalink: Monitoring" [ref=e609] [cursor=pointer]':
+                    - /url: "#monitoring"
+                    - img [ref=e610]
+                - paragraph [ref=e612]:
+                  - text: Use
+                  - code [ref=e613]: playwright-cli show
+                  - text: to open a visual dashboard that lets you see and control all running browser sessions. This is useful when your coding agents are running browser automation in the background and you want to observe their progress or step in to help.
+                - generic [ref=e614]:
+                  - generic [ref=e615]: playwright-cli show
+                  - button "Copy" [ref=e617] [cursor=pointer]:
+                    - img [ref=e618]
+                - link "Image" [ref=e621] [cursor=pointer]:
+                  - /url: https://private-user-images.githubusercontent.com/883973/549975133-99df739d-106a-4520-b004-bb315db41da7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzIxMTIyMjIsIm5iZiI6MTc3MjExMTkyMiwicGF0aCI6Ii84ODM5NzMvNTQ5OTc1MTMzLTk5ZGY3MzlkLTEwNmEtNDUyMC1iMDA0LWJiMzE1ZGI0MWRhNy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwMjI2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDIyNlQxMzE4NDJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT03YWNiZmY4ZGY0MWU0MDcxYWY5ODg2YTczYTc2NDdiOGFiZWM5M2ZkM2ZmMjlkOGQ1YmVlYTMwOWJjN2U4ZmI3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.8y9SCsLI-Q8IqU_f5GtdC4TQawagHTyijl7hPVGBbRU
+                  - img "Image" [ref=e622]
+                - paragraph [ref=e623]: "The dashboard opens a window with two views:"
+                - list [ref=e624]:
+                  - listitem [ref=e625]:
+                    - strong [ref=e626]: Session grid
+                    - text: — shows all active sessions grouped by workspace, each with a live screencast preview, session name, current URL, and page title. Click any session to zoom in.
+                  - listitem [ref=e627]:
+                    - strong [ref=e628]: Session detail
+                    - text: — shows a live view of the selected session with a tab bar, navigation controls (back, forward, reload, address bar), and full remote control. Click into the viewport to take over mouse and keyboard input; press Escape to release.
+                - paragraph [ref=e629]: From the grid you can also close running sessions or delete data for inactive ones.
+                - generic [ref=e630]:
+                  - heading "Commands" [level=2] [ref=e631]
+                  - 'link "Permalink: Commands" [ref=e632] [cursor=pointer]':
+                    - /url: "#commands"
+                    - img [ref=e633]
+                - generic [ref=e635]:
+                  - heading "Core" [level=3] [ref=e636]
+                  - 'link "Permalink: Core" [ref=e637] [cursor=pointer]':
+                    - /url: "#core"
+                    - img [ref=e638]
+                - generic [ref=e640]:
+                  - generic [ref=e641]:
+                    - text: playwright-cli open [url]
+                    - generic [ref=e642]: "# open browser, optionally navigate to url"
+                    - text: playwright-cli goto <url>
+                    - generic [ref=e643]: "# navigate to a url"
+                    - text: playwright-cli close
+                    - generic [ref=e644]: "# close the page"
+                    - text: playwright-cli type <text>
+                    - generic [ref=e645]: "# type text into editable element"
+                    - text: playwright-cli click <ref> [button]
+                    - generic [ref=e646]: "# perform click on a web page"
+                    - text: playwright-cli dblclick <ref> [button]
+                    - generic [ref=e647]: "# perform double click on a web page"
+                    - text: playwright-cli fill <ref> <text>
+                    - generic [ref=e648]: "# fill text into editable element"
+                    - text: playwright-cli drag <startRef> <endRef>
+                    - generic [ref=e649]: "# perform drag and drop between two elements"
+                    - text: playwright-cli hover <ref>
+                    - generic [ref=e650]: "# hover over element on page"
+                    - text: playwright-cli select <ref> <val>
+                    - generic [ref=e651]: "# select an option in a dropdown"
+                    - text: playwright-cli upload <file>
+                    - generic [ref=e652]: "# upload one or multiple files"
+                    - text: playwright-cli check <ref>
+                    - generic [ref=e653]: "# check a checkbox or radio button"
+                    - text: playwright-cli uncheck <ref>
+                    - generic [ref=e654]: "# uncheck a checkbox or radio button"
+                    - text: playwright-cli snapshot
+                    - generic [ref=e655]: "# capture page snapshot to obtain element ref"
+                    - text: playwright-cli snapshot --filename=f
+                    - generic [ref=e656]: "# save snapshot to specific file"
+                    - text: playwright-cli eval <func> [ref]
+                    - generic [ref=e657]: "# evaluate javascript expression on page or element"
+                    - text: playwright-cli dialog-accept [prompt]
+                    - generic [ref=e658]: "# accept a dialog"
+                    - text: playwright-cli dialog-dismiss
+                    - generic [ref=e659]: "# dismiss a dialog"
+                    - text: playwright-cli resize <w> <h>
+                    - generic [ref=e660]: "# resize the browser window"
+                  - button "Copy" [ref=e662] [cursor=pointer]:
+                    - img [ref=e663]
+                - generic [ref=e666]:
+                  - heading "Navigation" [level=3] [ref=e667]
+                  - 'link "Permalink: Navigation" [ref=e668] [cursor=pointer]':
+                    - /url: "#navigation"
+                    - img [ref=e669]
+                - generic [ref=e671]:
+                  - generic [ref=e672]:
+                    - text: playwright-cli go-back
+                    - generic [ref=e673]: "# go back to the previous page"
+                    - text: playwright-cli go-forward
+                    - generic [ref=e674]: "# go forward to the next page"
+                    - text: playwright-cli reload
+                    - generic [ref=e675]: "# reload the current page"
+                  - button "Copy" [ref=e677] [cursor=pointer]:
+                    - img [ref=e678]
+                - generic [ref=e681]:
+                  - heading "Keyboard" [level=3] [ref=e682]
+                  - 'link "Permalink: Keyboard" [ref=e683] [cursor=pointer]':
+                    - /url: "#keyboard"
+                    - img [ref=e684]
+                - generic [ref=e686]:
+                  - generic [ref=e687]:
+                    - text: playwright-cli press <key>
+                    - generic [ref=e688]: "# press a key on the keyboard, `a`, `arrowleft`"
+                    - text: playwright-cli keydown <key>
+                    - generic [ref=e689]: "# press a key down on the keyboard"
+                    - text: playwright-cli keyup <key>
+                    - generic [ref=e690]: "# press a key up on the keyboard"
+                  - button "Copy" [ref=e692] [cursor=pointer]:
+                    - img [ref=e693]
+                - generic [ref=e696]:
+                  - heading "Mouse" [level=3] [ref=e697]
+                  - 'link "Permalink: Mouse" [ref=e698] [cursor=pointer]':
+                    - /url: "#mouse"
+                    - img [ref=e699]
+                - generic [ref=e701]:
+                  - generic [ref=e702]:
+                    - text: playwright-cli mousemove <x> <y>
+                    - generic [ref=e703]: "# move mouse to a given position"
+                    - text: playwright-cli mousedown [button]
+                    - generic [ref=e704]: "# press mouse down"
+                    - text: playwright-cli mouseup [button]
+                    - generic [ref=e705]: "# press mouse up"
+                    - text: playwright-cli mousewheel <dx> <dy>
+                    - generic [ref=e706]: "# scroll mouse wheel"
+                  - button "Copy" [ref=e708] [cursor=pointer]:
+                    - img [ref=e709]
+                - generic [ref=e712]:
+                  - heading "Save as" [level=3] [ref=e713]
+                  - 'link "Permalink: Save as" [ref=e714] [cursor=pointer]':
+                    - /url: "#save-as"
+                    - img [ref=e715]
+                - generic [ref=e717]:
+                  - generic [ref=e718]:
+                    - text: playwright-cli screenshot [ref]
+                    - generic [ref=e719]: "# screenshot of the current page or element"
+                    - text: playwright-cli screenshot --filename=f
+                    - generic [ref=e720]: "# save screenshot with specific filename"
+                    - text: playwright-cli pdf
+                    - generic [ref=e721]: "# save page as pdf"
+                    - text: playwright-cli pdf --filename=page.pdf
+                    - generic [ref=e722]: "# save pdf with specific filename"
+                  - button "Copy" [ref=e724] [cursor=pointer]:
+                    - img [ref=e725]
+                - generic [ref=e728]:
+                  - heading "Tabs" [level=3] [ref=e729]
+                  - 'link "Permalink: Tabs" [ref=e730] [cursor=pointer]':
+                    - /url: "#tabs"
+                    - img [ref=e731]
+                - generic [ref=e733]:
+                  - generic [ref=e734]:
+                    - text: playwright-cli tab-list
+                    - generic [ref=e735]: "# list all tabs"
+                    - text: playwright-cli tab-new [url]
+                    - generic [ref=e736]: "# create a new tab"
+                    - text: playwright-cli tab-close [index]
+                    - generic [ref=e737]: "# close a browser tab"
+                    - text: playwright-cli tab-select <index>
+                    - generic [ref=e738]: "# select a browser tab"
+                  - button "Copy" [ref=e740] [cursor=pointer]:
+                    - img [ref=e741]
+                - generic [ref=e744]:
+                  - heading "Storage" [level=3] [ref=e745]
+                  - 'link "Permalink: Storage" [ref=e746] [cursor=pointer]':
+                    - /url: "#storage"
+                    - img [ref=e747]
+                - generic [ref=e749]:
+                  - generic [ref=e750]:
+                    - text: playwright-cli state-save [filename]
+                    - generic [ref=e751]: "# save storage state"
+                    - text: playwright-cli state-load <filename>
+                    - generic [ref=e752]: "# load storage state"
+                    - generic [ref=e753]: "# Cookies"
+                    - text: playwright-cli cookie-list [--domain]
+                    - generic [ref=e754]: "# list cookies"
+                    - text: playwright-cli cookie-get <name>
+                    - generic [ref=e755]: "# get a cookie"
+                    - text: playwright-cli cookie-set <name> <val>
+                    - generic [ref=e756]: "# set a cookie"
+                    - text: playwright-cli cookie-delete <name>
+                    - generic [ref=e757]: "# delete a cookie"
+                    - text: playwright-cli cookie-clear
+                    - generic [ref=e758]: "# clear all cookies"
+                    - generic [ref=e759]: "# LocalStorage"
+                    - text: playwright-cli localstorage-list
+                    - generic [ref=e760]: "# list localStorage entries"
+                    - text: playwright-cli localstorage-get <key>
+                    - generic [ref=e761]: "# get localStorage value"
+                    - text: playwright-cli localstorage-set <k> <v>
+                    - generic [ref=e762]: "# set localStorage value"
+                    - text: playwright-cli localstorage-delete <k>
+                    - generic [ref=e763]: "# delete localStorage entry"
+                    - text: playwright-cli localstorage-clear
+                    - generic [ref=e764]: "# clear all localStorage"
+                    - generic [ref=e765]: "# SessionStorage"
+                    - text: playwright-cli sessionstorage-list
+                    - generic [ref=e766]: "# list sessionStorage entries"
+                    - text: playwright-cli sessionstorage-get <k>
+                    - generic [ref=e767]: "# get sessionStorage value"
+                    - text: playwright-cli sessionstorage-set <k> <v>
+                    - generic [ref=e768]: "# set sessionStorage value"
+                    - text: playwright-cli sessionstorage-delete <k>
+                    - generic [ref=e769]: "# delete sessionStorage entry"
+                    - text: playwright-cli sessionstorage-clear
+                    - generic [ref=e770]: "# clear all sessionStorage"
+                  - button "Copy" [ref=e772] [cursor=pointer]:
+                    - img [ref=e773]
+                - generic [ref=e776]:
+                  - heading "Network" [level=3] [ref=e777]
+                  - 'link "Permalink: Network" [ref=e778] [cursor=pointer]':
+                    - /url: "#network"
+                    - img [ref=e779]
+                - generic [ref=e781]:
+                  - generic [ref=e782]:
+                    - text: playwright-cli route <pattern> [opts]
+                    - generic [ref=e783]: "# mock network requests"
+                    - text: playwright-cli route-list
+                    - generic [ref=e784]: "# list active routes"
+                    - text: playwright-cli unroute [pattern]
+                    - generic [ref=e785]: "# remove route(s)"
+                  - button "Copy" [ref=e787] [cursor=pointer]:
+                    - img [ref=e788]
+                - generic [ref=e791]:
+                  - heading "DevTools" [level=3] [ref=e792]
+                  - 'link "Permalink: DevTools" [ref=e793] [cursor=pointer]':
+                    - /url: "#devtools"
+                    - img [ref=e794]
+                - generic [ref=e796]:
+                  - generic [ref=e797]:
+                    - text: playwright-cli console [min-level]
+                    - generic [ref=e798]: "# list console messages"
+                    - text: playwright-cli network
+                    - generic [ref=e799]: "# list all network requests since loading the page"
+                    - text: playwright-cli run-code <code>
+                    - generic [ref=e800]: "# run playwright code snippet"
+                    - text: playwright-cli tracing-start
+                    - generic [ref=e801]: "# start trace recording"
+                    - text: playwright-cli tracing-stop
+                    - generic [ref=e802]: "# stop trace recording"
+                    - text: playwright-cli video-start
+                    - generic [ref=e803]: "# start video recording"
+                    - text: playwright-cli video-stop [filename]
+                    - generic [ref=e804]: "# stop video recording"
+                  - button "Copy" [ref=e806] [cursor=pointer]:
+                    - img [ref=e807]
+                - generic [ref=e810]:
+                  - heading "Open parameters" [level=3] [ref=e811]
+                  - 'link "Permalink: Open parameters" [ref=e812] [cursor=pointer]':
+                    - /url: "#open-parameters"
+                    - img [ref=e813]
+                - generic [ref=e815]:
+                  - generic [ref=e816]:
+                    - text: playwright-cli open --browser=chrome
+                    - generic [ref=e817]: "# use specific browser"
+                    - text: playwright-cli open --extension
+                    - generic [ref=e818]: "# connect via browser extension"
+                    - text: playwright-cli open --persistent
+                    - generic [ref=e819]: "# use persistent profile"
+                    - text: playwright-cli open --profile=<path>
+                    - generic [ref=e820]: "# use custom profile directory"
+                    - text: playwright-cli open --config=file.json
+                    - generic [ref=e821]: "# use config file"
+                    - text: playwright-cli close
+                    - generic [ref=e822]: "# close the browser"
+                    - text: playwright-cli delete-data
+                    - generic [ref=e823]: "# delete user data for default session"
+                  - button "Copy" [ref=e825] [cursor=pointer]:
+                    - img [ref=e826]
+                - generic [ref=e829]:
+                  - heading "Snapshots" [level=3] [ref=e830]
+                  - 'link "Permalink: Snapshots" [ref=e831] [cursor=pointer]':
+                    - /url: "#snapshots"
+                    - img [ref=e832]
+                - paragraph [ref=e834]: After each command, playwright-cli provides a snapshot of the current browser state.
+                - generic [ref=e835]:
+                  - generic [ref=e836]:
+                    - text: "> playwright-cli goto https://example.com"
+                    - generic [ref=e837]: "### Page"
+                    - text: "- Page URL: https://example.com/ - Page Title: Example Domain"
+                    - generic [ref=e838]: "### Snapshot"
+                    - text: "[Snapshot](.playwright-cli/page-2026-02-14T19-22-42-679Z.yml)"
+                  - button "Copy" [ref=e840] [cursor=pointer]:
+                    - img [ref=e841]
+                - paragraph [ref=e844]:
+                  - text: You can also take a snapshot on demand using
+                  - code [ref=e845]: playwright-cli snapshot
+                  - text: command.
+                - paragraph [ref=e846]:
+                  - text: If
+                  - code [ref=e847]: "--filename"
+                  - text: is not provided, a new snapshot file is created with a timestamp. Default to automatic file naming, use
+                  - code [ref=e848]: "--filename="
+                  - text: when artifact is a part of the workflow result.
+                - generic [ref=e849]:
+                  - heading "Sessions" [level=3] [ref=e850]
+                  - 'link "Permalink: Sessions" [ref=e851] [cursor=pointer]':
+                    - /url: "#sessions-1"
+                    - img [ref=e852]
+                - generic [ref=e854]:
+                  - generic [ref=e855]:
+                    - text: playwright-cli -s=name <cmd>
+                    - generic [ref=e856]: "# run command in named session"
+                    - text: playwright-cli -s=name close
+                    - generic [ref=e857]: "# stop a named browser"
+                    - text: playwright-cli -s=name delete-data
+                    - generic [ref=e858]: "# delete user data for named browser"
+                    - text: playwright-cli list
+                    - generic [ref=e859]: "# list all sessions"
+                    - text: playwright-cli close-all
+                    - generic [ref=e860]: "# close all browsers"
+                    - text: playwright-cli kill-all
+                    - generic [ref=e861]: "# forcefully kill all browser processes"
+                  - button "Copy" [ref=e863] [cursor=pointer]:
+                    - img [ref=e864]
+                - generic [ref=e867]:
+                  - heading "Local installation" [level=3] [ref=e868]
+                  - 'link "Permalink: Local installation" [ref=e869] [cursor=pointer]':
+                    - /url: "#local-installation"
+                    - img [ref=e870]
+                - paragraph [ref=e872]:
+                  - text: In some cases you might want to install playwright-cli locally. If running the globally available
+                  - code [ref=e873]: playwright-cli
+                  - text: binary fails, use
+                  - code [ref=e874]: npx playwright-cli
+                  - text: "to run the commands. For example:"
+                - generic [ref=e875]:
+                  - generic [ref=e876]: npx playwright-cli open https://example.com npx playwright-cli click e1
+                  - button "Copy" [ref=e878] [cursor=pointer]:
+                    - img [ref=e879]
+                - generic [ref=e882]:
+                  - heading "Configuration file" [level=2] [ref=e883]
+                  - 'link "Permalink: Configuration file" [ref=e884] [cursor=pointer]':
+                    - /url: "#configuration-file"
+                    - img [ref=e885]
+                - paragraph [ref=e887]:
+                  - text: The Playwright CLI can be configured using a JSON configuration file. You can specify the configuration file using the
+                  - code [ref=e888]: "--config"
+                  - text: "command line option:"
+                - generic [ref=e889]:
+                  - generic [ref=e890]: playwright-cli --config path/to/config.json open example.com
+                  - button "Copy" [ref=e892] [cursor=pointer]:
+                    - img [ref=e893]
+                - paragraph [ref=e896]:
+                  - text: Playwright CLI will load config from
+                  - code [ref=e897]: .playwright/cli.config.json
+                  - text: by default so that you did not need to specify it every time.
+                - group [ref=e898]:
+                  - generic "Configuration file schema" [ref=e899] [cursor=pointer]
+                - group [ref=e900]:
+                  - generic "Configuration via env" [ref=e901] [cursor=pointer]
+                - generic [ref=e902]:
+                  - heading "Specific tasks" [level=2] [ref=e903]
+                  - 'link "Permalink: Specific tasks" [ref=e904] [cursor=pointer]':
+                    - /url: "#specific-tasks"
+                    - img [ref=e905]
+                - paragraph [ref=e907]: "The installed skill includes detailed reference guides for common tasks:"
+                - list [ref=e908]:
+                  - listitem [ref=e909]:
+                    - strong [ref=e910]: Request mocking
+                    - text: — intercept and mock network requests
+                  - listitem [ref=e911]:
+                    - strong [ref=e912]: Running Playwright code
+                    - text: — execute arbitrary Playwright scripts
+                  - listitem [ref=e913]:
+                    - strong [ref=e914]: Browser session management
+                    - text: — manage multiple browser sessions
+                  - listitem [ref=e915]:
+                    - strong [ref=e916]: Storage state (cookies, localStorage)
+                    - text: — persist and restore browser state
+                  - listitem [ref=e917]:
+                    - strong [ref=e918]: Test generation
+                    - text: — generate Playwright tests from interactions
+                  - listitem [ref=e919]:
+                    - strong [ref=e920]: Tracing
+                    - text: — record and inspect execution traces
+                  - listitem [ref=e921]:
+                    - strong [ref=e922]: Video recording
+                    - text: — capture browser session videos
+        - generic [ref=e924]:
+          - generic [ref=e927]:
+            - heading "About" [level=2] [ref=e928]
+            - paragraph [ref=e929]: CLI for common Playwright actions. Record and generate Playwright code, inspect selectors and take screenshots.
+            - generic [ref=e930]:
+              - img [ref=e931]
+              - link "playwright.dev" [ref=e934] [cursor=pointer]:
+                - /url: https://playwright.dev
+            - heading "Topics" [level=3] [ref=e935]
+            - link "playwright" [ref=e938] [cursor=pointer]:
+              - /url: /topics/playwright
+            - heading "Resources" [level=3] [ref=e939]
+            - link "Readme" [ref=e941] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e942]
+              - text: Readme
+            - heading "License" [level=3] [ref=e944]
+            - link "Apache-2.0 license" [ref=e946] [cursor=pointer]:
+              - /url: "#Apache-2.0-1-ov-file"
+              - img [ref=e947]
+              - text: Apache-2.0 license
+            - heading "Code of conduct" [level=3] [ref=e949]
+            - link "Code of conduct" [ref=e951] [cursor=pointer]:
+              - /url: "#coc-ov-file"
+              - img [ref=e952]
+              - text: Code of conduct
+            - heading "Contributing" [level=3] [ref=e954]
+            - link "Contributing" [ref=e956] [cursor=pointer]:
+              - /url: "#contributing-ov-file"
+              - img [ref=e957]
+              - text: Contributing
+            - heading "Security policy" [level=3] [ref=e959]
+            - link "Security policy" [ref=e961] [cursor=pointer]:
+              - /url: "#security-ov-file"
+              - img [ref=e962]
+              - text: Security policy
+            - link "Activity" [ref=e965] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/activity
+              - img [ref=e966]
+              - text: Activity
+            - link "Custom properties" [ref=e969] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/custom-properties
+              - img [ref=e970]
+              - text: Custom properties
+            - heading "Stars" [level=3] [ref=e972]
+            - link "4.2k stars" [ref=e974] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/stargazers
+              - img [ref=e975]
+              - strong [ref=e977]: 4.2k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e978]
+            - link "30 watching" [ref=e980] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/watchers
+              - img [ref=e981]
+              - strong [ref=e983]: "30"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e984]
+            - link "158 forks" [ref=e986] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/forks
+              - img [ref=e987]
+              - strong [ref=e989]: "158"
+              - text: forks
+            - link "Report repository" [ref=e991] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fmicrosoft%2Fplaywright-cli&report=microsoft+%28user%29
+          - generic [ref=e993]:
+            - heading "Releases 4" [level=2] [ref=e994]:
+              - link "Releases 4" [ref=e995] [cursor=pointer]:
+                - /url: /microsoft/playwright-cli/releases
+                - text: Releases
+                - generic "4" [ref=e996]
+            - link "v0.1.1 Latest Feb 14, 20262 weeks ago" [ref=e997] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/releases/tag/v0.1.1
+              - img [ref=e998]
+              - generic [ref=e1000]:
+                - generic [ref=e1001]:
+                  - generic [ref=e1002]: v0.1.1
+                  - 'generic "Label: Latest" [ref=e1003]': Latest
+                - generic [ref=e1004]: Feb 14, 20262 weeks ago
+            - link "+ 3 releases" [ref=e1006] [cursor=pointer]:
+              - /url: /microsoft/playwright-cli/releases
+          - generic [ref=e1008]:
+            - heading "Packages" [level=2] [ref=e1009]:
+              - link "Packages" [ref=e1010] [cursor=pointer]:
+                - /url: /orgs/microsoft/packages?repo_name=playwright-cli
+            - generic [ref=e1011]: No packages published
+          - generic [ref=e1013]:
+            - heading "Contributors 8" [level=2] [ref=e1014]:
+              - link "Contributors 8" [ref=e1015] [cursor=pointer]:
+                - /url: /microsoft/playwright-cli/graphs/contributors
+                - text: Contributors
+                - generic "8" [ref=e1016]
+            - list [ref=e1017]:
+              - listitem [ref=e1018]:
+                - link "@pavelfeldman" [ref=e1019] [cursor=pointer]:
+                  - /url: https://github.com/pavelfeldman
+                  - img "@pavelfeldman" [ref=e1020]
+              - listitem [ref=e1021]:
+                - link "@Skn0tt" [ref=e1022] [cursor=pointer]:
+                  - /url: https://github.com/Skn0tt
+                  - img "@Skn0tt" [ref=e1023]
+              - listitem [ref=e1024]:
+                - link "@yury-s" [ref=e1025] [cursor=pointer]:
+                  - /url: https://github.com/yury-s
+                  - img "@yury-s" [ref=e1026]
+              - listitem [ref=e1027]:
+                - link "@manuelgruber" [ref=e1028] [cursor=pointer]:
+                  - /url: https://github.com/manuelgruber
+                  - img "@manuelgruber" [ref=e1029]
+              - listitem [ref=e1030]:
+                - link "@boardfish" [ref=e1031] [cursor=pointer]:
+                  - /url: https://github.com/boardfish
+                  - img "@boardfish" [ref=e1032]
+              - listitem [ref=e1033]:
+                - link "@vsantele" [ref=e1034] [cursor=pointer]:
+                  - /url: https://github.com/vsantele
+                  - img "@vsantele" [ref=e1035]
+              - listitem [ref=e1036]:
+                - link "@salmanmkc" [ref=e1037] [cursor=pointer]:
+                  - /url: https://github.com/salmanmkc
+                  - img "@salmanmkc" [ref=e1038]
+              - listitem [ref=e1039]:
+                - link "@Copilot" [ref=e1040] [cursor=pointer]:
+                  - /url: https://github.com/apps/copilot-swe-agent
+                  - img "@Copilot" [ref=e1041]
+          - generic [ref=e1043]:
+            - heading "Languages" [level=2] [ref=e1044]
+            - list [ref=e1049]:
+              - listitem [ref=e1050]:
+                - link "TypeScript 56.5%" [ref=e1051] [cursor=pointer]:
+                  - /url: /microsoft/playwright-cli/search?l=typescript
+                  - img [ref=e1052]
+                  - generic [ref=e1054]: TypeScript
+                  - generic [ref=e1055]: 56.5%
+              - listitem [ref=e1056]:
+                - link "JavaScript 43.5%" [ref=e1057] [cursor=pointer]:
+                  - /url: /microsoft/playwright-cli/search?l=javascript
+                  - img [ref=e1058]
+                  - generic [ref=e1060]: JavaScript
+                  - generic [ref=e1061]: 43.5%
+  - contentinfo [ref=e1062]:
+    - heading "Footer" [level=2] [ref=e1063]
+    - generic [ref=e1064]:
+      - generic [ref=e1065]:
+        - link "GitHub Homepage" [ref=e1066] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e1067]
+        - generic [ref=e1069]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e1070]:
+        - heading "Footer navigation" [level=3] [ref=e1071]
+        - list "Footer navigation" [ref=e1072]:
+          - listitem [ref=e1073]:
+            - link "Terms" [ref=e1074] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e1075]:
+            - link "Privacy" [ref=e1076] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e1077]:
+            - link "Security" [ref=e1078] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e1079]:
+            - link "Status" [ref=e1080] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e1081]:
+            - link "Community" [ref=e1082] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e1083]:
+            - link "Docs" [ref=e1084] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e1085]:
+            - link "Contact" [ref=e1086] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e1087]:
+            - button "Manage cookies" [ref=e1089] [cursor=pointer]
+          - listitem [ref=e1090]:
+            - button "Do not share my personal information" [ref=e1092] [cursor=pointer]
