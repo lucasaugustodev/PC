@@ -1,96 +1,54 @@
-# Sistema Windows
+# Sensible files
+*.env
+.env.*
+*.key
+*.pem
+*.cer
+*.p12
+
+# System files
 Thumbs.db
 Desktop.ini
-ntuser.ini
-ntuser.dat
-*.tmp
+$RECYCLE.BIN/
 NTUSER.DAT*
 *.regtrans-ms
 *.blf
+*.LOG1
+*.LOG2
+ntuser.ini
 
-# IDEs e Editores
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
-.cursor/
+
+# Claude/Cline data
+.cline/
+.claude-mem/
+.claude/
+
+# Cache and temp
+.cache/
+.bun/
+.scoop/
 .apm/
 .aws/
-
-# Ambiente Cline/Claude
-.agents/
-.claude/
-.cline/
-.paperclip/
-.claude-mem/
-
-# Docker
-.docker/
-
-# Aplicativos e configurações
-.bun/
-.cache/
 .chocolatey/
-.config/
-.fly/
-.gemini/
-.kiro/
-.lmstudio/
-.local/
-.m2/
-.matplotlib/
-.openfang/
-.pack/
-.playwright-cli/
 .playwright-mcp/
 .ssh/
 .trae-aicc/
 .trae/
+.agents/
 
-# Arquivos sensíveis
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-credentials.json
-temp_env_vars.env
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-.venv/
-
-# Bancos de dados
-*.db
-*.db-shm
-*.db-wal
-
-# Documentação e arquivos temporários
-docs-part*.txt
-teste-*.txt
-*.txt.backup
-old_gitignore.txt
-
-# Screenshots e imagens de teste
-*.png
-*.jpg
-*.jpeg
-!faster-whisper-web/avatars/*.glb
-!hiveclip/screenshots/*
-screenshots/
-
-# Personal Windows folders - ignoring
+# OS specific (Portuguese Windows)
+Cookies/
+Dados de Aplicativos/
+"Meus Documentos"/
+"Configurações Locais"/
+"Menu Iniciar"/
+Recent/
+SendTo/
 AppData/
 Desktop/
 Documents/
@@ -100,13 +58,29 @@ Links/
 Saved Games/
 Searches/
 Videos/
-WPS Cloud Files/
-scoop/
 
-# Ambientes específicos
-magentic-ui/
-dyad-apps/
-new-project/
-vultr-vm-creator/
+# Project specific - ignore node_modules, build outputs
+node_modules/
 bloons-td-3d/
+dyad-apps/
+vultr-vm-creator/
+new-project/
+scoop/
+screenshots/
+WPS Cloud Files/
+
+# Test/Dev files - ignore screenshots and test outputs
+*.png
+*test*.txt
+docs-part*.txt
+test-*.txt
+teste-*.txt
+*_screenshot.png
+
+# Personal/Projects - ignore runtime dirs
+magentic-ui-env/
+paperclip/
+.basic-memory/
+.hiveclip/
 claude-launcher-web/
+claude-launcher-video/
