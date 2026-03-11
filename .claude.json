@@ -35,7 +35,7 @@
     "desktop-shortcut": 75,
     "feedback-command": 75
   },
-  "promptQueueUseCount": 245,
+  "promptQueueUseCount": 250,
   "cachedGrowthBookFeatures": {
     "tengu_tst_kx7": false,
     "tengu_plan_mode_interview_phase": false,
@@ -320,6 +320,10 @@
     "para-memory-files": {
       "usageCount": 1,
       "lastUsedAt": 1772929015515
+    },
+    "claude-mem:mem-search": {
+      "usageCount": 1,
+      "lastUsedAt": 1773255719328
     }
   },
   "oauthAccount": {
