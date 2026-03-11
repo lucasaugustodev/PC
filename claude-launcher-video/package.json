@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx remotion studio src/index.ts",
+    "build": "npx remotion render src/index.ts ClaudeLauncherDemo out/video.mp4",
+    "preview": "npx remotion preview src/index.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 {
-  "numStartups": 88,
+  "numStartups": 89,
   "installMethod": "global",
   "autoUpdates": false,
   "hasSeenTasksHint": true,
@@ -35,7 +35,7 @@
     "desktop-shortcut": 75,
     "feedback-command": 75
   },
-  "promptQueueUseCount": 239,
+  "promptQueueUseCount": 241,
   "cachedGrowthBookFeatures": {
     "tengu_tst_kx7": false,
     "tengu_plan_mode_interview_phase": false,
