@@ -1,0 +1,380 @@
+{
+  "numStartups": 97,
+  "installMethod": "global",
+  "autoUpdates": true,
+  "tipsHistory": {
+    "new-user-warmup": 1,
+    "ide-hotkey": 67,
+    "shift-enter": 90,
+    "memory-command": 95,
+    "theme-command": 80,
+    "status-line": 91,
+    "prompt-queue": 56,
+    "enter-to-steer-in-relatime": 80,
+    "todo-list": 80,
+    "# for memory": 67,
+    "install-github-app": 90,
+    "permissions": 93,
+    "drag-and-drop-images": 93,
+    "double-esc": 49,
+    "continue": 93,
+    "custom-commands": 95,
+    "shift-tab": 93,
+    "custom-agents": 95,
+    "image-paste": 88,
+    "plan-mode-for-complex-tasks": 88,
+    "double-esc-code-restore": 90,
+    "git-worktrees": 90,
+    "tab-toggle-thinking": 63,
+    "ultrathink-keyword": 90,
+    "stickers-command": 75,
+    "install-slack-app": 88,
+    "rename-conversation": 91,
+    "config-thinking-mode": 76,
+    "btw-side-question": 77,
+    "desktop-app": 93,
+    "default-permission-mode-config": 90,
+    "web-app": 95,
+    "mobile-app": 95,
+    "guest-passes": 94,
+    "frontend-design-plugin": 95
+  },
+  "promptQueueUseCount": 9,
+  "cachedStatsigGates": {
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_use_file_checkpoints": true,
+    "tengu_tool_pear": false,
+    "tengu_glob_with_rg": false,
+    "tengu_vscode_review_upsell": false,
+    "tengu_web_tasks": true,
+    "tengu_log_1p_events": true,
+    "tengu_enable_versioned_plugins": false,
+    "code_slack_app_install_banner": false,
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_thinkback": false,
+    "tengu_prompt_suggestion": true,
+    "tengu_ant_attribution_header_new": true,
+    "tengu_year_end_2025_campaign_promo": false,
+    "tengu_streaming_tool_execution2": false,
+    "tengu_vscode_onboarding": false,
+    "tengu_session_memory": false
+  },
+  "cachedDynamicConfigs": {
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 5000,
+      "maxExportBatchSize": 200,
+      "maxQueueSize": 8192
+    },
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    }
+  },
+  "cachedGrowthBookFeatures": {
+    "strawberry_granite_flag": "N/A",
+    "persimmon_marble_flag": "N/A",
+    "tengu_mcp_tool_search": true,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_tool_pear": false,
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_thinkback": false,
+    "tengu_ant_attribution_header_new": true,
+    "tengu_vscode_review_upsell": false,
+    "tengu_sumi": true,
+    "tengu_react_vulnerability_warning": false,
+    "tengu_tool_result_persistence": false,
+    "tengu_accept_with_feedback": true,
+    "doorbell_bottle": "inherit",
+    "tengu_tool_search_unsupported_models": [
+      "haiku"
+    ],
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 5000,
+      "maxExportBatchSize": 200,
+      "maxQueueSize": 8192
+    },
+    "tengu_pid_based_version_locking": true,
+    "tengu_event_sampling_config": {},
+    "tengu_scratch": false,
+    "tengu_log_segment_events": false,
+    "tengu_log_datadog_events": true,
+    "tengu_streaming_tool_execution2": false,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    },
+    "tengu_post_compact_survey": false,
+    "tengu_vscode_onboarding": false,
+    "enhanced_telemetry_beta": false,
+    "tengu_compact_streaming_retry": false,
+    "tengu_code_diff_cli": true,
+    "tengu_plan_mode_interview_phase": false,
+    "tengu_bash_haiku_prefetch": true,
+    "tengu_session_memory": false,
+    "tengu_sm_compact": false,
+    "tengu_keybinding_customization": false,
+    "tengu_attribution_header": true,
+    "tengu_claudeai_mcp_connectors": false,
+    "tengu_permission_explainer": true,
+    "tengu_plank_river_frost": "user_intent",
+    "tengu_brass_pebble": false,
+    "tengu_cache_plum_violet": false
+  },
+  "firstStartTime": "2025-08-11T22:54:36.922Z",
+  "userID": "fec9e9a6342b1abbfbd7ae883cf99f46f3a7fdcc30e34d69bdbad3c600ca6f8d",
+  "projects": {
+    "C:\\Users\\PC\\Documents\\GitHub\\PainelAdminVaccini": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "hasTrustDialogHooksAccepted": false,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastTotalWebSearchRequests": 0
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\finance-blue-access": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "hasTrustDialogHooksAccepted": false,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "disabledMcpServers": [
+        "supabase"
+      ]
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\leilao-rj-imoveis-site-main-novo": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\hub-portal-vibe": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastTotalWebSearchRequests": 0
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\vaccini-cursor": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\Burgerpay": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\buscalead-cnpj-finder": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false
+    },
+    "C:\\Users\\PC\\Documents\\GitHub\\remove-ia": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": []
+    },
+    "C:/Users/PC/Documents/GitHub/finance-blue-access": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      }
+    },
+    "C:/Users/PC/Documents/GitHub/neural": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {
+        "figma": {
+          "type": "http",
+          "url": "https://mcp.figma.com/mcp"
+        }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      }
+    },
+    "C:/Users/PC/Documents/GitHub/hub-portal-vibe": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      }
+    }
+  },
+  "isQualifiedForDataSharing": false,
+  "shiftEnterKeyBindingInstalled": true,
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "1.0.100",
+  "recommendedSubscription": "",
+  "subscriptionNoticeCount": 0,
+  "hasAvailableSubscription": false,
+  "hasIdeOnboardingBeenShown": {
+    "cursor": true,
+    "vscode": true
+  },
+  "changelogLastFetched": 1769170368007,
+  "lastReleaseNotesSeen": "2.1.17",
+  "s1mAccessCache": {
+    "6417ab2e-f034-4a1a-82ff-72a9c6ffde6a": {
+      "hasAccess": false,
+      "timestamp": 1755100359228
+    },
+    "89f95df5-88d4-45f5-8312-a8caf23ff749": {
+      "hasAccess": false,
+      "timestamp": 1756676000987
+    },
+    "b7f0ded7-c3e2-4a0c-a28a-24c33a03540c": {
+      "hasAccess": false,
+      "hasAccessNotAsDefault": false,
+      "timestamp": 1769512845356
+    }
+  },
+  "fallbackAvailableWarningThreshold": 0.2,
+  "hasOpusPlanDefault": false,
+  "claudeCodeFirstTokenDate": "2025-08-11T22:54:50.156519Z",
+  "hasAcknowledgedCostThreshold": true,
+  "s1mNonSubscriberAccessCache": {
+    "6417ab2e-f034-4a1a-82ff-72a9c6ffde6a": {
+      "hasAccess": false,
+      "timestamp": 1756829487267
+    }
+  },
+  "oauthAccount": {
+    "accountUuid": "df6dc8f8-f4e2-4d9b-a0bc-8cd2d372330e",
+    "emailAddress": "desenvolvimento.hub@somosahub.com.br",
+    "organizationUuid": "b7f0ded7-c3e2-4a0c-a28a-24c33a03540c",
+    "organizationRole": "admin",
+    "workspaceRole": null,
+    "organizationName": "desenvolvimento.hub@somosahub.com.b's Organization",
+    "displayName": "lucas",
+    "organizationBillingType": "stripe_subscription",
+    "hasExtraUsageEnabled": false
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1769122332035
+  },
+  "sonnet45MigrationComplete": true,
+  "lastPlanModeUse": 1769170394628,
+  "passesEligibilityCache": {
+    "b7f0ded7-c3e2-4a0c-a28a-24c33a03540c": {
+      "eligible": true,
+      "referral_code_details": {
+        "code": "MKOyky5AEg",
+        "campaign": "claude_code_guest_pass",
+        "referral_link": "https://claude.ai/referral/MKOyky5AEg"
+      },
+      "referrer_reward": null,
+      "timestamp": 1769512852142
+    }
+  },
+  "githubRepoPaths": {
+    "lucasaugustodev/hub-portal-vibe": [
+      "C:\\Users\\PC\\Documents\\GitHub\\hub-portal-vibe",
+      "c:\\Users\\PC\\Documents\\GitHub\\hub-portal-vibe"
+    ],
+    "lucasaugustodev/finance-blue-access": [
+      "C:\\Users\\PC\\Documents\\GitHub\\finance-blue-access",
+      "c:\\Users\\PC\\Documents\\GitHub\\finance-blue-access"
+    ],
+    "lucasaugustodev/neural": [
+      "C:\\Users\\PC\\Documents\\GitHub\\neural",
+      "c:\\Users\\PC\\Documents\\GitHub\\neural"
+    ]
+  },
+  "opus45MigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "hasShownOpus45Notice": {
+    "b7f0ded7-c3e2-4a0c-a28a-24c33a03540c": true
+  },
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "groveConfigCache": {
+    "df6dc8f8-f4e2-4d9b-a0bc-8cd2d372330e": {
+      "grove_enabled": true,
+      "timestamp": 1769512868177
+    }
+  },
+  "opusProMigrationComplete": true,
+  "cachedChromeExtensionInstalled": false,
+  "passesUpsellSeenCount": 4,
+  "passesLastSeenCampaign": "claude_code_guest_pass"
+}
