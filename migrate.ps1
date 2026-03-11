@@ -51,7 +51,7 @@ Write-Host "`n=== Copying cloudflared.exe ==="
 Copy-Item "X:\Users\Administrator\Desktop\cloudflared.exe" "Y:\Users\Administrator\Desktop\cloudflared.exe" -Force
 
 # Cleanup
-net use X: /delete /yes
-net use Y: /delete /yes
+Remove-PSDrive -Name "X" -Force
+Remove-PSDrive -Name "Y" -Force
 
 Write-Host "`n=== ALL COPIES COMPLETE ==="
