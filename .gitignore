@@ -90,6 +90,19 @@ old_gitignore.txt
 !hiveclip/screenshots/*
 screenshots/
 
+# Personal Windows folders - ignoring
+AppData/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Saved Games/
+Searches/
+Videos/
+WPS Cloud Files/
+scoop/
+
 # Ambientes específicos
 magentic-ui/
 dyad-apps/
