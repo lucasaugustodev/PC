@@ -20,7 +20,7 @@ TIGHTVNC_URL = "https://www.tightvnc.com/download/2.8.84/tightvnc-2.8.84-gpl-set
 LAUNCHER_REPO = "https://github.com/lucasaugustodev/claude-launcher-web.git"
 
 print(f"Connecting to {ip}...")
-s = winrm.Session(ip, auth=("Administrator", pw), transport="ntlm", read_timeout_sec=300, operation_timeout_sec=240)
+s = winrm.Session(ip, auth=("Administrator", pw), transport="basic", read_timeout_sec=300, operation_timeout_sec=240)
 
 r = s.run_cmd("hostname")
 print(f"Hostname: {r.std_out.decode().strip()}")
