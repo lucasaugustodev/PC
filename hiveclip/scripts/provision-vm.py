@@ -20,7 +20,7 @@ TIGHTVNC_URL = "https://www.tightvnc.com/download/2.8.84/tightvnc-2.8.84-gpl-set
 LAUNCHER_REPO = "https://github.com/lucasaugustodev/claude-launcher-web.git"
 
 print(f"Connecting to {ip}...")
-s = winrm.Session(ip, auth=("Administrator", pw), transport="basic", read_timeout_sec=300, operation_timeout_sec=240)
+s = winrm.Session(ip, auth=("Administrator", pw), transport="ntlm", read_timeout_sec=300, operation_timeout_sec=240)
 
 r = s.run_cmd("hostname")
 print(f"Hostname: {r.std_out.decode().strip()}")
@@ -235,6 +235,67 @@ if r.status_code != 0:
 print("Installing Playwright chromium...")
 run_cmd('npx playwright install chromium', "Playwright install chromium")
 
+# --- claude-mem (memory plugin for Claude Code) ---
+print("\nInstalling claude-mem...")
+
+# Install Bun runtime (required by claude-mem)
+r = run_cmd('bun --version', "Check Bun")
+if r.status_code != 0:
+    print("  Installing Bun...")
+    r = s.run_ps('irm bun.sh/install.ps1 | iex')
+    bun_rc = r.status_code
+    bun_out = r.std_out.decode().strip()[-200:]
+    print(f"  Bun install RC: {bun_rc} - {bun_out}")
+    time.sleep(3)
+
+# Install uv (Python package manager, required by claude-mem vector search)
+r = run_cmd('uv --version', "Check uv")
+if r.status_code != 0:
+    print("  Installing uv...")
+    r = s.run_ps('irm https://astral.sh/uv/install.ps1 | iex')
+    print(f"  uv install RC: {r.status_code}")
+    time.sleep(3)
+
+# Clone claude-mem repo
+r = s.run_cmd(r'dir C:\claude-mem\package.json')
+if r.status_code != 0:
+    print("  Cloning claude-mem...")
+    r = s.run_cmd('git clone https://github.com/thedotmack/claude-mem.git C:\\claude-mem')
+    print(f"  Clone RC: {r.status_code}")
+else:
+    print("  claude-mem already cloned, pulling latest...")
+    s.run_cmd(r'cd C:\claude-mem && git pull')
+
+# Install claude-mem dependencies with Bun
+BUN_PATH = r"C:\Users\Administrator\.bun\bin"
+run_cmd(f'set PATH={BUN_PATH};%PATH% && cd /d C:\\claude-mem && bun install', "claude-mem bun install")
+
+# Set up Claude Code plugin hooks (register claude-mem as a plugin)
+CLAUDE_DIR = r"C:\Users\Administrator\.claude"
+print("  Configuring Claude Code plugin hooks...")
+plugin_config = r'''
+{
+  "plugins": {
+    "claude-mem": {
+      "root": "C:\\claude-mem",
+      "hooks": {
+        "SessionStart": "node C:\\claude-mem\\scripts\\smart-install.js && bun C:\\claude-mem\\src\\hooks\\session-start.ts",
+        "UserPromptSubmit": "bun C:\\claude-mem\\src\\hooks\\user-prompt-submit.ts",
+        "Stop": "bun C:\\claude-mem\\src\\hooks\\stop.ts"
+      }
+    }
+  }
+}
+'''.strip().replace("'", "''")
+
+r = s.run_ps(f"""
+New-Item -ItemType Directory -Force -Path '{CLAUDE_DIR}' | Out-Null
+Set-Content -Path '{CLAUDE_DIR}\\plugins.json' -Value '{plugin_config}' -Encoding UTF8
+""")
+print(f"  Plugin config RC: {r.status_code}")
+
+run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun version")
+
 # ========== STEP 4: Start claude-launcher-web with full PATH ==========
 print("\n=== Step 4: Start Launcher ===")
 
@@ -286,8 +347,10 @@ run_cmd('gemini --version', "Gemini CLI")
 run_cmd('cline --version', "Cline CLI")
 run_cmd('gws --version', "Google Workspace CLI")
 run_cmd('npx playwright --version', "Playwright CLI")
+run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun")
+run_cmd(r'dir C:\claude-mem\package.json', "claude-mem")
 
 print("\n=== Provisioning complete ===")
 print(f"  VNC: {ip}:5900 (password: hiveclip123)")
 print(f"  Launcher: {ip}:3001")
-print(f"  CLIs: claude, gh, gemini, cline, gws, playwright")
+print(f"  CLIs: claude, gh, gemini, cline, gws, playwright, claude-mem")
