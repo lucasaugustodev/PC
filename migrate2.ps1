@@ -1,0 +1,5 @@
+$OLD = "\43.157.180.16\C$"
+$NEW = "\92.246.128.240\C$"
+cmd /c "net use \43.157.180.16\C$ /user:Administrator g4RQgOY4Jnr8"
+cmd /c "net use \92.246.128.240\C$ /user:Administrator 9q7Gfx3GH3CWyaV4"
+Write-Host "Old: $(Test-Path $OLD\Users\Administrator) New: $(Test-Path $NEW\Users\Administrator)"

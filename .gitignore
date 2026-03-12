@@ -1,55 +1,103 @@
-# Sensible files
-*.env
-.env.*
-*.key
-*.pem
-*.cer
-*.p12
+# Node modules
+node_modules/
+.pnpm-store/
 
-# System files
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-NTUSER.DAT*
-*.regtrans-ms
-*.blf
-*.LOG1
-*.LOG2
-ntuser.ini
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+ENV/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+.cursor/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+NTUSER.*
+ntuser.*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Docker
+.docker/
+
+# Misc
+*.tmp
+*.bak
+SharpRDP.exe
+SharpRDP2.exe
+
+# Windows system files
+*.regtrans-ms
+*.blf
+
+# AppData directories (Windows)
+AppData/
+Application Data/
+Dados de Aplicativos/
+Cookies/
+Recent/
+SendTo/
+Menu Iniciar/
+Ambiente de Impressão/
+Ambiente de Rede/
+Configurações Locais/
+Meus Documentos/
+Modelos/
 
 # Claude/Cline data
 .cline/
-.claude-mem/
 .claude/
-
-# Cache and temp
-.cache/
-.bun/
-.scoop/
-.apm/
-.aws/
-.chocolatey/
-.playwright-mcp/
-.ssh/
-.trae-aicc/
-.trae/
+.claude-mem/
 .agents/
 
-# OS specific (Portuguese Windows)
-Cookies/
-Dados de Aplicativos/
-"Meus Documentos"/
-"Configurações Locais"/
-"Menu Iniciar"/
-Recent/
-SendTo/
-AppData/
+# Package managers
+.scoop/
+.chocolatey/
+.apm/
+
+# Cloud/AI tools
+.aws/
+.gemini/
+.lmstudio/
+.kiro/
+.openfang/
+.basic-memory/
+.bun/
+.m2/
+.matplotlib/
+.fly/
+.pack/
+.paperclip/
+.playwright-cli/
+
+# Other tools
+.local/
+.cache/
+
+# Windows user directories
 Desktop/
 Documents/
 Downloads/
@@ -58,29 +106,24 @@ Links/
 Saved Games/
 Searches/
 Videos/
-
-# Project specific - ignore node_modules, build outputs
-node_modules/
-bloons-td-3d/
-dyad-apps/
-vultr-vm-creator/
-new-project/
-scoop/
-screenshots/
 WPS Cloud Files/
 
-# Test/Dev files - ignore screenshots and test outputs
-*.png
-*test*.txt
-docs-part*.txt
-test-*.txt
-teste-*.txt
-*_screenshot.png
+# Config directories
+.config/
+.ssh/
+.trae-aicc/
+.trae/
 
-# Personal/Projects - ignore runtime dirs
-magentic-ui-env/
-paperclip/
-.basic-memory/
-.hiveclip/
-claude-launcher-web/
+# Project files (screenshots, tests, docs)
+*.png
+*.txt
 claude-launcher-video/
+claude-launcher-web/
+dyad-apps/
+hiveclip/screenshots/
+magentic-ui-env/
+new-project/
+paperclip/
+vultr-vm-creator/
+bloons-td-3d/
+screenshots/
