@@ -42,7 +42,7 @@ const HookScene: React.FC = () => {
         {/* Left - Text hook */}
         <div style={{ flex: 1, padding: "0 0 0 100px" }}>
           <div style={{ opacity: textOp }}>
-            <div style={{ fontSize: 42, color: gray, fontFamily: "system-ui" }}>Voce ainda paga</div>
+            <div style={{ fontSize: 42, color: gray, fontFamily: "system-ui" }}>Você ainda paga</div>
             <div style={{
               fontSize: 110, fontWeight: 900, color: "#ef4444", fontFamily: "system-ui",
               position: "relative", display: "inline-block",
