@@ -386,6 +386,7 @@ def process(parsed):
             BB_SIZE = float(blinds_val)
 
         # SNG/MTT specific fields
+        state['game_type'] = gi.get('type', state['game_type'])
         sb_val = gi.get('smallblinds', 0)
         if sb_val:
             state['small_blinds'] = float(sb_val)
@@ -395,12 +396,35 @@ def process(parsed):
         nb = gi.get('nextBlinds', 0)
         if nb:
             state['next_blinds'] = float(nb)
+        nbl = gi.get('nextBlindsLevel', 0)
+        if nbl:
+            state['next_blinds_level'] = int(nbl)
+        nbr = gi.get('nextBlindsLevelRemain', -1)
+        if nbr >= 0:
+            state['next_blinds_remain'] = int(nbr)
+        nsb = gi.get('nextSmallBlinds', 0)
+        if nsb:
+            state['next_sb'] = float(nsb)
+        nante = gi.get('nextAnteFix', 0)
+        state['next_ante'] = float(nante) if nante else 0
         avg = gi.get('avgStack', 0)
         if avg:
             state['avg_stack'] = float(avg)
         pc = gi.get('playerCount', 0)
         if pc:
             state['player_count'] = int(pc)
+        tp = gi.get('totalPlayerCount', 0)
+        if tp:
+            state['total_players'] = int(tp)
+        mpc = gi.get('mttprizecount', 0)
+        if mpc:
+            state['prize_count'] = int(mpc)
+        state['mtt_state'] = gi.get('mttstate', state['mtt_state'])
+        state['addon'] = gi.get('addon', state['addon'])
+        state['rebuy'] = gi.get('rebuy', state['rebuy'])
+        mst = gi.get('mtt_starttime', 0)
+        if mst:
+            state['mtt_start'] = mst
 
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list):
