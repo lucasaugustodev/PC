@@ -348,6 +348,19 @@ def process(parsed):
     # game_info
     gi = d.get('game_info', {})
     if isinstance(gi, dict) and gi:
+        # Log full game_info once per hand for discovery
+        gc_now = gi.get('game_counter', '')
+        if gc_now and str(gc_now) != state.get('_last_gi_log', ''):
+            state['_last_gi_log'] = str(gc_now)
+            try:
+                with open(os.path.expanduser('~/suprema_gameinfo.log'), 'a', encoding='utf-8') as f:
+                    f.write("[hand %s] game_info=%s\n" % (gc_now, json.dumps(gi, ensure_ascii=False)))
+                    # Also log full parsed message keys
+                    f.write("[hand %s] top_keys=%s\n" % (gc_now, list(d.keys())))
+                    f.write("\n")
+            except:
+                pass
+
         # Auto-detect BB size from blinds field (works for cash, SNG, MTT)
         blinds_val = gi.get('blinds', 0)
         if blinds_val and float(blinds_val) > 0:
