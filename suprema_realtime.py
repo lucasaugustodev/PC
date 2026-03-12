@@ -94,6 +94,7 @@ state = {
     'actions': [],       # list of action strings for current hand
     'acting_seat': -1,
     'msg_count': 0,
+    'gto_advice': '',
     'dirty': True,
 }
 
