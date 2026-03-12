@@ -201,7 +201,7 @@ const UrgencyCTA: React.FC = () => {
             ))}
           </div>
 
-          <div style={{ fontSize: 24, color: orange, letterSpacing: 5, marginBottom: 10 }}>ULTIMAS UNIDADES</div>
+          <div style={{ fontSize: 24, color: orange, letterSpacing: 5, marginBottom: 10 }}>ÚLTIMAS UNIDADES</div>
           <div style={{ fontSize: 66, fontWeight: 900, color: white, fontFamily: "system-ui" }}>SoundPro X1</div>
 
           <div style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 16, marginTop: 12 }}>
