@@ -172,9 +172,15 @@ def show():
     bb_info = "BB=%s" % BB_SIZE if BB_SIZE > 0 else "BB=?"
     sng_info = ""
     if state['blinds_level']:
-        sng_info = " | Lvl %d  Next BB=%s  Avg=%s  Players=%d" % (
-            state['blinds_level'], fmt_bb(state['next_blinds']),
-            fmt_bb(state['avg_stack']), state['player_count'])
+        remain = state['next_blinds_remain']
+        mins = remain // 60 if remain > 0 else 0
+        secs = remain % 60 if remain > 0 else 0
+        sng_info = " | Lvl %d  Next: %s/%s in %d:%02d" % (
+            state['blinds_level'], fmt_bb(state['next_sb']), fmt_bb(state['next_blinds']),
+            mins, secs)
+        sng_info += "\n  Players: %d/%d  Avg: %s  ITM: top %d" % (
+            state['player_count'], state['total_players'],
+            fmt_bb(state['avg_stack']), state['prize_count'])
     print("  Hand #%-6s  %s  [%s%s]" % (hand or '?', street, bb_info, sng_info), flush=True)
     print("-" * 56, flush=True)
 
