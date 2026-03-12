@@ -217,16 +217,27 @@ def build_gto_prompt():
         if str(uid) == str(MY_UID):
             my_seat_num = p.get('seat', 0)
 
+    # Detect game type
+    is_sng = state['blinds_level'] > 0
+    if is_sng:
+        game_type = "SNG/MTT Lvl %d (BB=%s, next BB=%s). %d players remaining. Avg stack %s." % (
+            state['blinds_level'], fmt_bb(BB_SIZE), fmt_bb(state['next_blinds']),
+            state['player_count'], fmt_bb(state['avg_stack']))
+        icm_note = " Consider ICM pressure — survival matters, avoid marginal spots."
+    else:
+        game_type = "6max NLH cash."
+        icm_note = ""
+
     prompt = (
-        "6max NLH cash. Stacks ~%s. "
+        "%s Stacks ~%s. "
         "Hero has [%s]. Board: [%s]. Street: %s. "
         "Pot: %s. To call: %s. "
         "Players in hand: %d. Action so far: %s. "
-        "Hero seat %d of %d."
-    ) % (fmt_bb(my_stack), cards, board, street, pot,
+        "Hero seat %d of %d.%s"
+    ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
          fmt_bb(state['max_bet'] - (state['players'].get(str(MY_UID), {}).get('chips_round', 0))),
          num_players, ', '.join(actions_history) if actions_history else 'none',
-         my_seat_num, total_seats)
+         my_seat_num, total_seats, icm_note)
     return prompt
 
 GTO_SYSTEM = """You are a world-class GTO poker solver. Analyze this hand and give the OPTIMAL play.
