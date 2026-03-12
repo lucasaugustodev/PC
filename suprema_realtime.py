@@ -459,8 +459,15 @@ def ask_gto():
         # Auto-play based on GTO recommendation
         if AUTO_PLAY:
             action, size = detect_gto_action(advice)
+            # Safety: never fold when check is available
+            avail = state.get('available_actions', {})
+            can_check = 'check' in avail and avail['check'] is not None
+            if action == 'fold' and can_check:
+                action = 'check'
+                state['gto_advice'] = advice + ' [OVERRIDE: check > fold]'
+                state['dirty'] = True
             if action:
-                time.sleep(0.3)
+                time.sleep(3)  # wait before acting to look natural + let GTO think
                 result = auto_play(action, size)
                 if result:
                     label = action.upper()
