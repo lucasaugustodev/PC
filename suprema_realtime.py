@@ -198,17 +198,9 @@ def build_gto_prompt():
     # Build player info
     num_players = len([p for p in state['players'].values() if p.get('action') not in ('FOLD', '')])
     my_stack = 0
-    my_pos = ''
-    actions_history = []
-    for uid, p in sorted(state['players'].items(), key=lambda x: x[1].get('seat', 0)):
-        action = p.get('action', '')
-        if action:
-            stack_bb = fmt_bb(p.get('stack', 0))
-            bet_bb = fmt_bb(p.get('chips', 0))
-            if str(uid) == str(MY_UID):
-                my_stack = p.get('stack', 0)
-            elif action not in ('', 'FOLD'):
-                actions_history.append("%s %s" % (action, bet_bb))
+    for uid, p in state['players'].items():
+        if str(uid) == str(MY_UID):
+            my_stack = p.get('stack', 0)
 
     # Build position info
     my_seat_num = 0
@@ -216,6 +208,9 @@ def build_gto_prompt():
     for uid, p in state['players'].items():
         if str(uid) == str(MY_UID):
             my_seat_num = p.get('seat', 0)
+
+    # Full hand action history
+    hand_history = ' -> '.join(state['actions']) if state['actions'] else 'none'
 
     # Detect game type
     is_sng = state['blinds_level'] > 0
