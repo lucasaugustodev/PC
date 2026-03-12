@@ -118,7 +118,19 @@ def process(parsed):
         if pot:
             state['pot'] = str(pot)
 
-    # handCards - your hole cards (in gameinfo event)
+    # Cards come from game_seat[MY_UID].cards in moveturn/prompt events
+    gs = d.get('game_seat', {})
+    if isinstance(gs, dict):
+        my_seat = gs.get(str(MY_UID), gs.get(MY_UID, {}))
+        if isinstance(my_seat, dict):
+            cards = my_seat.get('cards', None)
+            if cards and isinstance(cards, list) and any(c and c != 0 for c in cards):
+                decoded = decode_list(cards)
+                if decoded and decoded != state['my_cards']:
+                    state['my_cards'] = decoded
+                    state['dirty'] = True
+
+    # handCards fallback
     hc = d.get('handCards', [])
     if hc and any(c != 0 for c in hc if c):
         state['my_cards'] = decode_list(hc)
@@ -126,15 +138,6 @@ def process(parsed):
         state['opponents'] = {}
         state['last_result'] = ''
         state['dirty'] = True
-
-    # prompt event has publicCards
-    pc = d.get('publicCards', [])
-    if pc and any(c != 0 for c in pc if c):
-        state['board'] = decode_list(pc)
-        state['dirty'] = True
-
-    # prompt also has gamer_prompt
-    gp = d.get('gamer_prompt', {})
 
     # gameover -> d has game_result
     gr = d.get('game_result', {})
