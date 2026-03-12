@@ -108,11 +108,11 @@ const GalleryScene: React.FC = () => {
 
   const photos = [
     { src: "img/house2.jpg", label: "Living Room" },
-    { src: "img/house3.jpg", label: "Vista Panoramica" },
+    { src: "img/house3.jpg", label: "Vista Panorâmica" },
   ];
 
   const features = [
-    "Piso em marmore importado",
+    "Piso em mármore importado",
     "Automacao completa",
     "Spa e sauna privativa",
     "Adega climatizada",
