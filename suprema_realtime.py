@@ -161,6 +161,7 @@ state = {
     'rebuy': 0,
     'mtt_start': 0,
     'variant': '',  # NLH, PLO4, PLO5 - detected from card count
+    'available_actions': {},  # from gamer_prompt: fold/check/call/raise/bet/all_in
 }
 
 def show():
