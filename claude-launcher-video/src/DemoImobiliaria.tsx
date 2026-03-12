@@ -152,7 +152,7 @@ const GalleryScene: React.FC = () => {
         <div style={{ flex: 0.8, padding: "60px 50px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <div style={{ fontSize: 18, color: gold, letterSpacing: 4, marginBottom: 8 }}>DIFERENCIAIS</div>
           <div style={{ fontSize: 42, fontWeight: 700, color: white, fontFamily: "system-ui", marginBottom: 36 }}>
-            Cada Detalhe<br />Pensado Para<br /><span style={{ color: gold }}>Voce</span>
+            Cada Detalhe<br />Pensado Para<br /><span style={{ color: gold }}>Você</span>
           </div>
 
           {features.map((f, i) => {
