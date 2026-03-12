@@ -8,6 +8,7 @@ import sys
 import os
 import subprocess
 import time
+import json
 from datetime import datetime
 
 # ── Card decoding (Method B: suit*13+rank) ──
@@ -105,62 +106,18 @@ def read_msgpack(data, pos):
         return struct.unpack('>d', data[pos+1:pos+9])[0], pos+9
     if b == 0xca and pos+4 < len(data):
         return struct.unpack('>f', data[pos+1:pos+5])[0], pos+5
-    # bin8
     if b == 0xc4 and pos+1 < len(data):
-        slen = data[pos+1]
-        return data[pos+2:pos+2+slen], pos+2+slen
-    # bin16
+        slen = data[pos+1]; return data[pos+2:pos+2+slen], pos+2+slen
     if b == 0xc5 and pos+2 < len(data):
-        slen = (data[pos+1]<<8)|data[pos+2]
-        return data[pos+3:pos+3+slen], pos+3+slen
+        slen = (data[pos+1]<<8)|data[pos+2]; return data[pos+3:pos+3+slen], pos+3+slen
     return None, pos+1
 
-# ── WebSocket frame parser ──
-def parse_ws_frames(buf):
-    """Parse WebSocket frames from buffer. Returns list of (payload, consumed_bytes)"""
-    frames = []
-    pos = 0
-    while pos + 2 <= len(buf):
-        b0 = buf[pos]
-        b1 = buf[pos+1]
-        # fin = (b0 >> 7) & 1
-        opcode = b0 & 0x0f
-        masked = (b1 >> 7) & 1
-        payload_len = b1 & 0x7f
-
-        hdr_size = 2
-        if payload_len == 126:
-            if pos + 4 > len(buf): break
-            payload_len = (buf[pos+2] << 8) | buf[pos+3]
-            hdr_size = 4
-        elif payload_len == 127:
-            if pos + 10 > len(buf): break
-            payload_len = int.from_bytes(buf[pos+2:pos+10], 'big')
-            hdr_size = 10
-
-        mask_key = None
-        if masked:
-            if pos + hdr_size + 4 > len(buf): break
-            mask_key = buf[pos+hdr_size:pos+hdr_size+4]
-            hdr_size += 4
-
-        total = hdr_size + payload_len
-        if pos + total > len(buf):
-            break
-
-        payload = bytearray(buf[pos+hdr_size:pos+total])
-        if mask_key:
-            for i in range(len(payload)):
-                payload[i] ^= mask_key[i % 4]
-
-        frames.append((opcode, bytes(payload)))
-        pos += total
-
-    return frames, pos
-
 # ── Pomelo protocol ──
+# Pomelo package types: 1=handshake, 2=handshakeAck, 3=heartbeat, 4=data, 5=kick
+# Message types: 0=request, 1=notify, 2=response, 3=push
+
 def decode_pomelo(payload):
-    """Decode Pomelo package(s) from WebSocket payload"""
+    """Decode Pomelo packages from a WebSocket payload"""
     results = []
     pos = 0
     while pos + 4 <= len(payload):
@@ -168,36 +125,37 @@ def decode_pomelo(payload):
         pkg_len = (payload[pos+1] << 16) | (payload[pos+2] << 8) | payload[pos+3]
         pos += 4
 
-        if pkg_type > 4 or pkg_len > len(payload) - pos + 4:
+        if pkg_type < 1 or pkg_type > 5:
+            break
+        if pkg_len > len(payload) - pos + 4:
             break
 
         body = payload[pos:pos+pkg_len]
         pos += pkg_len
 
-        type_names = {0: 'handshake', 1: 'ack', 2: 'heartbeat', 3: 'data', 4: 'kick'}
-        result = {'pkg_type': type_names.get(pkg_type, f'?{pkg_type}')}
-
-        if pkg_type == 2:  # heartbeat
-            results.append(result)
+        if pkg_type == 3:  # heartbeat
             continue
 
-        if pkg_type == 0:  # handshake = JSON
+        result = {}
+
+        if pkg_type == 1:  # handshake (JSON)
             try:
-                import json
+                result['type'] = 'handshake'
                 result['data'] = json.loads(body.decode('utf-8'))
             except:
                 pass
             results.append(result)
             continue
 
-        if pkg_type == 3 and len(body) > 0:  # data
+        if pkg_type == 4 and len(body) > 0:  # data
             flag = body[0]
             msg_type = (flag >> 1) & 0x07
             compress_route = flag & 0x01
-            type_strs = {0: 'req', 1: 'notify', 2: 'resp', 3: 'push'}
-            result['msg_type'] = type_strs.get(msg_type, f'm{msg_type}')
+            msg_type_str = {0: 'req', 1: 'notify', 2: 'resp', 3: 'push'}.get(msg_type, f'm{msg_type}')
+            result['msg_type'] = msg_type_str
 
             bp = 1
+
             # msg_id for request/response
             if msg_type in (0, 2):
                 msg_id = 0
@@ -231,55 +189,82 @@ def decode_pomelo(payload):
 
     return results
 
-# ── Display helpers ──
+# ── Display ──
 MY_UID = 588900
 
-GAME_EVENTS = {
-    'gamestart', 'gameover', 'opencard', 'countdown', 'moveturn',
-    'updateseat', 'updategamer', 'prompt', 'updateboard', 'deal',
-    'flop', 'turn', 'river', 'showdown', 'action', 'allin',
-    'sitdown', 'standup', 'ready', 'leave', 'buyin', 'insurance',
+HIGHLIGHT_EVENTS = {
+    'gamestart', 'gameover', 'opencard', 'moveturn', 'prompt',
+    'updateboard', 'deal', 'showdown', 'insurance',
+    'countdown',
+}
+SKIP_EVENTS = {
+    'matchesStatusPushNotify',
 }
 
-def show_game_data(data, route='', event=''):
-    """Extract and display interesting game data"""
+def print_game_data(data, indent=2):
+    """Recursively find and display card/game data"""
     if not isinstance(data, dict):
         return
 
-    lines = []
-    name = event or route
+    prefix = ' ' * indent
 
-    # opencard: seat cards
-    if 'seat' in data and 'cards' in data and isinstance(data['cards'], list):
+    # Cards
+    for key in ['cards', 'shared_cards', 'holeCards', 'boardCards']:
+        if key in data and isinstance(data[key], list):
+            cards = data[key]
+            has_cards = any(isinstance(c, int) and c > 0 for c in cards)
+            if has_cards:
+                print(f"{prefix}{key}: {format_cards(cards)} (raw {cards})")
+
+    # Seat info
+    if 'seat' in data and 'uid' in data:
+        uid = data.get('uid', '?')
         seat = data.get('seat', '?')
-        cards = data['cards']
-        raw = cards[:]
-        decoded = format_cards(cards)
-        uid = data.get('uid', '')
+        coins = data.get('coins', '')
+        chips = data.get('chips', '')
         me = ' <<ME' if uid == MY_UID else ''
-        lines.append(f"  CARDS seat {seat}: {decoded} (raw {raw}){me}")
+        cards = data.get('cards', [])
+        if isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards):
+            print(f"{prefix}seat {seat}: uid={uid} {format_cards(cards)} (raw {cards}) coins={coins}{me}")
+        elif uid == MY_UID:
+            print(f"{prefix}seat {seat}: uid={uid} cards={cards} coins={coins} chips={chips} <<ME")
 
-    # game_info: board, pot, dealer
+    # Prompt options
+    gp = data.get('gamer_prompt')
+    if isinstance(gp, dict):
+        opts = []
+        for k in ['fold', 'check', 'call', 'raise', 'allin']:
+            v = gp.get(k)
+            if v is not None:
+                if isinstance(v, (int, float)) and v > 0:
+                    opts.append(f"{k}={v}")
+                elif v is not False:
+                    opts.append(k)
+        if opts:
+            print(f"{prefix}OPTIONS: {' | '.join(opts)}")
+
+    # game_info
     gi = data.get('game_info')
     if isinstance(gi, dict):
         sc = gi.get('shared_cards')
         if isinstance(sc, list) and any(isinstance(c, int) and c > 0 for c in sc):
-            lines.append(f"  BOARD: {format_cards(sc)} (raw {sc})")
+            print(f"{prefix}BOARD: {format_cards(sc)} (raw {sc})")
         pot = gi.get('pot')
-        if pot: lines.append(f"  POT: {pot}")
+        if pot: print(f"{prefix}POT: {pot}")
         gc = gi.get('game_counter')
-        if gc: lines.append(f"  HAND #{gc}")
         dealer = gi.get('dealer_seat')
-        if dealer is not None: lines.append(f"  DEALER: seat {dealer}")
+        gtype = gi.get('type')
+        if gc or dealer is not None or gtype:
+            print(f"{prefix}hand #{gc} type={gtype} dealer=seat {dealer}")
 
     # game_result
     gr = data.get('game_result')
     if isinstance(gr, dict):
         board = gr.get('cards', [])
         if isinstance(board, list) and board:
-            lines.append(f"  BOARD: {format_cards(board)} (raw {board})")
+            print(f"{prefix}BOARD: {format_cards(board)} (raw {board})")
         pots = gr.get('allpots')
-        if pots: lines.append(f"  TOTAL POT: {pots}")
+        if pots: print(f"{prefix}TOTAL POT: {pots}")
         seats = gr.get('seats')
         if isinstance(seats, (list, dict)):
             items = seats.items() if isinstance(seats, dict) else enumerate(seats)
@@ -290,10 +275,11 @@ def show_game_data(data, route='', event=''):
                     coins = s.get('coins', '?')
                     prize = s.get('prize', [])
                     me = ' <<ME' if uid == MY_UID else ''
-                    if isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards):
-                        lines.append(f"    seat {s.get('seat','?')}: uid={uid} {format_cards(cards)} (raw {cards}) coins={coins} prize={prize}{me}")
+                    has_cards = isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards)
+                    if has_cards or uid == MY_UID:
+                        print(f"{prefix}  seat {s.get('seat','?')}: uid={uid} {format_cards(cards)} coins={coins} prize={prize}{me}")
 
-    # game_seat: player positions & cards
+    # game_seat
     gs = data.get('game_seat')
     if isinstance(gs, (list, dict)):
         items = gs.items() if isinstance(gs, dict) else enumerate(gs)
@@ -304,52 +290,26 @@ def show_game_data(data, route='', event=''):
                 seat = s.get('seat', '?')
                 coins = s.get('coins', '?')
                 me = ' <<ME' if uid == MY_UID else ''
-                if isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards):
-                    lines.append(f"    seat {seat}: uid={uid} {format_cards(cards)} (raw {cards}){me}")
-                elif uid == MY_UID:
-                    lines.append(f"    seat {seat}: uid={uid} cards={cards} coins={coins} <<ME")
-
-    # prompt: action options
-    gp = data.get('gamer_prompt')
-    if isinstance(gp, dict):
-        opts = []
-        for k in ['fold', 'check', 'call', 'raise', 'allin']:
-            v = gp.get(k)
-            if v is not None and v is not False:
-                if isinstance(v, (int, float)) and v > 0:
-                    opts.append(f"{k}={v}")
-                elif v is True or v == 0 or v is None:
-                    opts.append(k)
-        if opts:
-            lines.append(f"  OPTIONS: {' | '.join(opts)}")
-
-    # countdown
-    cd = data.get('countdown')
-    if isinstance(cd, dict):
-        seat = cd.get('seat', '?')
-        timeout = cd.get('timeout', '?')
-        lines.append(f"  COUNTDOWN: seat {seat}, {timeout}s")
+                has_cards = isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards)
+                if has_cards or uid == MY_UID:
+                    print(f"{prefix}  seat {seat}: uid={uid} {format_cards(cards)} coins={coins}{me}")
 
     # room_status
     rs = data.get('room_status')
     if isinstance(rs, dict):
-        phase = rs.get('phase', '?')
-        lines.append(f"  PHASE: {phase}")
+        phase = rs.get('phase')
+        if phase: print(f"{prefix}PHASE: {phase}")
 
-    # direct cards field
-    if 'cards' in data and isinstance(data['cards'], list) and 'seat' not in data and 'game_result' not in data:
-        cards = data['cards']
-        if any(isinstance(c, int) and c > 0 for c in cards):
-            lines.append(f"  CARDS: {format_cards(cards)} (raw {cards})")
+    # countdown
+    cd = data.get('countdown')
+    if isinstance(cd, dict):
+        print(f"{prefix}countdown: seat {cd.get('seat','?')} {cd.get('timeout','?')}s")
 
     # pot/bet at top level
     if 'pot' in data and not gi:
-        lines.append(f"  POT: {data['pot']}")
+        print(f"{prefix}POT: {data['pot']}")
     if 'bet' in data:
-        lines.append(f"  BET: {data['bet']}")
-
-    for line in lines:
-        print(line)
+        print(f"{prefix}BET: {data['bet']}")
 
 # ── Frida JS ──
 FRIDA_SCRIPT = """
@@ -364,7 +324,7 @@ Interceptor.attach(ssl_read_addr, {
     onLeave: function(retval) {
         var n = retval.toInt32();
         if (n > 0) {
-            send({d: 'R', s: n}, this.buf.readByteArray(n));
+            send({d: 0, s: n}, this.buf.readByteArray(n));
         }
     }
 });
@@ -373,12 +333,12 @@ Interceptor.attach(ssl_write_addr, {
     onEnter: function(args) {
         var n = args[2].toInt32();
         if (n > 0) {
-            send({d: 'W', s: n}, args[1].readByteArray(n));
+            send({d: 1, s: n}, args[1].readByteArray(n));
         }
     }
 });
 
-send({d: 'I', m: 'SSL hooks active'});
+send({d: 9, m: 'Hooks active'});
 """
 
 def find_pid():
@@ -412,104 +372,128 @@ def main():
             return
 
         p = message['payload']
-        if 'I' == p.get('d'):
+        if p.get('d') == 9:
             print(f"[*] {p['m']}")
             return
         if data is None:
             return
 
         raw = bytes(data)
-        direction = p['d']
+        direction = p['d']  # 0=recv, 1=send
         ts = datetime.now().strftime('%H:%M:%S.%f')[:-3]
 
-        if direction == 'R':
-            recv_buf.extend(raw)
-            buf = recv_buf
+        # Parse WebSocket frame(s) directly from this SSL read/write
+        # Server->client: no mask. Client->server: masked.
+        if len(raw) < 2:
+            return
+
+        b0, b1 = raw[0], raw[1]
+        opcode = b0 & 0x0f
+        mask = (b1 >> 7) & 1
+        plen = b1 & 0x7f
+        hdr = 2
+
+        if plen == 126 and len(raw) >= 4:
+            plen = (raw[2] << 8) | raw[3]
+            hdr = 4
+        elif plen == 127 and len(raw) >= 10:
+            plen = int.from_bytes(raw[2:10], 'big')
+            hdr = 10
+
+        if mask:
+            if len(raw) < hdr + 4:
+                return
+            mask_key = raw[hdr:hdr+4]
+            hdr += 4
+            payload = bytearray(raw[hdr:])
+            for i in range(len(payload)):
+                payload[i] ^= mask_key[i % 4]
+            payload = bytes(payload)
         else:
-            send_buf.extend(raw)
-            buf = send_buf
+            payload = raw[hdr:]
 
-        # Parse WebSocket frames
-        frames, consumed = parse_ws_frames(buf)
-        if consumed > 0:
-            del buf[:consumed]
+        if opcode not in (1, 2):  # text or binary only
+            return
 
-        for opcode, payload in frames:
-            if opcode == 0x08:  # close
+        # Decode Pomelo packages
+        pkgs = decode_pomelo(payload)
+
+        for pkg in pkgs:
+            d = pkg.get('data')
+            route = pkg.get('route', '')
+            msg_type = pkg.get('msg_type', '')
+            msg_id = pkg.get('msg_id', '')
+
+            # Get event name
+            event = ''
+            if isinstance(d, dict):
+                event = str(d.get('event', d.get('0', '')))
+
+            label = event or route or pkg.get('type', '?')
+
+            # Skip noisy events
+            if label in SKIP_EVENTS:
                 continue
-            if opcode == 0x09 or opcode == 0x0a:  # ping/pong
-                continue
 
-            # Decode Pomelo packages
-            pkgs = decode_pomelo(payload)
-            for pkg in pkgs:
-                pkg_type = pkg.get('pkg_type', '?')
+            msg_count[0] += 1
+            arrow = '<--' if direction == 0 else '-->'
+            is_highlight = any(e in label.lower() for e in HIGHLIGHT_EVENTS)
 
-                if pkg_type == 'heartbeat':
-                    continue
+            # Format header
+            header = f"[{ts}] {arrow}"
+            if is_highlight:
+                header += f" *** {label.upper()} ***"
+            else:
+                header += f" {label}"
+            if msg_type:
+                header += f" ({msg_type})"
 
-                msg_count[0] += 1
-                arrow = '<--' if direction == 'R' else '-->'
-                route = pkg.get('route', '')
-                msg_type = pkg.get('msg_type', '')
-                msg_id = pkg.get('msg_id', '')
+            print(header)
+            log.write(f"{header}\n")
 
-                # Get event name from data
-                d = pkg.get('data')
-                event = ''
-                if isinstance(d, dict):
-                    event = d.get('event', d.get('0', ''))
-                    if isinstance(event, str):
-                        event = event
-                    else:
-                        event = ''
+            if isinstance(d, dict):
+                # Always extract game data for highlighted events
+                if is_highlight:
+                    print_game_data(d)
 
-                # Header
-                label = event or route or pkg_type
-                is_game = any(g in label.lower() for g in GAME_EVENTS) if label else False
+                # Show compact data for everything
+                data_field = d.get('data')
+                if isinstance(data_field, dict):
+                    print_game_data(data_field)
 
-                # Color coding via simple markers
-                if is_game:
-                    marker = '***'
-                else:
-                    marker = '   '
+                    # For small payloads show full data
+                    s = str(data_field)
+                    if len(s) < 400 and is_highlight:
+                        for k, v in data_field.items():
+                            if k not in ('game_info', 'game_result', 'game_seat', 'room_status',
+                                        'gamer_prompt', 'countdown', 'cards', 'shared_cards'):
+                                print(f"  {k}: {v}")
 
-                header = f"[{ts}] {arrow} {marker} {label}"
-                if msg_type: header += f" ({msg_type})"
-                if msg_id: header += f" id={msg_id}"
+                # For non-game events, just show keys
+                elif not is_highlight:
+                    keys = list(d.keys())
+                    if len(keys) <= 8:
+                        compact = {k: v for k, v in d.items() if not isinstance(v, (dict, list)) or len(str(v)) < 100}
+                        if len(str(compact)) < 200:
+                            print(f"  {compact}")
+                        else:
+                            print(f"  keys: {keys}")
 
-                print(header)
-                log.write(f"{header}\n")
+                log.write(f"  {d}\n")
+            elif d is not None:
+                print(f"  {d}")
+                log.write(f"  {d}\n")
 
-                # Show data
-                if isinstance(d, dict):
-                    # Always show game-relevant data
-                    if is_game:
-                        show_game_data(d, route, event)
-
-                    # For non-game events, show compact summary
-                    elif len(str(d)) < 300:
-                        keys = list(d.keys())
-                        print(f"  {d}")
-                    else:
-                        keys = list(d.keys())
-                        print(f"  keys: {keys}")
-
-                    # Log full data
-                    log.write(f"  {d}\n")
-                elif d is not None:
-                    print(f"  {d}")
-                    log.write(f"  {d}\n")
-
-                log.flush()
+            log.flush()
+            sys.stdout.flush()
 
     script.on('message', on_message)
     script.load()
 
     print(f"\n{'='*60}")
     print(f"  SUPREMA TRAFFIC MONITOR - REAL-TIME")
-    print(f"  Log: suprema_traffic.log")
-    print(f"  *** = game events")
+    print(f"  Intercepting decrypted WebSocket traffic")
+    print(f"  Log: suprema_traffic.log | UID: {MY_UID}")
     print(f"{'='*60}\n")
 
     try:
