@@ -10694,3 +10694,211 @@ Attaching to PID 67336...
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
 [16:41:13.407] <-- apiClub.clubHandler.jackpot (push)
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:25.669] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:25.805] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:36.594] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:40.186] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:46.737] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:46.779] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:41:58.168] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:08.803] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:08.807] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:19.654] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:31.309] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:31.313] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:42.268] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:42.272] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:52.725] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:42:52.729] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:03.208] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:13.240] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:13.244] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:24.798] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:24.802] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:34.850] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:34.898] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:47.633] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:48.329] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:57.681] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:43:57.685] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:08.273] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:08.277] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:20.374] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:31.706] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:31.748] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:43.174] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:43.184] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:53.625] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:44:54.998] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:03.948] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:03.995] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:15.315] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:16.533] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:25.366] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:25.370] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:38.364] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:38.368] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:48.856] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:45:48.902] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:00.747] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:00.751] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:11.552] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:14.481] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:22.400] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:22.659] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:32.861] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:32.864] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:47.611] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:47.615] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:57.746] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:46:57.801] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:08.027] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:08.031] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:18.664] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:19.888] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:30.614] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:30.669] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:41.017] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:41.021] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:51.330] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:47:51.378] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:01.576] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:03.441] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:12.135] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:12.139] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:22.114] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:22.160] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:32.194] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:32.511] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:42.326] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:42.440] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:53.226] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:48:53.230] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:03.283] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:13.987] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:15.921] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:27.560] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:27.609] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:38.013] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:50.368] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:49:50.371] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:00.623] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:00.666] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:11.225] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:11.272] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:23.177] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:33.281] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:33.285] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:43.633] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:43.655] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:56.380] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:50:56.384] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:51:07.953] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:51:07.957] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:51:15.614] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[16:51:17.876] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:51:17.925] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
