@@ -32,6 +32,40 @@ RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
 MY_UID = 588900
 
+# Button positions relative to SupremaPoker window (465x838)
+# Desistir (Fold) = left button, Passar (Check) = center, Apostar (Bet) = right
+BTN_FOLD_X, BTN_FOLD_Y = 77, 812
+BTN_CHECK_X, BTN_CHECK_Y = 232, 812
+BTN_BET_X, BTN_BET_Y = 388, 812
+
+AUTO_FOLD = True  # auto-click fold when GTO recommends it
+
+def click_game_button(rel_x, rel_y):
+    """Click a button at position relative to SupremaPoker window."""
+    try:
+        wins = gw.getWindowsWithTitle('SupremaPoker')
+        if not wins:
+            print("  [AUTOCLICK] SupremaPoker window not found!", flush=True)
+            return False
+        w = wins[0]
+        abs_x = w.left + rel_x
+        abs_y = w.top + rel_y
+        # Move cursor and click using ctypes (supports multi-monitor negative coords)
+        ctypes.windll.user32.SetCursorPos(abs_x, abs_y)
+        time.sleep(0.05)
+        ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)  # left down
+        time.sleep(0.02)
+        ctypes.windll.user32.mouse_event(0x0004, 0, 0, 0, 0)  # left up
+        print("  [AUTOCLICK] Clicked at (%d, %d)" % (abs_x, abs_y), flush=True)
+        return True
+    except Exception as e:
+        print("  [AUTOCLICK] Error: %s" % e, flush=True)
+        return False
+
+def auto_fold():
+    """Auto-click the Desistir (Fold) button."""
+    return click_game_button(BTN_FOLD_X, BTN_FOLD_Y)
+
 # Role code -> action name
 ROLES = {
     0: '', 2: '', 3: '',           # idle/reset/dealer
