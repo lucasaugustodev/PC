@@ -1,5 +1,5 @@
 """Real-time card decoder + betting tracker + GTO advisor for Suprema Poker."""
-import frida, json, time, sys, os, subprocess, threading
+import frida, json, time, sys, os, subprocess, threading, ctypes
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 try:
@@ -13,6 +13,12 @@ try:
 except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'anthropic'])
     import anthropic
+
+try:
+    import pygetwindow as gw
+except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pygetwindow'])
+    import pygetwindow as gw
 
 def _load_api_key():
     for p in [os.path.expanduser('~/.anthropic_key'), os.path.join(os.path.dirname(__file__), '.anthropic_key')]:
