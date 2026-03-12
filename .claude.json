@@ -1,5 +1,5 @@
 {
-  "numStartups": 91,
+  "numStartups": 95,
   "installMethod": "global",
   "autoUpdates": false,
   "hasSeenTasksHint": true,
@@ -25,7 +25,7 @@
     "web-app": 85,
     "mobile-app": 86,
     "frontend-design-plugin": 91,
-    "guest-passes": 90,
+    "guest-passes": 93,
     "custom-agents": 86,
     "agent-flag": 87,
     "permissions": 87,
@@ -35,7 +35,7 @@
     "desktop-shortcut": 90,
     "feedback-command": 90
   },
-  "promptQueueUseCount": 294,
+  "promptQueueUseCount": 309,
   "cachedGrowthBookFeatures": {
     "tengu_tst_kx7": false,
     "tengu_plan_mode_interview_phase": false,
@@ -92,7 +92,7 @@
     "tengu_session_memory": false,
     "tengu_oak_drum": false,
     "tengu_disable_streaming_to_non_streaming_fallback": false,
-    "tengu_mcp_elicitation": false,
+    "tengu_mcp_elicitation": true,
     "tengu_amber_flint": true,
     "tengu_penguins_off": null,
     "tengu_streaming_text": true,
@@ -211,7 +211,7 @@
       "lastAPIDuration": 0,
       "lastAPIDurationWithoutRetries": 0,
       "lastToolDuration": 0,
-      "lastDuration": 9732,
+      "lastDuration": 15353,
       "lastLinesAdded": 0,
       "lastLinesRemoved": 0,
       "lastTotalInputTokens": 0,
@@ -220,7 +220,7 @@
       "lastTotalCacheReadInputTokens": 0,
       "lastTotalWebSearchRequests": 0,
       "lastModelUsage": {},
-      "lastSessionId": "f29c95b3-131a-4248-a52b-713f7f50fadb",
+      "lastSessionId": "503636cc-5212-47e1-b19a-2742e60ba28d",
       "lastSessionMetrics": {
         "frame_duration_ms_count": 379344,
         "frame_duration_ms_min": 0.038100000470876694,
@@ -278,7 +278,7 @@
         "currency": "BRL"
       },
       "remaining_passes": 3,
-      "timestamp": 1773230404484
+      "timestamp": 1773324155670
     }
   },
   "groveConfigCache": {
