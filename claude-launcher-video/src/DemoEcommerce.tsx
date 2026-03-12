@@ -7,7 +7,6 @@ import {
   spring,
   Sequence,
   Img,
-  Audio,
   staticFile,
 } from "remotion";
 
