@@ -293,6 +293,23 @@ def process(parsed):
             global BB_SIZE
             BB_SIZE = float(blinds_val)
 
+        # SNG/MTT specific fields
+        sb_val = gi.get('smallblinds', 0)
+        if sb_val:
+            state['small_blinds'] = float(sb_val)
+        bl = gi.get('blindsLevel', 0)
+        if bl:
+            state['blinds_level'] = int(bl)
+        nb = gi.get('nextBlinds', 0)
+        if nb:
+            state['next_blinds'] = float(nb)
+        avg = gi.get('avgStack', 0)
+        if avg:
+            state['avg_stack'] = float(avg)
+        pc = gi.get('playerCount', 0)
+        if pc:
+            state['player_count'] = int(pc)
+
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list):
             decoded = decode_list(sc)
