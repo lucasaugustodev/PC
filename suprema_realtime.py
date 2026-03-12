@@ -166,7 +166,8 @@ state = {
 def show():
     os.system('cls')
     print("=" * 56, flush=True)
-    print("     SUPREMA POKER - REAL-TIME DECODER", flush=True)
+    variant = state['variant'] or '???'
+    print("     SUPREMA POKER - REAL-TIME DECODER  [%s]" % variant, flush=True)
     print("=" * 56, flush=True)
     hand = state['hand_num']
     street = state['street']
