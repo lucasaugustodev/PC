@@ -344,6 +344,13 @@ def process(parsed):
 
     if event:
         state['event'] = str(event)
+        # Log full event data for discovery (gameinfo, snginfo, tableinfo, etc.)
+        if event in ('gameinfo', 'snginfo', 'tableinfo', 'matchInfo', 'roomInfo', 'joinRoom', 'enterRoom', 'sitDown'):
+            try:
+                with open(os.path.expanduser('~/suprema_gameinfo.log'), 'a', encoding='utf-8') as f:
+                    f.write("[event:%s] FULL=%s\n\n" % (event, json.dumps(parsed, ensure_ascii=False, default=str)))
+            except:
+                pass
 
     # game_info
     gi = d.get('game_info', {})
