@@ -296,6 +296,19 @@ print(f"  Plugin config RC: {r.status_code}")
 
 run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun version")
 
+# --- Verify CLIs BEFORE starting the launcher (to avoid node process conflicts) ---
+print("\nVerifying installations...")
+run_cmd('node --version', "Node.js")
+run_cmd('git --version', "Git")
+run_cmd('claude --version', "Claude Code")
+run_cmd('gh --version', "GitHub CLI")
+run_cmd('gemini --version', "Gemini CLI")
+run_cmd('cline --version', "Cline CLI")
+run_cmd('gws --version', "Google Workspace CLI")
+run_cmd('npx playwright --version', "Playwright CLI")
+run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun")
+run_cmd(r'dir C:\claude-mem\package.json', "claude-mem")
+
 # ========== STEP 4: Start claude-launcher-web with full PATH ==========
 print("\n=== Step 4: Start Launcher ===")
 
@@ -305,7 +318,8 @@ r = s.run_ps('[Environment]::GetEnvironmentVariable("Path","Machine")')
 sys_path = r.std_out.decode().strip()
 npm_bin = r"C:\Users\Administrator\AppData\Roaming\npm"
 gh_dir = r"C:\Program Files\GitHub CLI"
-for extra in [npm_bin, gh_dir]:
+bun_bin = r"C:\Users\Administrator\.bun\bin"
+for extra in [npm_bin, gh_dir, bun_bin]:
     if extra.lower() not in sys_path.lower():
         sys_path = sys_path.rstrip(";") + ";" + extra
 
@@ -324,31 +338,39 @@ r = s.run_cmd(
 )
 print(f"  Task create RC: {r.status_code}")
 
-# Start it now (kill any existing instance first)
-print("Starting claude-launcher-web...")
+# Kill ALL node processes first (npm, claude --version leftovers, etc.)
+print("Killing stale node processes...")
 s.run_cmd('taskkill /f /im node.exe 2>nul')
-time.sleep(2)
+time.sleep(3)
+
+# Start launcher
+print("Starting claude-launcher-web...")
 r = s.run_cmd(r'schtasks /run /tn "ClaudeLauncherWeb"')
 print(f"  Task run RC: {r.status_code}")
 
-# Wait and check if port 3001 is listening
-time.sleep(5)
-r = s.run_cmd('powershell -c "Test-NetConnection -ComputerName localhost -Port 3001 | Select-Object -ExpandProperty TcpTestSucceeded"')
-port_ok = r.std_out.decode().strip()
-print(f"Port 3001 listening: {port_ok}")
+# Robust port check with retry
+print("Waiting for port 3001...")
+port_ok = False
+for i in range(6):
+    time.sleep(5)
+    r = s.run_cmd('powershell -c "Test-NetConnection -ComputerName localhost -Port 3001 | Select-Object -ExpandProperty TcpTestSucceeded"')
+    result = r.std_out.decode().strip()
+    if "True" in result:
+        port_ok = True
+        print(f"  Port 3001: LISTENING (attempt {i+1})")
+        break
+    print(f"  Port 3001: not yet (attempt {i+1})")
 
-# --- Verify all ---
-print("\nVerifying installations...")
-run_cmd('node --version', "Node.js")
-run_cmd('git --version', "Git")
-run_cmd('claude --version', "Claude Code")
-run_cmd('gh --version', "GitHub CLI")
-run_cmd('gemini --version', "Gemini CLI")
-run_cmd('cline --version', "Cline CLI")
-run_cmd('gws --version', "Google Workspace CLI")
-run_cmd('npx playwright --version', "Playwright CLI")
-run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun")
-run_cmd(r'dir C:\claude-mem\package.json', "claude-mem")
+if not port_ok:
+    # Emergency restart: kill everything and try once more
+    print("  WARNING: Port 3001 not listening, emergency restart...")
+    s.run_cmd('taskkill /f /im node.exe 2>nul')
+    time.sleep(3)
+    s.run_cmd(r'schtasks /run /tn "ClaudeLauncherWeb"')
+    time.sleep(8)
+    r = s.run_cmd('powershell -c "Test-NetConnection -ComputerName localhost -Port 3001 | Select-Object -ExpandProperty TcpTestSucceeded"')
+    result = r.std_out.decode().strip()
+    print(f"  Port 3001 after emergency restart: {result}")
 
 print("\n=== Provisioning complete ===")
 print(f"  VNC: {ip}:5900 (password: hiveclip123)")

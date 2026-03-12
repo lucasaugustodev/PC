@@ -21,6 +21,6 @@ Write-Host "=== Copying woi-recados ==="
 robocopy "$OLD\Users\Administrator\Desktop\woi-recados" "$NEW\Users\Administrator\Desktop\woi-recados" /E /MT:8 /R:1 /W:1 /NJH /NJS
 Write-Host "=== Copying Pronet (317MB) ==="
 robocopy "$OLD\Pronet" "$NEW\Pronet" /E /MT:8 /R:1 /W:1 /NJH /NJS
-Write-Host "=== Copying cloudflared.exe ==="
-Copy-Item "$OLD\Users\Administrator\Desktop\cloudflared.exe" "$NEW\Users\Administrator\Desktop\cloudflared.exe" -Force -ErrorAction SilentlyContinue
+Write-Host "=== Copying .claude (675MB - sessions, memory, plugins) ==="
+robocopy "$OLD\Users\Administrator\.claude" "$NEW\Users\Administrator\.claude" /E /MT:8 /R:1 /W:1 /NJH /NJS
 Write-Host "=== ALL COPIES COMPLETE ==="
