@@ -104,6 +104,11 @@ state = {
     'msg_count': 0,
     'gto_advice': '',
     'dirty': True,
+    'blinds_level': 0,
+    'next_blinds': 0,
+    'avg_stack': 0,
+    'player_count': 0,
+    'small_blinds': 0,
 }
 
 def show():
