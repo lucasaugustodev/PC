@@ -285,9 +285,17 @@ def build_gto_prompt():
         game_type += " %d/%d players remain. Avg stack %s. Top %d get paid." % (
             state['player_count'], state['total_players'],
             fmt_bb(state['avg_stack']), state['prize_count'])
-        icm_note = " Consider ICM pressure — survival matters, avoid marginal spots near the bubble."
-        if state['player_count'] <= state['prize_count'] + 1:
-            icm_note = " BUBBLE! ICM is critical — tighten up significantly, avoid coinflips."
+        # ICM phase detection
+        pc = state['player_count']
+        prize = state['prize_count']
+        if prize > 0 and pc > prize + 2:
+            icm_note = " EARLY/MID stage — far from bubble (top %d paid, %d remain). Focus on CHIP ACCUMULATION. Play aggressively, steal blinds, 3bet light. You need chips to WIN, not just survive." % (prize, pc)
+        elif prize > 0 and pc == prize + 1:
+            icm_note = " BUBBLE! You are 1 elimination from the money (top %d paid, %d remain). ICM is critical — tighten significantly unless you are big stack." % (prize, pc)
+        elif prize > 0 and pc <= prize:
+            icm_note = " IN THE MONEY! Top %d paid, %d remain. Now play to WIN — go for 1st place, not ladder. Be aggressive." % (prize, pc)
+        else:
+            icm_note = " SNG — play to maximize chips and finish 1st."
     else:
         game_type = "6max %s cash." % variant
         icm_note = ""
