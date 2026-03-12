@@ -1,2 +1,72 @@
 # Scoop apps directory (local package manager data)
 scoop/apps/
+
+# Dependencies
+node_modules/
+.vultr/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache/
+.cline/
+.claude/
+.agents/
+.apm/
+.aws/
+.basic-memory/
+.bun/
+.chocolatey/
+.lmstudio/
+.matplotlib/
+.openfang/
+.playwright/
+.playwright-cli/
+.playwright-mcp/
+.kiro/
+.trae/
+.trae-aicc/
+.trae-aicc/
+.azure/
+.fly/
+.gemini/
+.icube-remote-ssh/
+.ssh/
+
+# Build outputs
+dist/
+build/
+out/
+public/build/
+
+# Test coverage
+coverage/
+
+# Temp files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Windows specific
+NTUSER.DAT
+ntuser.dat.LOG*
+*.regtrans-ms
+*.blf
