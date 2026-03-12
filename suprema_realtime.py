@@ -38,33 +38,111 @@ BTN_FOLD_X, BTN_FOLD_Y = 77, 812
 BTN_CHECK_X, BTN_CHECK_Y = 232, 812
 BTN_BET_X, BTN_BET_Y = 388, 812
 
-AUTO_FOLD = True  # auto-click fold when GTO recommends it
+# Raise panel buttons (after clicking Apostar)
+BTN_25X_X, BTN_25X_Y = 50, 770
+BTN_3X_X, BTN_3X_Y = 135, 770
+BTN_4X_X, BTN_4X_Y = 205, 770
+BTN_ALLIN_X, BTN_ALLIN_Y = 290, 770
+BTN_CONFIRM_X, BTN_CONFIRM_Y = 400, 770
+BTN_PLUS_X, BTN_PLUS_Y = 370, 580
+BTN_MINUS_X, BTN_MINUS_Y = 370, 650
 
-def click_game_button(rel_x, rel_y):
+AUTO_PLAY = True  # auto-click actions based on GTO recommendation
+
+def click_game_button(rel_x, rel_y, label=''):
     """Click a button at position relative to SupremaPoker window."""
     try:
         wins = gw.getWindowsWithTitle('SupremaPoker')
         if not wins:
-            print("  [AUTOCLICK] SupremaPoker window not found!", flush=True)
+            print("  [AUTO] SupremaPoker window not found!", flush=True)
             return False
         w = wins[0]
         abs_x = w.left + rel_x
         abs_y = w.top + rel_y
-        # Move cursor and click using ctypes (supports multi-monitor negative coords)
         ctypes.windll.user32.SetCursorPos(abs_x, abs_y)
         time.sleep(0.05)
         ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)  # left down
         time.sleep(0.02)
         ctypes.windll.user32.mouse_event(0x0004, 0, 0, 0, 0)  # left up
-        print("  [AUTOCLICK] Clicked at (%d, %d)" % (abs_x, abs_y), flush=True)
+        print("  [AUTO] %s clicked at (%d, %d)" % (label, abs_x, abs_y), flush=True)
         return True
     except Exception as e:
-        print("  [AUTOCLICK] Error: %s" % e, flush=True)
+        print("  [AUTO] Error: %s" % e, flush=True)
         return False
 
-def auto_fold():
-    """Auto-click the Desistir (Fold) button."""
-    return click_game_button(BTN_FOLD_X, BTN_FOLD_Y)
+def detect_gto_action(advice):
+    """Parse GTO advice to determine action and size."""
+    text = advice.lower()
+    # Look after "ACTION:" if present
+    after_action = text
+    if 'action:' in text:
+        after_action = text.split('action:')[-1][:50]
+
+    action = None
+    size = None
+
+    if 'fold' in after_action[:20]:
+        action = 'fold'
+    elif 'all-in' in after_action or 'all_in' in after_action or 'allin' in after_action or 'shove' in after_action or 'push' in after_action:
+        action = 'allin'
+    elif 'raise' in after_action[:20] or 'bet' in after_action[:20]:
+        action = 'raise'
+        # Try to detect sizing: "2.5x", "3x", "4x", "75% pot", etc.
+        import re
+        # Match Nx patterns like "2.5x", "3x", "4x"
+        m = re.search(r'(\d+\.?\d*)\s*x', after_action)
+        if m:
+            size = float(m.group(1))
+        # Match "N BB" patterns
+        if not size:
+            m = re.search(r'(\d+\.?\d*)\s*bb', after_action)
+            if m:
+                size = float(m.group(1))
+    elif 'call' in after_action[:20]:
+        action = 'call'
+    elif 'check' in after_action[:20]:
+        action = 'check'
+
+    return action, size
+
+def auto_raise(size_x):
+    """Click Apostar, then select preset size, then Confirmar."""
+    # Step 1: click Apostar to open raise panel
+    click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
+    time.sleep(0.4)
+
+    # Step 2: select sizing preset
+    if size_x and size_x <= 2.5:
+        click_game_button(BTN_25X_X, BTN_25X_Y, '2.5X')
+    elif size_x and size_x <= 3.0:
+        click_game_button(BTN_3X_X, BTN_3X_Y, '3X')
+    elif size_x and size_x <= 4.0:
+        click_game_button(BTN_4X_X, BTN_4X_Y, '4X')
+    else:
+        # Default to 3x if no size detected
+        click_game_button(BTN_3X_X, BTN_3X_Y, '3X-default')
+    time.sleep(0.2)
+
+    # Step 3: confirm
+    click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
+    return True
+
+def auto_play(action, size=None):
+    """Auto-click the appropriate button based on GTO action."""
+    if action == 'fold':
+        return click_game_button(BTN_FOLD_X, BTN_FOLD_Y, 'FOLD')
+    elif action in ('check', 'call'):
+        return click_game_button(BTN_CHECK_X, BTN_CHECK_Y, 'CHECK/CALL')
+    elif action == 'raise':
+        return auto_raise(size)
+    elif action == 'allin':
+        click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
+        time.sleep(0.4)
+        click_game_button(BTN_ALLIN_X, BTN_ALLIN_Y, 'ALL-IN')
+        time.sleep(0.2)
+        click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
+        return True
+    return False
 
 # Role code -> action name
 ROLES = {
