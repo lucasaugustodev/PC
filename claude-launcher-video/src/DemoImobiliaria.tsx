@@ -113,7 +113,7 @@ const GalleryScene: React.FC = () => {
 
   const features = [
     "Piso em mármore importado",
-    "Automacao completa",
+    "Automação completa",
     "Spa e sauna privativa",
     "Adega climatizada",
     "Home theater",
