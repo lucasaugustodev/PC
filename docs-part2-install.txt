@@ -1,0 +1,41 @@
+================================================================================
+PLAYWRIGHT CLI - INSTALAÇÃO E REQUISITOS
+================================================================================
+Fonte: https://github.com/microsoft/playwright-cli
+
+================================================================================
+REQUISITOS (Requirements)
+================================================================================
+
+- Node.js 18 ou mais recente
+- Claude Code, GitHub Copilot, ou qualquer outro agente de codificação
+
+================================================================================
+INSTALAÇÃO (Installation)
+================================================================================
+
+1. Instalação via npm:
+   npm install -g @playwright/cli@latest
+
+2. Verificar a instalação:
+   playwright-cli --help
+
+3. Instalação de skills (opcional):
+   Claude Code, GitHub Copilot e outros usarão as skills instaladas localmente.
+
+   Comando para instalar as skills:
+   playwright-cli install --skills
+
+================================================================================
+OBSERVAÇÕES ADICIONAIS
+================================================================================
+
+- Instalação local:
+  Em alguns casos, pode ser necessário instalar o playwright-cli localmente.
+  Se o binário global não funcionar, use npx playwright-cli para executar
+  os comandos. Por exemplo:
+
+  npx playwright-cli open https://example.com
+  npx playwright-cli click e1
+
+================================================================================

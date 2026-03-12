@@ -1,0 +1,6 @@
+Repo: microsoft/playwright-cli
+Descrição: CLI for common Playwright actions. Record and generate Playwright code, inspect selectors and take screenshots.
+Stars: 4.2k (4187)
+Forks: 158
+Licença: Apache-2.0
+Linguagens: TypeScript 56.5%, JavaScript 43.5%

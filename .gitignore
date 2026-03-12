@@ -1,72 +1,90 @@
-# Scoop apps directory (local package manager data)
-scoop/apps/
+# System files
+AppData/
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+Contacts/
+Favorites/
+Links/
+Searches/
+Saved Games/
+3D Objects/
+WPS Cloud Files/
+
+# Windows registry files
+NTUSER.DAT
+NTUSER.DAT*
+
+# IDEs and editors
+.vscode/
+.idea/
+.cursor/
+.kiro/
+.icube-remote-s/
+
+# Config files (personal)
+.aws/
+.azure/
+.ssh/
+.gitconfig
+.gitmodules
+
+# Environment
+.env
+.env.local
+.env.*
 
 # Dependencies
 node_modules/
-.vultr/
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# IDE and editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS files
-.DS_Store
-Thumbs.db
+vendor/
 
 # Logs
 *.log
 npm-debug.log*
 
-# Cache
+# OS
+Thumbs.db
+.DS_Store
+
+# Executables
+*.exe
+*.dll
+
+# Cache and temp
 .cache/
-.cline/
-.claude/
-.agents/
-.apm/
-.aws/
-.basic-memory/
+.m2/
+.local/
+.docker/
 .bun/
 .chocolatey/
+.pack/
+.paperclip/
+
+# App data
+.claude/
+.cline/
+.claude-mem/
+.scoop/
+.fly/
+.gemini/
 .lmstudio/
 .matplotlib/
 .openfang/
+.trae/
+.trae-aicc/
+.agents/
+.apm/
+.basic-memory/
 .playwright/
 .playwright-cli/
 .playwright-mcp/
-.kiro/
-.trae/
-.trae-aicc/
-.trae-aicc/
-.azure/
-.fly/
-.gemini/
-.icube-remote-ssh/
-.ssh/
+.magentic_ui/
 
-# Build outputs
-dist/
-build/
-out/
-public/build/
+# OneDrive
+OneDrive/
 
-# Test coverage
-coverage/
-
-# Temp files
-*.tmp
-*.temp
-tmp/
-temp/
-
-# Windows specific
-NTUSER.DAT
-ntuser.dat.LOG*
-*.regtrans-ms
-*.blf
+# Data files
+*.json
