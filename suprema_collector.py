@@ -38,9 +38,9 @@ def extract_cards(img):
     """Extract individual card images from the board area"""
     w, h = img.size
 
-    # Board card row region - precise crop below POT
-    y1, y2 = int(h * 0.335), int(h * 0.40)
-    x1, x2 = int(w * 0.06), int(w * 0.74)
+    # Board card row region - precise crop below POT label
+    y1, y2 = int(h * 0.345), int(h * 0.405)
+    x1, x2 = int(w * 0.06), int(w * 0.82)
     board = np.array(img.crop((x1, y1, x2, y2)))
     bh, bw = board.shape[:2]
 
