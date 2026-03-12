@@ -146,9 +146,20 @@ state = {
     'dirty': True,
     'blinds_level': 0,
     'next_blinds': 0,
+    'next_blinds_level': 0,
+    'next_blinds_remain': 0,  # seconds until next level
+    'next_sb': 0,
+    'next_ante': 0,
     'avg_stack': 0,
     'player_count': 0,
+    'total_players': 0,
     'small_blinds': 0,
+    'prize_count': 0,        # how many get paid
+    'game_type': 0,          # 1=cash, 5=SNG/MTT
+    'mtt_state': 0,
+    'addon': 0,
+    'rebuy': 0,
+    'mtt_start': 0,
 }
 
 def show():
