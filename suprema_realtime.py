@@ -278,6 +278,7 @@ def process(parsed):
             state['actions'] = []
             state['players'] = {}
             state['last_result'] = ''
+            state['gto_advice'] = ''
             state['dirty'] = True
 
         pot = gi.get('pot', None)
