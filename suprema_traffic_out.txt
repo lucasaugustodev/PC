@@ -10418,3 +10418,71 @@ Attaching to PID 67336...
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
 [16:28:18.401] <-- apiClub.clubHandler.jackpot (push)
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:29.411] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:29.415] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:39.679] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:49.779] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:49.838] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:00.728] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:00.732] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:12.258] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:12.262] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:24.506] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:28.526] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:35.998] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:36.001] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:46.006] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:46.051] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:56.354] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:29:56.358] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:07.510] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:07.514] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:17.705] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:17.709] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:27.743] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:27.785] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:39.314] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:39.322] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:49.815] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:30:49.819] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:00.203] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:00.327] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:10.611] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:10.616] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:22.773] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:33.769] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:31:34.045] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
