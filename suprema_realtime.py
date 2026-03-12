@@ -55,7 +55,7 @@ if not pid:
 
 print("PID: %d" % pid, flush=True)
 
-BB_SIZE = 0.04  # internal BB value, auto-detected from blind posts
+BB_SIZE = 0.04  # auto-updated when BB post detected
 
 def bb(val):
     """Convert internal value to BB count."""
