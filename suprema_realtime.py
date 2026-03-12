@@ -453,12 +453,18 @@ def ask_gto():
         state['gto_advice'] = advice
         state['dirty'] = True
 
-        # Auto-click fold if GTO recommends it
-        if AUTO_FOLD and 'fold' in advice.lower().split('action:')[-1][:20].lower():
-            time.sleep(0.3)  # small delay for display update
-            auto_fold()
-            state['gto_advice'] = advice + ' [AUTO-FOLDED]'
-            state['dirty'] = True
+        # Auto-play based on GTO recommendation
+        if AUTO_PLAY:
+            action, size = detect_gto_action(advice)
+            if action:
+                time.sleep(0.3)
+                result = auto_play(action, size)
+                if result:
+                    label = action.upper()
+                    if size:
+                        label += ' %.1fx' % size
+                    state['gto_advice'] = advice + ' [AUTO: %s]' % label
+                    state['dirty'] = True
     except Exception as e:
         state['gto_advice'] = 'Error: %s' % str(e)[:80]
         state['dirty'] = True
