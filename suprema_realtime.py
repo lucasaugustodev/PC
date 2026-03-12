@@ -108,17 +108,17 @@ def show():
 
     # Pot info
     pot = state['pot']
-    print("  POT: %.2f   max_bet: %.2f   last_raise: %.2f" % (
-        pot, state['max_bet'], state['last_raise']), flush=True)
+    print("  POT: %-8s  max_bet: %-8s  last_raise: %s" % (
+        fmt_bb(pot), fmt_bb(state['max_bet']), fmt_bb(state['last_raise'])), flush=True)
     if state['sidepots']:
-        print("  SIDEPOTS: %s" % state['sidepots'], flush=True)
+        print("  SIDEPOTS: %s" % [fmt_bb(s) for s in state['sidepots']], flush=True)
     print(flush=True)
 
     # Players table
     if state['players']:
-        print("  %-10s %-6s %-7s %-7s %-8s %s" % (
-            'PLAYER', 'STACK', 'CHIPS', 'ROUND', 'ACTION', 'CARDS'), flush=True)
-        print("  " + "-" * 52, flush=True)
+        print("  %-10s %-8s %-8s %-8s %-8s %s" % (
+            'PLAYER', 'STACK', 'BET', 'ROUND', 'ACTION', 'CARDS'), flush=True)
+        print("  " + "-" * 54, flush=True)
         for uid, p in sorted(state['players'].items(), key=lambda x: x[1].get('seat', 0)):
             marker = '>> ' if str(uid) == str(MY_UID) else '   '
             name = str(uid)[-6:]
@@ -127,8 +127,8 @@ def show():
             cr = p.get('chips_round', 0)
             action = p.get('action', '')
             cards = p.get('cards', '')
-            print("%s%-10s %-6.2f %-7.2f %-7.2f %-8s %s" % (
-                marker, name, stack, chips, cr, action, cards), flush=True)
+            print("%s%-10s %-8s %-8s %-8s %-8s %s" % (
+                marker, name, fmt_bb(stack), fmt_bb(chips), fmt_bb(cr), action, cards), flush=True)
         print(flush=True)
 
     # Recent actions
@@ -235,13 +235,13 @@ def process(parsed):
             if role != prev_role and action_name:
                 amount = chips - prev_chips if chips > prev_chips else 0
                 if action_name in ('BET', 'RAISE') and amount > 0:
-                    action_str = "%s %s %.2f (total %.2f)" % (uid_s[-6:], action_name, amount, chips)
+                    action_str = "%s %s %s (total %s)" % (uid_s[-6:], action_name, fmt_bb(amount), fmt_bb(chips))
                 elif action_name == 'CALL':
-                    action_str = "%s CALL %.2f" % (uid_s[-6:], chips)
+                    action_str = "%s CALL %s" % (uid_s[-6:], fmt_bb(chips))
                 elif action_name in ('FOLD', 'CHECK', 'SB', 'BB'):
                     action_str = "%s %s" % (uid_s[-6:], action_name)
                     if action_name in ('SB', 'BB'):
-                        action_str += " %.2f" % chips
+                        action_str += " %s" % fmt_bb(chips)
                 else:
                     action_str = ''
 
