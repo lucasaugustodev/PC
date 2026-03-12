@@ -60,7 +60,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="EcommerceV4"
         component={EcommerceV4H}
-        durationInFrames={295}
+        durationInFrames={456}
         fps={30}
         width={1920}
         height={1080}
@@ -68,7 +68,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="EcommerceV4Reels"
         component={EcommerceV4V}
-        durationInFrames={295}
+        durationInFrames={456}
         fps={30}
         width={1080}
         height={1920}
