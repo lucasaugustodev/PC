@@ -1,0 +1,9 @@
+[submodule "scoop/buckets/extras"]
+	path = scoop/buckets/extras
+	url = https://github.com/ScoopInstaller/Extras
+[submodule "scoop/buckets/main"]
+	path = scoop/buckets/main
+	url = https://github.com/ScoopInstaller/Main
+[submodule "scoop/buckets/supabase"]
+	path = scoop/buckets/supabase
+	url = https://github.com/kkocdko/scoop-supabase
