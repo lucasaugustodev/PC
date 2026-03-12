@@ -14,7 +14,13 @@ except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'groq'])
     from groq import Groq
 
-groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY', ''))
+def _load_groq_key():
+    for p in [os.path.expanduser('~/.groq_key'), os.path.join(os.path.dirname(__file__), '.groq_key')]:
+        if os.path.exists(p):
+            return open(p).read().strip()
+    return os.environ.get('GROQ_API_KEY', '')
+
+groq_client = Groq(api_key=_load_groq_key())
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
