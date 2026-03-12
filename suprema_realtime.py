@@ -271,15 +271,25 @@ def build_gto_prompt():
     # Full hand action history
     hand_history = ' -> '.join(state['actions']) if state['actions'] else 'none'
 
+    # Game variant
+    variant = state['variant'] or 'NLH'
+
     # Detect game type
     is_sng = state['blinds_level'] > 0
     if is_sng:
-        game_type = "SNG/MTT Lvl %d (BB=%s, next BB=%s). %d players remaining. Avg stack %s." % (
-            state['blinds_level'], fmt_bb(BB_SIZE), fmt_bb(state['next_blinds']),
-            state['player_count'], fmt_bb(state['avg_stack']))
-        icm_note = " Consider ICM pressure — survival matters, avoid marginal spots."
+        game_type = "%s SNG/MTT. Blinds Lvl %d (%s/%s). Next level: %s/%s in %ds." % (
+            variant, state['blinds_level'],
+            fmt_bb(state['small_blinds']), fmt_bb(BB_SIZE),
+            fmt_bb(state['next_sb']), fmt_bb(state['next_blinds']),
+            state['next_blinds_remain'])
+        game_type += " %d/%d players remain. Avg stack %s. Top %d get paid." % (
+            state['player_count'], state['total_players'],
+            fmt_bb(state['avg_stack']), state['prize_count'])
+        icm_note = " Consider ICM pressure — survival matters, avoid marginal spots near the bubble."
+        if state['player_count'] <= state['prize_count'] + 1:
+            icm_note = " BUBBLE! ICM is critical — tighten up significantly, avoid coinflips."
     else:
-        game_type = "6max NLH cash."
+        game_type = "6max %s cash." % variant
         icm_note = ""
 
     prompt = (
@@ -296,7 +306,7 @@ def build_gto_prompt():
          hand_history)
     return prompt
 
-GTO_SYSTEM = """You are a world-class GTO poker solver. Analyze this hand and give the OPTIMAL play.
+GTO_SYSTEM = """You are a world-class GTO poker solver for NLH and PLO (Pot-Limit Omaha). Analyze this hand and give the OPTIMAL play.
 
 Rules:
 - Consider position, stack depth, pot odds, equity, board texture, and range advantage
@@ -304,6 +314,9 @@ Rules:
 - On the flop/turn/river, consider draws, made hands, and bluff candidates
 - Give specific bet sizings (e.g. "33% pot", "75% pot", "overbet 1.5x pot")
 - If it's a mixed strategy spot, give the primary action with frequency
+- For PLO/PLO5: remember you MUST use exactly 2 hole cards + 3 board cards. Evaluate wraps, flush draws, set potential, and nut advantage
+- For SNG/MTT: factor in ICM, bubble pressure, stack-to-pot ratio, and blind level progression
+- SHORT STACK (<15BB): use push/fold charts. Consider stealing, resteal spots, and pot odds for calls
 
 Response format (keep it SHORT, max 2 lines):
 ACTION: [fold/check/call/bet/raise] SIZE: [amount in BB or % pot] | [1-line reason]"""
