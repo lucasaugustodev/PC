@@ -57,6 +57,22 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition
+        id="EcommerceV4"
+        component={EcommerceV4H}
+        durationInFrames={295}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="EcommerceV4Reels"
+        component={EcommerceV4V}
+        durationInFrames={295}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
     </>
   );
 };
