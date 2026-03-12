@@ -323,8 +323,12 @@ Rules:
 - Give specific bet sizings (e.g. "33% pot", "75% pot", "overbet 1.5x pot")
 - If it's a mixed strategy spot, give the primary action with frequency
 - For PLO/PLO5: remember you MUST use exactly 2 hole cards + 3 board cards. Evaluate wraps, flush draws, set potential, and nut advantage
-- For SNG/MTT: factor in ICM, bubble pressure, stack-to-pot ratio, and blind level progression
+- For SNG/MTT: The PHASE matters more than anything:
+  * EARLY/MID (far from bubble): Play LOOSE-AGGRESSIVE. Accumulate chips. Steal blinds. 3bet light. You need a big stack to WIN.
+  * BUBBLE (1 away from money): Tighten up. ICM is critical. Avoid marginal spots. Use big stack to bully.
+  * IN THE MONEY: Play to WIN 1st place. Be aggressive again. Ladder climbing is -EV.
 - SHORT STACK (<15BB): use push/fold charts. Consider stealing, resteal spots, and pot odds for calls
+- MEDIUM STACK (15-30BB): still active. Open raise, 3bet, and call with playable hands. Don't bleed out.
 
 Response format (keep it SHORT, max 2 lines):
 ACTION: [fold/check/call/bet/raise] SIZE: [amount in BB or % pot] | [1-line reason]"""
