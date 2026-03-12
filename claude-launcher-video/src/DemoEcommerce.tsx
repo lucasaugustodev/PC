@@ -75,7 +75,7 @@ const ProductHero: React.FC = () => {
 
             <div style={{ fontSize: 20, color: gray, marginTop: 20, lineHeight: 1.7 }}>
               Cancelamento de ruído ativo | 48h bateria<br />
-              Bluetooth 5.3 | IPX7 a prova d'agua
+              Bluetooth 5.3 | IPX7 a prova d'água
             </div>
           </div>
 
@@ -102,7 +102,7 @@ const SocialScene: React.FC = () => {
   const photos = ["img/headphone1.jpg", "img/headphone2.jpg", "img/headphone3.jpg"];
 
   const stats = [
-    { num: "4.8", label: "Avaliacao", sub: "12.847 reviews" },
+    { num: "4.8", label: "Avaliação", sub: "12.847 reviews" },
     { num: "50K+", label: "Vendidos", sub: "este mes" },
     { num: "#1", label: "Mais Vendido", sub: "audio" },
   ];
