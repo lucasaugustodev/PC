@@ -1,7 +1,6 @@
 """
 Suprema Poker Real-Time Traffic Monitor
-Hooks OpenSSL SSL_read/SSL_write via Frida to capture decrypted WebSocket traffic.
-Decodes Pomelo/MessagePack messages in real-time.
+Hooks OpenSSL via Frida to capture decrypted WebSocket/Pomelo/MessagePack traffic.
 """
 import frida
 import struct
@@ -18,15 +17,18 @@ SUITS = 'cdhs'
 def dc(n):
     if isinstance(n, float): n = int(n)
     if not isinstance(n, int): return '??'
-    if 0 <= n <= 51:
-        return RANKS[n % 13] + SUITS[n // 13]
+    if 0 <= n <= 51: return RANKS[n % 13] + SUITS[n // 13]
     return f'?{n}'
 
 def format_cards(cards):
     if not cards or not isinstance(cards, list): return '---'
-    return ' '.join(dc(c) for c in cards if isinstance(c, (int, float)))
+    out = []
+    for c in cards:
+        if isinstance(c, (int, float)):
+            out.append(dc(int(c)))
+    return ' '.join(out) if out else '---'
 
-# ── Msgpack decoder (Python side) ──
+# ── Msgpack decoder ──
 def read_msgpack(data, pos):
     if pos >= len(data): return None, pos
     b = data[pos]
@@ -60,6 +62,9 @@ def read_msgpack(data, pos):
         v = data[pos+1]; return (v-256 if v>=128 else v), pos+2
     if b == 0xd1 and pos+2 < len(data):
         v = (data[pos+1]<<8)|data[pos+2]; return (v-65536 if v>=32768 else v), pos+3
+    if b == 0xd2 and pos+4 < len(data):
+        v = (data[pos+1]<<24)|(data[pos+2]<<16)|(data[pos+3]<<8)|data[pos+4]
+        return (v - 0x100000000 if v >= 0x80000000 else v), pos+5
     if b == 0xd9 and pos+1 < len(data):
         slen = data[pos+1]
         try: return data[pos+2:pos+2+slen].decode('utf-8','replace'), pos+2+slen
@@ -68,6 +73,10 @@ def read_msgpack(data, pos):
         slen = (data[pos+1]<<8)|data[pos+2]
         try: return data[pos+3:pos+3+slen].decode('utf-8','replace'), pos+3+slen
         except: return None, pos+3+slen
+    if b == 0xdb and pos+4 < len(data):
+        slen = (data[pos+1]<<24)|(data[pos+2]<<16)|(data[pos+3]<<8)|data[pos+4]
+        try: return data[pos+5:pos+5+slen].decode('utf-8','replace'), pos+5+slen
+        except: return None, pos+5+slen
     if b == 0xdc and pos+2 < len(data):
         count = (data[pos+1]<<8)|data[pos+2]; arr = []; p = pos+3
         for _ in range(min(count,500)):
@@ -85,207 +94,293 @@ def read_msgpack(data, pos):
             k, p = read_msgpack(data, p); v, p = read_msgpack(data, p)
             if k is not None: d[str(k)] = v
         return d, p
+    if b == 0xdf and pos+4 < len(data):
+        count = (data[pos+1]<<24)|(data[pos+2]<<16)|(data[pos+3]<<8)|data[pos+4]
+        d = {}; p = pos+5
+        for _ in range(min(count,500)):
+            k, p = read_msgpack(data, p); v, p = read_msgpack(data, p)
+            if k is not None: d[str(k)] = v
+        return d, p
     if b == 0xcb and pos+8 < len(data):
         return struct.unpack('>d', data[pos+1:pos+9])[0], pos+9
     if b == 0xca and pos+4 < len(data):
         return struct.unpack('>f', data[pos+1:pos+5])[0], pos+5
+    # bin8
+    if b == 0xc4 and pos+1 < len(data):
+        slen = data[pos+1]
+        return data[pos+2:pos+2+slen], pos+2+slen
+    # bin16
+    if b == 0xc5 and pos+2 < len(data):
+        slen = (data[pos+1]<<8)|data[pos+2]
+        return data[pos+3:pos+3+slen], pos+3+slen
     return None, pos+1
 
-# ── Pomelo protocol decoder ──
-# Pomelo frame: type(1) + id(3 bytes if needed) + route + body(msgpack)
-# Types: 0=handshake, 1=handshakeAck, 2=heartbeat, 3=data, 4=kick
-# For type 3 (data): compressRoute(1 bit) + msgId(variable) + route + body
+# ── WebSocket frame parser ──
+def parse_ws_frames(buf):
+    """Parse WebSocket frames from buffer. Returns list of (payload, consumed_bytes)"""
+    frames = []
+    pos = 0
+    while pos + 2 <= len(buf):
+        b0 = buf[pos]
+        b1 = buf[pos+1]
+        # fin = (b0 >> 7) & 1
+        opcode = b0 & 0x0f
+        masked = (b1 >> 7) & 1
+        payload_len = b1 & 0x7f
 
-def decode_pomelo_frame(data):
-    """Decode a Pomelo protocol frame"""
-    if len(data) < 4:
-        return None
+        hdr_size = 2
+        if payload_len == 126:
+            if pos + 4 > len(buf): break
+            payload_len = (buf[pos+2] << 8) | buf[pos+3]
+            hdr_size = 4
+        elif payload_len == 127:
+            if pos + 10 > len(buf): break
+            payload_len = int.from_bytes(buf[pos+2:pos+10], 'big')
+            hdr_size = 10
 
-    # Pomelo package header: type(1 byte) + length(3 bytes big-endian)
-    pkg_type = data[0]
-    pkg_len = (data[1] << 16) | (data[2] << 8) | data[3]
+        mask_key = None
+        if masked:
+            if pos + hdr_size + 4 > len(buf): break
+            mask_key = buf[pos+hdr_size:pos+hdr_size+4]
+            hdr_size += 4
 
-    type_names = {0: 'handshake', 1: 'handshakeAck', 2: 'heartbeat', 3: 'data', 4: 'kick'}
-    result = {'type': type_names.get(pkg_type, f'unknown({pkg_type})'), 'length': pkg_len}
+        total = hdr_size + payload_len
+        if pos + total > len(buf):
+            break
 
-    body = data[4:4+pkg_len] if pkg_len > 0 else b''
+        payload = bytearray(buf[pos+hdr_size:pos+total])
+        if mask_key:
+            for i in range(len(payload)):
+                payload[i] ^= mask_key[i % 4]
 
-    if pkg_type == 2:  # heartbeat
-        return result
+        frames.append((opcode, bytes(payload)))
+        pos += total
 
-    if pkg_type == 0:  # handshake - JSON
-        try:
-            import json
-            result['data'] = json.loads(body.decode('utf-8'))
-        except:
-            pass
-        return result
+    return frames, pos
 
-    if pkg_type == 3 and len(body) > 0:  # data message
-        # Message header: flag(1) + msgId(variable) + route(variable)
-        flag = body[0]
-        msg_type = (flag >> 1) & 0x07  # 0=request, 1=notify, 2=response, 3=push
-        compress_route = flag & 0x01
+# ── Pomelo protocol ──
+def decode_pomelo(payload):
+    """Decode Pomelo package(s) from WebSocket payload"""
+    results = []
+    pos = 0
+    while pos + 4 <= len(payload):
+        pkg_type = payload[pos]
+        pkg_len = (payload[pos+1] << 16) | (payload[pos+2] << 8) | payload[pos+3]
+        pos += 4
 
-        type_strs = {0: 'request', 1: 'notify', 2: 'response', 3: 'push'}
-        result['msg_type'] = type_strs.get(msg_type, f'msg({msg_type})')
+        if pkg_type > 4 or pkg_len > len(payload) - pos + 4:
+            break
 
-        pos = 1
+        body = payload[pos:pos+pkg_len]
+        pos += pkg_len
 
-        # Read message ID (variable length encoding for request/response)
-        msg_id = 0
-        if msg_type == 0 or msg_type == 2:  # request or response
-            while pos < len(body):
-                b = body[pos]
-                msg_id = (msg_id << 7) | (b & 0x7f)
-                pos += 1
-                if b < 128:
-                    break
-            result['msg_id'] = msg_id
+        type_names = {0: 'handshake', 1: 'ack', 2: 'heartbeat', 3: 'data', 4: 'kick'}
+        result = {'pkg_type': type_names.get(pkg_type, f'?{pkg_type}')}
 
-        # Read route
-        if msg_type == 0 or msg_type == 1 or msg_type == 3:  # has route
-            if compress_route:
-                if pos + 1 < len(body):
-                    route_code = (body[pos] << 8) | body[pos+1]
-                    result['route'] = f'compressed({route_code})'
-                    pos += 2
-            else:
-                if pos < len(body):
-                    route_len = body[pos]
-                    pos += 1
-                    if pos + route_len <= len(body):
-                        try:
-                            result['route'] = body[pos:pos+route_len].decode('utf-8')
-                        except:
-                            result['route'] = f'bytes({route_len})'
-                        pos += route_len
+        if pkg_type == 2:  # heartbeat
+            results.append(result)
+            continue
 
-        # Rest is msgpack body
-        if pos < len(body):
+        if pkg_type == 0:  # handshake = JSON
             try:
-                msg_body, _ = read_msgpack(body, pos)
-                result['data'] = msg_body
+                import json
+                result['data'] = json.loads(body.decode('utf-8'))
             except:
-                result['raw_body_len'] = len(body) - pos
+                pass
+            results.append(result)
+            continue
 
-        return result
+        if pkg_type == 3 and len(body) > 0:  # data
+            flag = body[0]
+            msg_type = (flag >> 1) & 0x07
+            compress_route = flag & 0x01
+            type_strs = {0: 'req', 1: 'notify', 2: 'resp', 3: 'push'}
+            result['msg_type'] = type_strs.get(msg_type, f'm{msg_type}')
 
-    return result
+            bp = 1
+            # msg_id for request/response
+            if msg_type in (0, 2):
+                msg_id = 0
+                while bp < len(body):
+                    b = body[bp]
+                    msg_id = (msg_id << 7) | (b & 0x7f)
+                    bp += 1
+                    if b < 128: break
+                result['msg_id'] = msg_id
 
-def extract_game_info(decoded):
-    """Extract interesting game info from decoded message"""
-    if not decoded or not isinstance(decoded.get('data'), dict):
-        return None
+            # route for request/notify/push
+            if msg_type in (0, 1, 3):
+                if compress_route and bp + 1 < len(body):
+                    result['route'] = f'c:{(body[bp]<<8)|body[bp+1]}'
+                    bp += 2
+                elif bp < len(body):
+                    route_len = body[bp]; bp += 1
+                    if bp + route_len <= len(body):
+                        try: result['route'] = body[bp:bp+route_len].decode('utf-8')
+                        except: result['route'] = f'r:{route_len}b'
+                        bp += route_len
 
-    data = decoded['data']
-    route = decoded.get('route', '')
-    info = []
+            # msgpack body
+            if bp < len(body):
+                try:
+                    result['data'], _ = read_msgpack(body, bp)
+                except:
+                    result['raw_len'] = len(body) - bp
 
-    # Check for event-based messages (Pomelo push)
-    event = data.get('event') or data.get('0') or ''
+            results.append(result)
 
-    # Cards in any field
-    for key in ['cards', 'shared_cards', 'holeCards', 'boardCards', 'myCards']:
-        if key in data and isinstance(data[key], list):
-            cards = data[key]
-            if any(isinstance(c, int) and 0 <= c <= 77 for c in cards):
-                info.append(f'{key}: {format_cards(cards)} (raw: {cards})')
+    return results
 
-    # Nested game_result
-    if 'game_result' in data:
-        gr = data['game_result']
-        if isinstance(gr, dict):
-            if 'cards' in gr:
-                info.append(f'board: {format_cards(gr["cards"])} (raw: {gr["cards"]})')
-            if 'allpots' in gr:
-                info.append(f'pot: {gr["allpots"]}')
-            seats = gr.get('seats', [])
-            if isinstance(seats, (list, dict)):
-                items = seats.items() if isinstance(seats, dict) else enumerate(seats)
-                for k, s in items:
-                    if isinstance(s, dict) and 'cards' in s:
-                        uid = s.get('uid', '?')
-                        cards = format_cards(s.get('cards', []))
-                        me = ' <<ME' if uid == 588900 else ''
-                        info.append(f'  seat {s.get("seat","?")}: uid={uid} {cards}{me}')
+# ── Display helpers ──
+MY_UID = 588900
 
-    # game_info
-    if 'game_info' in data:
-        gi = data['game_info']
-        if isinstance(gi, dict):
-            sc = gi.get('shared_cards')
-            if isinstance(sc, list):
-                info.append(f'board: {format_cards(sc)} (raw: {sc})')
+GAME_EVENTS = {
+    'gamestart', 'gameover', 'opencard', 'countdown', 'moveturn',
+    'updateseat', 'updategamer', 'prompt', 'updateboard', 'deal',
+    'flop', 'turn', 'river', 'showdown', 'action', 'allin',
+    'sitdown', 'standup', 'ready', 'leave', 'buyin', 'insurance',
+}
 
-    # opencard
-    if 'seat' in data and 'cards' in data:
-        seat = data.get('seat')
-        cards = data.get('cards')
-        if isinstance(cards, list):
-            info.append(f'seat {seat} cards: {format_cards(cards)} (raw: {cards})')
+def show_game_data(data, route='', event=''):
+    """Extract and display interesting game data"""
+    if not isinstance(data, dict):
+        return
 
-    # pot/bet
-    if 'pot' in data:
-        info.append(f'pot: {data["pot"]}')
+    lines = []
+    name = event or route
+
+    # opencard: seat cards
+    if 'seat' in data and 'cards' in data and isinstance(data['cards'], list):
+        seat = data.get('seat', '?')
+        cards = data['cards']
+        raw = cards[:]
+        decoded = format_cards(cards)
+        uid = data.get('uid', '')
+        me = ' <<ME' if uid == MY_UID else ''
+        lines.append(f"  CARDS seat {seat}: {decoded} (raw {raw}){me}")
+
+    # game_info: board, pot, dealer
+    gi = data.get('game_info')
+    if isinstance(gi, dict):
+        sc = gi.get('shared_cards')
+        if isinstance(sc, list) and any(isinstance(c, int) and c > 0 for c in sc):
+            lines.append(f"  BOARD: {format_cards(sc)} (raw {sc})")
+        pot = gi.get('pot')
+        if pot: lines.append(f"  POT: {pot}")
+        gc = gi.get('game_counter')
+        if gc: lines.append(f"  HAND #{gc}")
+        dealer = gi.get('dealer_seat')
+        if dealer is not None: lines.append(f"  DEALER: seat {dealer}")
+
+    # game_result
+    gr = data.get('game_result')
+    if isinstance(gr, dict):
+        board = gr.get('cards', [])
+        if isinstance(board, list) and board:
+            lines.append(f"  BOARD: {format_cards(board)} (raw {board})")
+        pots = gr.get('allpots')
+        if pots: lines.append(f"  TOTAL POT: {pots}")
+        seats = gr.get('seats')
+        if isinstance(seats, (list, dict)):
+            items = seats.items() if isinstance(seats, dict) else enumerate(seats)
+            for k, s in items:
+                if isinstance(s, dict):
+                    uid = s.get('uid', '?')
+                    cards = s.get('cards', [])
+                    coins = s.get('coins', '?')
+                    prize = s.get('prize', [])
+                    me = ' <<ME' if uid == MY_UID else ''
+                    if isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards):
+                        lines.append(f"    seat {s.get('seat','?')}: uid={uid} {format_cards(cards)} (raw {cards}) coins={coins} prize={prize}{me}")
+
+    # game_seat: player positions & cards
+    gs = data.get('game_seat')
+    if isinstance(gs, (list, dict)):
+        items = gs.items() if isinstance(gs, dict) else enumerate(gs)
+        for k, s in items:
+            if isinstance(s, dict):
+                uid = s.get('uid', 0)
+                cards = s.get('cards', [])
+                seat = s.get('seat', '?')
+                coins = s.get('coins', '?')
+                me = ' <<ME' if uid == MY_UID else ''
+                if isinstance(cards, list) and any(isinstance(c, int) and c > 0 for c in cards):
+                    lines.append(f"    seat {seat}: uid={uid} {format_cards(cards)} (raw {cards}){me}")
+                elif uid == MY_UID:
+                    lines.append(f"    seat {seat}: uid={uid} cards={cards} coins={coins} <<ME")
+
+    # prompt: action options
+    gp = data.get('gamer_prompt')
+    if isinstance(gp, dict):
+        opts = []
+        for k in ['fold', 'check', 'call', 'raise', 'allin']:
+            v = gp.get(k)
+            if v is not None and v is not False:
+                if isinstance(v, (int, float)) and v > 0:
+                    opts.append(f"{k}={v}")
+                elif v is True or v == 0 or v is None:
+                    opts.append(k)
+        if opts:
+            lines.append(f"  OPTIONS: {' | '.join(opts)}")
+
+    # countdown
+    cd = data.get('countdown')
+    if isinstance(cd, dict):
+        seat = cd.get('seat', '?')
+        timeout = cd.get('timeout', '?')
+        lines.append(f"  COUNTDOWN: seat {seat}, {timeout}s")
+
+    # room_status
+    rs = data.get('room_status')
+    if isinstance(rs, dict):
+        phase = rs.get('phase', '?')
+        lines.append(f"  PHASE: {phase}")
+
+    # direct cards field
+    if 'cards' in data and isinstance(data['cards'], list) and 'seat' not in data and 'game_result' not in data:
+        cards = data['cards']
+        if any(isinstance(c, int) and c > 0 for c in cards):
+            lines.append(f"  CARDS: {format_cards(cards)} (raw {cards})")
+
+    # pot/bet at top level
+    if 'pot' in data and not gi:
+        lines.append(f"  POT: {data['pot']}")
     if 'bet' in data:
-        info.append(f'bet: {data["bet"]}')
-    if 'chips' in data:
-        info.append(f'chips: {data["chips"]}')
+        lines.append(f"  BET: {data['bet']}")
 
-    return info if info else None
+    for line in lines:
+        print(line)
 
-# ── Frida JS script ──
-FRIDA_SCRIPT = r"""
-'use strict';
+# ── Frida JS ──
+FRIDA_SCRIPT = """
+var mod = Process.findModuleByName('libssl-1_1.dll');
+var ssl_read_addr = mod.findExportByName('SSL_read');
+var ssl_write_addr = mod.findExportByName('SSL_write');
 
-// Buffer to accumulate partial reads/writes
-var readBuffers = {};
-var writeBuffers = {};
-
-// Hook SSL_read in libssl-1_1.dll
-var ssl_read = Module.findExportByName('libssl-1_1.dll', 'SSL_read');
-var ssl_write = Module.findExportByName('libssl-1_1.dll', 'SSL_write');
-
-if (ssl_read) {
-    Interceptor.attach(ssl_read, {
-        onEnter: function(args) {
-            this.ssl = args[0];
-            this.buf = args[1];
-            this.num = args[2].toInt32();
-        },
-        onLeave: function(retval) {
-            var nread = retval.toInt32();
-            if (nread > 0) {
-                var data = this.buf.readByteArray(nread);
-                send({type: 'ssl_read', size: nread}, data);
-            }
+Interceptor.attach(ssl_read_addr, {
+    onEnter: function(args) {
+        this.buf = args[1];
+    },
+    onLeave: function(retval) {
+        var n = retval.toInt32();
+        if (n > 0) {
+            send({d: 'R', s: n}, this.buf.readByteArray(n));
         }
-    });
-    send({type: 'info', msg: 'Hooked SSL_read @ ' + ssl_read});
-} else {
-    send({type: 'error', msg: 'SSL_read not found!'});
-}
+    }
+});
 
-if (ssl_write) {
-    Interceptor.attach(ssl_write, {
-        onEnter: function(args) {
-            this.ssl = args[0];
-            this.buf = args[1];
-            this.num = args[2].toInt32();
-            if (this.num > 0) {
-                var data = this.buf.readByteArray(this.num);
-                send({type: 'ssl_write', size: this.num}, data);
-            }
+Interceptor.attach(ssl_write_addr, {
+    onEnter: function(args) {
+        var n = args[2].toInt32();
+        if (n > 0) {
+            send({d: 'W', s: n}, args[1].readByteArray(n));
         }
-    });
-    send({type: 'info', msg: 'Hooked SSL_write @ ' + ssl_write});
-}
+    }
+});
 
-send({type: 'info', msg: 'Hooks installed. Monitoring traffic...'});
+send({d: 'I', m: 'SSL hooks active'});
 """
 
-# ── Main ──
 def find_pid():
     out = subprocess.check_output(
         ['tasklist', '/FI', 'IMAGENAME eq SupremaPoker.exe', '/FO', 'CSV', '/NH'], text=True)
@@ -294,190 +389,140 @@ def find_pid():
             return int(line.strip('"').split('","')[1])
     return None
 
-class TrafficMonitor:
-    def __init__(self):
-        self.recv_buffer = bytearray()
-        self.send_buffer = bytearray()
-        self.msg_count = 0
-        self.log_file = open('suprema_traffic.log', 'a', encoding='utf-8')
-        self.interesting_events = []
-
-    def process_pomelo_stream(self, buf, direction):
-        """Process accumulated buffer as Pomelo frames"""
-        results = []
-        while len(buf) >= 4:
-            pkg_type = buf[0]
-            pkg_len = (buf[1] << 16) | (buf[2] << 8) | buf[3]
-            total = 4 + pkg_len
-
-            if pkg_type > 4:  # Invalid type, likely mid-stream
-                # Try to find next valid frame header
-                found = False
-                for i in range(1, min(len(buf), 100)):
-                    if buf[i] <= 4:
-                        candidate_len = (buf[i+1] << 16 | buf[i+2] << 8 | buf[i+3]) if i+3 < len(buf) else 999999
-                        if candidate_len < 65536:  # reasonable
-                            del buf[:i]
-                            found = True
-                            break
-                if not found:
-                    buf.clear()
-                break
-
-            if total > len(buf):
-                break  # Wait for more data
-
-            frame = bytes(buf[:total])
-            del buf[:total]
-
-            decoded = decode_pomelo_frame(frame)
-            if decoded:
-                results.append((direction, decoded))
-
-        return results
-
-    def on_message(self, message, data):
-        if message['type'] == 'send':
-            payload = message['payload']
-
-            if payload['type'] == 'info':
-                print(f"[FRIDA] {payload['msg']}")
-                return
-
-            if payload['type'] == 'error':
-                print(f"[FRIDA ERROR] {payload['msg']}")
-                return
-
-            if data is None:
-                return
-
-            ts = datetime.now().strftime('%H:%M:%S.%f')[:-3]
-            raw = bytes(data)
-
-            if payload['type'] == 'ssl_read':
-                self.recv_buffer.extend(raw)
-                frames = self.process_pomelo_stream(self.recv_buffer, 'RECV')
-            elif payload['type'] == 'ssl_write':
-                self.send_buffer.extend(raw)
-                frames = self.process_pomelo_stream(self.send_buffer, 'SEND')
-            else:
-                return
-
-            for direction, decoded in frames:
-                self.msg_count += 1
-                msg_type = decoded.get('type', '?')
-
-                # Skip heartbeats for clean output
-                if msg_type == 'heartbeat':
-                    continue
-
-                route = decoded.get('route', '')
-                msg_kind = decoded.get('msg_type', '')
-
-                # Format output
-                header = f"[{ts}] {direction} #{self.msg_count} {msg_type}"
-                if msg_kind:
-                    header += f"/{msg_kind}"
-                if route:
-                    header += f" route={route}"
-
-                print(f"\n{header}")
-                self.log_file.write(f"\n{header}\n")
-
-                # Show data summary
-                d = decoded.get('data')
-                if isinstance(d, dict):
-                    # Show keys
-                    keys = list(d.keys())
-                    if len(keys) <= 15:
-                        print(f"  keys: {keys}")
-                    else:
-                        print(f"  keys({len(keys)}): {keys[:10]}...")
-
-                    # Extract game-relevant info
-                    game_info = extract_game_info(decoded)
-                    if game_info:
-                        print(f"  --- GAME DATA ---")
-                        for line in game_info:
-                            print(f"  {line}")
-                            self.log_file.write(f"  {line}\n")
-                        self.interesting_events.append({
-                            'time': ts,
-                            'route': route,
-                            'info': game_info
-                        })
-
-                    # Show full data for small messages or game events
-                    game_events = ['gameover', 'opencard', 'gamestart', 'countdown',
-                                   'updateseat', 'prompt', 'updateboard', 'deal',
-                                   'flop', 'turn', 'river', 'showdown', 'action',
-                                   'bet', 'fold', 'call', 'raise', 'check', 'allin']
-
-                    event_name = d.get('event', d.get('0', route))
-                    if isinstance(event_name, str) and any(e in event_name.lower() for e in game_events):
-                        self._print_data(d, indent=2)
-                    elif len(str(d)) < 500:
-                        self._print_data(d, indent=2)
-
-                self.log_file.flush()
-
-        elif message['type'] == 'error':
-            print(f"[FRIDA ERROR] {message.get('stack', message)}")
-
-    def _print_data(self, data, indent=0):
-        prefix = ' ' * indent
-        if isinstance(data, dict):
-            for k, v in data.items():
-                if isinstance(v, (dict, list)) and len(str(v)) > 100:
-                    print(f"{prefix}{k}:")
-                    self._print_data(v, indent + 2)
-                else:
-                    print(f"{prefix}{k}: {v}")
-        elif isinstance(data, list):
-            if len(data) <= 10:
-                print(f"{prefix}{data}")
-            else:
-                for i, item in enumerate(data[:10]):
-                    print(f"{prefix}[{i}] {item}")
-                if len(data) > 10:
-                    print(f"{prefix}... ({len(data)} total)")
-        else:
-            print(f"{prefix}{data}")
-
 def main():
     pid = find_pid()
     if not pid:
         print("SupremaPoker not running!")
         return
 
-    print(f"Attaching to SupremaPoker PID {pid}...")
+    print(f"Attaching to PID {pid}...")
 
-    monitor = TrafficMonitor()
+    recv_buf = bytearray()
+    send_buf = bytearray()
+    msg_count = [0]
+    log = open('suprema_traffic.log', 'w', encoding='utf-8')
 
     session = frida.attach(pid)
     script = session.create_script(FRIDA_SCRIPT)
-    script.on('message', monitor.on_message)
+
+    def on_message(message, data):
+        if message['type'] != 'send':
+            if message['type'] == 'error':
+                print(f"[ERR] {message.get('description','?')}")
+            return
+
+        p = message['payload']
+        if 'I' == p.get('d'):
+            print(f"[*] {p['m']}")
+            return
+        if data is None:
+            return
+
+        raw = bytes(data)
+        direction = p['d']
+        ts = datetime.now().strftime('%H:%M:%S.%f')[:-3]
+
+        if direction == 'R':
+            recv_buf.extend(raw)
+            buf = recv_buf
+        else:
+            send_buf.extend(raw)
+            buf = send_buf
+
+        # Parse WebSocket frames
+        frames, consumed = parse_ws_frames(buf)
+        if consumed > 0:
+            del buf[:consumed]
+
+        for opcode, payload in frames:
+            if opcode == 0x08:  # close
+                continue
+            if opcode == 0x09 or opcode == 0x0a:  # ping/pong
+                continue
+
+            # Decode Pomelo packages
+            pkgs = decode_pomelo(payload)
+            for pkg in pkgs:
+                pkg_type = pkg.get('pkg_type', '?')
+
+                if pkg_type == 'heartbeat':
+                    continue
+
+                msg_count[0] += 1
+                arrow = '<--' if direction == 'R' else '-->'
+                route = pkg.get('route', '')
+                msg_type = pkg.get('msg_type', '')
+                msg_id = pkg.get('msg_id', '')
+
+                # Get event name from data
+                d = pkg.get('data')
+                event = ''
+                if isinstance(d, dict):
+                    event = d.get('event', d.get('0', ''))
+                    if isinstance(event, str):
+                        event = event
+                    else:
+                        event = ''
+
+                # Header
+                label = event or route or pkg_type
+                is_game = any(g in label.lower() for g in GAME_EVENTS) if label else False
+
+                # Color coding via simple markers
+                if is_game:
+                    marker = '***'
+                else:
+                    marker = '   '
+
+                header = f"[{ts}] {arrow} {marker} {label}"
+                if msg_type: header += f" ({msg_type})"
+                if msg_id: header += f" id={msg_id}"
+
+                print(header)
+                log.write(f"{header}\n")
+
+                # Show data
+                if isinstance(d, dict):
+                    # Always show game-relevant data
+                    if is_game:
+                        show_game_data(d, route, event)
+
+                    # For non-game events, show compact summary
+                    elif len(str(d)) < 300:
+                        keys = list(d.keys())
+                        print(f"  {d}")
+                    else:
+                        keys = list(d.keys())
+                        print(f"  keys: {keys}")
+
+                    # Log full data
+                    log.write(f"  {d}\n")
+                elif d is not None:
+                    print(f"  {d}")
+                    log.write(f"  {d}\n")
+
+                log.flush()
+
+    script.on('message', on_message)
     script.load()
 
     print(f"\n{'='*60}")
-    print(f"  SUPREMA POKER TRAFFIC MONITOR")
-    print(f"  Intercepting decrypted WebSocket traffic in real-time")
+    print(f"  SUPREMA TRAFFIC MONITOR - REAL-TIME")
     print(f"  Log: suprema_traffic.log")
-    print(f"{'='*60}")
-    print(f"\nWaiting for traffic... (play a hand!)\n")
+    print(f"  *** = game events")
+    print(f"{'='*60}\n")
 
     try:
         while True:
             time.sleep(0.1)
     except KeyboardInterrupt:
-        print(f"\n\nStopping... {monitor.msg_count} messages captured.")
-        print(f"Interesting events: {len(monitor.interesting_events)}")
-        for ev in monitor.interesting_events[-10:]:
-            print(f"  [{ev['time']}] {ev['route']}: {ev['info']}")
+        print(f"\n{msg_count[0]} messages captured.")
     finally:
-        script.unload()
-        session.detach()
-        monitor.log_file.close()
+        try:
+            script.unload()
+            session.detach()
+        except: pass
+        log.close()
 
 if __name__ == '__main__':
     main()

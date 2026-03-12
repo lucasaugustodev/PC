@@ -1,0 +1,25 @@
+===== SUPREMA MEMORY MONITOR [15:12:40] =====
+Room: ?
+
+>> MY HAND: KS ?62 JD ?73
+
+SEATS (30 with cards):
+  Seat 1: uid=1589046 cards=?76 ?78 ?60 9S chips=9550
+  Seat 0: uid=1630702 cards=5S ?77 ?67 6H chips=9550
+  Seat 3: uid=? cards=7D ?57 chips=?
+  Seat 4: uid=588900 cards=KS ?62 JD ?73 chips=225 <-- ME
+
+EVENTS (256):
+  gamestart: keys=['room_status', 'gamer', 'game_seat', '1508776', '0', '5', "{'seat': 1, 'uid': 1589046, 'coins': 24424, 'cards': [0, 0, 0, 0], 'role': 0, 'chips': 50, 'chips_round': 50, 'bestp': None, 'sitout': False, 'stepaway': False, 'unseatNB': False, 'needLeave': False, 'topup': 0, 'cashout': 0, 'ready': False, 'waiting': None, 'postblind': False, 'calltime': -1, 'winnings': 14474, 'autorebuy': None, 'agentID': 0, 'autoTimeBank': 0, 'swap': 0, 'vpipC': 0, 'addon': False, 'ko': 0, 'bounty': 0, 'bountyTmp': 0, 'autoAddon': 0, 'timeBank': 5}"]
+  updateseat: keys=['room_status', 'game_seat', 'timeBank', 'seatready', 'roomID', 'ts']
+
+GAME RESULTS (7):
+  Board: ---  Pot: [3266]
+  Board: ---  Pot: [3266]
+  Board: ---  Pot: [3266]
+
+OPENCARD (2):
+  seat=8 cards=6H ?60
+  seat=8 cards=AH ?71
+
+[Scanning... Ctrl+C to stop]
