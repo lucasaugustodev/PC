@@ -512,15 +512,27 @@ def process(parsed):
                     state['actions'].append(action_str)
                     state['dirty'] = True
 
-            # Cards
+            # Cards + variant detection
             cards_str = ''
             cards_raw = sd.get('cards', None)
-            if cards_raw and isinstance(cards_raw, list) and any(c and c != 0 for c in cards_raw):
-                decoded = decode_list(cards_raw)
-                cards_str = ' '.join(decoded)
-                if uid_s == str(MY_UID) and decoded != state['my_cards']:
-                    state['my_cards'] = decoded
-                    state['dirty'] = True
+            if cards_raw and isinstance(cards_raw, list):
+                # Detect variant from card slot count
+                if not state['variant'] and len(cards_raw) > 0:
+                    n = len(cards_raw)
+                    if n == 2:
+                        state['variant'] = 'NLH'
+                    elif n == 4:
+                        state['variant'] = 'PLO4'
+                    elif n == 5:
+                        state['variant'] = 'PLO5'
+                    elif n == 6:
+                        state['variant'] = 'PLO6'
+                if any(c and c != 0 for c in cards_raw):
+                    decoded = decode_list(cards_raw)
+                    cards_str = ' '.join(decoded)
+                    if uid_s == str(MY_UID) and decoded != state['my_cards']:
+                        state['my_cards'] = decoded
+                        state['dirty'] = True
 
             # Pattern (shown in prompt)
             pattern = sd.get('pattern', '')
