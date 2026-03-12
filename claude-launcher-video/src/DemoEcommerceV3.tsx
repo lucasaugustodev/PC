@@ -93,7 +93,7 @@ const Scene1H: React.FC = () => {
           <StaggerText text="Fone Bluetooth" fontSize={58} stagger={4} startFrame={6} />
           <StaggerText text="Pro Max X1" fontSize={58} color={neon} stagger={4} startFrame={14} />
           <div style={{ opacity: detailOp, fontSize: 20, color: gray, marginTop: 20, lineHeight: 1.7 }}>
-            Cancelamento de ruido ativo | 48h bateria<br />Bluetooth 5.3 | IPX7 a prova d'agua
+            Cancelamento de ruído ativo | 48h bateria<br />Bluetooth 5.3 | IPX7 a prova d'água
           </div>
           <div style={{ opacity: priceOp, marginTop: 28, transform: `translateY(${(1 - priceY) * 30}px)` }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
@@ -115,14 +115,14 @@ const Scene2H: React.FC = () => {
   const { fps } = useVideoConfig();
   const photos = ["img/headphone1.jpg", "img/headphone2.jpg", "img/headphone3.jpg"];
   const stats = [
-    { to: 4.8, label: "Avaliacao", sub: "12.847 reviews", decimals: 1 },
+    { to: 4.8, label: "Avaliação", sub: "12.847 reviews", decimals: 1 },
     { to: 50, label: "Mil vendidos", sub: "este mes", decimals: 0 },
   ];
   const features = [
     { t: "ANC Ativo", d: "98% cancelamento", c: neon },
-    { t: "48h Bateria", d: "Carga rapida", c: purple },
+    { t: "48h Bateria", d: "Carga rápida", c: purple },
     { t: "Bluetooth 5.3", d: "15m alcance", c: pink },
-    { t: "IPX7", d: "A prova d'agua", c: neon },
+    { t: "IPX7", d: "A prova d'água", c: neon },
   ];
 
   return (
@@ -173,7 +173,7 @@ const Scene2H: React.FC = () => {
           </div>
           <div style={{ opacity: interpolate(frame, [50, 62], [0, 1], { extrapolateRight: "clamp" }), background: dark, borderRadius: 12, padding: "14px 18px", marginTop: 14, border: "1px solid #ffffff08" }}>
             <span style={{ color: "#fbbf24", fontSize: 18 }}>* * * * *</span>
-            <span style={{ fontSize: 14, color: gray, marginLeft: 10 }}>"Melhor custo-beneficio que ja vi" — Ana M.</span>
+            <span style={{ fontSize: 14, color: gray, marginLeft: 10 }}>"Melhor custo-beneficio que já vi" — Ana M.</span>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@ const Scene3H: React.FC = () => {
       <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.55)" }} />
       <div style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1 }}>
         <div style={{ transform: `scale(${scale})`, opacity: op, textAlign: "center" }}>
-          <div style={{ fontSize: 22, color: neon, letterSpacing: 5, marginBottom: 10 }}>OFERTA RELAMPAGO</div>
+          <div style={{ fontSize: 22, color: neon, letterSpacing: 5, marginBottom: 10 }}>OFERTA RELÂMPAGO</div>
           <StaggerText text="Fone Pro Max X1" fontSize={64} stagger={3} />
           <div style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 14, marginTop: 14 }}>
             <span style={{ fontSize: 26, color: gray, textDecoration: "line-through" }}>R$ 329,90</span>
@@ -217,7 +217,7 @@ const Scene3H: React.FC = () => {
               <div style={{ width: 7, height: 7, borderRadius: 4, background: "#dc2626", opacity: blink }} />
               <span style={{ color: "#fca5a5", fontSize: 14, fontFamily: "monospace" }}>23 unidades</span>
             </div>
-            <span style={{ fontSize: 14, color: gray }}>Frete gratis | 12x sem juros</span>
+            <span style={{ fontSize: 14, color: gray }}>Frete grátis | 12x sem juros</span>
           </div>
         </div>
       </div>
@@ -290,8 +290,8 @@ const Scene2V: React.FC = () => {
   const photos = ["img/headphone1.jpg", "img/headphone2.jpg", "img/headphone3.jpg"];
   const features = [
     { t: "ANC Ativo", d: "98% cancelamento", c: neon },
-    { t: "48h Bateria", d: "Carga rapida 10min=3h", c: purple },
-    { t: "Bluetooth 5.3", d: "Conexao estavel 15m", c: pink },
+    { t: "48h Bateria", d: "Carga rápida 10min=3h", c: purple },
+    { t: "Bluetooth 5.3", d: "Conexão estável 15m", c: pink },
     { t: "IPX7", d: "Resiste chuva e suor", c: neon },
   ];
 
@@ -318,7 +318,7 @@ const Scene2V: React.FC = () => {
         {/* Stats */}
         <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
           {[
-            { to: 4.8, l: "Avaliacao", d: 1, s: "" },
+            { to: 4.8, l: "Avaliação", d: 1, s: "" },
             { to: 50, l: "Mil vendidos", d: 0, s: "K+" },
             { to: 1, l: "Mais vendido", d: 0, s: "#" },
           ].map((st, i) => {
@@ -377,7 +377,7 @@ const Scene3V: React.FC = () => {
       <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.5)" }} />
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "60px 40px", zIndex: 1 }}>
         <div style={{ transform: `scale(${scale})`, opacity: op, textAlign: "center" }}>
-          <div style={{ fontSize: 20, color: neon, letterSpacing: 5, marginBottom: 14 }}>OFERTA RELAMPAGO</div>
+          <div style={{ fontSize: 20, color: neon, letterSpacing: 5, marginBottom: 14 }}>OFERTA RELÂMPAGO</div>
           <StaggerText text="Fone Pro" fontSize={54} stagger={3} />
           <StaggerText text="Max X1" fontSize={54} stagger={3} startFrame={6} />
           <div style={{ marginTop: 20 }}>
@@ -398,7 +398,7 @@ const Scene3V: React.FC = () => {
               <div style={{ width: 7, height: 7, borderRadius: 4, background: "#dc2626", opacity: blink }} />
               <span style={{ color: "#fca5a5", fontSize: 15, fontFamily: "monospace" }}>Restam 23 unidades</span>
             </div>
-            <span style={{ fontSize: 14, color: gray }}>Frete gratis | 12x sem juros</span>
+            <span style={{ fontSize: 14, color: gray }}>Frete grátis | 12x sem juros</span>
           </div>
         </div>
       </div>

@@ -174,7 +174,7 @@ const SocialScene: React.FC = () => {
             background: dark, borderRadius: 12, padding: "16px 20px", marginTop: 16, border: "1px solid #ffffff08",
           }}>
             <div style={{ color: "#fbbf24", fontSize: 20, marginBottom: 6 }}>* * * * *</div>
-            <div style={{ fontSize: 15, color: gray, fontStyle: "italic" }}>"Melhor fone que ja tive. Cancelamento de ruido perfeito." — Ana M.</div>
+            <div style={{ fontSize: 15, color: gray, fontStyle: "italic" }}>"Melhor fone que já tive. Cancelamento de ruído perfeito." — Ana M.</div>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@ const CTAScene: React.FC = () => {
 
       <div style={{ position: "absolute", inset: 0, display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1 }}>
         <div style={{ transform: `scale(${scale})`, opacity: op, textAlign: "center" }}>
-          <div style={{ fontSize: 24, color: neon, letterSpacing: 4, marginBottom: 12 }}>OFERTA RELAMPAGO</div>
+          <div style={{ fontSize: 24, color: neon, letterSpacing: 4, marginBottom: 12 }}>OFERTA RELÂMPAGO</div>
           <div style={{ fontSize: 68, fontWeight: 900, color: white, fontFamily: "system-ui" }}>
             Fone Pro Max X1
           </div>
@@ -231,7 +231,7 @@ const CTAScene: React.FC = () => {
               <div style={{ width: 8, height: 8, borderRadius: 4, background: "#dc2626", opacity: blink }} />
               <span style={{ color: "#fca5a5", fontSize: 15, fontFamily: "monospace" }}>23 unidades</span>
             </div>
-            <span style={{ fontSize: 15, color: gray }}>Frete gratis | 12x sem juros</span>
+            <span style={{ fontSize: 15, color: gray }}>Frete grátis | 12x sem juros</span>
           </div>
         </div>
       </div>
