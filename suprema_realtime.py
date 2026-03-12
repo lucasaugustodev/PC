@@ -227,12 +227,14 @@ def build_gto_prompt():
         "%s Stacks ~%s. "
         "Hero has [%s]. Board: [%s]. Street: %s. "
         "Pot: %s. To call: %s. "
-        "Players in hand: %d. Action so far: %s. "
-        "Hero seat %d of %d.%s"
+        "Players in hand: %d. "
+        "Hero seat %d of %d.%s\n\n"
+        "Full hand history:\n%s"
     ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
          fmt_bb(state['max_bet'] - (state['players'].get(str(MY_UID), {}).get('chips_round', 0))),
-         num_players, ', '.join(actions_history) if actions_history else 'none',
-         my_seat_num, total_seats, icm_note)
+         num_players,
+         my_seat_num, total_seats, icm_note,
+         hand_history)
     return prompt
 
 GTO_SYSTEM = """You are a world-class GTO poker solver. Analyze this hand and give the OPTIMAL play.
