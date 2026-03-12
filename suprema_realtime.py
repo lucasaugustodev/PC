@@ -86,27 +86,29 @@ def show():
     print("  Ctrl+C to stop", flush=True)
     state['dirty'] = False
 
-def process(data):
-    if not isinstance(data, dict):
+def process(parsed):
+    """parsed = msgpack result: {'route':'onMsg', 'event':'gameinfo', 'data':{...}}"""
+    if not isinstance(parsed, dict):
         return
 
     state['msg_count'] += 1
 
-    event = data.get('pushRoute', '')
-    inner = data.get('msg', data)
-    if not isinstance(inner, dict):
+    # Structure: {route, event, data} or {code, route, event, data/apiData}
+    event = parsed.get('event', '')
+    d = parsed.get('data', parsed.get('apiData', {}))
+    if not isinstance(d, dict):
         return
 
-    ev = inner.get('pushRoute', event)
-    if ev:
-        state['event'] = str(ev)
+    if event:
+        state['event'] = str(event)
 
-    gi = inner.get('game_info', {})
-    if isinstance(gi, dict):
+    # gameinfo -> d has game_info, handCards, etc
+    gi = d.get('game_info', {})
+    if isinstance(gi, dict) and gi:
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list) and sc:
             decoded = decode_list(sc)
-            if decoded and decoded != state['board']:
+            if decoded:
                 state['board'] = decoded
                 state['dirty'] = True
         gc = gi.get('game_counter', '')
@@ -116,7 +118,8 @@ def process(data):
         if pot:
             state['pot'] = str(pot)
 
-    hc = inner.get('handCards', [])
+    # handCards - your hole cards (in gameinfo event)
+    hc = d.get('handCards', [])
     if hc and any(c != 0 for c in hc if c):
         state['my_cards'] = decode_list(hc)
         state['board'] = []
@@ -124,12 +127,17 @@ def process(data):
         state['last_result'] = ''
         state['dirty'] = True
 
-    pc = inner.get('publicCards', [])
+    # prompt event has publicCards
+    pc = d.get('publicCards', [])
     if pc and any(c != 0 for c in pc if c):
         state['board'] = decode_list(pc)
         state['dirty'] = True
 
-    gr = inner.get('game_result', {})
+    # prompt also has gamer_prompt
+    gp = d.get('gamer_prompt', {})
+
+    # gameover -> d has game_result
+    gr = d.get('game_result', {})
     if isinstance(gr, dict) and gr:
         patterns = gr.get('patterns', [])
         lightcards = gr.get('lightcards', [])
@@ -155,15 +163,17 @@ def process(data):
                         state['opponents'][str(uid)] = decoded
                     state['dirty'] = True
 
-    if 'shared_cards' in inner:
-        sc = inner['shared_cards']
+    # shared_cards directly in d
+    if 'shared_cards' in d:
+        sc = d['shared_cards']
         if isinstance(sc, list) and sc:
             decoded = decode_list(sc)
-            if decoded and decoded != state['board']:
+            if decoded:
                 state['board'] = decoded
                 state['dirty'] = True
 
-    msg2 = inner.get('msg', None)
+    # Some events nest data inside d.msg
+    msg2 = d.get('msg', None)
     if isinstance(msg2, dict):
         for key in ['handCards', 'cards']:
             val = msg2.get(key, [])
@@ -179,23 +189,6 @@ def process(data):
             if val and any(c != 0 for c in val if c):
                 state['board'] = decode_list(val)
                 state['dirty'] = True
-
-        gr2 = msg2.get('game_result', {})
-        if isinstance(gr2, dict) and gr2:
-            seats2 = gr2.get('seats', {})
-            if isinstance(seats2, dict):
-                for uid_str, sdata in seats2.items():
-                    if not isinstance(sdata, dict):
-                        continue
-                    uid = sdata.get('uid', uid_str)
-                    cards = sdata.get('cards', [])
-                    if cards and any(c != 0 for c in cards if c):
-                        decoded = decode_list(cards)
-                        if str(uid) == str(MY_UID):
-                            state['my_cards'] = decoded
-                        else:
-                            state['opponents'][str(uid)] = decoded
-                        state['dirty'] = True
 
 buf = b''
 lock = threading.Lock()
