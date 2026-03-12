@@ -60,7 +60,7 @@ const CinematicHero: React.FC = () => {
           <div style={{ fontSize: 82, fontWeight: 800, color: white, fontFamily: "system-ui", lineHeight: 1.05 }}>
             Cobertura Duplex
           </div>
-          <div style={{ fontSize: 34, color: gray, marginTop: 8 }}>Jardins, Sao Paulo - SP</div>
+          <div style={{ fontSize: 34, color: gray, marginTop: 8 }}>Jardins, São Paulo - SP</div>
         </div>
 
         <div style={{ width: lineW, height: 2, background: `linear-gradient(90deg, ${gold}, transparent)`, marginTop: 24 }} />
