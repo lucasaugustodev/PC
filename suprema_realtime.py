@@ -312,14 +312,14 @@ def process(parsed):
 
                 # Log result
                 if prize and any(p > 0 for p in prize):
-                    action_str = "%s WON %.2f" % (str(uid)[-6:], sum(prize))
+                    action_str = "%s WON %s" % (str(uid)[-6:], fmt_bb(sum(prize)))
                     state['actions'].append(action_str)
                 elif diff and any(d < 0 for d in diff):
-                    action_str = "%s LOST %.2f" % (str(uid)[-6:], abs(sum(diff)))
+                    action_str = "%s LOST %s" % (str(uid)[-6:], fmt_bb(abs(sum(diff))))
                     state['actions'].append(action_str)
 
         if allpots:
-            state['actions'].append("POTS: %s" % allpots)
+            state['actions'].append("POTS: %s" % [fmt_bb(p) for p in allpots])
         state['dirty'] = True
 
     # handCards fallback
