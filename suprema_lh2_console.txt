@@ -1,0 +1,4 @@
+[ok] getSpriteFrameByName hooked
+[ok] setSpriteFrame hooked
+[ready] 
+Monitorando tudo...

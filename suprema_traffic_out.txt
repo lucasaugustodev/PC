@@ -11254,3 +11254,2366 @@ Attaching to PID 67336...
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
 [17:07:59.765] <-- apiClub.clubHandler.jackpot (push)
   {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:10.661] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:10.665] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:20.955] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:20.959] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:32.332] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:32.335] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:42.330] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:42.367] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:54.533] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:08:54.537] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:05.177] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:05.181] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:16.775] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:16.992] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:26.860] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:27.516] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:37.151] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:37.216] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:49.496] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:49.499] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:53.496] --> apiClub.clubHandler.info (req)
+  123
+[17:09:53.705] <-- apiClub.clubHandler.info (resp)
+  {'event': 'apiClub.clubHandler.info', 'code': 0}
+[17:09:53.713] --> apiClubMatch.clubMatchHandler.match (req)
+  123
+[17:09:53.720] --> apiClub.clubHandler.jackpot (req)
+  123
+[17:09:53.889] <-- ? (resp)
+  18
+[17:09:53.893] <-- apiClub.clubHandler.jackpot (resp)
+  {'code': 0, 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:53.897] --> apiClubMatch.clubMatchHandler.matchGU (req)
+  123
+[17:09:53.901] --> apiClubMatch.clubMatchHandler.grandUnionExtra (req)
+  123
+[17:09:56.786] --> apiPlayer.playerHandler.joinGameRoom (req)
+  123
+[17:09:57.252] <-- apiPlayer.playerHandler.joinGameRoom (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.joinGameRoom'}
+[17:09:57.532] --> apiClub.clubHandler.info (req)
+  123
+[17:09:57.621] --> apiPlayer.playerHandler.getReddotOfNoticeUnread (req)
+  123
+[17:09:57.634] --> room.roomHandler.clientMessage (req)
+  123
+[17:09:57.704] <-- apiClub.clubHandler.info (resp)
+  {'event': 'apiClub.clubHandler.info', 'code': 0}
+[17:09:57.753] <-- apiPlayer.playerHandler.getReddotOfNoticeUnread (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getReddotOfNoticeUnread', 'apiData': {'reddotNotice': 1, 'reddotAchievement': 0, 'reddotReward': 0}}
+[17:09:57.891] <-- updategamer (push)
+[17:09:59.285] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:09:59.289] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:00.257] --> room.roomHandler.clientMessage (req)
+  123
+[17:10:00.429] <-- updategamer (push)
+[17:10:00.433] <-- *** PROMPT *** (resp)
+  roomID: 14625_43038318
+[17:10:00.669] --> apiPlayer.playerHandler.getPrefsData (req)
+  123
+[17:10:00.675] --> apiPlayer.playerHandler.getLoginInfo (req)
+  123
+[17:10:00.681] --> apiClub.clubHandler.getLobbyCoins (req)
+  123
+[17:10:00.687] --> apiClub.clubHandler.getLobbyCoins (req)
+  123
+[17:10:00.694] --> apiClub.clubHandler.getLobbyLists (req)
+  123
+[17:10:00.733] --> apiClub.clubHandler.info (req)
+  123
+[17:10:00.861] <-- apiPlayer.playerHandler.getPrefsData (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getPrefsData'}
+[17:10:00.875] <-- apiClub.clubHandler.getLobbyCoins (resp)
+  {'event': 'apiClub.clubHandler.getLobbyCoins', 'code': 0}
+[17:10:00.878] <-- apiClub.clubHandler.getLobbyCoins (resp)
+  {'event': 'apiClub.clubHandler.getLobbyCoins', 'code': 0}
+[17:10:00.971] <-- apiClub.clubHandler.info (resp)
+  {'event': 'apiClub.clubHandler.info', 'code': 0}
+[17:10:00.988] --> apiClubMatch.clubMatchHandler.match (req)
+  123
+[17:10:00.994] --> apiClub.clubHandler.jackpot (req)
+  123
+[17:10:01.126] <-- apiClub.clubHandler.jackpot (resp)
+  {'code': 0, 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:01.140] --> apiClubMatch.clubMatchHandler.grandUnionExtra (req)
+  123
+[17:10:01.159] --> apiPlayer.playerHandler.getApiDataAchievementList (req)
+  123
+[17:10:01.160] <-- ? (resp)
+  18
+[17:10:01.174] --> apiClubMatch.clubMatchHandler.matchGU (req)
+  123
+[17:10:01.323] <-- apiClubMatch.clubMatchHandler.grandUnionExtra (resp)
+  {'event': 'apiClubMatch.clubMatchHandler.grandUnionExtra', 'code': 0}
+[17:10:01.344] <-- apiPlayer.playerHandler.getApiDataAchievementList (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getApiDataAchievementList', 'apiData': {'achievementList': []}}
+[17:10:04.432] --> apiPlayer.playerHandler.joinGameRoom (req)
+  123
+[17:10:05.006] <-- apiPlayer.playerHandler.joinGameRoom (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.joinGameRoom'}
+[17:10:05.239] --> apiClub.clubHandler.info (req)
+  123
+[17:10:05.325] --> apiPlayer.playerHandler.getReddotOfNoticeUnread (req)
+  123
+[17:10:05.403] --> room.roomHandler.clientMessage (req)
+  123
+[17:10:05.654] <-- apiPlayer.playerHandler.getReddotOfNoticeUnread (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getReddotOfNoticeUnread', 'apiData': {'reddotNotice': 1, 'reddotAchievement': 0, 'reddotReward': 0}}
+[17:10:05.687] <-- apiClub.clubHandler.info (resp)
+  {'event': 'apiClub.clubHandler.info', 'code': 0}
+[17:10:05.767] <-- updategamer (push)
+[17:10:06.992] <-- gameinfo (push)
+  hand #63 type=1 dealer=seat 2
+[17:10:06.996] <-- gameinfo (push)
+  hand #63 type=1 dealer=seat 2
+[17:10:07.936] <-- updateseat (push)
+[17:10:07.940] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346206595
+  seqno: 63
+[17:10:08.034] <-- updateseat (push)
+[17:10:08.038] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346206692
+  seqno: 63
+[17:10:08.042] <-- updateseat (push)
+[17:10:08.091] <-- updateseat (push)
+[17:10:08.095] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346206765
+  seqno: 63
+[17:10:08.226] <-- updateseat (push)
+[17:10:08.230] <-- *** GAMESTART *** (push)
+  hand #64 type=1 dealer=seat 3
+[17:10:08.234] <-- *** GAMESTART *** (push)
+[17:10:09.264] <-- gameinfo (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+[17:10:09.795] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:09.943] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:09.954] <-- updategamer (push)
+[17:10:10.225] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+  countdown: seat 1 ?s
+[17:10:10.311] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346208970
+  seqno: 64
+[17:10:10.405] <-- updateseat (push)
+[17:10:10.409] <-- updateseat (push)
+[17:10:10.483] --> room.roomHandler.clientMessage (req)
+  123
+[17:10:10.490] --> room.roomHandler.clientMessage (req)
+  123
+[17:10:10.542] <-- gameinfo (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+[17:10:10.617] <-- ? (resp)
+[17:10:10.659] <-- updategamer (push)
+[17:10:10.702] <-- *** PROMPT *** (resp)
+  roomID: 14625_43037413
+[17:10:10.706] <-- gameinfo (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+[17:10:10.860] <-- gameinfo (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+[17:10:11.129] <-- gameinfo (push)
+  POT: 0.06
+  hand #64 type=1 dealer=seat 3
+[17:10:11.772] <-- updateseat (push)
+[17:10:12.605] <-- *** MOVETURN *** (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=0 <<ME
+  countdown: seat 3 ?s
+[17:10:12.670] --> room.roomHandler.clientMessage (req)
+  123
+[17:10:12.677] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346211374
+  seqno: 64
+[17:10:12.859] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:12.863] <-- *** MOVETURN *** (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=0 <<ME
+  countdown: seat 4 ?s
+[17:10:12.921] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346211574
+  seqno: 64
+[17:10:12.925] <-- updateseat (push)
+    seat 0: uid=588900 --- coins=4 <<ME
+[17:10:12.929] <-- ? (resp)
+[17:10:12.967] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:10:13.172] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:13.176] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:14.007] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:14.893] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:15.364] <-- gameinfo (push)
+  POT: 0.18
+  hand #64 type=1 dealer=seat 3
+[17:10:15.764] <-- *** MOVETURN *** (push)
+  POT: 0.28
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:10:16.068] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346214577
+  seqno: 64
+[17:10:16.129] <-- gameinfo (push)
+  POT: 0.28
+  hand #64 type=1 dealer=seat 3
+[17:10:16.773] <-- updateseat (push)
+[17:10:16.777] <-- updategamer (push)
+[17:10:17.737] <-- *** MOVETURN *** (push)
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:10:18.455] <-- updateseat (push)
+[17:10:18.459] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:10:18.662] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:18.847] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:18.921] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346217580
+  seqno: 64
+[17:10:19.915] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:20.553] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:20.567] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:20.571] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:20.612] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:21.226] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:21.567] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:21.648] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:21.652] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:22.961] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:23.297] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:10:23.727] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:23.875] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:24.485] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:25.313] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:25.371] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:26.040] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:27.582] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.36
+  hand #64 type=1 dealer=seat 3
+[17:10:28.745] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.4
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:10:28.749] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346227439
+  seqno: 64
+[17:10:30.702] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:30.706] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:33.401] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.4
+  hand #64 type=1 dealer=seat 3
+[17:10:33.781] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346232440
+  seqno: 64
+[17:10:33.785] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.58
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 4 ?s
+[17:10:33.926] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.58
+  hand #64 type=1 dealer=seat 3
+[17:10:34.203] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346232640
+  seqno: 64
+[17:10:34.956] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.58
+  hand #64 type=1 dealer=seat 3
+[17:10:35.272] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.58
+  hand #64 type=1 dealer=seat 3
+[17:10:36.788] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.58
+  hand #64 type=1 dealer=seat 3
+[17:10:37.936] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.76
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:10:37.990] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346236644
+  seqno: 64
+[17:10:38.840] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.76
+  hand #64 type=1 dealer=seat 3
+[17:10:38.968] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.76
+  hand #64 type=1 dealer=seat 3
+[17:10:40.815] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.76
+  hand #64 type=1 dealer=seat 3
+[17:10:40.854] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 (raw [67, 37, 60])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:10:41.896] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:10:42.395] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346241047
+  seqno: 64
+[17:10:43.432] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:43.436] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:43.460] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:43.464] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:47.324] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:10:47.395] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346246051
+  seqno: 64
+[17:10:47.706] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:47.991] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:48.735] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:49.169] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:49.460] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.9
+  hand #64 type=1 dealer=seat 3
+[17:10:49.891] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.94
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:10:50.004] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346248656
+  seqno: 64
+[17:10:50.008] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.94
+  hand #64 type=1 dealer=seat 3
+[17:10:50.298] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 0.94
+  hand #64 type=1 dealer=seat 3
+[17:10:52.332] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 4 ?s
+[17:10:52.399] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346251058
+  seqno: 64
+[17:10:52.516] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:52.846] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:53.153] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:53.469] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:53.522] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:10:54.285] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:55.056] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:55.114] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 7.57
+  hand #64 type=1 dealer=seat 3
+[17:10:56.087] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:10:56.202] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346254860
+  seqno: 64
+[17:10:56.436] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:10:58.818] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:10:59.634] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:00.265] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:01.513] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346259865
+  seqno: 64
+[17:11:01.838] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:02.994] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:03.004] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:04.284] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:04.292] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:05.026] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:06.049] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:06.178] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:06.561] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:06.685] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:07.214] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:08.024] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346266680
+  seqno: 64
+[17:11:08.396] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:08.713] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 8.39
+  hand #64 type=1 dealer=seat 3
+[17:11:09.022] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+    seat 5: uid=1367637 ?75 ?74 coins=0
+    seat 1: uid=1629778 5h 7s coins=5.81
+    seat 4: uid=1652444 Qh Ah coins=0
+  countdown: seat -1 ?s
+[17:11:09.026] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+    seat 5: uid=1367637 ?75 ?74 coins=0
+    seat 1: uid=1629778 5h 7s coins=5.81
+    seat 4: uid=1652444 Qh Ah coins=0
+  countdown: seat -1 ?s
+[17:11:09.064] <-- updateOutsCards (push)
+[17:11:09.313] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 (raw [67, 37, 60, 71])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+[17:11:10.021] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+    seat 5: uid=1367637 ?75 ?74 coins=0
+    seat 1: uid=1629778 5h 7s coins=5.81
+    seat 4: uid=1652444 Qh Ah coins=0
+  countdown: seat -1 ?s
+[17:11:10.061] <-- updateOutsCards (push)
+[17:11:10.171] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+[17:11:10.558] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+[17:11:10.876] <-- gameinfo (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+[17:11:11.066] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+    seat 5: uid=1367637 ?75 ?74 coins=0
+    seat 1: uid=1629778 5h 7s coins=5.81
+    seat 4: uid=1652444 Qh Ah coins=0
+  countdown: seat -1 ?s
+[17:11:11.105] <-- updateOutsCards (push)
+[17:11:12.069] <-- *** MOVETURN *** (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+    seat 0: uid=588900 --- coins=4 <<ME
+    seat 5: uid=1367637 ?75 ?74 coins=0
+    seat 1: uid=1629778 5h 7s coins=5.81
+    seat 4: uid=1652444 Qh Ah coins=0
+  countdown: seat -1 ?s
+[17:11:12.236] <-- *** GAMEOVER *** (push)
+  BOARD: ?67 Kh ?60 ?71 ?52 (raw [67, 37, 60, 71, 52])
+  POT: 3.24
+  hand #64 type=1 dealer=seat 3
+  BOARD: --- (raw [[71, 38, 37, 52, 67], [71, 38, 37, 52, 67]])
+  TOTAL POT: [3, 0.24]
+    seat 5: uid=1367637 ?75 ?74 coins=0 prize=[0, 0]
+    seat 1: uid=1629778 5h 7s coins=5.81 prize=[0, 0]
+    seat 4: uid=1652444 Qh Ah coins=3.03 prize=[2.81, 0.22]
+[17:11:12.249] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:11:12.320] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:12.324] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:12.909] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:13.110] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:14.083] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:16.100] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:16.530] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:16.810] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:18.144] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:18.236] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:18.240] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:18.562] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:20.319] <-- gameinfo (push)
+  hand #64 type=1 dealer=seat 3
+[17:11:20.841] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:21.010] <-- updateseat (push)
+[17:11:21.014] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346279668
+  seqno: 64
+[17:11:21.018] <-- *** PROMPT *** (resp)
+  roomID: 14625_43037413
+[17:11:21.054] <-- updateseat (push)
+    seat 0: uid=588900 --- coins=4 <<ME
+[17:11:21.057] <-- updateseat (push)
+[17:11:21.082] <-- updateseat (push)
+[17:11:21.103] <-- updateseat (push)
+[17:11:21.246] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346279895
+  seqno: 64
+[17:11:21.345] <-- updateseat (push)
+[17:11:21.349] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=3.96 <<ME
+[17:11:22.052] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:22.416] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:22.669] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:22.769] <-- updateseat (push)
+[17:11:22.773] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:23.226] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:23.389] <-- *** MOVETURN *** (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 1 ?s
+[17:11:23.442] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346282097
+  seqno: 65
+[17:11:23.896] <-- *** MOVETURN *** (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 2 ?s
+[17:11:23.900] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:23.904] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346282499
+  seqno: 65
+[17:11:24.416] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:25.457] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:26.538] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:26.584] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:27.048] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:27.391] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:27.870] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:28.844] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346287502
+  seqno: 65
+[17:11:29.900] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:30.527] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:33.003] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:33.573] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:33.659] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:33.845] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346292504
+  seqno: 65
+[17:11:34.224] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:35.105] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:35.421] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:37.033] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:37.037] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:37.846] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346296504
+  seqno: 65
+[17:11:38.107] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:38.916] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:40.068] <-- *** MOVETURN *** (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 3 ?s
+[17:11:40.248] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346298904
+  seqno: 65
+[17:11:40.428] <-- *** MOVETURN *** (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 4 ?s
+[17:11:41.057] <-- gameinfo (push)
+  POT: 0.08
+  hand #65 type=1 dealer=seat 4
+[17:11:41.061] <-- *** MOVETURN *** (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 0 ?s
+[17:11:41.065] <-- clientPing (push)
+[17:11:41.092] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:41.125] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:41.251] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:41.266] <-- ? (resp)
+[17:11:41.494] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:42.594] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:43.224] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:43.586] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:43.758] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.04, 'last_raise': 0.04, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:11:43.798] <-- *** MOVETURN *** (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat -1 ?s
+[17:11:44.176] <-- gameinfo (push)
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:44.799] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat -1 ?s
+[17:11:44.802] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 ?66 As coins=3.96 <<ME
+[17:11:45.099] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346303757
+  seqno: 65
+[17:11:45.117] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:45.253] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346303909
+  seqno: 65
+[17:11:45.292] <-- ? (resp)
+[17:11:45.978] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:46.180] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:46.359] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:46.380] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:46.555] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.04, 'last_raise': 0.04, 'sidepots': [0.12], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:11:46.595] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 2 ?s
+[17:11:46.655] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346305312
+  seqno: 65
+[17:11:47.013] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:47.734] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:48.114] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:48.118] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:48.274] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 4 ?s
+[17:11:48.278] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:48.456] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346307114
+  seqno: 65
+[17:11:51.580] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 (raw [53, 78, 67])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat -1 ?s
+[17:11:52.579] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat -1 ?s
+[17:11:52.583] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 ?66 As coins=3.96 <<ME
+[17:11:52.587] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:52.697] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:52.881] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346311537
+  seqno: 65
+[17:11:52.885] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:53.041] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346311700
+  seqno: 65
+[17:11:53.057] <-- ? (resp)
+[17:11:53.102] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:54.717] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+[17:11:55.372] --> room.roomHandler.clientMessage (req)
+  123
+[17:11:55.545] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.04, 'last_raise': 0.04, 'sidepots': [0.12], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:11:55.592] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.88 <<ME
+  countdown: seat 2 ?s
+[17:11:55.645] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346314302
+  seqno: 65
+[17:11:55.863] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:11:56.679] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:11:56.903] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:11:57.109] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:11:58.348] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:58.588] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:11:58.809] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:11:59.181] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.88 <<ME
+  countdown: seat 4 ?s
+[17:11:59.248] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346317905
+  seqno: 65
+[17:12:02.317] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:02.603] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:03.139] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:04.141] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:04.235] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346322909
+  seqno: 65
+[17:12:04.530] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:04.677] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:05.421] <-- gameinfo (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.2
+  hand #65 type=1 dealer=seat 4
+[17:12:05.857] <-- *** MOVETURN *** (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+    seat 0: uid=588900 --- coins=3.96 <<ME
+  countdown: seat 4 ?s
+[17:12:06.415] <-- *** GAMEOVER *** (push)
+  BOARD: ?53 ?78 ?67 ?55 (raw [53, 78, 67, 55])
+  POT: 0.12
+  hand #65 type=1 dealer=seat 4
+  BOARD: --- (raw [None])
+  TOTAL POT: [0.12]
+    seat 0: uid=588900 2c 2c coins=4.08 prize=[0.12] <<ME
+[17:12:06.419] <-- tryStraddle (push)
+[17:12:06.448] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:12:06.451] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:12:08.468] <-- gameinfo (push)
+  hand #65 type=1 dealer=seat 4
+[17:12:08.839] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:08.892] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:09.113] <-- gameinfo (push)
+  hand #65 type=1 dealer=seat 4
+[17:12:09.543] <-- gameinfo (push)
+  hand #65 type=1 dealer=seat 4
+[17:12:11.015] <-- gameinfo (push)
+  hand #65 type=1 dealer=seat 4
+[17:12:12.481] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:12.656] <-- *** PROMPT *** (resp)
+  roomID: 14625_43037413
+[17:12:12.696] <-- updateseat (push)
+    seat 0: uid=588900 --- coins=4.08 <<ME
+[17:12:12.700] <-- updateseat (push)
+[17:12:12.704] <-- updateseat (push)
+[17:12:12.822] <-- updateseat (push)
+[17:12:12.871] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346331528
+  seqno: 65
+[17:12:13.020] <-- updateseat (push)
+[17:12:13.024] <-- *** GAMESTART *** (push)
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 2c 2c coins=4.08 <<ME
+[17:12:13.028] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=4.08 <<ME
+[17:12:13.032] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=4.06 <<ME
+[17:12:13.036] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 5s Ad coins=4.06 <<ME
+[17:12:14.360] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:15.065] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4.06 <<ME
+  countdown: seat 2 ?s
+[17:12:15.069] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346333734
+  seqno: 66
+[17:12:16.937] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4.06 <<ME
+  countdown: seat 3 ?s
+[17:12:17.076] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346335735
+  seqno: 66
+[17:12:19.111] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:19.115] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:19.667] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:20.075] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:20.813] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:22.081] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346340738
+  seqno: 66
+[17:12:22.757] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4.06 <<ME
+  countdown: seat 4 ?s
+[17:12:22.881] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346341538
+  seqno: 66
+[17:12:24.663] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:24.765] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4.06 <<ME
+  countdown: seat 5 ?s
+[17:12:24.769] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:24.884] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346343541
+  seqno: 66
+[17:12:25.009] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:26.317] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:26.654] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:27.649] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4.06 <<ME
+  countdown: seat 0 ?s
+[17:12:27.664] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:27.690] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346346343
+  seqno: 66
+[17:12:27.838] <-- ? (resp)
+[17:12:29.705] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:29.709] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:30.348] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:31.355] <-- gameinfo (push)
+  POT: 0.06
+  hand #66 type=1 dealer=seat 5
+[17:12:31.713] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:31.888] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.04, 'last_raise': 0.04, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:12:31.928] <-- *** MOVETURN *** (push)
+  POT: 0.12
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:12:32.090] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346350748
+  seqno: 66
+[17:12:33.288] <-- gameinfo (push)
+  POT: 0.12
+  hand #66 type=1 dealer=seat 5
+[17:12:33.751] <-- *** MOVETURN *** (push)
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:12:34.751] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:12:34.755] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 5s Ad coins=4 <<ME
+[17:12:35.008] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:35.065] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346353707
+  seqno: 66
+[17:12:35.069] <-- clientPing (push)
+[17:12:35.073] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346353752
+  seqno: 66
+[17:12:35.088] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:35.263] <-- ? (resp)
+[17:12:36.580] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:36.752] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.08, 'last_raise': 0.04, 'sidepots': [0.16], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:12:36.793] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:12:36.894] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346355552
+  seqno: 66
+[17:12:39.807] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:40.320] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:40.323] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:41.899] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346360557
+  seqno: 66
+[17:12:42.440] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:42.664] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:42.744] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:43.636] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:44.233] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:44.371] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:44.463] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:44.610] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:12:45.343] <-- gameinfo (push)
+  BOARD: ?76 ?70 As (raw [76, 70, 51])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:45.587] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:12:45.591] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 5s Ad coins=4 <<ME
+[17:12:45.889] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346364544
+  seqno: 66
+[17:12:45.893] <-- clientPing (push)
+[17:12:45.901] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:46.083] <-- ? (resp)
+[17:12:50.170] <-- gameinfo (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:50.576] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:50.751] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.08, 'last_raise': 0.04, 'sidepots': [0.16], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:12:50.790] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.27
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=3.89 <<ME
+  countdown: seat 1 ?s
+[17:12:50.910] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346369568
+  seqno: 66
+[17:12:51.097] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:12:51.101] <-- *** MOVETURN *** (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:12:51.156] <-- gameinfo (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:51.257] <-- gameinfo (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+[17:12:51.692] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:12:51.696] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:12:51.700] <-- *** GAMEOVER *** (push)
+  BOARD: ?76 ?70 As ?56 (raw [76, 70, 51, 56])
+  POT: 0.16
+  hand #66 type=1 dealer=seat 5
+  BOARD: --- (raw [None])
+  TOTAL POT: [0.16]
+    seat 0: uid=588900 2c 2c coins=4.16 prize=[0.16] <<ME
+[17:12:51.704] <-- tryStraddle (push)
+[17:12:52.431] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:52.435] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:12:53.617] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:54.116] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:54.232] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:56.664] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:56.789] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:57.493] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:57.789] --> room.roomHandler.clientMessage (req)
+  123
+[17:12:57.913] <-- gameinfo (push)
+  hand #66 type=1 dealer=seat 5
+[17:12:57.965] <-- *** PROMPT *** (resp)
+  roomID: 14625_43037413
+[17:12:57.969] <-- updateseat (push)
+[17:12:57.973] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346376622
+  seqno: 66
+[17:12:57.977] <-- updateseat (push)
+    seat 0: uid=588900 --- coins=4.16 <<ME
+[17:12:58.004] <-- updateseat (push)
+[17:12:58.014] <-- updateseat (push)
+[17:12:58.018] <-- updateseat (push)
+[17:12:58.117] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346376776
+  seqno: 66
+[17:12:58.183] <-- updateseat (push)
+[17:12:58.187] <-- *** GAMESTART *** (push)
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 2c 2c coins=4.16 <<ME
+[17:12:58.191] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=4.16 <<ME
+[17:12:58.195] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=4.16 <<ME
+[17:12:58.199] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 Kd ?56 coins=4.16 <<ME
+[17:12:58.289] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:12:58.549] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:12:58.620] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:12:59.067] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:12:59.242] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:12:59.505] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:13:00.228] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4.16 <<ME
+  countdown: seat 3 ?s
+[17:13:00.318] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346378976
+  seqno: 67
+[17:13:02.104] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:13:02.579] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:13:02.994] <-- gameinfo (push)
+  POT: 0.06
+  hand #67 type=1 dealer=seat 0
+[17:13:03.055] <-- *** MOVETURN *** (push)
+  POT: 0.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4.16 <<ME
+  countdown: seat 4 ?s
+[17:13:03.100] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346381779
+  seqno: 67
+[17:13:03.414] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:03.841] <-- gameinfo (push)
+  POT: 0.22
+  hand #67 type=1 dealer=seat 0
+[17:13:04.127] <-- gameinfo (push)
+  POT: 0.22
+  hand #67 type=1 dealer=seat 0
+[17:13:04.978] <-- *** MOVETURN *** (push)
+  POT: 0.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4.16 <<ME
+  countdown: seat 5 ?s
+[17:13:05.124] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346383779
+  seqno: 67
+[17:13:07.534] <-- *** MOVETURN *** (push)
+  POT: 0.38
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4.16 <<ME
+  countdown: seat 0 ?s
+[17:13:07.538] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | call=True | raise
+  roomID: 14625_43037413#113
+  ts: 1773346386191
+  seqno: 67
+[17:13:07.542] <-- clientPing (push)
+[17:13:07.563] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:07.689] <-- gameinfo (push)
+  POT: 0.38
+  hand #67 type=1 dealer=seat 0
+[17:13:07.735] <-- ? (resp)
+[17:13:08.068] <-- gameinfo (push)
+  POT: 0.38
+  hand #67 type=1 dealer=seat 0
+[17:13:09.433] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:09.843] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.16, 'last_raise': 0.12, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:13:09.884] <-- *** MOVETURN *** (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 1 ?s
+[17:13:10.089] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346388736
+  seqno: 67
+[17:13:10.420] <-- *** MOVETURN *** (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 2 ?s
+[17:13:10.480] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346389137
+  seqno: 67
+[17:13:10.711] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:13.254] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:13.399] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:14.109] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:14.113] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:14.121] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:15.959] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:16.176] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:16.831] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346395348
+  seqno: 67
+[17:13:17.477] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:17.809] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:18.318] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:18.548] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:19.783] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:19.968] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:20.373] <-- *** MOVETURN *** (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:13:20.800] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:20.804] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:20.867] <-- gameinfo (push)
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:21.376] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat -1 ?s
+[17:13:21.380] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 Kd ?56 coins=4 <<ME
+[17:13:21.696] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346400351
+  seqno: 67
+[17:13:23.982] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:25.563] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:26.328] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 5 ?s
+[17:13:26.497] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346405155
+  seqno: 67
+[17:13:26.754] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:27.877] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:28.460] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=4 <<ME
+  countdown: seat 0 ?s
+[17:13:28.464] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346407116
+  seqno: 67
+[17:13:28.468] <-- clientPing (push)
+[17:13:28.472] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346407157
+  seqno: 67
+[17:13:28.476] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:28.609] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:28.655] <-- ? (resp)
+[17:13:29.030] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:30.355] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:30.356] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:30.523] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 0.54
+  hand #67 type=1 dealer=seat 0
+[17:13:30.537] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.16, 'last_raise': 0.04, 'sidepots': [0.54], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:13:30.610] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=3.46 <<ME
+  countdown: seat 3 ?s
+[17:13:30.690] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:30.694] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346409359
+  seqno: 67
+[17:13:31.273] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:31.396] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:32.004] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:32.261] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:33.071] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=3.46 <<ME
+  countdown: seat 5 ?s
+[17:13:34.486] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:35.959] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:36.803] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:37.145] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:38.116] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346416765
+  seqno: 67
+[17:13:38.263] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.08
+  hand #67 type=1 dealer=seat 0
+[17:13:38.887] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=3.46 <<ME
+  countdown: seat -1 ?s
+[17:13:39.033] <-- gameinfo (push)
+  BOARD: ?53 2h Th (raw [53, 26, 34])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:39.888] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=3.46 <<ME
+  countdown: seat -1 ?s
+[17:13:39.892] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 Kd ?56 coins=3.46 <<ME
+[17:13:39.943] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:40.311] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346418969
+  seqno: 67
+[17:13:40.939] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:41.339] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:42.214] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:42.323] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:42.554] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:43.585] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=3.46 <<ME
+  countdown: seat 0 ?s
+[17:13:43.588] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | check=True
+  roomID: 14625_43037413#113
+  ts: 1773346422238
+  seqno: 67
+[17:13:43.593] <-- clientPing (push)
+[17:13:43.621] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:43.716] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346422371
+  seqno: 67
+[17:13:43.795] <-- ? (resp)
+[17:13:43.849] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:44.363] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:45.094] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 1.62
+  hand #67 type=1 dealer=seat 0
+[17:13:45.139] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:45.313] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 4.16, 'last_raise': 3.46, 'sidepots': [1.62], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:13:45.355] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=0 <<ME
+  countdown: seat 5 ?s
+[17:13:45.519] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346424174
+  seqno: 67
+[17:13:46.907] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+[17:13:47.138] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+[17:13:47.502] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+[17:13:47.861] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+[17:13:48.276] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:48.330] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:48.751] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 5.08
+  hand #67 type=1 dealer=seat 0
+[17:13:48.801] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat -1 ?s
+[17:13:48.805] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat 0 ?s
+[17:13:48.809] <-- multitimes (push)
+[17:13:48.813] <-- updateOutsCards (push)
+[17:13:51.567] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:51.571] --> room.roomHandler.clientMessage (req)
+  123
+[17:13:51.742] <-- ? (resp)
+[17:13:51.782] <-- multitimes (push)
+[17:13:52.214] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:52.787] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh (raw [53, 26, 34, 35])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat -1 ?s
+[17:13:52.833] <-- updateOutsCards (push)
+[17:13:53.786] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat -1 ?s
+[17:13:53.826] <-- updateOutsCards (push)
+[17:13:53.830] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:53.923] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:54.825] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat -1 ?s
+[17:13:54.868] <-- updateOutsCards (push)
+[17:13:55.820] <-- *** MOVETURN *** (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+    seat 0: uid=588900 Kd ?56 coins=3.16 <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0
+  countdown: seat -1 ?s
+[17:13:56.027] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:56.474] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:56.544] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:56.850] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:58.378] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:58.468] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:58.681] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:13:58.834] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:13:59.378] <-- gameinfo (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+[17:14:00.777] <-- *** GAMEOVER *** (push)
+  BOARD: ?53 2h Th Jh ?75 (raw [53, 26, 34, 35, 75])
+  POT: 2.22
+  hand #67 type=1 dealer=seat 0
+  BOARD: --- (raw [[56, 24, 75, 26, 53]])
+  TOTAL POT: [2.22]
+    seat 0: uid=588900 Kd ?56 coins=5.22 prize=[2.06] <<ME
+    seat 5: uid=1367637 ?55 ?71 coins=0 prize=[0]
+[17:14:00.972] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:14:00.976] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[17:14:01.003] <-- *** OPENCARD *** (push)
+  opencard: {'seat': 2, 'cards': [74, 0], 'swap': 0}
+  roomID: 14625_43037413
+  ts: 1773346439660
+  seqno: 67
+[17:14:01.007] <-- *** OPENCARD *** (push)
+  opencard: {'seat': 3, 'cards': [61, 60], 'swap': 0}
+  roomID: 14625_43037413
+  ts: 1773346439671
+  seqno: 67
+[17:14:01.125] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:01.824] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:03.932] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:04.011] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:04.973] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:05.077] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:06.271] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:06.605] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:06.791] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:07.897] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:07.901] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:08.010] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:08.853] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:09.365] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:09.380] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:09.422] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:10.734] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:11.903] --> room.roomHandler.clientMessage (req)
+  123
+[17:14:11.910] <-- gameinfo (push)
+  hand #67 type=1 dealer=seat 0
+[17:14:12.064] <-- updateseat (push)
+[17:14:12.068] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346450720
+  seqno: 67
+[17:14:12.072] <-- updateseat (push)
+[17:14:12.076] <-- *** COUNTDOWN *** (push)
+  countdown: seat -1 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346450732
+  seqno: 67
+[17:14:12.080] <-- updateseat (push)
+[17:14:12.084] <-- updateseat (push)
+[17:14:12.088] <-- updateseat (push)
+[17:14:12.092] <-- *** PROMPT *** (resp)
+  roomID: 14625_43037413
+[17:14:12.118] <-- updateseat (push)
+    seat 0: uid=588900 --- coins=5.22 <<ME
+[17:14:12.311] <-- updateseat (push)
+[17:14:12.315] <-- *** GAMESTART *** (push)
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 2c 2c coins=5.22 <<ME
+[17:14:12.318] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=5.22 <<ME
+[17:14:12.322] <-- *** GAMESTART *** (push)
+    seat 0: uid=588900 2c 2c coins=5.22 <<ME
+[17:14:12.326] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 8d ?70 coins=5.22 <<ME
+[17:14:12.595] <-- gameinfo (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+[17:14:12.929] <-- gameinfo (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+[17:14:14.294] <-- gameinfo (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+[17:14:14.350] <-- *** MOVETURN *** (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat 4 ?s
+[17:14:14.479] <-- *** COUNTDOWN *** (push)
+  countdown: seat 4 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346453135
+  seqno: 68
+[17:14:14.483] <-- gameinfo (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+[17:14:14.533] <-- gameinfo (push)
+  POT: 0.06
+  hand #68 type=1 dealer=seat 1
+[17:14:16.285] <-- *** MOVETURN *** (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat 0 ?s
+[17:14:16.288] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | call=True | raise
+  roomID: 14625_43037413#113
+  ts: 1773346454941
+  seqno: 68
+[17:14:16.292] <-- clientPing (push)
+[17:14:16.312] --> room.roomHandler.clientMessage (req)
+  123
+[17:14:16.478] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346455136
+  seqno: 68
+[17:14:16.482] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:16.486] <-- ? (resp)
+[17:14:18.121] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:18.187] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:18.871] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:19.421] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:19.429] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:19.501] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:20.305] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:20.426] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:20.506] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:20.808] --> room.roomHandler.clientMessage (req)
+  123
+[17:14:20.929] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:21.012] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.04, 'last_raise': 0.04, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43037413
+[17:14:21.037] <-- *** MOVETURN *** (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat 1 ?s
+[17:14:22.071] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:22.075] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:22.515] <-- *** MOVETURN *** (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat 2 ?s
+[17:14:22.664] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346461321
+  seqno: 68
+[17:14:23.533] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:24.232] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:24.657] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:24.824] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:25.735] <-- gameinfo (push)
+  POT: 0.1
+  hand #68 type=1 dealer=seat 1
+[17:14:26.259] <-- *** MOVETURN *** (push)
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat 3 ?s
+[17:14:26.467] <-- *** COUNTDOWN *** (push)
+  countdown: seat 3 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346465123
+  seqno: 68
+[17:14:27.216] <-- *** MOVETURN *** (push)
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat -1 ?s
+[17:14:27.620] <-- gameinfo (push)
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+[17:14:27.832] <-- gameinfo (push)
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+[17:14:28.215] <-- *** MOVETURN *** (push)
+  BOARD: 6h As ?74 (raw [30, 51, 74])
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+    seat 0: uid=588900 --- coins=5.22 <<ME
+  countdown: seat -1 ?s
+[17:14:28.667] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346467324
+  seqno: 68
+[17:14:29.624] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:29.628] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[17:14:30.571] <-- gameinfo (push)
+  BOARD: 6h As ?74 (raw [30, 51, 74])
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+[17:14:30.713] <-- gameinfo (push)
+  BOARD: 6h As ?74 (raw [30, 51, 74])
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+[17:14:33.620] <-- gameinfo (push)
+  BOARD: 6h As ?74 (raw [30, 51, 74])
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1
+[17:14:33.672] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43037413
+  ts: 1773346472327
+  seqno: 68
+[17:14:34.260] <-- gameinfo (push)
+  BOARD: 6h As ?74 (raw [30, 51, 74])
+  POT: 0.12
+  hand #68 type=1 dealer=seat 1

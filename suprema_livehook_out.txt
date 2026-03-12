@@ -1,0 +1,7 @@
+Hooked getSpriteFrameByName
+Hooked setSpriteFrame
+Hooked SSL_read
+
+PRONTO - jogue pra capturar!
+
+Monitorando...

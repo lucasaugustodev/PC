@@ -1,0 +1,6 @@
+[info] Hooked setTextureRect: ?setTextureRect@Sprite@cocos2d@@UAEXABVRect@2@_NABVSize@2@@Z
+[ready] 
+Capturing for 60 seconds...
+  ...15s, rects=0
+  ...30s, rects=0
+  ...45s, rects=0

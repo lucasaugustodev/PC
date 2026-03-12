@@ -1,0 +1,607 @@
+READY
+Capturing... play hands! Ctrl+C to stop
+[#2] updateseat
+[#3] updateseat
+[#6] moveturn
+[#7] moveturn
+[#8] multitimes
+[#35] multitimes
+[#47] multitimes
+[#50] moveturn
+[#53] moveturn
+  shared_cards = [66, 22, 52]
+[#54] prompt
+[#55] updateOutsCards
+[#57] moveturn
+  shared_cards = [66, 22, 52]
+[#58] updateOutsCards
+[#63] moveturn
+  shared_cards = [66, 22, 52, 21]
+[#64] updateOutsCards
+[#65] moveturn
+  shared_cards = [66, 22, 52, 21]
+[#66] updateOutsCards
+[#71] moveturn
+  shared_cards = [66, 22, 52, 21, 34]
+[#72] updateOutsCards
+[#74] moveturn
+  shared_cards = [66, 22, 52, 21, 34]
+[#75] updateOutsCards
+[#78] moveturn
+  shared_cards = [66, 22, 52, 21, 34]
+[#79] gameover
+  shared_cards = [66, 22, 52, 21, 34]
+[#80] tryStraddle
+[#82] notify
+[#83] updateseat
+[#112] opencard
+[#114] opencard
+[#125] say
+[#131] updateseat
+[#132] updateseat
+[#133] updateseat
+[#135] updateseat
+[#136] gamestart
+[#137] gamestart
+[#138] gamestart
+[#139] prompt
+[#146] moveturn
+[#162] moveturn
+[#163] prompt
+[#174] moveturn
+[#176] moveturn
+[#195] moveturn
+[#198] moveturn
+[#202] moveturn
+  shared_cards = [60, 36, 74]
+[#211] moveturn
+  shared_cards = [60, 36, 74]
+[#218] gameover
+  shared_cards = [60, 36, 74]
+[#219] tryStraddle
+[#220] notify
+[#234] updateseat
+[#235] updateseat
+[#236] updateseat
+[#237] updateseat
+[#238] updateseat
+[#239] gamestart
+[#240] gamestart
+[#241] gamestart
+[#242] prompt
+[#246] moveturn
+[#252] moveturn
+[#255] moveturn
+[#257] updateseat
+[#258] moveturn
+[#259] gameover
+[#260] tryStraddle
+[#261] notify
+[#273] updateseat
+[#274] updateseat
+[#275] updateseat
+[#276] updateseat
+[#277] gamestart
+[#278] gamestart
+[#279] gamestart
+[#280] prompt
+[#285] moveturn
+[#317] moveturn
+[#320] moveturn
+[#328] roomInfoUpdate
+[#338] moveturn
+[#339] prompt
+[#340] updateseat
+[#344] updateseat
+[#363] moveturn
+[#365] moveturn
+  shared_cards = [57, 52, 38]
+[#367] prompt
+[#377] updateseat
+[#382] updateseat
+[#387] moveturn
+  shared_cards = [57, 52, 38]
+[#390] moveturn
+  shared_cards = [57, 52, 38]
+[#393] moveturn
+  shared_cards = [57, 52, 38, 45]
+[#394] prompt
+[#395] prompt
+[#400] moveturn
+  shared_cards = [57, 52, 38, 45]
+[#410] moveturn
+  shared_cards = [57, 52, 38, 45]
+[#413] moveturn
+  shared_cards = [57, 52, 38, 45, 61]
+[#414] prompt
+[#415] prompt
+[#416] clientPing
+[#422] moveturn
+  shared_cards = [57, 52, 38, 45, 61]
+[#424] moveturn
+  shared_cards = [57, 52, 38, 45, 61]
+[#427] moveturn
+  shared_cards = [57, 52, 38, 45, 61]
+[#428] gameover
+  shared_cards = [57, 52, 38, 45, 61]
+[#429] notify
+[#430] notify
+[#431] updateseat
+[#446] updateseat
+[#447] updateseat
+[#448] updateseat
+[#449] updateseat
+[#450] updateseat
+[#452] updateseat
+[#453] gamestart
+[#454] gamestart
+[#455] gamestart
+[#456] prompt
+[#460] moveturn
+[#472] moveturn
+[#479] moveturn
+[#499] moveturn
+[#500] moveturn
+[#505] notify
+[#506] notify
+[#507] gameover
+[#508] tryStraddle
+[#522] updateseat
+[#523] updateseat
+[#524] updateseat
+[#525] gamestart
+[#526] gamestart
+[#527] gamestart
+[#528] prompt
+[#533] moveturn
+[#537] moveturn
+[#555] moveturn
+[#557] moveturn
+[#571] moveturn
+[#574] moveturn
+  shared_cards = [75, 56, 21]
+[#575] prompt
+[#586] moveturn
+  shared_cards = [75, 56, 21]
+[#589] moveturn
+  shared_cards = [75, 56, 21]
+[#596] moveturn
+  shared_cards = [75, 56, 21]
+[#597] moveturn
+  shared_cards = [75, 56, 21]
+[#598] multitimes
+[#599] updateOutsCards
+[#602] multitimes
+[#605] multitimes
+[#606] moveturn
+  shared_cards = [75, 56, 21]
+[#609] moveturn
+  shared_cards = [75, 56, 21, 50]
+[#610] updateOutsCards
+[#612] moveturn
+  shared_cards = [75, 56, 21, 50]
+[#613] updateOutsCards
+[#617] moveturn
+  shared_cards = [75, 56, 21, 50, 39]
+[#618] updateOutsCards
+[#620] moveturn
+  shared_cards = [75, 56, 21, 50, 39]
+[#621] updateOutsCards
+[#623] moveturn
+  shared_cards = [75, 56, 21, 50, 39]
+[#626] gameover
+  shared_cards = [75, 56, 21, 50, 39]
+[#628] notify
+[#629] notify
+[#657] waitingList
+[#660] updateseat
+[#661] updateseat
+[#662] updateseat
+[#663] gamestart
+[#664] gamestart
+[#665] gamestart
+[#666] prompt
+[#673] moveturn
+[#675] say
+[#686] moveturn
+[#688] moveturn
+[#690] moveturn
+[#691] moveturn
+[#693] notify
+[#694] notify
+[#695] gameover
+[#708] say
+[#710] updateseat
+[#711] updateseat
+[#712] updateseat
+[#713] updateseat
+[#714] gamestart
+[#715] gamestart
+[#716] gamestart
+[#717] prompt
+[#718] moveturn
+[#719] clientPing
+[#732] moveturn
+[#739] moveturn
+[#744] moveturn
+[#753] moveturn
+[#754] moveturn
+  shared_cards = [46, 20, 50]
+[#760] moveturn
+  shared_cards = [46, 20, 50]
+[#771] moveturn
+  shared_cards = [46, 20, 50]
+[#775] moveturn
+  shared_cards = [46, 20, 50, 72]
+[#783] moveturn
+  shared_cards = [46, 20, 50, 72]
+[#790] moveturn
+  shared_cards = [46, 20, 50, 72]
+[#791] moveturn
+  shared_cards = [46, 20, 50, 72]
+[#793] notify
+[#794] gameover
+  shared_cards = [46, 20, 50, 72]
+[#803] updateseat
+[#805] updateseat
+[#806] updateseat
+[#807] updateseat
+[#808] updateseat
+[#809] gamestart
+[#810] gamestart
+[#811] gamestart
+[#815] moveturn
+[#821] moveturn
+[#823] moveturn
+[#826] moveturn
+[#833] moveturn
+[#835] moveturn
+[#837] moveturn
+[#842] moveturn
+  shared_cards = [41, 56, 54]
+[#853] moveturn
+  shared_cards = [41, 56, 54]
+[#864] moveturn
+  shared_cards = [41, 56, 54]
+[#865] moveturn
+  shared_cards = [41, 56, 54]
+[#872] notify
+[#873] notify
+[#874] gameover
+  shared_cards = [41, 56, 54]
+[#888] updateseat
+[#891] updateseat
+[#892] updateseat
+[#894] updateseat
+[#896] updateseat
+[#897] gamestart
+[#898] gamestart
+[#899] gamestart
+[#900] prompt
+[#903] moveturn
+[#907] moveturn
+[#914] moveturn
+[#916] moveturn
+[#929] moveturn
+[#931] moveturn
+[#932] prompt
+[#933] clientPing
+[#955] moveturn
+[#956] moveturn
+[#960] gameover
+[#961] notify
+[#962] notify
+[#977] updateseat
+[#978] updateseat
+[#980] updateseat
+[#981] updateseat
+[#982] updateseat
+[#984] updateseat
+[#985] gamestart
+[#986] gamestart
+[#987] gamestart
+[#988] prompt
+[#994] moveturn
+[#1001] moveturn
+[#1009] moveturn
+[#1020] moveturn
+[#1021] moveturn
+[#1022] clientPing
+[#1033] moveturn
+[#1035] moveturn
+[#1040] moveturn
+[#1043] moveturn
+  shared_cards = [26, 67, 42]
+[#1044] prompt
+[#1047] prompt
+[#1048] clientPing
+[#1052] moveturn
+  shared_cards = [26, 67, 42]
+[#1060] moveturn
+  shared_cards = [26, 67, 42]
+[#1061] moveturn
+  shared_cards = [26, 67, 42]
+[#1063] notify
+[#1064] notify
+[#1065] gameover
+  shared_cards = [26, 67, 42]
+[#1066] tryStraddle
+[#1076] updateseat
+[#1077] updateseat
+[#1079] updateseat
+[#1080] updateseat
+[#1081] updateseat
+[#1082] gamestart
+[#1083] gamestart
+[#1084] gamestart
+[#1089] moveturn
+[#1094] moveturn
+[#1098] moveturn
+[#1109] moveturn
+[#1111] moveturn
+[#1117] moveturn
+[#1125] moveturn
+  shared_cards = [45, 54, 75]
+[#1131] moveturn
+  shared_cards = [45, 54, 75]
+[#1143] moveturn
+  shared_cards = [45, 54, 75, 60]
+[#1149] moveturn
+  shared_cards = [45, 54, 75, 60]
+[#1158] moveturn
+  shared_cards = [45, 54, 75, 60]
+[#1159] moveturn
+  shared_cards = [45, 54, 75, 60, 53]
+[#1165] moveturn
+  shared_cards = [45, 54, 75, 60, 53]
+[#1181] moveturn
+  shared_cards = [45, 54, 75, 60, 53]
+[#1205] moveturn
+  shared_cards = [45, 54, 75, 60, 53]
+[#1207] gameover
+  shared_cards = [45, 54, 75, 60, 53]
+[#1208] notify
+[#1209] opencard
+[#1220] updateseat
+[#1222] updateseat
+[#1224] updateseat
+[#1225] updateseat
+[#1226] gamestart
+[#1227] gamestart
+[#1228] gamestart
+[#1229] prompt
+[#1232] moveturn
+[#1239] moveturn
+[#1243] moveturn
+[#1255] moveturn
+[#1264] moveturn
+[#1277] moveturn
+[#1282] moveturn
+[#1286] moveturn
+  shared_cards = [19, 70, 67]
+[#1305] moveturn
+  shared_cards = [19, 70, 67]
+[#1310] moveturn
+  shared_cards = [19, 70, 67]
+[#1311] moveturn
+  shared_cards = [19, 70, 67, 51]
+[#1317] moveturn
+  shared_cards = [19, 70, 67, 51]
+[#1325] moveturn
+  shared_cards = [19, 70, 67, 51]
+[#1327] moveturn
+  shared_cards = [19, 70, 67, 51, 54]
+[#1342] moveturn
+  shared_cards = [19, 70, 67, 51, 54]
+[#1348] moveturn
+  shared_cards = [19, 70, 67, 51, 54]
+[#1352] moveturn
+  shared_cards = [19, 70, 67, 51, 54]
+[#1353] gameover
+  shared_cards = [19, 70, 67, 51, 54]
+[#1356] notify
+[#1357] notify
+[#1374] updateseat
+[#1376] updateseat
+[#1378] updateseat
+[#1379] updateseat
+[#1381] updateseat
+[#1382] updateseat
+[#1383] gamestart
+[#1384] gamestart
+[#1385] gamestart
+[#1386] prompt
+[#1391] moveturn
+[#1394] moveturn
+[#1395] prompt
+[#1404] moveturn
+[#1408] moveturn
+[#1412] moveturn
+[#1416] moveturn
+[#1431] moveturn
+[#1432] moveturn
+  shared_cards = [53, 69, 59]
+[#1445] moveturn
+  shared_cards = [53, 69, 59]
+[#1459] moveturn
+  shared_cards = [53, 69, 59]
+[#1491] moveturn
+  shared_cards = [53, 69, 59]
+[#1493] moveturn
+  shared_cards = [53, 69, 59, 50]
+[#1518] moveturn
+  shared_cards = [53, 69, 59, 50]
+[#1523] moveturn
+  shared_cards = [53, 69, 59, 50]
+[#1527] moveturn
+  shared_cards = [53, 69, 59, 50]
+[#1529] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1542] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1550] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1559] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1561] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1568] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1569] moveturn
+  shared_cards = [53, 69, 59, 50, 41]
+[#1571] notify
+[#1572] notify
+[#1573] gameover
+  shared_cards = [53, 69, 59, 50, 41]
+[#1585] updateseat
+[#1586] updateseat
+[#1588] updateseat
+[#1589] updateseat
+[#1590] gamestart
+[#1591] gamestart
+[#1592] gamestart
+[#1595] moveturn
+[#1596] prompt
+[#1604] moveturn
+[#1612] moveturn
+[#1614] moveturn
+[#1621] moveturn
+[#1622] say
+[#1625] moveturn
+[#1629] moveturn
+[#1630] moveturn
+[#1631] gameover
+[#1632] tryStraddle
+[#1633] notify
+[#1634] notify
+[#1647] updateseat
+[#1648] updateseat
+[#1650] updateseat
+[#1651] updateseat
+[#1652] updateseat
+[#1654] updateseat
+[#1655] gamestart
+[#1656] gamestart
+[#1657] gamestart
+[#1660] moveturn
+[#1665] moveturn
+[#1680] moveturn
+[#1691] moveturn
+[#1696] moveturn
+[#1698] moveturn
+[#1699] clientPing
+[#1701] moveturn
+[#1702] moveturn
+[#1704] gameover
+[#1705] tryStraddle
+[#1706] notify
+[#1713] updateseat
+[#1715] updateseat
+[#1722] updateseat
+[#1723] gamestart
+[#1724] gamestart
+[#1725] gamestart
+[#1726] prompt
+[#1728] moveturn
+[#1737] moveturn
+[#1740] moveturn
+[#1764] moveturn
+[#1766] moveturn
+[#1771] moveturn
+[#1780] moveturn
+[#1782] moveturn
+  shared_cards = [55, 22, 21]
+[#1783] prompt
+[#1784] prompt
+[#1788] moveturn
+  shared_cards = [55, 22, 21]
+[#1801] moveturn
+  shared_cards = [55, 22, 21]
+[#1804] moveturn
+  shared_cards = [55, 22, 21]
+[#1805] moveturn
+  shared_cards = [55, 22, 21, 60]
+[#1806] prompt
+[#1807] prompt
+[#1808] clientPing
+[#1815] moveturn
+  shared_cards = [55, 22, 21, 60]
+[#1821] moveturn
+  shared_cards = [55, 22, 21, 60]
+[#1822] moveturn
+  shared_cards = [55, 22, 21, 60, 54]
+[#1823] prompt
+[#1824] clientPing
+[#1828] moveturn
+  shared_cards = [55, 22, 21, 60, 54]
+[#1850] moveturn
+  shared_cards = [55, 22, 21, 60, 54]
+[#1854] moveturn
+  shared_cards = [55, 22, 21, 60, 54]
+[#1856] gameover
+  shared_cards = [55, 22, 21, 60, 54]
+[#1857] notify
+[#1858] notify
+[#1877] updateseat
+[#1878] updateseat
+[#1880] updateseat
+[#1881] updateseat
+[#1882] updateseat
+[#1883] gamestart
+[#1884] gamestart
+[#1885] gamestart
+[#1886] prompt
+[#1892] moveturn
+[#1894] moveturn
+[#1903] moveturn
+[#1905] moveturn
+[#1906] clientPing
+[#1908] moveturn
+[#1916] moveturn
+[#1923] moveturn
+[#1924] moveturn
+  shared_cards = [24, 54, 78]
+[#1930] moveturn
+  shared_cards = [24, 54, 78]
+[#1932] moveturn
+  shared_cards = [24, 54, 78]
+[#1934] moveturn
+  shared_cards = [24, 54, 78, 20]
+[#1941] moveturn
+  shared_cards = [24, 54, 78, 20]
+[#1953] moveturn
+  shared_cards = [24, 54, 78, 20]
+[#1957] moveturn
+  shared_cards = [24, 54, 78, 20, 55]
+[#1960] moveturn
+  shared_cards = [24, 54, 78, 20, 55]
+[#1972] moveturn
+  shared_cards = [24, 54, 78, 20, 55]
+[#1975] moveturn
+  shared_cards = [24, 54, 78, 20, 55]
+[#1976] moveturn
+  shared_cards = [24, 54, 78, 20, 55]
+[#1980] notify
+[#1981] notify
+[#1993] updateseat
+[#1995] updateseat
+[#1996] updateseat
+[#1997] updateseat
+[#1999] updateseat
+[#2000] gamestart
+[#2001] gamestart
+[#2002] gamestart
+[#2003] prompt
+[#2007] moveturn
+[#2022] moveturn
+[#2032] moveturn
+[#2033] prompt
+[#2036] moveturn
+[#2063] moveturn
+[#2079] moveturn
+[#2086] moveturn
+[#2091] moveturn
+[#2093] moveturn
+  shared_cards = [72, 21, 52]
+[#2097] moveturn
+  shared_cards = [72, 21, 52]

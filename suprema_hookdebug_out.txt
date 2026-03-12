@@ -1,0 +1,4 @@
+[ok] Hooked getSpriteFrameByName @ 0x510ad82b
+[ok] Hooked SSL_read
+[ready] 
+Monitoring...

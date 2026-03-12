@@ -106,14 +106,25 @@ def process(parsed):
     gi = d.get('game_info', {})
     if isinstance(gi, dict) and gi:
         sc = gi.get('shared_cards', [])
-        if isinstance(sc, list) and sc:
+        if isinstance(sc, list):
             decoded = decode_list(sc)
             if decoded:
-                state['board'] = decoded
+                if decoded != state['board']:
+                    state['board'] = decoded
+                    state['dirty'] = True
+            elif state['board']:
+                # New hand - board cleared
+                state['board'] = []
+                state['opponents'] = {}
+                state['last_result'] = ''
                 state['dirty'] = True
         gc = gi.get('game_counter', '')
-        if gc:
+        if gc and str(gc) != state['hand_num']:
             state['hand_num'] = str(gc)
+            state['my_cards'] = []
+            state['board'] = []
+            state['opponents'] = {}
+            state['dirty'] = True
         pot = gi.get('pot', '')
         if pot:
             state['pot'] = str(pot)

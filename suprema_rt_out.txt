@@ -1,0 +1,16 @@
+PID: 100628
+Connecting to SupremaPoker (PID 100628)...
+HOOK OK!
+Monitoring... play a hand!
+==================================================
+    SUPREMA POKER - REAL-TIME DECODER
+==================================================
+
+  YOUR CARDS:  --
+
+  BOARD:       --
+
+
+  [] msgs=0
+
+  Ctrl+C to stop
