@@ -35,7 +35,7 @@
     "desktop-shortcut": 90,
     "feedback-command": 90
   },
-  "promptQueueUseCount": 276,
+  "promptQueueUseCount": 280,
   "cachedGrowthBookFeatures": {
     "tengu_tst_kx7": false,
     "tengu_plan_mode_interview_phase": false,
@@ -70,7 +70,7 @@
     "tengu_amber_quartz": true,
     "tengu_thinkback": false,
     "tengu_chomp_inflection": false,
-    "tengu_marble_sandcastle": true,
+    "tengu_marble_sandcastle": false,
     "tengu_copper_lantern": false,
     "tengu_marble_lantern_disabled": false,
     "tengu_pebble_leaf_prune": false,
