@@ -118,7 +118,13 @@ def show():
     print("=" * 56, flush=True)
     hand = state['hand_num']
     street = state['street']
-    print("  Hand #%-6s  %s" % (hand or '?', street), flush=True)
+    bb_info = "BB=%s" % BB_SIZE if BB_SIZE > 0 else "BB=?"
+    sng_info = ""
+    if state['blinds_level']:
+        sng_info = " | Lvl %d  Next BB=%s  Avg=%s  Players=%d" % (
+            state['blinds_level'], fmt_bb(state['next_blinds']),
+            fmt_bb(state['avg_stack']), state['player_count'])
+    print("  Hand #%-6s  %s  [%s%s]" % (hand or '?', street, bb_info, sng_info), flush=True)
     print("-" * 56, flush=True)
 
     my = '  '.join(state['my_cards']) if state['my_cards'] else '--'
