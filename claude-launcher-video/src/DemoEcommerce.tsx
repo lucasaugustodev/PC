@@ -74,7 +74,7 @@ const ProductHero: React.FC = () => {
             </div>
 
             <div style={{ fontSize: 20, color: gray, marginTop: 20, lineHeight: 1.7 }}>
-              Cancelamento de ruido ativo | 48h bateria<br />
+              Cancelamento de ruído ativo | 48h bateria<br />
               Bluetooth 5.3 | IPX7 a prova d'agua
             </div>
           </div>
