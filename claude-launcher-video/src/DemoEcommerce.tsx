@@ -110,7 +110,7 @@ const SocialScene: React.FC = () => {
   const features = [
     { title: "ANC Ativo", desc: "98% cancelamento", color: neon },
     { title: "48h Bateria", desc: "Carga rapida 10min=3h", color: purple },
-    { title: "Bluetooth 5.3", desc: "Conexao 15m", color: pink },
+    { title: "Bluetooth 5.3", desc: "Conexão 15m", color: pink },
     { title: "IPX7", desc: "Resiste chuva e suor", color: neon },
   ];
 
