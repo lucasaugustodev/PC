@@ -1,4 +1,4 @@
-"""Real-time card decoder terminal for Suprema Poker."""
+"""Real-time card decoder + betting tracker for Suprema Poker."""
 import frida, json, time, sys, os, subprocess, threading
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
@@ -11,6 +11,18 @@ except ImportError:
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
 MY_UID = 588900
+
+# Role code -> action name
+ROLES = {
+    0: '', 2: '', 3: '',           # idle/reset/dealer
+    13: 'DEALER', 30: 'CALL', 32: 'CALL',
+    33: 'CALL', 40: 'FOLD', 42: 'CHECK',
+    43: 'CHECK', 50: 'RAISE', 63: 'BB',
+    70: 'BET', 72: 'RAISE', 73: 'RAISE',
+    82: 'SB', 93: 'BB', 100: 'FOLD',
+}
+
+STREETS = {3: 'PREFLOP', 4: 'FLOP', 5: 'TURN', 6: 'RIVER', 7: 'SHOWDOWN'}
 
 def decode(cid):
     if not cid or cid == 0:
@@ -38,10 +50,25 @@ def find_pid():
 pid = find_pid()
 if not pid:
     print("SupremaPoker.exe nao encontrado!")
-    input("Press Enter to exit...")
+    input("Press Enter...")
     sys.exit(1)
 
 print("PID: %d" % pid, flush=True)
+
+BB_SIZE = 0.04  # auto-updated when BB post detected
+
+def bb(val):
+    """Convert internal value to BB count."""
+    if BB_SIZE <= 0:
+        return val
+    return val / BB_SIZE
+
+def fmt_bb(val):
+    """Format value as BB string."""
+    b = bb(val)
+    if b == int(b):
+        return "%dBB" % int(b)
+    return "%.1fBB" % b
 
 state = {
     'my_cards': [],
@@ -49,51 +76,90 @@ state = {
     'opponents': {},
     'last_result': '',
     'event': '',
-    'pot': '',
+    'pot': 0,
     'hand_num': '',
+    'street': '',
+    'max_bet': 0,
+    'last_raise': 0,
+    'sidepots': [],
+    'players': {},      # uid -> {name, chips, chips_round, role, action, stack}
+    'actions': [],       # list of action strings for current hand
+    'acting_seat': -1,
     'msg_count': 0,
     'dirty': True,
 }
 
 def show():
     os.system('cls')
-    print("==================================================", flush=True)
-    print("    SUPREMA POKER - REAL-TIME DECODER", flush=True)
-    print("==================================================", flush=True)
-    print(flush=True)
+    print("=" * 56, flush=True)
+    print("     SUPREMA POKER - REAL-TIME DECODER", flush=True)
+    print("=" * 56, flush=True)
+    hand = state['hand_num']
+    street = state['street']
+    print("  Hand #%-6s  %s" % (hand or '?', street), flush=True)
+    print("-" * 56, flush=True)
+
     my = '  '.join(state['my_cards']) if state['my_cards'] else '--'
     print("  YOUR CARDS:  %s" % my, flush=True)
-    print(flush=True)
+
     bd = '  '.join(state['board']) if state['board'] else '--'
     print("  BOARD:       %s" % bd, flush=True)
     print(flush=True)
+
+    # Pot info
+    pot = state['pot']
+    print("  POT: %-8s  max_bet: %-8s  last_raise: %s" % (
+        fmt_bb(pot), fmt_bb(state['max_bet']), fmt_bb(state['last_raise'])), flush=True)
+    if state['sidepots']:
+        print("  SIDEPOTS: %s" % [fmt_bb(s) for s in state['sidepots']], flush=True)
+    print(flush=True)
+
+    # Players table
+    if state['players']:
+        print("  %-10s %-8s %-8s %-8s %-8s %s" % (
+            'PLAYER', 'STACK', 'BET', 'ROUND', 'ACTION', 'CARDS'), flush=True)
+        print("  " + "-" * 54, flush=True)
+        for uid, p in sorted(state['players'].items(), key=lambda x: x[1].get('seat', 0)):
+            marker = '>> ' if str(uid) == str(MY_UID) else '   '
+            name = str(uid)[-6:]
+            stack = p.get('stack', 0)
+            chips = p.get('chips', 0)
+            cr = p.get('chips_round', 0)
+            action = p.get('action', '')
+            cards = p.get('cards', '')
+            print("%s%-10s %-8s %-8s %-8s %-8s %s" % (
+                marker, name, fmt_bb(stack), fmt_bb(chips), fmt_bb(cr), action, cards), flush=True)
+        print(flush=True)
+
+    # Recent actions
+    if state['actions']:
+        print("  ACTIONS:", flush=True)
+        for a in state['actions'][-8:]:
+            print("    %s" % a, flush=True)
+        print(flush=True)
+
+    # Opponents cards (showdown)
     if state['opponents']:
-        print("  OPPONENTS:", flush=True)
+        print("  SHOWDOWN:", flush=True)
         for name, cards in state['opponents'].items():
             c = '  '.join(cards) if cards else '??'
             print("    %s: %s" % (name, c), flush=True)
         print(flush=True)
-    if state['pot']:
-        print("  POT: %s" % state['pot'], flush=True)
-    if state['hand_num']:
-        print("  HAND #%s" % state['hand_num'], flush=True)
-    print(flush=True)
+
     if state['last_result']:
-        print("  LAST RESULT: %s" % state['last_result'], flush=True)
+        print("  RESULT: %s" % state['last_result'], flush=True)
         print(flush=True)
+
     print("  [%s] msgs=%d" % (state['event'], state['msg_count']), flush=True)
-    print(flush=True)
     print("  Ctrl+C to stop", flush=True)
     state['dirty'] = False
 
 def process(parsed):
-    """parsed = msgpack result: {'route':'onMsg', 'event':'gameinfo', 'data':{...}}"""
     if not isinstance(parsed, dict):
         return
 
     state['msg_count'] += 1
 
-    # Structure: {route, event, data} or {code, route, event, data/apiData}
     event = parsed.get('event', '')
     d = parsed.get('data', parsed.get('apiData', {}))
     if not isinstance(d, dict):
@@ -102,7 +168,7 @@ def process(parsed):
     if event:
         state['event'] = str(event)
 
-    # gameinfo -> d has game_info, handCards, etc
+    # game_info
     gi = d.get('game_info', {})
     if isinstance(gi, dict) and gi:
         sc = gi.get('shared_cards', [])
@@ -113,48 +179,113 @@ def process(parsed):
                     state['board'] = decoded
                     state['dirty'] = True
             elif state['board']:
-                # New hand - board cleared
                 state['board'] = []
                 state['opponents'] = {}
                 state['last_result'] = ''
                 state['dirty'] = True
+
         gc = gi.get('game_counter', '')
         if gc and str(gc) != state['hand_num']:
             state['hand_num'] = str(gc)
             state['my_cards'] = []
             state['board'] = []
             state['opponents'] = {}
+            state['actions'] = []
+            state['players'] = {}
+            state['last_result'] = ''
             state['dirty'] = True
-        pot = gi.get('pot', '')
-        if pot:
-            state['pot'] = str(pot)
 
-    # Cards come from game_seat[MY_UID].cards in moveturn/prompt events
+        pot = gi.get('pot', None)
+        if pot is not None:
+            state['pot'] = float(pot)
+
+        st = gi.get('state', None)
+        if st is not None:
+            state['street'] = STREETS.get(st, str(st))
+
+    # game_status
+    gst = d.get('game_status', {})
+    if isinstance(gst, dict) and gst:
+        state['max_bet'] = float(gst.get('max_chip', 0))
+        state['last_raise'] = float(gst.get('last_raise', 0))
+        sp = gst.get('sidepots', [])
+        if sp:
+            state['sidepots'] = sp
+
+    # game_seat -> player info + cards + actions
     gs = d.get('game_seat', {})
-    if isinstance(gs, dict):
-        my_seat = gs.get(str(MY_UID), gs.get(MY_UID, {}))
-        if isinstance(my_seat, dict):
-            cards = my_seat.get('cards', None)
-            if cards and isinstance(cards, list) and any(c and c != 0 for c in cards):
-                decoded = decode_list(cards)
-                if decoded and decoded != state['my_cards']:
+    if isinstance(gs, dict) and gs:
+        for uid_str, sd in gs.items():
+            if not isinstance(sd, dict):
+                continue
+            uid = sd.get('uid', uid_str)
+            uid_s = str(uid)
+            role = sd.get('role', 0)
+            chips = sd.get('chips', 0)
+            cr = sd.get('chips_round', 0)
+            stack = sd.get('coins', 0)
+            seat = sd.get('seat', 0)
+            action_name = ROLES.get(role, 'r%d' % role)
+
+            # Detect action changes
+            prev = state['players'].get(uid_s, {})
+            prev_chips = prev.get('chips', 0)
+            prev_role = prev.get('role_code', -1)
+
+            if role != prev_role and action_name:
+                amount = chips - prev_chips if chips > prev_chips else 0
+                if action_name in ('BET', 'RAISE') and amount > 0:
+                    action_str = "%s %s %s (total %s)" % (uid_s[-6:], action_name, fmt_bb(amount), fmt_bb(chips))
+                elif action_name == 'CALL':
+                    action_str = "%s CALL %s" % (uid_s[-6:], fmt_bb(chips))
+                elif action_name in ('FOLD', 'CHECK', 'SB', 'BB'):
+                    action_str = "%s %s" % (uid_s[-6:], action_name)
+                    if action_name in ('SB', 'BB'):
+                        action_str += " %s" % fmt_bb(chips)
+                else:
+                    action_str = ''
+
+                if action_str:
+                    state['actions'].append(action_str)
+                    state['dirty'] = True
+
+            # Cards
+            cards_str = ''
+            cards_raw = sd.get('cards', None)
+            if cards_raw and isinstance(cards_raw, list) and any(c and c != 0 for c in cards_raw):
+                decoded = decode_list(cards_raw)
+                cards_str = ' '.join(decoded)
+                if uid_s == str(MY_UID) and decoded != state['my_cards']:
                     state['my_cards'] = decoded
                     state['dirty'] = True
 
-    # handCards fallback
-    hc = d.get('handCards', [])
-    if hc and any(c != 0 for c in hc if c):
-        state['my_cards'] = decode_list(hc)
-        state['board'] = []
-        state['opponents'] = {}
-        state['last_result'] = ''
-        state['dirty'] = True
+            # Pattern (shown in prompt)
+            pattern = sd.get('pattern', '')
 
-    # gameover -> d has game_result
+            state['players'][uid_s] = {
+                'seat': seat,
+                'stack': stack,
+                'chips': chips,
+                'chips_round': cr,
+                'action': action_name,
+                'role_code': role,
+                'cards': cards_str,
+                'pattern': pattern,
+            }
+            state['dirty'] = True
+
+    # countdown -> who's acting
+    cd = d.get('countdown', {})
+    if isinstance(cd, dict):
+        state['acting_seat'] = cd.get('seat', -1)
+
+    # gameover
     gr = d.get('game_result', {})
     if isinstance(gr, dict) and gr:
         patterns = gr.get('patterns', [])
         lightcards = gr.get('lightcards', [])
+        allpots = gr.get('allpots', [])
+
         if patterns and lightcards:
             pat = patterns[0] if patterns else ''
             lc = lightcards[0] if lightcards else []
@@ -169,6 +300,8 @@ def process(parsed):
                     continue
                 uid = sdata.get('uid', uid_str)
                 cards = sdata.get('cards', [])
+                prize = sdata.get('prize', [])
+                diff = sdata.get('chipsDiff', [])
                 if cards and any(c != 0 for c in cards if c):
                     decoded = decode_list(cards)
                     if str(uid) == str(MY_UID):
@@ -177,32 +310,23 @@ def process(parsed):
                         state['opponents'][str(uid)] = decoded
                     state['dirty'] = True
 
-    # shared_cards directly in d
-    if 'shared_cards' in d:
-        sc = d['shared_cards']
-        if isinstance(sc, list) and sc:
-            decoded = decode_list(sc)
-            if decoded:
-                state['board'] = decoded
-                state['dirty'] = True
+                # Log result
+                if prize and any(p > 0 for p in prize):
+                    action_str = "%s WON %s" % (str(uid)[-6:], fmt_bb(sum(prize)))
+                    state['actions'].append(action_str)
+                elif diff and any(d < 0 for d in diff):
+                    action_str = "%s LOST %s" % (str(uid)[-6:], fmt_bb(abs(sum(diff))))
+                    state['actions'].append(action_str)
 
-    # Some events nest data inside d.msg
-    msg2 = d.get('msg', None)
-    if isinstance(msg2, dict):
-        for key in ['handCards', 'cards']:
-            val = msg2.get(key, [])
-            if val and any(c != 0 for c in val if c):
-                decoded = decode_list(val)
-                if len(decoded) <= 4:
-                    state['my_cards'] = decoded
-                    state['board'] = []
-                    state['opponents'] = {}
-                    state['dirty'] = True
-        for key in ['publicCards', 'boardCards', 'shared_cards']:
-            val = msg2.get(key, [])
-            if val and any(c != 0 for c in val if c):
-                state['board'] = decode_list(val)
-                state['dirty'] = True
+        if allpots:
+            state['actions'].append("POTS: %s" % [fmt_bb(p) for p in allpots])
+        state['dirty'] = True
+
+    # handCards fallback
+    hc = d.get('handCards', [])
+    if hc and any(c != 0 for c in hc if c):
+        state['my_cards'] = decode_list(hc)
+        state['dirty'] = True
 
 buf = b''
 lock = threading.Lock()
@@ -223,8 +347,7 @@ def on_msg(msg, data):
         return
 
     with lock:
-        d = bytes(data)
-        buf += d
+        buf += bytes(data)
         parse_buf()
 
 def parse_buf():
@@ -238,21 +361,18 @@ def parse_buf():
             buf = buf[idx:]
             continue
 
-        b1 = buf[1]
-        plen_raw = b1 & 0x7F
+        b1 = buf[1] & 0x7F
         ws_off = 2
-        if plen_raw == 126:
-            if len(buf) < 4:
-                break
+        if b1 == 126:
+            if len(buf) < 4: break
             ws_len = (buf[2] << 8) | buf[3]
             ws_off = 4
-        elif plen_raw == 127:
-            if len(buf) < 10:
-                break
+        elif b1 == 127:
+            if len(buf) < 10: break
             ws_len = int.from_bytes(buf[2:10], 'big')
             ws_off = 10
         else:
-            ws_len = plen_raw
+            ws_len = b1
 
         total = ws_off + ws_len
         if len(buf) < total:
@@ -263,20 +383,15 @@ def parse_buf():
 
         if len(ws_payload) < 5:
             continue
-        ptype = ws_payload[0]
-        if ptype != 4:
+        if ws_payload[0] != 4:
             continue
         plen2 = (ws_payload[1] << 16) | (ws_payload[2] << 8) | ws_payload[3]
         pbody = ws_payload[4:4+plen2]
         if len(pbody) < 3:
             continue
 
-        msg_type = pbody[0]
-        off = 1
-        rlen = pbody[off]
-        off += 1
-        route = pbody[off:off+rlen].decode('ascii', 'replace')
-        off += rlen
+        rlen = pbody[1]
+        off = 2 + rlen
 
         try:
             parsed = msgpack.unpackb(pbody[off:], raw=False)

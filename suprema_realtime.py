@@ -1,4 +1,4 @@
-"""Real-time card decoder + betting tracker for Suprema Poker."""
+"""Real-time card decoder + betting tracker + GTO advisor for Suprema Poker."""
 import frida, json, time, sys, os, subprocess, threading
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
@@ -7,6 +7,14 @@ try:
 except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'msgpack'])
     import msgpack
+
+try:
+    from groq import Groq
+except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'groq'])
+    from groq import Groq
+
+groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY', ''))
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
