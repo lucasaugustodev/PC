@@ -282,6 +282,12 @@ def process(parsed):
     # game_info
     gi = d.get('game_info', {})
     if isinstance(gi, dict) and gi:
+        # Auto-detect BB size from blinds field (works for cash, SNG, MTT)
+        blinds_val = gi.get('blinds', 0)
+        if blinds_val and float(blinds_val) > 0:
+            global BB_SIZE
+            BB_SIZE = float(blinds_val)
+
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list):
             decoded = decode_list(sc)
