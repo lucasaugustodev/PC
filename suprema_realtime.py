@@ -302,6 +302,13 @@ def ask_gto():
         advice = resp.content[0].text.strip()
         state['gto_advice'] = advice
         state['dirty'] = True
+
+        # Auto-click fold if GTO recommends it
+        if AUTO_FOLD and 'fold' in advice.lower().split('action:')[-1][:20].lower():
+            time.sleep(0.3)  # small delay for display update
+            auto_fold()
+            state['gto_advice'] = advice + ' [AUTO-FOLDED]'
+            state['dirty'] = True
     except Exception as e:
         state['gto_advice'] = 'Error: %s' % str(e)[:80]
         state['dirty'] = True
