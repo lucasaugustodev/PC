@@ -9933,3 +9933,488 @@ Attaching to PID 67336...
 [16:19:31.797] <-- gameinfo (push)
   POT: 0.16
   hand #18 type=1 dealer=seat 0
+[16:19:35.062] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:35.532] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:35.850] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:36.286] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343174971
+  seqno: 18
+[16:19:36.867] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:37.546] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:38.010] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:38.748] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:38.873] <-- gameinfo (push)
+  POT: 0.16
+  hand #18 type=1 dealer=seat 0
+[16:19:39.260] --> room.roomHandler.clientMessage (req)
+  123
+[16:19:40.121] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 0.1, 'last_raise': 0.06, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43036671
+[16:19:40.163] <-- *** MOVETURN *** (push)
+  POT: 0.46
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=1.22 <<ME
+  countdown: seat 1 ?s
+[16:19:40.167] <-- gameinfo (push)
+  POT: 0.46
+  hand #18 type=1 dealer=seat 0
+[16:19:40.357] <-- *** COUNTDOWN *** (push)
+  countdown: seat 1 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343179041
+  seqno: 18
+[16:19:40.446] <-- *** MOVETURN *** (push)
+  POT: 0.46
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=1.22 <<ME
+  countdown: seat 2 ?s
+[16:19:40.557] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343179241
+  seqno: 18
+[16:19:40.934] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:19:41.208] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:19:41.840] <-- *** MOVETURN *** (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=1.22 <<ME
+  countdown: seat 5 ?s
+[16:19:41.963] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343180642
+  seqno: 18
+[16:19:42.742] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:43.039] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:43.724] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:44.454] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:45.218] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:46.464] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:46.966] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343185649
+  seqno: 18
+[16:19:47.114] <-- gameinfo (push)
+  POT: 0.72
+  hand #18 type=1 dealer=seat 0
+[16:19:47.869] <-- *** MOVETURN *** (push)
+  POT: 1.82
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=1.22 <<ME
+  countdown: seat 0 ?s
+[16:19:47.873] <-- *** PROMPT *** (push)
+  OPTIONS: fold=True | call=True
+  roomID: 14625_43036671#113
+  ts: 1773343186551
+  seqno: 18
+[16:19:47.877] <-- clientPing (push)
+[16:19:47.897] --> room.roomHandler.clientMessage (req)
+  123
+[16:19:47.969] <-- *** COUNTDOWN *** (push)
+  countdown: seat 0 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343186651
+  seqno: 18
+[16:19:48.068] <-- ? (resp)
+[16:19:48.575] <-- gameinfo (push)
+  POT: 1.82
+  hand #18 type=1 dealer=seat 0
+[16:19:48.769] <-- gameinfo (push)
+  POT: 1.82
+  hand #18 type=1 dealer=seat 0
+[16:19:48.882] <-- gameinfo (push)
+  POT: 1.82
+  hand #18 type=1 dealer=seat 0
+[16:19:49.401] --> room.roomHandler.clientMessage (req)
+  123
+[16:19:49.505] <-- gameinfo (push)
+  POT: 1.82
+  hand #18 type=1 dealer=seat 0
+[16:19:49.573] <-- *** PROMPT *** (resp)
+  game_status: {'max_chip': 1.52, 'last_raise': 0.9, 'sidepots': [], 'allpass': False, 'preop': []}
+  roomID: 14625_43036671
+[16:19:49.615] <-- *** MOVETURN *** (push)
+  POT: 3.04
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=0 <<ME
+  countdown: seat 2 ?s
+[16:19:49.721] <-- gameinfo (push)
+  POT: 3.04
+  hand #18 type=1 dealer=seat 0
+[16:19:49.770] <-- *** COUNTDOWN *** (push)
+  countdown: seat 2 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343188454
+  seqno: 18
+[16:19:49.896] <-- *** MOVETURN *** (push)
+  POT: 3.04
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 --- coins=0 <<ME
+  countdown: seat 5 ?s
+[16:19:50.005] <-- *** COUNTDOWN *** (push)
+  countdown: seat 5 ?s
+  protect: 0
+  roomID: 14625_43036671
+  ts: 1773343188654
+  seqno: 18
+[16:19:50.795] <-- gameinfo (push)
+  POT: 3.04
+  hand #18 type=1 dealer=seat 0
+[16:19:51.121] <-- *** MOVETURN *** (push)
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat 0 ?s
+[16:19:51.125] <-- multitimes (push)
+[16:19:52.740] <-- gameinfo (push)
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+[16:19:52.762] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:19:52.766] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:19:53.457] <-- multitimes (push)
+[16:19:54.456] <-- *** MOVETURN *** (push)
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:19:55.165] <-- gameinfo (push)
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+[16:19:55.462] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td (raw [42, 41, 21])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:19:55.561] <-- updateOutsCards (push)
+[16:19:56.343] <-- gameinfo (push)
+  BOARD: 5s 4s Td (raw [42, 41, 21])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+[16:19:57.518] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td (raw [42, 41, 21])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:19:57.661] <-- updateOutsCards (push)
+[16:19:57.946] <-- gameinfo (push)
+  BOARD: 5s 4s Td (raw [42, 41, 21])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+[16:19:58.563] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td ?52 (raw [42, 41, 21, 52])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:19:58.604] <-- updateOutsCards (push)
+[16:19:59.605] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td ?52 (raw [42, 41, 21, 52])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:19:59.653] <-- updateOutsCards (push)
+[16:20:00.608] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td ?52 Jd (raw [42, 41, 21, 52, 22])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:20:00.612] <-- *** PROMPT *** (push)
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+[16:20:00.647] <-- updateOutsCards (push)
+[16:20:01.648] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td ?52 Jd (raw [42, 41, 21, 52, 22])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:20:01.690] <-- updateOutsCards (push)
+[16:20:02.874] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:04.167] <-- *** MOVETURN *** (push)
+  BOARD: 5s 4s Td ?52 Jd (raw [42, 41, 21, 52, 22])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+    seat 0: uid=588900 ?62 6s coins=0 <<ME
+    seat 5: uid=1629778 ?77 6h coins=2.32
+  countdown: seat -1 ?s
+[16:20:04.273] <-- updategamer (push)
+[16:20:04.325] <-- gameinfo (push)
+  BOARD: 5s 4s Td ?52 Jd (raw [42, 41, 21, 52, 22])
+  POT: 3.36
+  hand #18 type=1 dealer=seat 0
+[16:20:04.369] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[16:20:04.447] <-- updateseat (push)
+[16:20:04.501] <-- gameinfo (push)
+  hand #18 type=1 dealer=seat 0
+[16:20:05.182] <-- gameinfo (push)
+  hand #18 type=1 dealer=seat 0
+[16:20:06.074] <-- gameinfo (push)
+  hand #18 type=1 dealer=seat 0
+[16:20:07.537] <-- gameinfo (push)
+  hand #18 type=1 dealer=seat 0
+[16:20:08.366] --> room.roomHandler.clientMessage (req)
+  123
+[16:20:08.378] <-- gameinfo (push)
+  hand #18 type=1 dealer=seat 0
+[16:20:08.578] <-- updateseat (push)
+[16:20:08.582] <-- *** PROMPT *** (resp)
+  roomID: 14625_43036671
+[16:20:08.699] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify'}
+[16:20:08.733] --> apiPlayer.playerHandler.getPrefsData (req)
+  123
+[16:20:08.740] --> apiPlayer.playerHandler.getLoginInfo (req)
+  123
+[16:20:08.747] --> apiClub.clubHandler.getLobbyCoins (req)
+  123
+[16:20:08.754] --> apiClub.clubHandler.getLobbyCoins (req)
+  123
+[16:20:08.761] --> apiClub.clubHandler.getLobbyLists (req)
+  123
+[16:20:08.793] --> apiClub.clubHandler.info (req)
+  123
+[16:20:08.903] <-- apiPlayer.playerHandler.getPrefsData (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getPrefsData'}
+[16:20:08.925] <-- apiClub.clubHandler.getLobbyCoins (resp)
+  {'event': 'apiClub.clubHandler.getLobbyCoins', 'code': 0}
+[16:20:08.929] <-- apiClub.clubHandler.getLobbyCoins (resp)
+  {'event': 'apiClub.clubHandler.getLobbyCoins', 'code': 0}
+[16:20:08.973] <-- apiClub.clubHandler.info (resp)
+  {'event': 'apiClub.clubHandler.info', 'code': 0}
+[16:20:08.986] --> apiClubMatch.clubMatchHandler.match (req)
+  123
+[16:20:08.993] --> apiClub.clubHandler.jackpot (req)
+  123
+[16:20:09.161] <-- ? (resp)
+  18
+[16:20:09.169] --> apiClubMatch.clubMatchHandler.matchGU (req)
+  123
+[16:20:09.171] <-- apiClub.clubHandler.jackpot (resp)
+  {'code': 0, 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:09.185] --> apiClubMatch.clubMatchHandler.grandUnionExtra (req)
+  123
+[16:20:09.342] --> apiPlayer.playerHandler.getApiDataAchievementList (req)
+  123
+[16:20:09.516] <-- apiPlayer.playerHandler.getApiDataAchievementList (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getApiDataAchievementList', 'apiData': {'achievementList': []}}
+[16:20:10.807] --> apiPlayer.playerHandler.getReddotOfNoticeUnread (req)
+  123
+[16:20:10.982] <-- apiPlayer.playerHandler.getReddotOfNoticeUnread (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getReddotOfNoticeUnread', 'apiData': {'reddotNotice': 1, 'reddotAchievement': 0, 'reddotReward': 0}}
+[16:20:12.867] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:22.953] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:22.957] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:34.515] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:20:34.519] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:21:59.204] --> handshake
+  {'sys': {'type': 'js-websocket', 'version': '0.0.1', 'rsa': {}, 'protoVersion': 'hE3JD+wvbqeTg+VcSE4mkw=='}}
+[16:21:59.336] <-- handshake
+  {'code': 200, 'sys': {'heartbeat': 2, 'useProto': True}}
+[16:21:59.351] --> connector.entryHandler.connect (req)
+  123
+[16:22:00.659] --> apiPlayer.playerHandler.getClubsAddonInfo (req)
+  123
+[16:22:00.665] --> apiPlayer.playerHandler.getLoginInfo (req)
+  123
+[16:22:00.949] <-- apiPlayer.playerHandler.getClubsAddonInfo (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getClubsAddonInfo'}
+[16:22:00.953] <-- apiPlayer.playerHandler.getLoginInfo (resp)
+  {'code': 0, 'event': 'apiPlayer.playerHandler.getLoginInfo'}
+[16:22:09.097] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:09.374] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:19.132] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:19.136] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:29.860] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:29.964] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:40.207] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:40.671] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:50.322] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:22:50.326] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:00.408] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:00.412] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:10.577] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:10.580] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:20.885] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:20.889] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:31.253] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:31.257] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:41.628] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:41.632] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:51.907] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:23:51.968] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:03.250] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:14.600] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:14.604] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:25.445] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:25.492] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:36.455] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:36.459] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:46.587] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:46.591] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:57.362] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:24:57.770] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:07.399] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:07.448] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:19.599] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:19.603] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:31.527] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:41.642] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:41.875] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:50.662] <-- notify (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'notify', 'apiData': {'roomList': [], 'roomListType': {}}}
+[16:25:51.919] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:25:51.961] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:02.291] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:02.295] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:12.782] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:15.436] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:22.854] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:22.921] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:33.168] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:33.171] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:44.689] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:47.509] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:55.466] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:26:55.518] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:06.815] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:06.858] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:16.847] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:26.868] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:26.872] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:37.053] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:37.057] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:47.084] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:47.099] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:57.250] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:27:57.315] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:07.515] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:18.397] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
+[16:28:18.401] <-- apiClub.clubHandler.jackpot (push)
+  {'code': 0, 'route': 'onMsg', 'event': 'apiClub.clubHandler.jackpot'}
