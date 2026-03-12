@@ -1,4 +1,4 @@
-"""Real-time card decoder + betting tracker for Suprema Poker."""
+"""Real-time card decoder + betting tracker + GTO advisor for Suprema Poker."""
 import frida, json, time, sys, os, subprocess, threading
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
@@ -7,6 +7,20 @@ try:
 except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'msgpack'])
     import msgpack
+
+try:
+    from groq import Groq
+except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'groq'])
+    from groq import Groq
+
+def _load_groq_key():
+    for p in [os.path.expanduser('~/.groq_key'), os.path.join(os.path.dirname(__file__), '.groq_key')]:
+        if os.path.exists(p):
+            return open(p).read().strip()
+    return os.environ.get('GROQ_API_KEY', '')
+
+groq_client = Groq(api_key=_load_groq_key())
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
@@ -86,6 +100,7 @@ state = {
     'actions': [],       # list of action strings for current hand
     'acting_seat': -1,
     'msg_count': 0,
+    'gto_advice': '',
     'dirty': True,
 }
 
@@ -150,9 +165,85 @@ def show():
         print("  RESULT: %s" % state['last_result'], flush=True)
         print(flush=True)
 
+    # GTO recommendation
+    if state['gto_advice']:
+        print("  >>> GTO: %s <<<" % state['gto_advice'], flush=True)
+        print(flush=True)
+
     print("  [%s] msgs=%d" % (state['event'], state['msg_count']), flush=True)
     print("  Ctrl+C to stop", flush=True)
     state['dirty'] = False
+
+def build_gto_prompt():
+    """Build poker situation description for LLM."""
+    cards = ' '.join(state['my_cards']) if state['my_cards'] else '??'
+    board = ' '.join(state['board']) if state['board'] else 'none'
+    street = state['street'] or '?'
+    pot = fmt_bb(state['pot'])
+    max_bet = fmt_bb(state['max_bet'])
+
+    # Build player info
+    num_players = len([p for p in state['players'].values() if p.get('action') not in ('FOLD', '')])
+    my_stack = 0
+    my_pos = ''
+    actions_history = []
+    for uid, p in sorted(state['players'].items(), key=lambda x: x[1].get('seat', 0)):
+        action = p.get('action', '')
+        if action:
+            stack_bb = fmt_bb(p.get('stack', 0))
+            bet_bb = fmt_bb(p.get('chips', 0))
+            if str(uid) == str(MY_UID):
+                my_stack = p.get('stack', 0)
+            elif action not in ('', 'FOLD'):
+                actions_history.append("%s %s" % (action, bet_bb))
+
+    prompt = (
+        "6max cash game. Effective stacks ~%s. "
+        "Hero has %s. Board: %s. Street: %s. "
+        "Pot: %s. Max bet: %s. "
+        "Villains still in: %d. Actions before hero: %s. "
+        "What is the GTO play for hero? Give ACTION, SIZING in BB, and brief REASON in 1-2 lines."
+    ) % (fmt_bb(my_stack), cards, board, street, pot, max_bet,
+         num_players - 1, ', '.join(actions_history) if actions_history else 'none')
+    return prompt
+
+def ask_gto():
+    """Call Groq in background thread."""
+    try:
+        prompt = build_gto_prompt()
+        resp = groq_client.chat.completions.create(
+            model='llama-3.3-70b-versatile',
+            messages=[
+                {'role': 'system', 'content': 'You are a GTO poker coach. Give concise action recommendations. Format: ACTION: X | SIZE: Y | REASON: Z. Be specific with sizings in BB.'},
+                {'role': 'user', 'content': prompt}
+            ],
+            max_tokens=120,
+            temperature=0.3,
+        )
+        advice = resp.choices[0].message.content.strip()
+        state['gto_advice'] = advice
+        state['dirty'] = True
+    except Exception as e:
+        state['gto_advice'] = 'Error: %s' % str(e)[:50]
+        state['dirty'] = True
+
+gto_thread = None
+gto_last_hand = ''
+gto_last_street = ''
+
+def maybe_ask_gto():
+    """Trigger GTO advice when it's hero's turn."""
+    global gto_thread, gto_last_hand, gto_last_street
+    if not state['my_cards']:
+        return
+    key = "%s_%s" % (state['hand_num'], state['street'])
+    if key == gto_last_hand:
+        return  # already asked for this spot
+    gto_last_hand = key
+    state['gto_advice'] = 'thinking...'
+    state['dirty'] = True
+    gto_thread = threading.Thread(target=ask_gto, daemon=True)
+    gto_thread.start()
 
 def process(parsed):
     if not isinstance(parsed, dict):
@@ -193,6 +284,7 @@ def process(parsed):
             state['actions'] = []
             state['players'] = {}
             state['last_result'] = ''
+            state['gto_advice'] = ''
             state['dirty'] = True
 
         pot = gi.get('pot', None)
@@ -327,6 +419,10 @@ def process(parsed):
     if hc and any(c != 0 for c in hc if c):
         state['my_cards'] = decode_list(hc)
         state['dirty'] = True
+
+    # Trigger GTO advice when it's hero's turn (prompt event or board changes)
+    if event == 'prompt' and state['my_cards']:
+        maybe_ask_gto()
 
 buf = b''
 lock = threading.Lock()

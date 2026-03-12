@@ -9,18 +9,18 @@ except ImportError:
     import msgpack
 
 try:
-    from groq import Groq
+    import anthropic
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'groq'])
-    from groq import Groq
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'anthropic'])
+    import anthropic
 
-def _load_groq_key():
-    for p in [os.path.expanduser('~/.groq_key'), os.path.join(os.path.dirname(__file__), '.groq_key')]:
+def _load_api_key():
+    for p in [os.path.expanduser('~/.anthropic_key'), os.path.join(os.path.dirname(__file__), '.anthropic_key')]:
         if os.path.exists(p):
             return open(p).read().strip()
-    return os.environ.get('GROQ_API_KEY', '')
+    return os.environ.get('ANTHROPIC_API_KEY', '')
 
-groq_client = Groq(api_key=_load_groq_key())
+llm_client = anthropic.Anthropic(api_key=_load_api_key())
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
@@ -197,34 +197,52 @@ def build_gto_prompt():
             elif action not in ('', 'FOLD'):
                 actions_history.append("%s %s" % (action, bet_bb))
 
+    # Build position info
+    my_seat_num = 0
+    total_seats = len(state['players'])
+    for uid, p in state['players'].items():
+        if str(uid) == str(MY_UID):
+            my_seat_num = p.get('seat', 0)
+
     prompt = (
-        "6max cash game. Effective stacks ~%s. "
-        "Hero has %s. Board: %s. Street: %s. "
-        "Pot: %s. Max bet: %s. "
-        "Villains still in: %d. Actions before hero: %s. "
-        "What is the GTO play for hero? Give ACTION, SIZING in BB, and brief REASON in 1-2 lines."
-    ) % (fmt_bb(my_stack), cards, board, street, pot, max_bet,
-         num_players - 1, ', '.join(actions_history) if actions_history else 'none')
+        "6max NLH cash. Stacks ~%s. "
+        "Hero has [%s]. Board: [%s]. Street: %s. "
+        "Pot: %s. To call: %s. "
+        "Players in hand: %d. Action so far: %s. "
+        "Hero seat %d of %d."
+    ) % (fmt_bb(my_stack), cards, board, street, pot,
+         fmt_bb(state['max_bet'] - (state['players'].get(str(MY_UID), {}).get('chips_round', 0))),
+         num_players, ', '.join(actions_history) if actions_history else 'none',
+         my_seat_num, total_seats)
     return prompt
 
+GTO_SYSTEM = """You are a world-class GTO poker solver. Analyze this hand and give the OPTIMAL play.
+
+Rules:
+- Consider position, stack depth, pot odds, equity, board texture, and range advantage
+- Account for blockers and removal effects
+- On the flop/turn/river, consider draws, made hands, and bluff candidates
+- Give specific bet sizings (e.g. "33% pot", "75% pot", "overbet 1.5x pot")
+- If it's a mixed strategy spot, give the primary action with frequency
+
+Response format (keep it SHORT, max 2 lines):
+ACTION: [fold/check/call/bet/raise] SIZE: [amount in BB or % pot] | [1-line reason]"""
+
 def ask_gto():
-    """Call Groq in background thread."""
+    """Call Claude Haiku in background thread."""
     try:
         prompt = build_gto_prompt()
-        resp = groq_client.chat.completions.create(
-            model='llama-3.3-70b-versatile',
-            messages=[
-                {'role': 'system', 'content': 'You are a GTO poker coach. Give concise action recommendations. Format: ACTION: X | SIZE: Y | REASON: Z. Be specific with sizings in BB.'},
-                {'role': 'user', 'content': prompt}
-            ],
-            max_tokens=120,
-            temperature=0.3,
+        resp = llm_client.messages.create(
+            model='claude-haiku-4-5-20251001',
+            max_tokens=150,
+            system=GTO_SYSTEM,
+            messages=[{'role': 'user', 'content': prompt}],
         )
-        advice = resp.choices[0].message.content.strip()
+        advice = resp.content[0].text.strip()
         state['gto_advice'] = advice
         state['dirty'] = True
     except Exception as e:
-        state['gto_advice'] = 'Error: %s' % str(e)[:50]
+        state['gto_advice'] = 'Error: %s' % str(e)[:80]
         state['dirty'] = True
 
 gto_thread = None
