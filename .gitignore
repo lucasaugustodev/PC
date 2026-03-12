@@ -1,90 +1,48 @@
-# System files
-AppData/
-Desktop/
-Documents/
-Downloads/
-Music/
-Pictures/
-Videos/
-Contacts/
-Favorites/
-Links/
-Searches/
-Saved Games/
-3D Objects/
-WPS Cloud Files/
-
-# Windows registry files
-NTUSER.DAT
-NTUSER.DAT*
-
-# IDEs and editors
-.vscode/
-.idea/
-.cursor/
-.kiro/
-.icube-remote-s/
-
-# Config files (personal)
-.aws/
-.azure/
-.ssh/
-.gitconfig
-.gitmodules
-
-# Environment
+# Environment files
 .env
-.env.local
 .env.*
+!.env.example
 
-# Dependencies
-node_modules/
-vendor/
-
-# Logs
-*.log
-npm-debug.log*
-
-# OS
+# OS files
 Thumbs.db
 .DS_Store
+ntuser.ini
 
-# Executables
-*.exe
-*.dll
+# Screenshots and temporary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.log
 
-# Cache and temp
-.cache/
-.m2/
-.local/
-.docker/
-.bun/
-.chocolatey/
-.pack/
-.paperclip/
+# Node modules (if any in root)
+node_modules/
 
-# App data
-.claude/
-.cline/
-.claude-mem/
-.scoop/
-.fly/
-.gemini/
-.lmstudio/
-.matplotlib/
-.openfang/
-.trae/
-.trae-aicc/
-.agents/
-.apm/
-.basic-memory/
-.playwright/
-.playwright-cli/
-.playwright-mcp/
-.magentic_ui/
+# scoop
+scoop/apps/
+scoop/cache/
+scoop/persist/
+scoop/shims/
 
-# OneDrive
-OneDrive/
+# Python virtual environments
+magentic-ui-env/
+*_env/
 
-# Data files
-*.json
+# dyad-apps (submodules or local development)
+dyad-apps/
+
+# paperclip (submodule)
+paperclip/
+
+# claude-launcher-web (submodule or related project)
+claude-launcher-web/
+
+# vultr-vm-creator (submodule)
+vultr-vm-creator/
+
+# scoop buckets (submodules)
+scoop/buckets/*
+
+# Temporary files
+*.tmp
+*.temp
