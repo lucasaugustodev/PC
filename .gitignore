@@ -7,6 +7,67 @@
 Thumbs.db
 .DS_Store
 ntuser.ini
+NTUSER.DAT*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# CLI and tool data
+.cline/
+.cursor/
+.apm/
+.agents/
+.aws/
+.basic-memory/
+.bun/
+.cache/
+.chocolatey/
+.claude-mem/
+.claude/
+.docker/
+.fly/
+.gemini/
+.kiro/
+.lmstudio/
+.local/
+.m2/
+.matplotlib/
+.openfang/
+.pack/
+.paperclip/
+.playwright-cli/
+.ssh/
+.trae-aicc/
+.trae/
+
+# Config directories
+.config/
+AppData/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Windows specific
+3D Objects/
+"3D Objects/"
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+WPS Cloud Files/
 
 # Screenshots and temporary files
 *.png
@@ -43,6 +104,9 @@ vultr-vm-creator/
 # scoop buckets (submodules)
 scoop/buckets/*
 
-# Temporary files
-*.tmp
-*.temp
+# Project specific
+bloons-td-3d/
+claude-launcher-video/
+suprema_overlay.py
+SharpRDP.exe
+SharpRDP2.exe
