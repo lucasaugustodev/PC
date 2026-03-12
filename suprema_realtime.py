@@ -582,6 +582,15 @@ def process(parsed):
             }
             state['dirty'] = True
 
+    # gamer_prompt -> available actions for hero
+    gp = d.get('gamer_prompt', {})
+    if isinstance(gp, dict) and any(v is not None for v in gp.values()):
+        actions = {}
+        for action_name, val in gp.items():
+            if val is not None:
+                actions[action_name] = val
+        state['available_actions'] = actions
+
     # countdown -> who's acting
     cd = d.get('countdown', {})
     if isinstance(cd, dict):
