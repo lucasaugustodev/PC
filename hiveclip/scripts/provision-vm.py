@@ -296,6 +296,17 @@ print(f"  Plugin config RC: {r.status_code}")
 
 run_cmd(f'set PATH={BUN_PATH};%PATH% && bun --version', "Bun version")
 
+# --- Pre-install agent pack (lucasaugustodev-agents) ---
+print("\nPre-installing agent pack...")
+r = s.run_cmd(r'dir C:\lucasaugustodev-agents\README.md')
+if r.status_code != 0:
+    print("  Cloning agent pack...")
+    r = s.run_cmd('git clone --depth 1 https://github.com/lucasaugustodev/claude-agents.git C:\\lucasaugustodev-agents')
+    print(f"  Clone RC: {r.status_code}")
+else:
+    print("  Agent pack already present, pulling latest...")
+    s.run_cmd(r'cd C:\lucasaugustodev-agents && git pull')
+
 # --- Verify CLIs BEFORE starting the launcher (to avoid node process conflicts) ---
 print("\nVerifying installations...")
 run_cmd('node --version', "Node.js")
