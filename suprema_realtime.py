@@ -414,6 +414,10 @@ def process(parsed):
         state['my_cards'] = decode_list(hc)
         state['dirty'] = True
 
+    # Trigger GTO advice when it's hero's turn (prompt event or board changes)
+    if event == 'prompt' and state['my_cards']:
+        maybe_ask_gto()
+
 buf = b''
 lock = threading.Lock()
 
