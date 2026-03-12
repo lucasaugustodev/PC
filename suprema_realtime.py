@@ -301,17 +301,38 @@ def build_gto_prompt():
         game_type = "6max %s cash." % variant
         icm_note = ""
 
+    # Available actions from game
+    avail = state.get('available_actions', {})
+    if avail:
+        action_parts = []
+        for a, v in avail.items():
+            if v is True or v == 1:
+                action_parts.append(a.upper())
+            elif isinstance(v, (int, float)) and v > 0:
+                action_parts.append("%s(%s)" % (a.upper(), fmt_bb(v)))
+            elif v is not None:
+                action_parts.append(a.upper())
+        available_str = "Available actions: %s." % ', '.join(action_parts)
+    else:
+        available_str = ""
+
+    # To call calculation
+    my_cr = state['players'].get(str(MY_UID), {}).get('chips_round', 0)
+    to_call = max(0, state['max_bet'] - my_cr)
+
     prompt = (
         "%s Stacks ~%s. "
         "Hero has [%s]. Board: [%s]. Street: %s. "
-        "Pot: %s. To call: %s. "
+        "Pot: %s. %s "
         "Players in hand: %d. "
         "Hero seat %d of %d.%s\n\n"
+        "%s\n\n"
         "Full hand history:\n%s"
     ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
-         fmt_bb(state['max_bet'] - (state['players'].get(str(MY_UID), {}).get('chips_round', 0))),
+         "To call: %s." % fmt_bb(to_call) if to_call > 0 else "No bet to call (can check).",
          num_players,
          my_seat_num, total_seats, icm_note,
+         available_str,
          hand_history)
     return prompt
 
