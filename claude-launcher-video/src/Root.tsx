@@ -4,6 +4,7 @@ import { DemoImobiliaria } from "./DemoImobiliaria";
 import { DemoEcommerce } from "./DemoEcommerce";
 import { DemoDropshipping } from "./DemoDropshipping";
 import { EcommerceH, EcommerceV } from "./DemoEcommerceV3";
+import { EcommerceV4H, EcommerceV4V } from "./DemoEcommerceV4";
 
 export const RemotionRoot: React.FC = () => {
   return (
