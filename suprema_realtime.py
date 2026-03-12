@@ -381,6 +381,7 @@ def build_gto_prompt():
 
     # Available actions from game
     avail = state.get('available_actions', {})
+    can_check = 'check' in avail and avail['check'] is not None
     if avail:
         action_parts = []
         for a, v in avail.items():
@@ -391,6 +392,8 @@ def build_gto_prompt():
             elif v is not None:
                 action_parts.append(a.upper())
         available_str = "Available actions: %s." % ', '.join(action_parts)
+        if can_check:
+            available_str += " IMPORTANT: You can CHECK for free — NEVER fold when check is available!"
     else:
         available_str = ""
 
