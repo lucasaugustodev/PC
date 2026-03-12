@@ -160,6 +160,7 @@ state = {
     'addon': 0,
     'rebuy': 0,
     'mtt_start': 0,
+    'variant': '',  # NLH, PLO4, PLO5 - detected from card count
 }
 
 def show():
@@ -431,6 +432,9 @@ def process(parsed):
         mst = gi.get('mtt_starttime', 0)
         if mst:
             state['mtt_start'] = mst
+
+        # Detect number of cards per player -> game variant
+        num_cards = gi.get('gamers_count', 0)  # not reliable for variant
 
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list):
