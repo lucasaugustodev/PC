@@ -69,7 +69,7 @@ if not pid:
 
 print("PID: %d" % pid, flush=True)
 
-BB_SIZE = 0.04  # auto-updated when BB post detected
+BB_SIZE = 0  # auto-detected from game_info.blinds
 
 def bb(val):
     """Convert internal value to BB count."""
@@ -79,6 +79,8 @@ def bb(val):
 
 def fmt_bb(val):
     """Format value as BB string."""
+    if BB_SIZE <= 0:
+        return str(val)
     b = bb(val)
     if b == int(b):
         return "%dBB" % int(b)
