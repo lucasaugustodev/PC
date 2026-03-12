@@ -1,119 +1,59 @@
-# Environment files
-.env
-.env.*
-!.env.example
-
-# OS files
+# Windows
+Configurações Locais/
+Dados de Aplicativos/
+Menu Iniciar/
+Meus Documentos/
 Thumbs.db
-.DS_Store
-ntuser.ini
-NTUSER.DAT*
+Desktop.ini
 
-# IDE and editor files
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
-# CLI and tool data
+# OS
+.DS_Store
+
+# Claude/Cline
+.claude/
 .cline/
-.cursor/
-.apm/
+.claude-mem/
 .agents/
-.aws/
+
+# Node
+.node/
+.apm/
+
+# Cache & Logs
+.cache/
 .basic-memory/
 .bun/
-.cache/
-.chocolatey/
-.claude-mem/
-.claude/
-.docker/
-.fly/
-.gemini/
-.kiro/
-.lmstudio/
-.local/
-.m2/
-.matplotlib/
-.openfang/
-.pack/
-.paperclip/
-.playwright-cli/
-.ssh/
-.trae-aicc/
-.trae/
 
-# Config directories
-.config/
-AppData/
+# AWS
+.aws/
 
-# Temporary files
-*.tmp
-*.temp
-*.log
+# Scripts/Templates
+*_shot_*.png
+*_region_*.png
+*_strip_*.png
+*_templates/
+*_screen.png
+test-*.png
+suprema_*.png
+vultr_screenshot.png
+test-*.png
+*diagram.png
 
-# Windows specific
-3D Objects/
-"3D Objects"/
-"Configurações Locais"/
-Cookies/
-"Dados de Aplicativos"/
-"Menu Iniciar"/
-"Meus Documentos"/
-Recent/
-SendTo/
-Contacts/
-Desktop/
-Documents/
-Downloads/
-Favorites/
-Links/
-Music/
-Pictures/
-Saved Games/
-Searches/
-Videos/
-WPS Cloud Files/
-
-# Screenshots and temporary files
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.log
-
-# Node modules (if any in root)
-node_modules/
-
-# scoop
-scoop/apps/
-scoop/cache/
-scoop/persist/
-scoop/shims/
-
-# Python virtual environments
-magentic-ui-env/
-*_env/
-
-# dyad-apps (submodules or local development)
-dyad-apps/
-
-# paperclip (submodule)
-paperclip/
-
-# claude-launcher-web (submodule or related project)
-claude-launcher-web/
-
-# vultr-vm-creator (submodule)
-vultr-vm-creator/
-
-# scoop buckets (submodules)
-scoop/buckets/*
-
-# Project specific
-bloons-td-3d/
-claude-launcher-video/
-suprema_overlay.py
-SharpRDP.exe
-SharpRDP2.exe
+# Secrets
+secrets.json
+.env
