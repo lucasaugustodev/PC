@@ -1,0 +1,314 @@
+================================================================================
+  DOCUMENTACAO COMPLETA DO REPOSITORIO
+  https://github.com/microsoft/playwright-cli
+  Capturado em: 2026-02-26
+================================================================================
+
+INFORMACOES DO REPOSITORIO
+--------------------------
+Nome:        microsoft/playwright-cli
+Visibilidade: Public
+Descricao:   CLI for common Playwright actions. Record and generate Playwright
+             code, inspect selectors and take screenshots.
+Stars:       4.2k
+Forks:       158
+Linguagens:  TypeScript 56.5%, JavaScript 43.5%
+Topicos:     playwright
+
+================================================================================
+                              README COMPLETO
+================================================================================
+
+playwright-cli
+
+Playwright CLI with SKILLS
+
+--------------------------------------------------------------------------------
+Playwright CLI vs Playwright MCP
+--------------------------------------------------------------------------------
+
+Este pacote fornece interface CLI para o Playwright. Se voce esta usando
+coding agents, este e o melhor encaixe.
+
+CLI: Modern coding agents increasingly favor CLI-based workflows exposed as
+SKILLs over MCP because CLI invocations are more token-efficient: they avoid
+loading large tool schemas and verbose accessibility trees into the model
+context, allowing agents to act through concise, purpose-built commands. This
+makes CLI + SKILLs better suited for high-throughput coding agents that must
+balance browser automation with large codebases, tests, and reasoning within
+limited context windows.
+
+MCP: MCP remains relevant for specialized agentic loops that benefit from
+persistent state, rich introspection, and iterative reasoning over page
+structure, such as exploratory automation, self-healing tests, or long-running
+autonomous workflows where maintaining continuous browser context outweighs
+token cost concerns. Learn more about Playwright MCP.
+
+--------------------------------------------------------------------------------
+Key Features
+--------------------------------------------------------------------------------
+- Token-efficient. Does not force page data into LLM.
+
+--------------------------------------------------------------------------------
+Requirements
+--------------------------------------------------------------------------------
+- Node.js 18 or newer
+- Claude Code, GitHub Copilot, or any other coding agent.
+
+================================================================================
+                              INSTALACAO
+================================================================================
+
+Instalacao Global
+-----------------
+  npm install -g @playwright/cli@latest
+  playwright-cli --help
+
+Instalando Skills
+-----------------
+Claude Code, GitHub Copilot e outros usarao as skills instaladas localmente.
+
+  playwright-cli install --skills
+
+Operacao sem Skills
+-------------------
+Aponte seu agente para o CLI e deixe-o trabalhar. Ele lera a skill de
+playwright-cli --help por conta propria:
+
+  Test the "add todo" flow on https://demo.playwright.dev/todomvc using
+  playwright-cli. Check playwright-cli --help for available commands.
+
+Instalacao Local
+----------------
+Em alguns casos voce pode querer instalar playwright-cli localmente. Se rodar
+o binario global falhar, use npx:
+
+  npx playwright-cli open https://example.com
+  npx playwright-cli click e1
+
+================================================================================
+                          DEMO (Exemplo de Uso)
+================================================================================
+
+> Use playwright skills to test https://demo.playwright.dev/todomvc/.
+  Take screenshots for all successful and failing scenarios.
+
+Exemplo manual:
+
+  playwright-cli open https://demo.playwright.dev/todomvc/ --headed
+  playwright-cli type "Buy groceries"
+  playwright-cli press Enter
+  playwright-cli type "Water flowers"
+  playwright-cli press Enter
+  playwright-cli check e21
+  playwright-cli check e35
+  playwright-cli screenshot
+
+================================================================================
+                    HEADED OPERATION (Modo Visual)
+================================================================================
+
+Playwright CLI e headless por padrao. Para ver o navegador, passe --headed:
+
+  playwright-cli open https://playwright.dev --headed
+
+================================================================================
+                              SESSIONS
+================================================================================
+
+Playwright CLI mantem o perfil do navegador em memoria por padrao. Cookies e
+storage state sao preservados entre chamadas CLI dentro da sessao, mas perdidos
+quando o navegador fecha. Use --persistent para salvar o perfil em disco.
+
+Voce pode usar diferentes instancias do navegador para diferentes projetos com
+sessoes. Passe -s=<nome> para falar com um navegador especifico.
+
+  playwright-cli open https://playwright.dev
+  playwright-cli -s=example open https://example.com --persistent
+  playwright-cli list
+
+Variavel de ambiente para sessao:
+
+  PLAYWRIGHT_CLI_SESSION=todo-app claude .
+
+Gerenciamento de sessoes:
+
+  playwright-cli list                     # listar todas as sessoes
+  playwright-cli close-all                # fechar todos os navegadores
+  playwright-cli kill-all                 # forcar encerramento de todos
+
+================================================================================
+                             MONITORING
+================================================================================
+
+Use playwright-cli show para abrir um dashboard visual que permite ver e
+controlar todas as sessoes de navegador em execucao.
+
+  playwright-cli show
+
+O dashboard abre uma janela com duas visualizacoes:
+
+Session grid - mostra todas as sessoes ativas agrupadas por workspace, cada
+uma com preview de screencast ao vivo, nome da sessao, URL atual e titulo da
+pagina. Clique em qualquer sessao para ampliar.
+
+Session detail - mostra uma visualizacao ao vivo da sessao selecionada com
+barra de abas, controles de navegacao (voltar, avancar, recarregar, barra de
+endereco) e controle remoto completo.
+
+================================================================================
+                     LISTA COMPLETA DE COMANDOS CLI
+================================================================================
+
+--- CORE ---
+  playwright-cli open [url]               # abrir navegador, opcionalmente navegar para url
+  playwright-cli goto <url>               # navegar para uma url
+  playwright-cli close                    # fechar a pagina
+  playwright-cli type <text>              # digitar texto em elemento editavel
+  playwright-cli click <ref> [button]     # clicar em elemento da pagina
+  playwright-cli dblclick <ref> [button]  # duplo clique em elemento da pagina
+  playwright-cli fill <ref> <text>        # preencher texto em elemento editavel
+  playwright-cli drag <startRef> <endRef> # arrastar e soltar entre dois elementos
+  playwright-cli hover <ref>              # passar mouse sobre elemento
+  playwright-cli select <ref> <val>       # selecionar opcao em dropdown
+  playwright-cli upload <file>            # upload de um ou multiplos arquivos
+  playwright-cli check <ref>              # marcar checkbox ou radio button
+  playwright-cli uncheck <ref>            # desmarcar checkbox ou radio button
+  playwright-cli snapshot                 # capturar snapshot da pagina (obter refs)
+  playwright-cli snapshot --filename=f    # salvar snapshot em arquivo especifico
+  playwright-cli eval <func> [ref]        # avaliar expressao JavaScript
+  playwright-cli dialog-accept [prompt]   # aceitar um dialogo
+  playwright-cli dialog-dismiss           # dispensar um dialogo
+  playwright-cli resize <w> <h>           # redimensionar janela do navegador
+
+--- NAVIGATION ---
+  playwright-cli go-back                  # voltar para pagina anterior
+  playwright-cli go-forward               # avancar para proxima pagina
+  playwright-cli reload                   # recarregar pagina atual
+
+--- KEYBOARD ---
+  playwright-cli press <key>              # pressionar tecla (a, arrowleft, etc)
+  playwright-cli keydown <key>            # pressionar tecla para baixo
+  playwright-cli keyup <key>              # soltar tecla
+
+--- MOUSE ---
+  playwright-cli mousemove <x> <y>        # mover mouse para posicao
+  playwright-cli mousedown [button]       # pressionar botao do mouse
+  playwright-cli mouseup [button]         # soltar botao do mouse
+  playwright-cli mousewheel <dx> <dy>     # rolar roda do mouse
+
+--- SAVE AS (Captura) ---
+  playwright-cli screenshot [ref]         # screenshot da pagina ou elemento
+  playwright-cli screenshot --filename=f  # screenshot com nome especifico
+  playwright-cli pdf                      # salvar pagina como PDF
+  playwright-cli pdf --filename=page.pdf  # salvar PDF com nome especifico
+
+--- TABS ---
+  playwright-cli tab-list                 # listar todas as abas
+  playwright-cli tab-new [url]            # criar nova aba
+  playwright-cli tab-close [index]        # fechar uma aba
+  playwright-cli tab-select <index>       # selecionar uma aba
+
+--- STORAGE ---
+  playwright-cli state-save [filename]    # salvar estado de armazenamento
+  playwright-cli state-load <filename>    # carregar estado de armazenamento
+
+--- COOKIES ---
+  playwright-cli cookie-list [--domain]   # listar cookies
+  playwright-cli cookie-get <name>        # obter um cookie
+  playwright-cli cookie-set <name> <val>  # definir um cookie
+  playwright-cli cookie-delete <name>     # deletar um cookie
+  playwright-cli cookie-clear             # limpar todos os cookies
+
+--- LOCALSTORAGE ---
+  playwright-cli localstorage-list        # listar entradas do localStorage
+  playwright-cli localstorage-get <key>   # obter valor do localStorage
+  playwright-cli localstorage-set <k> <v> # definir valor no localStorage
+  playwright-cli localstorage-delete <k>  # deletar entrada do localStorage
+  playwright-cli localstorage-clear       # limpar todo o localStorage
+
+--- SESSIONSTORAGE ---
+  playwright-cli sessionstorage-list        # listar entradas do sessionStorage
+  playwright-cli sessionstorage-get <k>     # obter valor do sessionStorage
+  playwright-cli sessionstorage-set <k> <v> # definir valor no sessionStorage
+  playwright-cli sessionstorage-delete <k>  # deletar entrada do sessionStorage
+  playwright-cli sessionstorage-clear       # limpar todo o sessionStorage
+
+--- NETWORK ---
+  playwright-cli route <pattern> [opts]   # interceptar e mockar requests
+  playwright-cli route-list               # listar rotas ativas
+  playwright-cli unroute [pattern]        # remover rota(s)
+
+--- DEVTOOLS ---
+  playwright-cli console [min-level]      # listar mensagens do console
+  playwright-cli network                  # listar requests de rede desde carregamento
+  playwright-cli run-code <code>          # executar snippet de codigo Playwright
+  playwright-cli tracing-start            # iniciar gravacao de trace
+  playwright-cli tracing-stop             # parar gravacao de trace
+  playwright-cli video-start              # iniciar gravacao de video
+  playwright-cli video-stop [filename]    # parar gravacao de video
+
+--- OPEN PARAMETERS ---
+  playwright-cli open --browser=chrome    # usar navegador especifico
+  playwright-cli open --extension         # conectar via extensao do navegador
+  playwright-cli open --persistent        # usar perfil persistente
+  playwright-cli open --profile=<path>    # usar diretorio de perfil customizado
+  playwright-cli open --config=file.json  # usar arquivo de configuracao
+  playwright-cli close                    # fechar o navegador
+  playwright-cli delete-data              # deletar dados do usuario (sessao padrao)
+
+--- SESSIONS ---
+  playwright-cli -s=name <cmd>            # executar comando em sessao nomeada
+  playwright-cli -s=name close            # parar navegador nomeado
+  playwright-cli -s=name delete-data      # deletar dados de navegador nomeado
+  playwright-cli list                     # listar todas as sessoes
+  playwright-cli close-all                # fechar todos os navegadores
+  playwright-cli kill-all                 # forcar encerramento de todos
+
+================================================================================
+                             SNAPSHOTS
+================================================================================
+
+Apos cada comando, playwright-cli fornece um snapshot do estado atual do
+navegador. Exemplo:
+
+  > playwright-cli goto https://example.com
+  ### Page
+  - Page URL: https://example.com/
+  - Page Title: Example Domain
+  ### Snapshot
+  [Snapshot](.playwright-cli/page-2026-02-14T19-22-42-679Z.yml)
+
+Se --filename nao for fornecido, um novo arquivo de snapshot e criado com
+timestamp. Use --filename= quando o artefato faz parte do resultado do workflow.
+
+================================================================================
+                        ARQUIVO DE CONFIGURACAO
+================================================================================
+
+O Playwright CLI pode ser configurado usando um arquivo JSON. Especifique com:
+
+  playwright-cli --config path/to/config.json open example.com
+
+Por padrao, carrega de .playwright/cli.config.json para que nao seja necessario
+especificar toda vez.
+
+Configuracao tambem pode ser feita via variaveis de ambiente.
+
+================================================================================
+                          TAREFAS ESPECIFICAS
+================================================================================
+
+A skill instalada inclui guias de referencia detalhados para tarefas comuns:
+
+- Request mocking       - interceptar e mockar requests de rede
+- Running Playwright code - executar scripts Playwright arbitrarios
+- Browser session management - gerenciar multiplas sessoes de navegador
+- Storage state (cookies, localStorage) - persistir e restaurar estado
+- Test generation       - gerar testes Playwright a partir de interacoes
+- Tracing               - gravar e inspecionar traces de execucao
+- Video recording       - capturar videos de sessoes do navegador
+
+================================================================================
+                          FIM DO DOCUMENTO
+================================================================================

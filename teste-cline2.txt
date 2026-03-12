@@ -1,0 +1,3 @@
+Descrição: CLI for common Playwright actions. Record and generate Playwright code, inspect selectors and take screenshots.
+
+Stars: 4.2k

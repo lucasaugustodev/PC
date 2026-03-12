@@ -1,0 +1,178 @@
+# Microsoft Playwright CLI Repository Information
+
+## Repository Status
+- **Redirected**: No
+- **Archived**: No
+- **URL**: https://github.com/microsoft/playwright-cli
+- **Status**: Active and maintained (latest commit: Feb 25, 2026)
+
+## Repository Description
+CLI for common Playwright actions. Record and generate Playwright code, inspect selectors and take screenshots.
+
+## Star Count
+- 4,188 users starred this repository (4.2k stars)
+- 158 forks
+- 30 watchers
+
+## Installation Instructions
+
+### Global Installation
+```
+npm install -g @playwright/cli@latest
+```
+
+### Verify Installation
+```
+playwright-cli --help
+```
+
+### Installing Skills
+Claude Code, GitHub Copilot and others will use the locally installed skills:
+```
+playwright-cli install --skills
+```
+
+### Requirements
+- Node.js 18 or newer
+- Claude Code, GitHub Copilot, or any other coding agent
+
+### Skills-less Operation
+Point your agent at the CLI and let it cook. It'll read the skill off playwright-cli --help on its own:
+```
+Test the "add todo" flow on https://demo.playwright.dev/todomvc using playwright-cli. Check playwright-cli --help for available commands.
+```
+
+### Local Installation (Alternative)
+If running the globally available playwright-cli binary fails, use npx playwright-cli to run the commands:
+```
+npx playwright-cli open https://example.com
+npx playwright-cli click e1
+```
+
+## CLI Commands
+
+### Core Commands
+- `playwright-cli open [url]` - open browser, optionally navigate to url
+- `playwright-cli goto <url>` - navigate to a url
+- `playwright-cli close` - close the page
+- `playwright-cli type <text>` - type text into editable element
+- `playwright-cli click <ref> [button]` - perform click on a web page
+- `playwright-cli dblclick <ref> [button]` - perform double click on a web page
+- `playwright-cli fill <ref> <text>` - fill text into editable element
+- `playwright-cli drag <startRef> <endRef>` - perform drag and drop between two elements
+- `playwright-cli hover <ref>` - hover over element on page
+- `playwright-cli select <ref> <val>` - select an option in a dropdown
+- `playwright-cli upload <file>` - upload one or multiple files
+- `playwright-cli check <ref>` - check a checkbox or radio button
+- `playwright-cli uncheck <ref>` - uncheck a checkbox or radio button
+- `playwright-cli snapshot` - capture page snapshot to obtain element ref
+- `playwright-cli snapshot --filename=f` - save snapshot to specific file
+- `playwright-cli eval <func> [ref]` - evaluate javascript expression on page or element
+- `playwright-cli dialog-accept [prompt]` - accept a dialog
+- `playwright-cli dialog-dismiss` - dismiss a dialog
+- `playwright-cli resize <w> <h>` - resize the browser window
+
+### Navigation Commands
+- `playwright-cli go-back` - go back to the previous page
+- `playwright-cli go-forward` - go forward to the next page
+- `playwright-cli reload` - reload the current page
+
+### Keyboard Commands
+- `playwright-cli press <key>` - press a key on the keyboard (e.g., "a", "arrowleft")
+- `playwright-cli keydown <key>` - press a key down on the keyboard
+- `playwright-cli keyup <key>` - press a key up on the keyboard
+
+### Mouse Commands
+- `playwright-cli mousemove <x> <y>` - move mouse to a given position
+- `playwright-cli mousedown [button]` - press mouse down
+- `playwright-cli mouseup [button]` - press mouse up
+- `playwright-cli mousewheel <dx> <dy>` - scroll mouse wheel
+
+### Save as Commands
+- `playwright-cli screenshot [ref]` - screenshot of the current page or element
+- `playwright-cli screenshot --filename=f` - save screenshot with specific filename
+- `playwright-cli pdf` - save page as pdf
+- `playwright-cli pdf --filename=page.pdf` - save pdf with specific filename
+
+### Tabs Commands
+- `playwright-cli tab-list` - list all tabs
+- `playwright-cli tab-new [url]` - create a new tab
+- `playwright-cli tab-close [index]` - close a browser tab
+- `playwright-cli tab-select <index>` - select a browser tab
+
+### Storage Commands
+- `playwright-cli state-save [filename]` - save storage state
+- `playwright-cli state-load <filename>` - load storage state
+
+#### Cookies
+- `playwright-cli cookie-list [--domain]` - list cookies
+- `playwright-cli cookie-get <name>` - get a cookie
+- `playwright-cli cookie-set <name> <val>` - set a cookie
+- `playwright-cli cookie-delete <name>` - delete a cookie
+- `playwright-cli cookie-clear` - clear all cookies
+
+#### LocalStorage
+- `playwright-cli localstorage-list` - list localStorage entries
+- `playwright-cli localstorage-get <key>` - get localStorage value
+- `playwright-cli localstorage-set <k> <v>` - set localStorage value
+- `playwright-cli localstorage-delete <k>` - delete localStorage entry
+- `playwright-cli localstorage-clear` - clear all localStorage
+
+#### SessionStorage
+- `playwright-cli sessionstorage-list` - list sessionStorage entries
+- `playwright-cli sessionstorage-get <k>` - get sessionStorage value
+- `playwright-cli sessionstorage-set <k> <v>` - set sessionStorage value
+- `playwright-cli sessionstorage-delete <k>` - delete sessionStorage entry
+- `playwright-cli sessionstorage-clear` - clear all sessionStorage
+
+### Network Commands
+- `playwright-cli route <pattern> [opts]` - mock network requests
+- `playwright-cli route-list` - list active routes
+- `playwright-cli unroute [pattern]` - remove route(s)
+
+### DevTools Commands
+- `playwright-cli console [min-level]` - list console messages
+- `playwright-cli network` - list all network requests since loading the page
+- `playwright-cli run-code <code>` - run playwright code snippet
+- `playwright-cli tracing-start` - start trace recording
+- `playwright-cli tracing-stop` - stop trace recording
+- `playwright-cli video-start` - start video recording
+- `playwright-cli video-stop [filename]` - stop video recording
+
+### Open Parameters
+- `playwright-cli open --browser=chrome` - use specific browser (chrome, firefox, webkit, msedge)
+- `playwright-cli open --extension` - connect via browser extension
+- `playwright-cli open --persistent` - use persistent profile
+- `playwright-cli open --profile=<path>` - use custom profile directory
+- `playwright-cli open --config=file.json` - use config file
+- `playwright-cli close` - close the browser
+- `playwright-cli delete-data` - delete user data for default session
+
+### Session Management Commands
+- `playwright-cli -s=name <cmd>` - run command in named session
+- `playwright-cli -s=name close` - stop a named browser
+- `playwright-cli -s=name delete-data` - delete user data for named browser
+- `playwright-cli list` - list all sessions
+- `playwright-cli close-all` - close all browsers
+- `playwright-cli kill-all` - forcefully kill all browser processes
+- `playwright-cli show` - open visual dashboard to see and control all running browser sessions
+
+### Configuration
+The Playwright CLI can be configured using a JSON configuration file:
+```
+playwright-cli --config path/to/config.json open example.com
+```
+Playwright CLI will load config from `.playwright/cli.config.json` by default.
+
+### Headed Operation
+Playwright CLI is headless by default. If you'd like to see the browser, pass `--headed` to `open`:
+```
+playwright-cli open https://playwright.dev --headed
+```
+
+## Additional Information
+- **License**: Apache-2.0
+- **Language**: TypeScript 56.5%, JavaScript 43.5%
+- **Contributors**: 8
+- **Releases**: 4 (latest: v0.1.1 - Feb 14, 2026)
+- **Used by**: 228 projects
