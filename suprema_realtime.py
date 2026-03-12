@@ -76,7 +76,7 @@ ROLES = {
     82: 'SB', 93: 'BB', 100: 'FOLD',
 }
 
-STREETS = {3: 'PREFLOP', 4: 'FLOP', 5: 'TURN', 6: 'RIVER', 7: 'SHOWDOWN'}
+STREETS = {1: 'DEAL', 2: 'BLINDS', 3: 'PREFLOP', 4: 'FLOP', 5: 'TURN', 6: 'RIVER', 7: 'SHOWDOWN'}
 
 def decode(cid):
     if not cid or cid == 0:
