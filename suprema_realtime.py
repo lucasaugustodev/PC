@@ -337,6 +337,12 @@ def ask_gto():
     """Call Claude Haiku in background thread."""
     try:
         prompt = build_gto_prompt()
+        # Log prompt for debugging
+        try:
+            with open(os.path.expanduser('~/suprema_gto_prompts.log'), 'a', encoding='utf-8') as f:
+                f.write("[%s] %s\n\n" % (time.strftime('%H:%M:%S'), prompt))
+        except:
+            pass
         resp = llm_client.messages.create(
             model='claude-haiku-4-5-20251001',
             max_tokens=150,
