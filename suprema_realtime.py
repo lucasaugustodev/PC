@@ -481,21 +481,18 @@ def build_gto_prompt():
     # Pre-analyze hand strength
     hand_analysis = analyze_hand(state['my_cards'], state['board'])
 
-    prompt = (
-        "%s Stacks ~%s. "
-        "Hero has [%s]. Board: [%s]. Street: %s. "
-        "Pot: %s. %s "
-        "Players in hand: %d. "
-        "Hero seat %d of %d.%s\n\n"
-        "%s%s\n\n"
-        "%s\n\n"
-        "Full hand history:\n%s"
-    ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
-         ("To call: %s." % fmt_bb(to_call)) if to_call > 0 else "No bet to call (can check).",
-         num_players,
-         my_seat_num, total_seats, icm_note,
-         hand_analysis, available_str,
-         hand_history)
+    to_call_str = ("To call: %s." % fmt_bb(to_call)) if to_call > 0 else "No bet to call (can check)."
+
+    prompt = "%s Stacks ~%s. " % (game_type, fmt_bb(my_stack))
+    prompt += "Hero has [%s]. Board: [%s]. Street: %s. " % (cards, board, street)
+    prompt += "Pot: %s. %s " % (pot, to_call_str)
+    prompt += "Players in hand: %d. " % num_players
+    prompt += "Hero seat %d of %d.%s\n\n" % (my_seat_num, total_seats, icm_note)
+    if hand_analysis:
+        prompt += "%s\n\n" % hand_analysis
+    if available_str:
+        prompt += "%s\n\n" % available_str
+    prompt += "Full hand history:\n%s" % hand_history
     return prompt
 
 GTO_SYSTEM = """You are a world-class GTO poker solver for NLH and PLO (Pot-Limit Omaha). Analyze this hand and give the OPTIMAL play.
