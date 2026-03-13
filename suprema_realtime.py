@@ -38,14 +38,16 @@ BTN_FOLD_X, BTN_FOLD_Y = 77, 812
 BTN_CHECK_X, BTN_CHECK_Y = 232, 812
 BTN_BET_X, BTN_BET_Y = 388, 812
 
-# Raise panel buttons (after clicking Apostar) - calibrated from 453x792 content + 6/46 chrome offset
-BTN_25X_X, BTN_25X_Y = 44, 817
-BTN_3X_X, BTN_3X_Y = 119, 817
-BTN_4X_X, BTN_4X_Y = 191, 817
-BTN_ALLIN_X, BTN_ALLIN_Y = 272, 817
-BTN_CONFIRM_X, BTN_CONFIRM_Y = 388, 817
-BTN_PLUS_X, BTN_PLUS_Y = 316, 536
-BTN_MINUS_X, BTN_MINUS_Y = 316, 606
+# Raise panel buttons (after clicking Apostar) - calibrated from 449x829 screenshot + 8/9 chrome
+# 5 buttons: [preset1] [preset2] [preset3] [All In] [Confirmar]
+# Presets vary (2.5X/3X/4X or 1/3POT/2/3POT/1POT) but positions are same
+BTN_PRESET1_X, BTN_PRESET1_Y = 53, 802    # 1/3 POT or 2.5X
+BTN_PRESET2_X, BTN_PRESET2_Y = 141, 802   # 2/3 POT or 3X
+BTN_PRESET3_X, BTN_PRESET3_Y = 221, 802   # 1 POT or 4X
+BTN_ALLIN_X, BTN_ALLIN_Y = 308, 802       # All In
+BTN_CONFIRM_X, BTN_CONFIRM_Y = 408, 802   # Confirmar
+BTN_PLUS_X, BTN_PLUS_Y = 324, 545
+BTN_MINUS_X, BTN_MINUS_Y = 324, 615
 
 AUTO_PLAY = True  # auto-click actions based on GTO recommendation
 
