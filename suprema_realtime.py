@@ -793,10 +793,7 @@ def process(parsed):
         state['my_cards'] = decode_list(hc)
         state['dirty'] = True
 
-    # Trigger GTO advice ONLY when it's hero's turn (prompt event with our UID)
-    prompt_uid = parsed.get('uid', None)
-    if event == 'prompt' and state['my_cards'] and str(prompt_uid) == str(MY_UID):
-        maybe_ask_gto()
+    # GTO is now triggered by countdown event (when hero's timer starts)
 
 buf = b''
 lock = threading.Lock()
