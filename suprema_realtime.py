@@ -71,37 +71,61 @@ def click_game_button(btn, label=''):
         return False
 
 def detect_gto_action(advice):
-    """Parse GTO advice to determine action and size."""
+    """Parse GTO advice to determine action and size. Robust against any format."""
+    import re
     text = advice.lower()
-    # Look after "ACTION:" if present
+
+    # Strategy 1: Look after "ACTION:" tag
     after_action = text
     if 'action:' in text:
-        after_action = text.split('action:')[-1][:50]
+        after_action = text.split('action:')[-1][:80]
 
+    # Strategy 2: If no ACTION: tag, scan full text for action keywords
     action = None
     size = None
 
-    if 'fold' in after_action[:20]:
-        action = 'fold'
-    elif 'all-in' in after_action or 'all_in' in after_action or 'allin' in after_action or 'shove' in after_action or 'push' in after_action:
+    # Check in priority order (all-in first since it contains other words)
+    if re.search(r'\ball[\s-]?in\b|\bshove\b|\bpush\b|\bjam\b', after_action[:40]):
         action = 'allin'
-    elif 'raise' in after_action[:20] or 'bet' in after_action[:20]:
+    elif 'fold' in after_action[:30]:
+        action = 'fold'
+    elif re.search(r'\braise\b|\bbet\b|\b3[\s-]?bet\b|\bopen\b', after_action[:30]):
         action = 'raise'
-        # Try to detect sizing: "2.5x", "3x", "4x", "75% pot", etc.
-        import re
-        # Match Nx patterns like "2.5x", "3x", "4x"
-        m = re.search(r'(\d+\.?\d*)\s*x', after_action)
+    elif 'call' in after_action[:30]:
+        action = 'call'
+    elif 'check' in after_action[:30]:
+        action = 'check'
+
+    # Fallback: scan entire response if nothing found in ACTION: area
+    if not action:
+        # Look for strong action signals anywhere in text
+        if re.search(r'\ball[\s-]?in\b|\bshove\b|\bpush\b|\bjam\b', text):
+            action = 'allin'
+        elif re.search(r'\bfold\b', text):
+            action = 'fold'
+        elif re.search(r'\braise\b|\bbet\b|\b3[\s-]?bet\b', text):
+            action = 'raise'
+        elif re.search(r'\bcall\b', text):
+            action = 'call'
+        elif re.search(r'\bcheck\b', text):
+            action = 'check'
+
+    # Extract sizing from anywhere in response
+    if action in ('raise', 'allin'):
+        # Match "SIZE: XBB" pattern first
+        m = re.search(r'size:\s*(\d+\.?\d*)\s*bb', text)
         if m:
             size = float(m.group(1))
-        # Match "N BB" patterns
+        # Match Nx patterns like "2.5x", "3x"
         if not size:
-            m = re.search(r'(\d+\.?\d*)\s*bb', after_action)
+            m = re.search(r'(\d+\.?\d*)\s*x\b', text)
             if m:
                 size = float(m.group(1))
-    elif 'call' in after_action[:20]:
-        action = 'call'
-    elif 'check' in after_action[:20]:
-        action = 'check'
+        # Match "N BB" patterns
+        if not size:
+            m = re.search(r'(\d+\.?\d*)\s*bb', text)
+            if m:
+                size = float(m.group(1))
 
     return action, size
 
