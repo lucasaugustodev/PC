@@ -733,10 +733,16 @@ def process(parsed):
         elif event == 'prompt':
             state['available_actions'] = {}
 
-    # countdown -> who's acting
+    # countdown -> who's acting (this is the REAL timer start)
     cd = d.get('countdown', {})
-    if isinstance(cd, dict):
-        state['acting_seat'] = cd.get('seat', -1)
+    if isinstance(cd, dict) and cd.get('seat', -1) >= 0 and cd.get('sec', 0) > 0:
+        acting_seat = cd.get('seat', -1)
+        state['acting_seat'] = acting_seat
+        # Check if it's hero's turn by matching seat
+        my_info = state['players'].get(str(MY_UID), {})
+        my_seat = my_info.get('seat', -99)
+        if acting_seat == my_seat and state['my_cards']:
+            maybe_ask_gto()
 
     # gameover
     gr = d.get('game_result', {})
