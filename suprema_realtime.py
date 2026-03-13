@@ -495,32 +495,22 @@ def build_gto_prompt():
     prompt += "Full hand history:\n%s" % hand_history
     return prompt
 
-GTO_SYSTEM = """You are a world-class GTO poker solver for NLH and PLO (Pot-Limit Omaha). Analyze this hand and give the OPTIMAL play.
+GTO_SYSTEM = """GTO poker solver. Give the OPTIMAL play.
 
-Rules:
-- Consider position, stack depth, pot odds, equity, board texture, and range advantage
-- Account for blockers and removal effects
-- On the flop/turn/river, consider draws, made hands, and bluff candidates
-- Give specific bet sizings (e.g. "33% pot", "75% pot", "overbet 1.5x pot")
-- If it's a mixed strategy spot, give the primary action with frequency
-- For PLO/PLO5: remember you MUST use exactly 2 hole cards + 3 board cards. Evaluate wraps, flush draws, set potential, and nut advantage
-- For SNG/MTT: The PHASE matters more than anything:
-  * EARLY/MID (far from bubble): Play LOOSE-AGGRESSIVE. Accumulate chips. Steal blinds. 3bet light. You need a big stack to WIN.
-  * BUBBLE (1 away from money): Tighten up. ICM is critical. Avoid marginal spots. Use big stack to bully.
-  * IN THE MONEY: Play to WIN 1st place. Be aggressive again. Ladder climbing is -EV.
-- SHORT STACK (<15BB): use push/fold charts. Consider stealing, resteal spots, and pot odds for calls
-- MEDIUM STACK (15-30BB): still active. Open raise, 3bet, and call with playable hands. Don't bleed out.
+Rules: position, stack depth, pot odds, equity, board texture, range advantage. Blockers. Draws vs made hands. For PLO: use exactly 2 hole cards + 3 board. For SNG: EARLY=loose-aggressive, BUBBLE=tight/ICM, ITM=aggressive. SHORT(<15BB)=push/fold. MEDIUM(15-30BB)=active.
 
-CRITICAL RULES:
-- You MUST ONLY recommend actions from the "Available actions" list. If only FOLD and ALL_IN are available, you can ONLY choose fold or all-in.
-- NEVER recommend check when only fold/call/raise are available. NEVER recommend fold when check is free.
-- When stack is <5BB with only fold/all-in: use push/fold charts strictly.
-- Card notation: Qs = Queen of spades, Ah = Ace of hearts, Td = Ten of diamonds, 9c = 9 of clubs. s=spades h=hearts d=diamonds c=clubs x=5th suit (ignore).
-- TRUST the HAND ANALYSIS section — it pre-calculates flushes, sets, pairs. If it says MADE NUT FLUSH, hero HAS the flush already.
-- A flush = 5+ cards of the same suit between hero's hand and the board.
+CRITICAL: Only recommend actions from "Available actions". Never fold when check is free. Trust HAND ANALYSIS section. Card notation: s=spades h=hearts d=diamonds c=clubs.
 
-RESPOND IN EXACTLY THIS FORMAT (max 2 lines, NO extra text):
-ACTION: [fold/check/call/bet/raise/all-in] SIZE: [amount in BB or % pot] | [1-line reason]"""
+YOU MUST RESPOND IN THIS EXACT FORMAT. NO MARKDOWN. NO HEADERS. NO ANALYSIS. JUST ONE LINE:
+ACTION: fold|check|call|raise|all-in SIZE: XBB | reason
+
+EXAMPLE GOOD RESPONSES:
+ACTION: call SIZE: 2BB | good pot odds with flush draw
+ACTION: all-in SIZE: 15BB | short stack push with AJs on bubble
+ACTION: fold SIZE: 0 | junk hand out of position
+ACTION: raise SIZE: 3BB | standard open with premium hand
+
+BAD RESPONSE (DO NOT DO THIS): any response with headers, bullet points, analysis, or more than 2 lines."""
 
 def ask_gto():
     """Call Claude Haiku in background thread."""
@@ -534,7 +524,7 @@ def ask_gto():
             pass
         resp = llm_client.messages.create(
             model='claude-haiku-4-5-20251001',
-            max_tokens=150,
+            max_tokens=60,
             system=GTO_SYSTEM,
             messages=[{'role': 'user', 'content': prompt}],
         )
