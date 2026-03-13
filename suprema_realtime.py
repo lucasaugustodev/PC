@@ -549,6 +549,8 @@ def ask_gto():
             messages=[{'role': 'user', 'content': prompt}],
         )
         advice = resp.content[0].text.strip()
+        # Strip non-ASCII chars (emojis etc) to avoid terminal encoding errors
+        advice = advice.encode('ascii', 'ignore').decode('ascii')
         state['gto_advice'] = advice
         state['dirty'] = True
 
