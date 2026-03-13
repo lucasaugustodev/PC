@@ -464,12 +464,28 @@ def ask_gto():
         # Auto-play based on GTO recommendation
         if AUTO_PLAY:
             action, size = detect_gto_action(advice)
-            # Safety: never fold when check is available
+            # Safety: validate action against available actions
             avail = state.get('available_actions', {})
             can_check = 'check' in avail and avail['check'] is not None
+            can_call = 'call' in avail and avail['call'] is not None
+            can_raise = 'raise' in avail and avail['raise'] is not None
+            can_allin = 'all_in' in avail and avail['all_in'] is not None
+            can_fold = 'fold' in avail and avail['fold'] is not None
+
+            # Never fold when check is free
             if action == 'fold' and can_check:
                 action = 'check'
                 state['gto_advice'] = advice + ' [OVERRIDE: check > fold]'
+                state['dirty'] = True
+            # If raise/bet recommended but only fold+allin available, convert to allin or fold
+            if action == 'raise' and not can_raise and can_allin:
+                action = 'allin'
+                state['gto_advice'] = advice + ' [OVERRIDE: all-in (no raise)]'
+                state['dirty'] = True
+            # If call recommended but no call available, check if can check
+            if action == 'call' and not can_call and can_check:
+                action = 'check'
+                state['gto_advice'] = advice + ' [OVERRIDE: check (no call)]'
                 state['dirty'] = True
             if action:
                 time.sleep(3)  # wait before acting to look natural + let GTO think
