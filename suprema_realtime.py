@@ -550,7 +550,10 @@ def ask_gto():
             model='claude-haiku-4-5-20251001',
             max_tokens=60,
             system=GTO_SYSTEM,
-            messages=[{'role': 'user', 'content': prompt}],
+            messages=[
+                {'role': 'user', 'content': prompt},
+                {'role': 'assistant', 'content': 'ACTION:'},
+            ],
         )
         advice = resp.content[0].text.strip()
         # Strip non-ASCII chars (emojis etc) to avoid terminal encoding errors
