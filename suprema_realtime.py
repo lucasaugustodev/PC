@@ -332,12 +332,10 @@ RANK_NAMES = {'2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9',
               'T':'10','J':'Jack','Q':'Queen','K':'King','A':'Ace'}
 
 def describe_card(c):
-    """Convert 'Qs' to 'Q♠(Queen of spades)'."""
+    """Convert 'Qs' to 'Qs(Queen-spades)'."""
     if len(c) != 2:
         return c
-    r, s = c[0], c[1]
-    suit_sym = {'c':'♣','d':'♦','h':'♥','s':'♠','x':'?'}
-    return "%s%s" % (r, suit_sym.get(s, s))
+    return c  # keep simple notation, LLM now knows the format
 
 def analyze_hand(hero_cards, board_cards):
     """Pre-analyze hand strength for the LLM."""
