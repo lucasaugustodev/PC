@@ -38,14 +38,14 @@ BTN_FOLD_X, BTN_FOLD_Y = 77, 812
 BTN_CHECK_X, BTN_CHECK_Y = 232, 812
 BTN_BET_X, BTN_BET_Y = 388, 812
 
-# Raise panel buttons (after clicking Apostar)
-BTN_25X_X, BTN_25X_Y = 50, 770
-BTN_3X_X, BTN_3X_Y = 135, 770
-BTN_4X_X, BTN_4X_Y = 205, 770
-BTN_ALLIN_X, BTN_ALLIN_Y = 290, 770
-BTN_CONFIRM_X, BTN_CONFIRM_Y = 400, 770
-BTN_PLUS_X, BTN_PLUS_Y = 370, 580
-BTN_MINUS_X, BTN_MINUS_Y = 370, 650
+# Raise panel buttons (after clicking Apostar) - calibrated from 453x792 content + 6/46 chrome offset
+BTN_25X_X, BTN_25X_Y = 44, 817
+BTN_3X_X, BTN_3X_Y = 119, 817
+BTN_4X_X, BTN_4X_Y = 191, 817
+BTN_ALLIN_X, BTN_ALLIN_Y = 272, 817
+BTN_CONFIRM_X, BTN_CONFIRM_Y = 388, 817
+BTN_PLUS_X, BTN_PLUS_Y = 316, 536
+BTN_MINUS_X, BTN_MINUS_Y = 316, 606
 
 AUTO_PLAY = True  # auto-click actions based on GTO recommendation
 
@@ -133,15 +133,10 @@ def auto_play(action, size=None):
         return click_game_button(BTN_FOLD_X, BTN_FOLD_Y, 'FOLD')
     elif action in ('check', 'call'):
         return click_game_button(BTN_CHECK_X, BTN_CHECK_Y, 'CHECK/CALL')
-    elif action == 'raise':
-        return auto_raise(size)
-    elif action == 'allin':
-        click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
-        time.sleep(0.4)
-        click_game_button(BTN_ALLIN_X, BTN_ALLIN_Y, 'ALL-IN')
-        time.sleep(0.2)
-        click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
-        return True
+    elif action in ('raise', 'allin'):
+        # Raise/all-in needs calibration — manual for now
+        print("  [AUTO] %s recommended — act manually" % action.upper(), flush=True)
+        return False
     return False
 
 # Role code -> action name
