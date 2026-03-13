@@ -697,14 +697,18 @@ def process(parsed):
             }
             state['dirty'] = True
 
-    # gamer_prompt -> available actions for hero
+    # gamer_prompt -> available actions for hero (only non-null = available)
     gp = d.get('gamer_prompt', {})
-    if isinstance(gp, dict) and any(v is not None for v in gp.values()):
+    if isinstance(gp, dict) and gp:
         actions = {}
         for action_name, val in gp.items():
             if val is not None:
                 actions[action_name] = val
-        state['available_actions'] = actions
+        # Only update if we got a fresh prompt (reset stale data)
+        if actions:
+            state['available_actions'] = actions
+        elif event == 'prompt':
+            state['available_actions'] = {}
 
     # countdown -> who's acting
     cd = d.get('countdown', {})
