@@ -28,14 +28,14 @@ BTN_FOLD = (77, 812)
 BTN_CHECK = (232, 812)
 BTN_BET = (388, 812)
 
-# Raise panel buttons
-BTN_25X = (44, 817)
-BTN_3X = (119, 817)
-BTN_4X = (191, 817)
-BTN_ALLIN = (272, 817)
-BTN_CONFIRM = (388, 817)
-BTN_PLUS = (316, 536)
-BTN_MINUS = (316, 606)
+# Raise panel buttons (calibrated from raise2.png 449x829 + chrome 8/9)
+BTN_PRESET1 = (53, 802)    # 1/3 POT or 2.5X
+BTN_PRESET2 = (141, 802)   # 2/3 POT or 3X
+BTN_PRESET3 = (221, 802)   # 1 POT or 4X
+BTN_ALLIN = (308, 802)     # All In
+BTN_CONFIRM = (408, 802)   # Confirmar
+BTN_PLUS = (324, 545)
+BTN_MINUS = (324, 615)
 
 print("=== SupremaPoker Button Tester ===")
 print()
@@ -51,19 +51,17 @@ print()
 print("Commands:")
 print("  1 = FOLD (Desistir)")
 print("  2 = CHECK/CALL (Passar)")
-print("  3 = BET/RAISE (Apostar)")
-print("  4 = 2.5X preset")
-print("  5 = 3X preset")
-print("  6 = 4X preset")
+print("  3 = BET/RAISE (Apostar) - opens raise panel")
+print("  4 = Preset 1 (1/3 POT or 2.5X)")
+print("  5 = Preset 2 (2/3 POT or 3X)")
+print("  6 = Preset 3 (1 POT or 4X)")
 print("  7 = All In")
 print("  8 = Confirmar")
 print("  9 = + (plus)")
 print("  0 = - (minus)")
-print("  r = Full raise test: Apostar -> 3X -> Confirmar")
-print("  a = Full all-in test: Apostar -> All In -> Confirmar")
+print("  r = Full raise: Apostar -> Preset2 -> Confirmar")
+print("  a = Full all-in: Apostar -> All In -> Confirmar")
 print("  q = Quit")
-print()
-print("NOTE: Make sure it's your turn before testing!")
 print()
 
 while True:
@@ -77,11 +75,11 @@ while True:
     elif cmd == '3':
         click(*BTN_BET, 'APOSTAR')
     elif cmd == '4':
-        click(*BTN_25X, '2.5X')
+        click(*BTN_PRESET1, 'PRESET1')
     elif cmd == '5':
-        click(*BTN_3X, '3X')
+        click(*BTN_PRESET2, 'PRESET2')
     elif cmd == '6':
-        click(*BTN_4X, '4X')
+        click(*BTN_PRESET3, 'PRESET3')
     elif cmd == '7':
         click(*BTN_ALLIN, 'ALL-IN')
     elif cmd == '8':
@@ -91,16 +89,16 @@ while True:
     elif cmd == '0':
         click(*BTN_MINUS, 'MINUS')
     elif cmd == 'r':
-        print("--- Full raise sequence ---")
+        print("--- Full raise: Apostar -> Preset2 -> Confirmar ---")
         click(*BTN_BET, 'APOSTAR')
-        time.sleep(0.7)
-        click(*BTN_3X, '3X')
+        time.sleep(0.8)
+        click(*BTN_PRESET2, 'PRESET2')
         time.sleep(0.3)
         click(*BTN_CONFIRM, 'CONFIRMAR')
     elif cmd == 'a':
-        print("--- Full all-in sequence ---")
+        print("--- Full all-in: Apostar -> All In -> Confirmar ---")
         click(*BTN_BET, 'APOSTAR')
-        time.sleep(0.7)
+        time.sleep(0.8)
         click(*BTN_ALLIN, 'ALL-IN')
         time.sleep(0.3)
         click(*BTN_CONFIRM, 'CONFIRMAR')
