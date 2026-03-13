@@ -734,11 +734,15 @@ def process(parsed):
         for action_name, val in gp.items():
             if val is not None:
                 actions[action_name] = val
-        # Only update if we got a fresh prompt (reset stale data)
         if actions:
             state['available_actions'] = actions
-        elif event == 'prompt':
-            state['available_actions'] = {}
+    # Also check in prompt event (hero-specific)
+    if event == 'prompt':
+        prompt_gp = d.get('gamer_prompt', parsed.get('data', {}).get('gamer_prompt', {}))
+        if isinstance(prompt_gp, dict):
+            actions = {k: v for k, v in prompt_gp.items() if v is not None}
+            if actions:
+                state['available_actions'] = actions
 
     # countdown -> who's acting (this is the REAL timer start)
     cd = d.get('countdown', {})
