@@ -32,41 +32,39 @@ RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
 MY_UID = 588900
 
-# Button positions relative to SupremaPoker window (465x838)
-# Desistir (Fold) = left button, Passar (Check) = center, Apostar (Bet) = right
-BTN_FOLD_X, BTN_FOLD_Y = 77, 812
-BTN_CHECK_X, BTN_CHECK_Y = 232, 812
-BTN_BET_X, BTN_BET_Y = 388, 812
+# Button positions as proportions (0.0-1.0) of window size — adapts to any window size
+# Main action buttons
+BTN_FOLD    = (0.17, 0.97)  # Desistir (left)
+BTN_CHECK   = (0.50, 0.97)  # Passar/Pagar (center)
+BTN_BET     = (0.84, 0.97)  # Apostar/Aumentar (right)
 
-# Raise panel buttons (after clicking Apostar) - calibrated from 449x829 screenshot + 8/9 chrome
-# 5 buttons: [preset1] [preset2] [preset3] [All In] [Confirmar]
-# Presets vary (2.5X/3X/4X or 1/3POT/2/3POT/1POT) but positions are same
-BTN_PRESET1_X, BTN_PRESET1_Y = 53, 802    # 1/3 POT or 2.5X
-BTN_PRESET2_X, BTN_PRESET2_Y = 141, 802   # 2/3 POT or 3X
-BTN_PRESET3_X, BTN_PRESET3_Y = 221, 802   # 1 POT or 4X
-BTN_ALLIN_X, BTN_ALLIN_Y = 308, 802       # All In
-BTN_CONFIRM_X, BTN_CONFIRM_Y = 408, 802   # Confirmar
-BTN_PLUS_X, BTN_PLUS_Y = 324, 545
-BTN_MINUS_X, BTN_MINUS_Y = 324, 615
+# Raise panel buttons (after clicking Apostar)
+BTN_PRESET1 = (0.11, 0.97)  # 1/3 POT or 2.5X
+BTN_PRESET2 = (0.30, 0.97)  # 2/3 POT or 3X
+BTN_PRESET3 = (0.48, 0.97)  # 1 POT or 4X
+BTN_ALLIN   = (0.65, 0.97)  # All In
+BTN_CONFIRM = (0.87, 0.97)  # Confirmar
+BTN_PLUS    = (0.70, 0.66)  # +
+BTN_MINUS   = (0.70, 0.74)  # -
 
-AUTO_PLAY = True  # auto-click actions based on GTO recommendation
+AUTO_PLAY = True
 
-def click_game_button(rel_x, rel_y, label=''):
-    """Click a button at position relative to SupremaPoker window."""
+def click_game_button(btn, label=''):
+    """Click a button using proportional position on SupremaPoker window."""
     try:
         wins = gw.getWindowsWithTitle('SupremaPoker')
         if not wins:
             print("  [AUTO] SupremaPoker window not found!", flush=True)
             return False
         w = wins[0]
-        abs_x = w.left + rel_x
-        abs_y = w.top + rel_y
+        abs_x = w.left + int(btn[0] * w.width)
+        abs_y = w.top + int(btn[1] * w.height)
         ctypes.windll.user32.SetCursorPos(abs_x, abs_y)
         time.sleep(0.05)
-        ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)  # left down
+        ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)
         time.sleep(0.02)
-        ctypes.windll.user32.mouse_event(0x0004, 0, 0, 0, 0)  # left up
-        print("  [AUTO] %s clicked at (%d, %d)" % (label, abs_x, abs_y), flush=True)
+        ctypes.windll.user32.mouse_event(0x0004, 0, 0, 0, 0)
+        print("  [AUTO] %s at (%d,%d) win=%dx%d" % (label, abs_x, abs_y, w.width, w.height), flush=True)
         return True
     except Exception as e:
         print("  [AUTO] Error: %s" % e, flush=True)
@@ -109,40 +107,36 @@ def detect_gto_action(advice):
 
 def auto_raise(size_x):
     """Click Apostar, then select preset size, then Confirmar."""
-    # Step 1: click Apostar to open raise panel
-    click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
-    time.sleep(0.8)  # wait for panel to open
+    click_game_button(BTN_BET, 'APOSTAR')
+    time.sleep(0.8)
 
-    # Step 2: select sizing preset (maps to 1/3pot, 2/3pot, 1pot or 2.5x, 3x, 4x)
     if size_x and size_x <= 2.5:
-        click_game_button(BTN_PRESET1_X, BTN_PRESET1_Y, 'PRESET1')
+        click_game_button(BTN_PRESET1, 'PRESET1')
     elif size_x and size_x <= 3.5:
-        click_game_button(BTN_PRESET2_X, BTN_PRESET2_Y, 'PRESET2')
+        click_game_button(BTN_PRESET2, 'PRESET2')
     elif size_x and size_x <= 5.0:
-        click_game_button(BTN_PRESET3_X, BTN_PRESET3_Y, 'PRESET3')
+        click_game_button(BTN_PRESET3, 'PRESET3')
     else:
-        # Default to preset2 (middle sizing)
-        click_game_button(BTN_PRESET2_X, BTN_PRESET2_Y, 'PRESET2-default')
+        click_game_button(BTN_PRESET2, 'PRESET2-default')
     time.sleep(0.3)
 
-    # Step 3: confirm
-    click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
+    click_game_button(BTN_CONFIRM, 'CONFIRMAR')
     return True
 
 def auto_play(action, size=None):
     """Auto-click the appropriate button based on GTO action."""
     if action == 'fold':
-        return click_game_button(BTN_FOLD_X, BTN_FOLD_Y, 'FOLD')
+        return click_game_button(BTN_FOLD, 'FOLD')
     elif action in ('check', 'call'):
-        return click_game_button(BTN_CHECK_X, BTN_CHECK_Y, 'CHECK/CALL')
+        return click_game_button(BTN_CHECK, 'CHECK/CALL')
     elif action == 'raise':
         return auto_raise(size)
     elif action == 'allin':
-        click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
-        time.sleep(0.5)
-        click_game_button(BTN_ALLIN_X, BTN_ALLIN_Y, 'ALL-IN')
+        click_game_button(BTN_BET, 'APOSTAR')
+        time.sleep(0.8)
+        click_game_button(BTN_ALLIN, 'ALL-IN')
         time.sleep(0.3)
-        click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
+        click_game_button(BTN_CONFIRM, 'CONFIRMAR')
         return True
     return False
 
@@ -525,7 +519,7 @@ CRITICAL RULES:
 - You MUST ONLY recommend actions from the "Available actions" list. If only FOLD and ALL_IN are available, you can ONLY choose fold or all-in.
 - NEVER recommend check when only fold/call/raise are available. NEVER recommend fold when check is free.
 - When stack is <5BB with only fold/all-in: use push/fold charts strictly.
-- Card notation: Qs = Queen of spades, Ah = Ace of hearts, Td = Ten of diamonds, 9c = 9 of clubs. ♠=spades ♥=hearts ♦=diamonds ♣=clubs.
+- Card notation: Qs = Queen of spades, Ah = Ace of hearts, Td = Ten of diamonds, 9c = 9 of clubs. s=spades h=hearts d=diamonds c=clubs x=5th suit (ignore).
 - TRUST the HAND ANALYSIS section — it pre-calculates flushes, sets, pairs. If it says MADE NUT FLUSH, hero HAS the flush already.
 - A flush = 5+ cards of the same suit between hero's hand and the board.
 
