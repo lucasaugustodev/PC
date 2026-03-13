@@ -486,18 +486,23 @@ def build_gto_prompt():
     my_cr = state['players'].get(str(MY_UID), {}).get('chips_round', 0)
     to_call = max(0, state['max_bet'] - my_cr)
 
+    # Pre-analyze hand strength
+    hand_analysis = analyze_hand(state['my_cards'], state['board'])
+
     prompt = (
         "%s Stacks ~%s. "
         "Hero has [%s]. Board: [%s]. Street: %s. "
         "Pot: %s. %s "
         "Players in hand: %d. "
         "Hero seat %d of %d.%s\n\n"
+        "%s%s\n\n"
         "%s\n\n"
         "Full hand history:\n%s"
     ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
          "To call: %s." % fmt_bb(to_call) if to_call > 0 else "No bet to call (can check).",
          num_players,
          my_seat_num, total_seats, icm_note,
+         hand_analysis,
          available_str,
          hand_history)
     return prompt
