@@ -109,7 +109,7 @@ def auto_raise(size_x):
     """Click Apostar, then select preset size, then Confirmar."""
     # Step 1: click Apostar to open raise panel
     click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
-    time.sleep(0.4)
+    time.sleep(0.7)  # wait for panel to open
 
     # Step 2: select sizing preset
     if size_x and size_x <= 2.5:
@@ -119,9 +119,9 @@ def auto_raise(size_x):
     elif size_x and size_x <= 4.0:
         click_game_button(BTN_4X_X, BTN_4X_Y, '4X')
     else:
-        # Default to 3x if no size detected
-        click_game_button(BTN_3X_X, BTN_3X_Y, '3X-default')
-    time.sleep(0.2)
+        # Default to 2.5x if no size detected
+        click_game_button(BTN_25X_X, BTN_25X_Y, '2.5X-default')
+    time.sleep(0.3)
 
     # Step 3: confirm
     click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
