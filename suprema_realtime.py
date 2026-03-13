@@ -433,17 +433,22 @@ Rules:
 - SHORT STACK (<15BB): use push/fold charts. Consider stealing, resteal spots, and pot odds for calls
 - MEDIUM STACK (15-30BB): still active. Open raise, 3bet, and call with playable hands. Don't bleed out.
 
+CRITICAL RULES:
+- You MUST ONLY recommend actions from the "Available actions" list. If only FOLD and ALL_IN are available, you can ONLY choose fold or all-in.
+- NEVER recommend check when only fold/call/raise are available. NEVER recommend fold when check is free.
+- When stack is <5BB with only fold/all-in: use push/fold charts strictly.
+
 Response format (keep it SHORT, max 2 lines):
-ACTION: [fold/check/call/bet/raise] SIZE: [amount in BB or % pot] | [1-line reason]"""
+ACTION: [fold/check/call/bet/raise/all-in] SIZE: [amount in BB or % pot] | [1-line reason]"""
 
 def ask_gto():
     """Call Claude Haiku in background thread."""
     try:
         prompt = build_gto_prompt()
-        # Log prompt for debugging
+        # Log prompt + available actions for debugging
         try:
             with open(os.path.expanduser('~/suprema_gto_prompts.log'), 'a', encoding='utf-8') as f:
-                f.write("[%s] %s\n\n" % (time.strftime('%H:%M:%S'), prompt))
+                f.write("[%s] avail=%s\n%s\n\n" % (time.strftime('%H:%M:%S'), state.get('available_actions', {}), prompt))
         except:
             pass
         resp = llm_client.messages.create(
