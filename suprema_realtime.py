@@ -555,7 +555,7 @@ def ask_gto():
                 {'role': 'assistant', 'content': 'ACTION:'},
             ],
         )
-        advice = resp.content[0].text.strip()
+        advice = 'ACTION:' + resp.content[0].text.strip()
         # Strip non-ASCII chars (emojis etc) to avoid terminal encoding errors
         advice = advice.encode('ascii', 'ignore').decode('ascii')
         state['gto_advice'] = advice
