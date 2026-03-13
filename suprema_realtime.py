@@ -327,10 +327,86 @@ def show():
     print("  Ctrl+C to stop", flush=True)
     state['dirty'] = False
 
+SUIT_NAMES = {'c': 'clubs', 'd': 'diamonds', 'h': 'hearts', 's': 'spades', 'x': 'suit5'}
+RANK_NAMES = {'2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9',
+              'T':'10','J':'Jack','Q':'Queen','K':'King','A':'Ace'}
+
+def describe_card(c):
+    """Convert 'Qs' to 'Q♠(Queen of spades)'."""
+    if len(c) != 2:
+        return c
+    r, s = c[0], c[1]
+    suit_sym = {'c':'♣','d':'♦','h':'♥','s':'♠','x':'?'}
+    return "%s%s" % (r, suit_sym.get(s, s))
+
+def analyze_hand(hero_cards, board_cards):
+    """Pre-analyze hand strength for the LLM."""
+    if not hero_cards or not board_cards:
+        return ""
+
+    all_cards = hero_cards + board_cards
+    # Count suits
+    suits = {}
+    for c in all_cards:
+        if len(c) == 2:
+            s = c[1]
+            suits[s] = suits.get(s, []) + [c]
+
+    hero_suits = {}
+    for c in hero_cards:
+        if len(c) == 2:
+            hero_suits[c[1]] = hero_suits.get(c[1], []) + [c]
+
+    board_suits = {}
+    for c in board_cards:
+        if len(c) == 2:
+            board_suits[c[1]] = board_suits.get(c[1], []) + [c]
+
+    notes = []
+
+    # Flush detection
+    for s, cards in suits.items():
+        hero_in_suit = len(hero_suits.get(s, []))
+        board_in_suit = len(board_suits.get(s, []))
+        if len(cards) >= 5 and hero_in_suit >= 1:
+            # Check if hero has the nut flush card (Ace of that suit)
+            has_ace = any(c[0] == 'A' for c in hero_suits.get(s, []))
+            if has_ace:
+                notes.append("MADE NUT FLUSH in %s!" % SUIT_NAMES.get(s, s))
+            else:
+                notes.append("MADE FLUSH in %s" % SUIT_NAMES.get(s, s))
+        elif len(cards) == 4 and hero_in_suit >= 1:
+            has_ace = any(c[0] == 'A' for c in hero_suits.get(s, []))
+            if has_ace:
+                notes.append("NUT FLUSH DRAW in %s (1 card needed)" % SUIT_NAMES.get(s, s))
+            else:
+                notes.append("Flush draw in %s (1 card needed)" % SUIT_NAMES.get(s, s))
+
+    # Pair/set detection on board
+    rank_count = {}
+    for c in all_cards:
+        if len(c) == 2:
+            rank_count[c[0]] = rank_count.get(c[0], 0) + 1
+
+    hero_ranks = [c[0] for c in hero_cards if len(c) == 2]
+    for r in hero_ranks:
+        if rank_count.get(r, 0) >= 4:
+            notes.append("QUADS %s!" % r)
+        elif rank_count.get(r, 0) == 3:
+            notes.append("SET/TRIPS of %s" % r)
+        elif rank_count.get(r, 0) == 2:
+            board_has_r = any(c[0] == r for c in board_cards)
+            if board_has_r:
+                notes.append("Pair of %s (hit board)" % r)
+
+    if notes:
+        return " HAND ANALYSIS: " + "; ".join(notes) + "."
+    return ""
+
 def build_gto_prompt():
     """Build poker situation description for LLM."""
-    cards = ' '.join(state['my_cards']) if state['my_cards'] else '??'
-    board = ' '.join(state['board']) if state['board'] else 'none'
+    cards = ' '.join(describe_card(c) for c in state['my_cards']) if state['my_cards'] else '??'
+    board = ' '.join(describe_card(c) for c in state['board']) if state['board'] else 'none'
     street = state['street'] or '?'
     pot = fmt_bb(state['pot'])
     max_bet = fmt_bb(state['max_bet'])
