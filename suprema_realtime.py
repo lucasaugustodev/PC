@@ -491,11 +491,10 @@ def build_gto_prompt():
         "%s\n\n"
         "Full hand history:\n%s"
     ) % (game_type, fmt_bb(my_stack), cards, board, street, pot,
-         "To call: %s." % fmt_bb(to_call) if to_call > 0 else "No bet to call (can check).",
+         ("To call: %s." % fmt_bb(to_call)) if to_call > 0 else "No bet to call (can check).",
          num_players,
          my_seat_num, total_seats, icm_note,
-         hand_analysis,
-         available_str,
+         hand_analysis, available_str,
          hand_history)
     return prompt
 
