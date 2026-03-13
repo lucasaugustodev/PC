@@ -369,10 +369,17 @@ def build_gto_prompt():
         # ICM phase detection
         pc = state['player_count']
         prize = state['prize_count']
+        my_stack_bb = bb(state['players'].get(str(MY_UID), {}).get('stack', 0)) if BB_SIZE > 0 else 0
+        avg_bb = bb(state['avg_stack']) if BB_SIZE > 0 else 0
+        is_big_stack = my_stack_bb > avg_bb * 1.2 if avg_bb > 0 else False
+
         if prize > 0 and pc > prize + 2:
             icm_note = " EARLY/MID stage — far from bubble (top %d paid, %d remain). Focus on CHIP ACCUMULATION. Play aggressively, steal blinds, 3bet light. You need chips to WIN, not just survive." % (prize, pc)
         elif prize > 0 and pc == prize + 1:
-            icm_note = " BUBBLE! You are 1 elimination from the money (top %d paid, %d remain). ICM is critical — tighten significantly unless you are big stack." % (prize, pc)
+            if is_big_stack:
+                icm_note = " BUBBLE (top %d paid, %d remain). Hero is BIG STACK — EXPLOIT the bubble! Put pressure on medium stacks. Call all-ins from short stacks with decent hands (any Ax, any pair, KQ+, suited connectors). Short stacks are desperate — you can afford to gamble." % (prize, pc)
+            else:
+                icm_note = " BUBBLE (top %d paid, %d remain). Be selective but don't blind out. Premium hands and short stack shoves are still worth calling if pot odds are good. AJ+ ATs+ KQ+ 77+ are calls vs short stacks." % (prize, pc)
         elif prize > 0 and pc <= prize:
             icm_note = " IN THE MONEY! Top %d paid, %d remain. Now play to WIN — go for 1st place, not ladder. Be aggressive." % (prize, pc)
         else:
