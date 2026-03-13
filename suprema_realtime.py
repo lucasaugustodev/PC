@@ -584,12 +584,14 @@ def ask_gto():
                     state['gto_advice'] = advice + ' [AUTO: %s]' % label
                     state['dirty'] = True
     except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
         err = str(e).encode('ascii', 'ignore').decode('ascii')[:80]
         state['gto_advice'] = 'GTO Error: %s' % err
         state['dirty'] = True
         try:
-            with open(os.path.expanduser('~/suprema_gto_prompts.log'), 'a', encoding='utf-8') as f:
-                f.write("[ERROR] %s\n\n" % str(e))
+            with open(os.path.expanduser('~/suprema_gto_errors.log'), 'a', encoding='utf-8') as f:
+                f.write("[%s] %s\n%s\n\n" % (time.strftime('%H:%M:%S'), str(e), tb))
         except:
             pass
 
