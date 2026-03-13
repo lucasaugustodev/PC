@@ -527,8 +527,11 @@ CRITICAL RULES:
 - You MUST ONLY recommend actions from the "Available actions" list. If only FOLD and ALL_IN are available, you can ONLY choose fold or all-in.
 - NEVER recommend check when only fold/call/raise are available. NEVER recommend fold when check is free.
 - When stack is <5BB with only fold/all-in: use push/fold charts strictly.
+- Card notation: Qs = Queen of spades, Ah = Ace of hearts, Td = Ten of diamonds, 9c = 9 of clubs. ♠=spades ♥=hearts ♦=diamonds ♣=clubs.
+- TRUST the HAND ANALYSIS section — it pre-calculates flushes, sets, pairs. If it says MADE NUT FLUSH, hero HAS the flush already.
+- A flush = 5+ cards of the same suit between hero's hand and the board.
 
-Response format (keep it SHORT, max 2 lines):
+RESPOND IN EXACTLY THIS FORMAT (max 2 lines, NO extra text):
 ACTION: [fold/check/call/bet/raise/all-in] SIZE: [amount in BB or % pot] | [1-line reason]"""
 
 def ask_gto():
