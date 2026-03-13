@@ -133,10 +133,15 @@ def auto_play(action, size=None):
         return click_game_button(BTN_FOLD_X, BTN_FOLD_Y, 'FOLD')
     elif action in ('check', 'call'):
         return click_game_button(BTN_CHECK_X, BTN_CHECK_Y, 'CHECK/CALL')
-    elif action in ('raise', 'allin'):
-        # Raise/all-in needs calibration — manual for now
-        print("  [AUTO] %s recommended — act manually" % action.upper(), flush=True)
-        return False
+    elif action == 'raise':
+        return auto_raise(size)
+    elif action == 'allin':
+        click_game_button(BTN_BET_X, BTN_BET_Y, 'APOSTAR')
+        time.sleep(0.5)
+        click_game_button(BTN_ALLIN_X, BTN_ALLIN_Y, 'ALL-IN')
+        time.sleep(0.3)
+        click_game_button(BTN_CONFIRM_X, BTN_CONFIRM_Y, 'CONFIRMAR')
+        return True
     return False
 
 # Role code -> action name
