@@ -584,8 +584,14 @@ def ask_gto():
                     state['gto_advice'] = advice + ' [AUTO: %s]' % label
                     state['dirty'] = True
     except Exception as e:
-        state['gto_advice'] = 'Error: %s' % str(e)[:80]
+        err = str(e).encode('ascii', 'ignore').decode('ascii')[:80]
+        state['gto_advice'] = 'GTO Error: %s' % err
         state['dirty'] = True
+        try:
+            with open(os.path.expanduser('~/suprema_gto_prompts.log'), 'a', encoding='utf-8') as f:
+                f.write("[ERROR] %s\n\n" % str(e))
+        except:
+            pass
 
 gto_thread = None
 gto_last_hand = ''
