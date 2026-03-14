@@ -426,8 +426,8 @@ for pid in pids:
     except Exception as e:
         print(f"  PID {pid}: {e}")
 
-print("\nDetecting gameSSL (3s)...")
-time.sleep(3)
+print("\nDetecting gameSSL (6s)... Navigate in the app if needed.")
+time.sleep(6)
 
 for sess, sc, pid in sessions:
     try:
@@ -462,10 +462,10 @@ for route in KNOWN_ROUTES:
 
 print(f"\n  Validation: {validation_ok}/{len(KNOWN_ROUTES)} known routes responded")
 if validation_ok == 0:
-    print("  \033[91mWARNING: No responses! Check if you're connected to a game.\033[0m")
-    inp = input("  Continue anyway? (y/n): ").strip().lower()
-    if inp != 'y':
-        print("Aborting."); sys.exit(1)
+    print("  \033[91mWARNING: No responses from known routes.\033[0m")
+    print("  Responses may be arriving as type-4 pushes instead of type-2.")
+    print("  Continuing with enumeration anyway...")
+    time.sleep(1)
 
 # ── Enumerate by priority ──
 priorities = generate_prioritized_routes()
