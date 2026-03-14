@@ -164,10 +164,10 @@ def build_pomelo_request(route, body_dict):
     rlen = len(route_bytes)
     req_id = req_counter
     req_counter += 1
-    # Inner: [reqId_hi] [reqId_lo] [flags=01] [routeLen] [route] [msgpack]
+    # Inner: [reqId_hi] [reqId_lo] [flags=02] [routeLen] [route] [msgpack]
     inner = bytes([(req_id >> 8) & 0xFF,
                    req_id & 0xFF,
-                   0x01,
+                   0x02,
                    rlen]) + route_bytes + body_bytes
     plen = len(inner)
     # Header: [type=4] [plen 3B]
