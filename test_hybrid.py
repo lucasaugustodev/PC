@@ -239,14 +239,9 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
             if votes[k] == 'fold':
                 votes[k] = 'check'
 
-    # Rule: equity < 15% and facing big bet, fold (clear trash)
+    # Rules minimized - let RAG/eval7 voting decide
+    # Only rule: never fold when can check
     bet_ratio = to_call / pot if pot > 0 else 0
-    if equity < 0.15 and pot_odds > 0.35 and not can_check:
-        rules_action = 'fold'
-
-    # Rule: nuts (>95%) facing big bet in big pot -> call (trap only with near-nuts)
-    if is_postflop and equity > 0.95 and facing_bet and bet_ratio > 0.50 and pot > 50:
-        rules_action = 'call'
 
     # Combine votes
     if rules_action:
