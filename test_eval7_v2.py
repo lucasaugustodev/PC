@@ -110,7 +110,7 @@ def decide(equity, pot, to_call, can_check, can_raise, num_opps, hero_cards, boa
                     # HU: even trash can call if pot odds are good and has some equity
                     if equity > 0.40 and pot_odds < 0.30:
                         return 'CALL (HU wide call, equity %.0f%%, tier 5)' % (equity*100)
-                    elif hi >= 10 or (hi == 14):
+                    elif max(RANK_VAL.get(hero_cards[0][0],0), RANK_VAL.get(hero_cards[1][0],0)) >= 10:
                         return 'CALL (HU has high card, tier 5)'
                     else:
                         return 'FOLD (trash HU, tier 5)'
