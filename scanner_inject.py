@@ -262,9 +262,13 @@ def inject(pomelo_bytes):
 
 # Wait to capture current reqId
 print(f"\nUltimo reqId capturado: {last_reqid}")
-print("Esperando 5s pra pegar mais reqIds do trafego real...")
-time.sleep(5)
-print(f"Ultimo reqId agora: {last_reqid}")
+if last_reqid == 0:
+    last_reqid = 100  # Start from safe high number
+    print(f"  Nenhum reqId real capturado, usando {last_reqid}")
+else:
+    print("Esperando 3s pra pegar mais reqIds...")
+    time.sleep(3)
+    print(f"Ultimo reqId agora: {last_reqid}")
 
 # Get match IDs from the scanner data
 scanner_file = os.path.expanduser('~/suprema_scanner.json')
