@@ -232,17 +232,39 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
     # 4. Rules override
     rules_action = None
     pot_odds = to_call / (pot + to_call) if (pot + to_call) > 0 else 0
+    is_postflop = len(board) > 0
+    facing_bet = to_call > 0
+
     # Rule: never fold when can check
     if can_check and to_call == 0:
         for k in votes:
             if votes[k] == 'fold':
                 votes[k] = 'check'
-    # Rule: equity > 85% always raise
-    if equity > 0.85:
+
+    # Rule: TRAP/SLOW-PLAY - monster hand facing BIG bet in BIG pot -> call
+    bet_ratio = to_call / pot if pot > 0 else 0
+    if is_postflop and equity > 0.90 and facing_bet and bet_ratio > 0.35 and pot > 30:
+        rules_action = 'call'
+    # Rule: monster hand facing small bet or small pot -> raise for value
+    elif is_postflop and equity > 0.90 and facing_bet:
         rules_action = 'raise'
+    # Rule: monster hand, can check, BIG pot -> check (induce bluff)
+    elif is_postflop and equity > 0.90 and not facing_bet and pot > 40:
+        rules_action = 'check'
+    # Rule: monster hand, can check, small pot -> raise for value
+    elif is_postflop and equity > 0.90 and not facing_bet:
+        rules_action = 'raise'
+    # Rule: strong hand preflop -> raise
+    elif not is_postflop and equity > 0.85:
+        rules_action = 'raise'
+
     # Rule: equity < 20% and facing big bet, fold
     if equity < 0.20 and pot_odds > 0.30 and not can_check:
         rules_action = 'fold'
+
+    # Rule: medium hand (70-90%) facing BIG bet (>40% pot) -> call (pot control)
+    if is_postflop and 0.70 < equity <= 0.90 and facing_bet and bet_ratio > 0.40:
+        rules_action = 'call'
 
     # Combine votes
     if rules_action:
