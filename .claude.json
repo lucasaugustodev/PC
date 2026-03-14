@@ -29,8 +29,8 @@
     "custom-agents": 101,
     "agent-flag": 102,
     "permissions": 98,
-    "rename-conversation": 90,
-    "custom-commands": 90,
+    "rename-conversation": 105,
+    "custom-commands": 105,
     "git-worktrees": 98,
     "desktop-shortcut": 90,
     "feedback-command": 90
