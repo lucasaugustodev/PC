@@ -130,7 +130,9 @@ def extract_features(text):
     to_call = 0
     before = text_lower.split('your turn')[0] if 'your turn' in text_lower else text_lower
     bets = re.findall(r'(?:bet|raise)\s+([\d.]+)', before)
-    if bets: to_call = float(bets[-1])
+    if bets:
+        try: to_call = float(bets[-1].rstrip('.'))
+        except: pass
     return {'pos':pos,'hero':hero,'board':board,'street':street,'pot':pot,'to_call':to_call}
 
 RAG_SIZE = len(train_data)
