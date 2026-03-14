@@ -337,7 +337,7 @@ sc.load()
 
 def inject_pomelo(route, body_dict):
     """Send a Pomelo message through the game's SSL connection."""
-    pomelo_payload = build_pomelo_msg(route, body_dict)
+    pomelo_payload = build_pomelo_request(route, body_dict)
     ws_frame = build_ws_frame(pomelo_payload, masked=True)
     hex_data = ws_frame.hex()
     result = sc.exports_sync.inject(hex_data)
