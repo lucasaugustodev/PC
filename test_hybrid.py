@@ -223,11 +223,9 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
     })
     votes['rag'] = rag_action
 
-    # 3. LLM
-    llm_action = llm_decide(hero, board, pot, to_call, can_check, pos)
-    # Normalize
-    if llm_action == 'bet': llm_action = 'raise'
-    votes['llm'] = llm_action
+    # 3. LLM (disabled - performs worse than eval7 and adds latency)
+    # llm_action = llm_decide(hero, board, pot, to_call, can_check, pos)
+    # votes['llm'] = llm_action
 
     # 4. Rules override
     rules_action = None
