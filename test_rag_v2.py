@@ -57,7 +57,7 @@ for i in range(50000):
     f['answer'] = train[i]['output'].strip()
     f['idx'] = i
     index.append(f)
-print('Done in %.1fs' % (len(index), time.time()-t0))
+print('Done %d in %.1fs' % (len(index), time.time()-t0))
 
 def hero_ranks(hero):
     return tuple(sorted(c[0] for c in hero))
