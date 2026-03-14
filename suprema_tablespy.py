@@ -179,12 +179,19 @@ def process_recv(raw):
         recv_buf += raw
         frames, recv_buf = parse_ws_frames(recv_buf)
         for frame in frames:
-            decoded = decode_pomelo_push(frame)
+            decoded = decode_pomelo(frame)
             if not decoded or not decoded.get('body'):
                 continue
             body = decoded['body']
             if not isinstance(body, dict):
                 continue
+
+            msg_type = decoded.get('type', '')
+            req_id = decoded.get('reqId', '')
+
+            # Log all responses for debugging
+            if msg_type == 'RESPONSE':
+                print(f"\033[96m  RESPONSE [#{req_id}]: {json.dumps(body, default=str, ensure_ascii=False)[:300]}\033[0m")
 
             event = body.get('event', '')
             route = body.get('route', '')
