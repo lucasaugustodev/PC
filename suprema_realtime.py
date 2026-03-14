@@ -9,10 +9,10 @@ except ImportError:
     import msgpack
 
 try:
-    import anthropic
+    import requests as _requests
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'anthropic'])
-    import anthropic
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
+    import requests as _requests
 
 try:
     import pygetwindow as gw
@@ -20,13 +20,8 @@ except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pygetwindow'])
     import pygetwindow as gw
 
-def _load_api_key():
-    for p in [os.path.expanduser('~/.anthropic_key'), os.path.join(os.path.dirname(__file__), '.anthropic_key')]:
-        if os.path.exists(p):
-            return open(p).read().strip()
-    return os.environ.get('ANTHROPIC_API_KEY', '')
-
-llm_client = anthropic.Anthropic(api_key=_load_api_key())
+OLLAMA_URL = 'http://localhost:11434/api/generate'
+OLLAMA_MODEL = 'poker-gto'
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
@@ -263,7 +258,7 @@ state = {
 }
 
 def show():
-    os.system('cls')
+    print('\033[H\033[J', end='', flush=True)  # move cursor home + clear without flash
     print("=" * 56, flush=True)
     variant = state['variant'] or '???'
     print("     SUPREMA POKER - REAL-TIME DECODER  [%s]" % variant, flush=True)

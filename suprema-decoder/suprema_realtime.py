@@ -1,5 +1,5 @@
 """Real-time card decoder + betting tracker + GTO advisor for Suprema Poker."""
-import frida, json, time, sys, os, subprocess, threading
+import frida, json, time, sys, os, subprocess, threading, ctypes
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 try:
@@ -9,22 +9,160 @@ except ImportError:
     import msgpack
 
 try:
-    from groq import Groq
+    import anthropic
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'groq'])
-    from groq import Groq
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'anthropic'])
+    import anthropic
 
-def _load_groq_key():
-    for p in [os.path.expanduser('~/.groq_key'), os.path.join(os.path.dirname(__file__), '.groq_key')]:
+try:
+    import pygetwindow as gw
+except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pygetwindow'])
+    import pygetwindow as gw
+
+def _load_api_key():
+    for p in [os.path.expanduser('~/.anthropic_key'), os.path.join(os.path.dirname(__file__), '.anthropic_key')]:
         if os.path.exists(p):
             return open(p).read().strip()
-    return os.environ.get('GROQ_API_KEY', '')
+    return os.environ.get('ANTHROPIC_API_KEY', '')
 
-groq_client = Groq(api_key=_load_groq_key())
+llm_client = anthropic.Anthropic(api_key=_load_api_key())
 
 RANKS = '23456789TJQKA'
 SUITS = ['c','d','h','s','x']
 MY_UID = 588900
+
+# Button positions as proportions (0.0-1.0) of window size — adapts to any window size
+# Main action buttons
+BTN_FOLD    = (0.17, 0.97)  # Desistir (left)
+BTN_CHECK   = (0.50, 0.97)  # Passar/Pagar (center)
+BTN_BET     = (0.84, 0.97)  # Apostar/Aumentar (right)
+
+# Raise panel buttons (after clicking Apostar)
+BTN_PRESET1 = (0.11, 0.97)  # 1/3 POT or 2.5X
+BTN_PRESET2 = (0.30, 0.97)  # 2/3 POT or 3X
+BTN_PRESET3 = (0.48, 0.97)  # 1 POT or 4X
+BTN_ALLIN   = (0.65, 0.97)  # All In
+BTN_CONFIRM = (0.87, 0.97)  # Confirmar
+BTN_PLUS    = (0.70, 0.66)  # +
+BTN_MINUS   = (0.70, 0.74)  # -
+
+AUTO_PLAY = True
+
+def click_game_button(btn, label=''):
+    """Click a button using proportional position on SupremaPoker window."""
+    try:
+        wins = gw.getWindowsWithTitle('SupremaPoker')
+        if not wins:
+            print("  [AUTO] SupremaPoker window not found!", flush=True)
+            return False
+        w = wins[0]
+        abs_x = w.left + int(btn[0] * w.width)
+        abs_y = w.top + int(btn[1] * w.height)
+        ctypes.windll.user32.SetCursorPos(abs_x, abs_y)
+        time.sleep(0.05)
+        ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)
+        time.sleep(0.02)
+        ctypes.windll.user32.mouse_event(0x0004, 0, 0, 0, 0)
+        print("  [AUTO] %s at (%d,%d) win=%dx%d" % (label, abs_x, abs_y, w.width, w.height), flush=True)
+        return True
+    except Exception as e:
+        print("  [AUTO] Error: %s" % e, flush=True)
+        return False
+
+def detect_gto_action(advice):
+    """Parse GTO advice to determine action and size. Robust against any format."""
+    import re
+    text = advice.lower()
+
+    # Strategy 1: Look after "ACTION:" tag
+    after_action = text
+    if 'action:' in text:
+        after_action = text.split('action:')[-1][:80]
+
+    # Strategy 2: If no ACTION: tag, scan full text for action keywords
+    action = None
+    size = None
+
+    # Check in priority order (all-in first since it contains other words)
+    if re.search(r'\ball[\s-]?in\b|\bshove\b|\bpush\b|\bjam\b', after_action[:40]):
+        action = 'allin'
+    elif 'fold' in after_action[:30]:
+        action = 'fold'
+    elif re.search(r'\braise\b|\bbet\b|\b3[\s-]?bet\b|\bopen\b', after_action[:30]):
+        action = 'raise'
+    elif 'call' in after_action[:30]:
+        action = 'call'
+    elif 'check' in after_action[:30]:
+        action = 'check'
+
+    # Fallback: scan entire response if nothing found in ACTION: area
+    if not action:
+        # Look for strong action signals anywhere in text
+        if re.search(r'\ball[\s-]?in\b|\bshove\b|\bpush\b|\bjam\b', text):
+            action = 'allin'
+        elif re.search(r'\bfold\b', text):
+            action = 'fold'
+        elif re.search(r'\braise\b|\bbet\b|\b3[\s-]?bet\b', text):
+            action = 'raise'
+        elif re.search(r'\bcall\b', text):
+            action = 'call'
+        elif re.search(r'\bcheck\b', text):
+            action = 'check'
+
+    # Extract sizing from anywhere in response
+    if action in ('raise', 'allin'):
+        # Match "SIZE: XBB" pattern first
+        m = re.search(r'size:\s*(\d+\.?\d*)\s*bb', text)
+        if m:
+            size = float(m.group(1))
+        # Match Nx patterns like "2.5x", "3x"
+        if not size:
+            m = re.search(r'(\d+\.?\d*)\s*x\b', text)
+            if m:
+                size = float(m.group(1))
+        # Match "N BB" patterns
+        if not size:
+            m = re.search(r'(\d+\.?\d*)\s*bb', text)
+            if m:
+                size = float(m.group(1))
+
+    return action, size
+
+def auto_raise(size_x):
+    """Click Apostar, then select preset size, then Confirmar."""
+    click_game_button(BTN_BET, 'APOSTAR')
+    time.sleep(0.8)
+
+    if size_x and size_x <= 2.5:
+        click_game_button(BTN_PRESET1, 'PRESET1')
+    elif size_x and size_x <= 3.5:
+        click_game_button(BTN_PRESET2, 'PRESET2')
+    elif size_x and size_x <= 5.0:
+        click_game_button(BTN_PRESET3, 'PRESET3')
+    else:
+        click_game_button(BTN_PRESET2, 'PRESET2-default')
+    time.sleep(0.3)
+
+    click_game_button(BTN_CONFIRM, 'CONFIRMAR')
+    return True
+
+def auto_play(action, size=None):
+    """Auto-click the appropriate button based on GTO action."""
+    if action == 'fold':
+        return click_game_button(BTN_FOLD, 'FOLD')
+    elif action in ('check', 'call'):
+        return click_game_button(BTN_CHECK, 'CHECK/CALL')
+    elif action == 'raise':
+        return auto_raise(size)
+    elif action == 'allin':
+        click_game_button(BTN_BET, 'APOSTAR')
+        time.sleep(0.8)
+        click_game_button(BTN_ALLIN, 'ALL-IN')
+        time.sleep(0.3)
+        click_game_button(BTN_CONFIRM, 'CONFIRMAR')
+        return True
+    return False
 
 # Role code -> action name
 ROLES = {
@@ -36,7 +174,7 @@ ROLES = {
     82: 'SB', 93: 'BB', 100: 'FOLD',
 }
 
-STREETS = {3: 'PREFLOP', 4: 'FLOP', 5: 'TURN', 6: 'RIVER', 7: 'SHOWDOWN'}
+STREETS = {1: 'DEAL', 2: 'BLINDS', 3: 'PREFLOP', 4: 'FLOP', 5: 'TURN', 6: 'RIVER', 7: 'SHOWDOWN'}
 
 def decode(cid):
     if not cid or cid == 0:
@@ -69,7 +207,7 @@ if not pid:
 
 print("PID: %d" % pid, flush=True)
 
-BB_SIZE = 0.04  # auto-updated when BB post detected
+BB_SIZE = 0  # auto-detected from game_info.blinds
 
 def bb(val):
     """Convert internal value to BB count."""
@@ -79,6 +217,8 @@ def bb(val):
 
 def fmt_bb(val):
     """Format value as BB string."""
+    if BB_SIZE <= 0:
+        return str(val)
     b = bb(val)
     if b == int(b):
         return "%dBB" % int(b)
@@ -102,16 +242,47 @@ state = {
     'msg_count': 0,
     'gto_advice': '',
     'dirty': True,
+    'blinds_level': 0,
+    'next_blinds': 0,
+    'next_blinds_level': 0,
+    'next_blinds_remain': 0,  # seconds until next level
+    'next_sb': 0,
+    'next_ante': 0,
+    'avg_stack': 0,
+    'player_count': 0,
+    'total_players': 0,
+    'small_blinds': 0,
+    'prize_count': 0,        # how many get paid
+    'game_type': 0,          # 1=cash, 5=SNG/MTT
+    'mtt_state': 0,
+    'addon': 0,
+    'rebuy': 0,
+    'mtt_start': 0,
+    'variant': '',  # NLH, PLO4, PLO5 - detected from card count
+    'available_actions': {},  # from gamer_prompt: fold/check/call/raise/bet/all_in
 }
 
 def show():
     os.system('cls')
     print("=" * 56, flush=True)
-    print("     SUPREMA POKER - REAL-TIME DECODER", flush=True)
+    variant = state['variant'] or '???'
+    print("     SUPREMA POKER - REAL-TIME DECODER  [%s]" % variant, flush=True)
     print("=" * 56, flush=True)
     hand = state['hand_num']
     street = state['street']
-    print("  Hand #%-6s  %s" % (hand or '?', street), flush=True)
+    bb_info = "BB=%s" % BB_SIZE if BB_SIZE > 0 else "BB=?"
+    sng_info = ""
+    if state['blinds_level']:
+        remain = state['next_blinds_remain']
+        mins = remain // 60 if remain > 0 else 0
+        secs = remain % 60 if remain > 0 else 0
+        sng_info = " | Lvl %d  Next: %s/%s in %d:%02d" % (
+            state['blinds_level'], fmt_bb(state['next_sb']), fmt_bb(state['next_blinds']),
+            mins, secs)
+        sng_info += "\n  Players: %d/%d  Avg: %s  ITM: top %d" % (
+            state['player_count'], state['total_players'],
+            fmt_bb(state['avg_stack']), state['prize_count'])
+    print("  Hand #%-6s  %s  [%s%s]" % (hand or '?', street, bb_info, sng_info), flush=True)
     print("-" * 56, flush=True)
 
     my = '  '.join(state['my_cards']) if state['my_cards'] else '--'
@@ -174,10 +345,84 @@ def show():
     print("  Ctrl+C to stop", flush=True)
     state['dirty'] = False
 
+SUIT_NAMES = {'c': 'clubs', 'd': 'diamonds', 'h': 'hearts', 's': 'spades', 'x': 'suit5'}
+RANK_NAMES = {'2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9',
+              'T':'10','J':'Jack','Q':'Queen','K':'King','A':'Ace'}
+
+def describe_card(c):
+    """Convert 'Qs' to 'Qs(Queen-spades)'."""
+    if len(c) != 2:
+        return c
+    return c  # keep simple notation, LLM now knows the format
+
+def analyze_hand(hero_cards, board_cards):
+    """Pre-analyze hand strength for the LLM."""
+    if not hero_cards or not board_cards:
+        return ""
+
+    all_cards = hero_cards + board_cards
+    # Count suits
+    suits = {}
+    for c in all_cards:
+        if len(c) == 2:
+            s = c[1]
+            suits[s] = suits.get(s, []) + [c]
+
+    hero_suits = {}
+    for c in hero_cards:
+        if len(c) == 2:
+            hero_suits[c[1]] = hero_suits.get(c[1], []) + [c]
+
+    board_suits = {}
+    for c in board_cards:
+        if len(c) == 2:
+            board_suits[c[1]] = board_suits.get(c[1], []) + [c]
+
+    notes = []
+
+    # Flush detection
+    for s, cards in suits.items():
+        hero_in_suit = len(hero_suits.get(s, []))
+        board_in_suit = len(board_suits.get(s, []))
+        if len(cards) >= 5 and hero_in_suit >= 1:
+            # Check if hero has the nut flush card (Ace of that suit)
+            has_ace = any(c[0] == 'A' for c in hero_suits.get(s, []))
+            if has_ace:
+                notes.append("MADE NUT FLUSH in %s!" % SUIT_NAMES.get(s, s))
+            else:
+                notes.append("MADE FLUSH in %s" % SUIT_NAMES.get(s, s))
+        elif len(cards) == 4 and hero_in_suit >= 1:
+            has_ace = any(c[0] == 'A' for c in hero_suits.get(s, []))
+            if has_ace:
+                notes.append("NUT FLUSH DRAW in %s (1 card needed)" % SUIT_NAMES.get(s, s))
+            else:
+                notes.append("Flush draw in %s (1 card needed)" % SUIT_NAMES.get(s, s))
+
+    # Pair/set detection on board
+    rank_count = {}
+    for c in all_cards:
+        if len(c) == 2:
+            rank_count[c[0]] = rank_count.get(c[0], 0) + 1
+
+    hero_ranks = [c[0] for c in hero_cards if len(c) == 2]
+    for r in hero_ranks:
+        if rank_count.get(r, 0) >= 4:
+            notes.append("QUADS %s!" % r)
+        elif rank_count.get(r, 0) == 3:
+            notes.append("SET/TRIPS of %s" % r)
+        elif rank_count.get(r, 0) == 2:
+            board_has_r = any(c[0] == r for c in board_cards)
+            if board_has_r:
+                notes.append("Pair of %s (hit board)" % r)
+
+    if notes:
+        return " HAND ANALYSIS: " + "; ".join(notes) + "."
+    return ""
+
 def build_gto_prompt():
     """Build poker situation description for LLM."""
-    cards = ' '.join(state['my_cards']) if state['my_cards'] else '??'
-    board = ' '.join(state['board']) if state['board'] else 'none'
+    cards = ' '.join(describe_card(c) for c in state['my_cards']) if state['my_cards'] else '??'
+    board = ' '.join(describe_card(c) for c in state['board']) if state['board'] else 'none'
     street = state['street'] or '?'
     pot = fmt_bb(state['pot'])
     max_bet = fmt_bb(state['max_bet'])
@@ -185,47 +430,183 @@ def build_gto_prompt():
     # Build player info
     num_players = len([p for p in state['players'].values() if p.get('action') not in ('FOLD', '')])
     my_stack = 0
-    my_pos = ''
-    actions_history = []
-    for uid, p in sorted(state['players'].items(), key=lambda x: x[1].get('seat', 0)):
-        action = p.get('action', '')
-        if action:
-            stack_bb = fmt_bb(p.get('stack', 0))
-            bet_bb = fmt_bb(p.get('chips', 0))
-            if str(uid) == str(MY_UID):
-                my_stack = p.get('stack', 0)
-            elif action not in ('', 'FOLD'):
-                actions_history.append("%s %s" % (action, bet_bb))
+    for uid, p in state['players'].items():
+        if str(uid) == str(MY_UID):
+            my_stack = p.get('stack', 0)
 
-    prompt = (
-        "6max cash game. Effective stacks ~%s. "
-        "Hero has %s. Board: %s. Street: %s. "
-        "Pot: %s. Max bet: %s. "
-        "Villains still in: %d. Actions before hero: %s. "
-        "What is the GTO play for hero? Give ACTION, SIZING in BB, and brief REASON in 1-2 lines."
-    ) % (fmt_bb(my_stack), cards, board, street, pot, max_bet,
-         num_players - 1, ', '.join(actions_history) if actions_history else 'none')
+    # Build position info
+    my_seat_num = 0
+    total_seats = len(state['players'])
+    for uid, p in state['players'].items():
+        if str(uid) == str(MY_UID):
+            my_seat_num = p.get('seat', 0)
+
+    # Full hand action history
+    hand_history = ' -> '.join(state['actions']) if state['actions'] else 'none'
+
+    # Game variant
+    variant = state['variant'] or 'NLH'
+
+    # Detect game type
+    is_sng = state['blinds_level'] > 0
+    if is_sng:
+        game_type = "%s SNG/MTT. Blinds Lvl %d (%s/%s). Next level: %s/%s in %ds." % (
+            variant, state['blinds_level'],
+            fmt_bb(state['small_blinds']), fmt_bb(BB_SIZE),
+            fmt_bb(state['next_sb']), fmt_bb(state['next_blinds']),
+            state['next_blinds_remain'])
+        game_type += " %d/%d players remain. Avg stack %s. Top %d get paid." % (
+            state['player_count'], state['total_players'],
+            fmt_bb(state['avg_stack']), state['prize_count'])
+        # ICM phase detection
+        pc = state['player_count']
+        prize = state['prize_count']
+        my_stack_bb = bb(state['players'].get(str(MY_UID), {}).get('stack', 0)) if BB_SIZE > 0 else 0
+        avg_bb = bb(state['avg_stack']) if BB_SIZE > 0 else 0
+        is_big_stack = my_stack_bb > avg_bb * 1.2 if avg_bb > 0 else False
+
+        if prize > 0 and pc > prize + 2:
+            icm_note = " EARLY/MID stage — far from bubble (top %d paid, %d remain). Focus on CHIP ACCUMULATION. Play aggressively, steal blinds, 3bet light. You need chips to WIN, not just survive." % (prize, pc)
+        elif prize > 0 and pc == prize + 1:
+            if is_big_stack:
+                icm_note = " BUBBLE (top %d paid, %d remain). Hero is BIG STACK — EXPLOIT the bubble! Put pressure on medium stacks. Call all-ins from short stacks with decent hands (any Ax, any pair, KQ+, suited connectors). Short stacks are desperate — you can afford to gamble." % (prize, pc)
+            else:
+                icm_note = " BUBBLE (top %d paid, %d remain). Be selective but don't blind out. Premium hands and short stack shoves are still worth calling if pot odds are good. AJ+ ATs+ KQ+ 77+ are calls vs short stacks." % (prize, pc)
+        elif prize > 0 and pc <= prize:
+            icm_note = " IN THE MONEY! Top %d paid, %d remain. Now play to WIN — go for 1st place, not ladder. Be aggressive." % (prize, pc)
+        else:
+            icm_note = " SNG — play to maximize chips and finish 1st."
+    else:
+        game_type = "6max %s cash." % variant
+        icm_note = ""
+
+    # Available actions from game
+    avail = state.get('available_actions', {})
+    can_check = 'check' in avail and avail['check'] is not None
+    if avail:
+        action_parts = []
+        for a, v in avail.items():
+            if v is True or v == 1:
+                action_parts.append(a.upper())
+            elif isinstance(v, (int, float)) and v > 0:
+                action_parts.append("%s(%s)" % (a.upper(), fmt_bb(v)))
+            elif v is not None:
+                action_parts.append(a.upper())
+        available_str = "Available actions: %s." % ', '.join(action_parts)
+        if can_check:
+            available_str += " IMPORTANT: You can CHECK for free — NEVER fold when check is available!"
+    else:
+        available_str = ""
+
+    # To call calculation
+    my_cr = state['players'].get(str(MY_UID), {}).get('chips_round', 0)
+    to_call = max(0, state['max_bet'] - my_cr)
+
+    # Pre-analyze hand strength
+    hand_analysis = analyze_hand(state['my_cards'], state['board'])
+
+    to_call_str = ("To call: %s." % fmt_bb(to_call)) if to_call > 0 else "No bet to call (can check)."
+
+    prompt = "%s Stacks ~%s. " % (game_type, fmt_bb(my_stack))
+    prompt += "Hero has [%s]. Board: [%s]. Street: %s. " % (cards, board, street)
+    prompt += "Pot: %s. %s " % (pot, to_call_str)
+    prompt += "Players in hand: %d. " % num_players
+    prompt += "Hero seat %d of %d.%s\n\n" % (my_seat_num, total_seats, icm_note)
+    if hand_analysis:
+        prompt += "%s\n\n" % hand_analysis
+    if available_str:
+        prompt += "%s\n\n" % available_str
+    prompt += "Full hand history:\n%s" % hand_history
     return prompt
 
+GTO_SYSTEM = """GTO poker solver. Give the OPTIMAL play.
+
+Rules: position, stack depth, pot odds, equity, board texture, range advantage. Blockers. Draws vs made hands. For PLO: use exactly 2 hole cards + 3 board. For SNG: EARLY=loose-aggressive, BUBBLE=tight/ICM, ITM=aggressive. SHORT(<15BB)=push/fold. MEDIUM(15-30BB)=active.
+
+CRITICAL: Only recommend actions from "Available actions". Never fold when check is free. Trust HAND ANALYSIS section. Card notation: s=spades h=hearts d=diamonds c=clubs.
+
+YOU MUST RESPOND IN THIS EXACT FORMAT. NO MARKDOWN. NO HEADERS. NO ANALYSIS. JUST ONE LINE:
+ACTION: fold|check|call|raise|all-in SIZE: XBB | reason
+
+EXAMPLE GOOD RESPONSES:
+ACTION: call SIZE: 2BB | good pot odds with flush draw
+ACTION: all-in SIZE: 15BB | short stack push with AJs on bubble
+ACTION: fold SIZE: 0 | junk hand out of position
+ACTION: raise SIZE: 3BB | standard open with premium hand
+
+BAD RESPONSE (DO NOT DO THIS): any response with headers, bullet points, analysis, or more than 2 lines."""
+
 def ask_gto():
-    """Call Groq in background thread."""
+    """Call Claude Haiku in background thread."""
     try:
         prompt = build_gto_prompt()
-        resp = groq_client.chat.completions.create(
-            model='llama-3.3-70b-versatile',
+        # Log prompt + available actions for debugging
+        try:
+            with open(os.path.expanduser('~/suprema_gto_prompts.log'), 'a', encoding='utf-8') as f:
+                f.write("[%s] avail=%s\n%s\n\n" % (time.strftime('%H:%M:%S'), state.get('available_actions', {}), prompt))
+        except:
+            pass
+        resp = llm_client.messages.create(
+            model='claude-haiku-4-5-20251001',
+            max_tokens=60,
+            system=GTO_SYSTEM,
             messages=[
-                {'role': 'system', 'content': 'You are a GTO poker coach. Give concise action recommendations. Format: ACTION: X | SIZE: Y | REASON: Z. Be specific with sizings in BB.'},
-                {'role': 'user', 'content': prompt}
+                {'role': 'user', 'content': prompt},
+                {'role': 'assistant', 'content': 'ACTION:'},
             ],
-            max_tokens=120,
-            temperature=0.3,
         )
-        advice = resp.choices[0].message.content.strip()
+        advice = 'ACTION:' + resp.content[0].text.strip()
+        # Strip non-ASCII chars (emojis etc) to avoid terminal encoding errors
+        advice = advice.encode('ascii', 'ignore').decode('ascii')
         state['gto_advice'] = advice
         state['dirty'] = True
+
+        # Auto-play based on GTO recommendation
+        if AUTO_PLAY:
+            action, size = detect_gto_action(advice)
+            # Safety: validate action against available actions
+            avail = state.get('available_actions', {})
+            can_check = 'check' in avail and avail['check'] is not None
+            can_call = 'call' in avail and avail['call'] is not None
+            can_raise = 'raise' in avail and avail['raise'] is not None
+            can_allin = 'all_in' in avail and avail['all_in'] is not None
+            can_fold = 'fold' in avail and avail['fold'] is not None
+
+            # Never fold when check is free
+            if action == 'fold' and can_check:
+                action = 'check'
+                state['gto_advice'] = advice + ' [OVERRIDE: check > fold]'
+                state['dirty'] = True
+            # If raise/bet recommended but only fold+allin available, convert to allin or fold
+            if action == 'raise' and not can_raise and can_allin:
+                action = 'allin'
+                state['gto_advice'] = advice + ' [OVERRIDE: all-in (no raise)]'
+                state['dirty'] = True
+            # If call recommended but no call available, check if can check
+            if action == 'call' and not can_call and can_check:
+                action = 'check'
+                state['gto_advice'] = advice + ' [OVERRIDE: check (no call)]'
+                state['dirty'] = True
+            if action:
+                time.sleep(3)  # wait before acting to look natural + let GTO think
+                result = auto_play(action, size)
+                if result:
+                    label = action.upper()
+                    if size:
+                        label += ' %.1fx' % size
+                    state['gto_advice'] = advice + ' [AUTO: %s]' % label
+                    state['dirty'] = True
     except Exception as e:
-        state['gto_advice'] = 'Error: %s' % str(e)[:50]
+        import traceback
+        tb = traceback.format_exc()
+        err = str(e).encode('ascii', 'ignore').decode('ascii')[:80]
+        state['gto_advice'] = 'GTO Error: %s' % err
         state['dirty'] = True
+        try:
+            with open(os.path.expanduser('~/suprema_gto_errors.log'), 'a', encoding='utf-8') as f:
+                f.write("[%s] %s\n%s\n\n" % (time.strftime('%H:%M:%S'), str(e), tb))
+        except:
+            pass
 
 gto_thread = None
 gto_last_hand = ''
@@ -258,10 +639,77 @@ def process(parsed):
 
     if event:
         state['event'] = str(event)
+        # Log all unique events for discovery
+        if event not in ('moveturn', 'prompt', 'countdown', 'gameover', 'matchesStatusPushNotify', 'updateOutsCards'):
+            try:
+                with open(os.path.expanduser('~/suprema_gameinfo.log'), 'a', encoding='utf-8') as f:
+                    f.write("[event:%s] FULL=%s\n\n" % (event, json.dumps(parsed, ensure_ascii=False, default=str)))
+            except:
+                pass
 
     # game_info
     gi = d.get('game_info', {})
     if isinstance(gi, dict) and gi:
+        # Log full game_info once per hand for discovery
+        gc_now = gi.get('game_counter', '')
+        if gc_now and str(gc_now) != state.get('_last_gi_log', ''):
+            state['_last_gi_log'] = str(gc_now)
+            try:
+                with open(os.path.expanduser('~/suprema_gameinfo.log'), 'a', encoding='utf-8') as f:
+                    f.write("[hand %s] game_info=%s\n" % (gc_now, json.dumps(gi, ensure_ascii=False)))
+                    # Also log full parsed message keys
+                    f.write("[hand %s] top_keys=%s\n" % (gc_now, list(d.keys())))
+                    f.write("\n")
+            except:
+                pass
+
+        # Auto-detect BB size from blinds field (works for cash, SNG, MTT)
+        blinds_val = gi.get('blinds', 0)
+        if blinds_val and float(blinds_val) > 0:
+            global BB_SIZE
+            BB_SIZE = float(blinds_val)
+
+        # SNG/MTT specific fields
+        state['game_type'] = gi.get('type', state['game_type'])
+        sb_val = gi.get('smallblinds', 0)
+        if sb_val:
+            state['small_blinds'] = float(sb_val)
+        bl = gi.get('blindsLevel', 0)
+        if bl:
+            state['blinds_level'] = int(bl)
+        nb = gi.get('nextBlinds', 0)
+        if nb:
+            state['next_blinds'] = float(nb)
+        nbl = gi.get('nextBlindsLevel', 0)
+        if nbl:
+            state['next_blinds_level'] = int(nbl)
+        nbr = gi.get('nextBlindsLevelRemain', -1)
+        if nbr >= 0:
+            state['next_blinds_remain'] = int(nbr)
+        nsb = gi.get('nextSmallBlinds', 0)
+        if nsb:
+            state['next_sb'] = float(nsb)
+        nante = gi.get('nextAnteFix', 0)
+        state['next_ante'] = float(nante) if nante else 0
+        avg = gi.get('avgStack', 0)
+        if avg:
+            state['avg_stack'] = float(avg)
+        pc = gi.get('playerCount', 0)
+        if pc:
+            state['player_count'] = int(pc)
+        tp = gi.get('totalPlayerCount', 0)
+        if tp:
+            state['total_players'] = int(tp)
+        mpc = gi.get('mttprizecount', 0)
+        if mpc:
+            state['prize_count'] = int(mpc)
+        state['mtt_state'] = gi.get('mttstate', state['mtt_state'])
+        state['addon'] = gi.get('addon', state['addon'])
+        state['rebuy'] = gi.get('rebuy', state['rebuy'])
+        mst = gi.get('mtt_starttime', 0)
+        if mst:
+            state['mtt_start'] = mst
+
         sc = gi.get('shared_cards', [])
         if isinstance(sc, list):
             decoded = decode_list(sc)
@@ -341,15 +789,27 @@ def process(parsed):
                     state['actions'].append(action_str)
                     state['dirty'] = True
 
-            # Cards
+            # Cards + variant detection
             cards_str = ''
             cards_raw = sd.get('cards', None)
-            if cards_raw and isinstance(cards_raw, list) and any(c and c != 0 for c in cards_raw):
-                decoded = decode_list(cards_raw)
-                cards_str = ' '.join(decoded)
-                if uid_s == str(MY_UID) and decoded != state['my_cards']:
-                    state['my_cards'] = decoded
-                    state['dirty'] = True
+            if cards_raw and isinstance(cards_raw, list):
+                # Detect variant from card slot count
+                if not state['variant'] and len(cards_raw) > 0:
+                    n = len(cards_raw)
+                    if n == 2:
+                        state['variant'] = 'NLH'
+                    elif n == 4:
+                        state['variant'] = 'PLO4'
+                    elif n == 5:
+                        state['variant'] = 'PLO5'
+                    elif n == 6:
+                        state['variant'] = 'PLO6'
+                if any(c and c != 0 for c in cards_raw):
+                    decoded = decode_list(cards_raw)
+                    cards_str = ' '.join(decoded)
+                    if uid_s == str(MY_UID) and decoded != state['my_cards']:
+                        state['my_cards'] = decoded
+                        state['dirty'] = True
 
             # Pattern (shown in prompt)
             pattern = sd.get('pattern', '')
@@ -366,10 +826,33 @@ def process(parsed):
             }
             state['dirty'] = True
 
-    # countdown -> who's acting
+    # gamer_prompt -> available actions for hero (only non-null = available)
+    gp = d.get('gamer_prompt', {})
+    if isinstance(gp, dict) and gp:
+        actions = {}
+        for action_name, val in gp.items():
+            if val is not None:
+                actions[action_name] = val
+        if actions:
+            state['available_actions'] = actions
+    # Also check in prompt event (hero-specific)
+    if event == 'prompt':
+        prompt_gp = d.get('gamer_prompt', parsed.get('data', {}).get('gamer_prompt', {}))
+        if isinstance(prompt_gp, dict):
+            actions = {k: v for k, v in prompt_gp.items() if v is not None}
+            if actions:
+                state['available_actions'] = actions
+
+    # countdown -> who's acting (this is the REAL timer start)
     cd = d.get('countdown', {})
-    if isinstance(cd, dict):
-        state['acting_seat'] = cd.get('seat', -1)
+    if isinstance(cd, dict) and cd.get('seat', -1) >= 0 and cd.get('sec', 0) > 0:
+        acting_seat = cd.get('seat', -1)
+        state['acting_seat'] = acting_seat
+        # Check if it's hero's turn by matching seat
+        my_info = state['players'].get(str(MY_UID), {})
+        my_seat = my_info.get('seat', -99)
+        if acting_seat == my_seat and state['my_cards']:
+            maybe_ask_gto()
 
     # gameover
     gr = d.get('game_result', {})
@@ -420,9 +903,7 @@ def process(parsed):
         state['my_cards'] = decode_list(hc)
         state['dirty'] = True
 
-    # Trigger GTO advice when it's hero's turn (prompt event or board changes)
-    if event == 'prompt' and state['my_cards']:
-        maybe_ask_gto()
+    # GTO is now triggered by countdown event (when hero's timer starts)
 
 buf = b''
 lock = threading.Lock()
