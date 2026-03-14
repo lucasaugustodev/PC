@@ -212,6 +212,10 @@ def process(raw, d):
             route = pending.get(req_id)
             if route:
                 classify(req_id, route, body)
+            else:
+                # Log unmatched responses too
+                preview = json.dumps(body, ensure_ascii=False, default=str)[:100] if body else 'null'
+                print(f"\033[90m  [UNMATCHED type-2 #{req_id}] {preview}\033[0m")
 
         elif d == 'RECV' and ptype == 4:
             plen = (frame[1]<<16)|(frame[2]<<8)|frame[3]
@@ -219,28 +223,44 @@ def process(raw, d):
             if len(pb) < 2: continue
             flags = pb[0]
             body = None
+            route_str = ''
             if flags & 0x04:
                 if len(pb) > 3:
                     try: body = msgpack.unpackb(pb[3:], raw=False)
                     except: pass
+                route_str = f'compressed:{(pb[1]<<8)|pb[2]}' if len(pb) >= 3 else ''
             else:
                 rl = pb[1]; off = 2+rl
+                try: route_str = bytes(pb[2:2+rl]).decode('utf-8', errors='replace')
+                except: pass
                 if off < len(pb):
                     try: body = msgpack.unpackb(pb[off:], raw=False)
                     except: pass
 
-            if isinstance(body, dict) and body.get('event') == 'error':
-                err_msg = body.get('errorMessage', str(body))
-                for rid in list(pending.keys()):
-                    if rid not in results:
-                        results[rid] = {
-                            'route': pending[rid],
-                            'status': f'ERROR_PUSH:{str(err_msg)[:60]}',
-                            'response': body,
-                        }
-                        evt = response_events.get(rid)
-                        if evt: evt.set()
-                        break
+            if isinstance(body, dict):
+                event = body.get('event', '')
+                # Match push responses to pending requests
+                # Server may respond via push with error or data
+                if event == 'error' or body.get('code', 0) != 0:
+                    err_msg = body.get('errorMessage', body.get('error', str(body)))
+                    # Try to match to oldest unresolved pending request
+                    matched = False
+                    for rid in sorted(pending.keys()):
+                        if rid not in results:
+                            classify(rid, pending[rid], body)
+                            matched = True
+                            break
+                    if not matched and event not in ('countdown', 'clientPing', 'gameinfo',
+                            'matchesStatusPushNotify', 'apiClub.clubHandler.jackpot'):
+                        preview = json.dumps(body, ensure_ascii=False, default=str)[:100]
+                        print(f"\033[90m  [PUSH {route_str}] {event}: {preview}\033[0m")
+                elif event and event not in ('countdown', 'clientPing', 'gameinfo',
+                        'matchesStatusPushNotify', 'apiClub.clubHandler.jackpot'):
+                    # Non-error push - might be a successful response
+                    for rid in sorted(pending.keys()):
+                        if rid not in results:
+                            classify(rid, pending[rid], body)
+                            break
 
 def classify(req_id, route, body):
     status = 'UNKNOWN'
