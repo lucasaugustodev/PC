@@ -133,9 +133,10 @@ def extract_features(text):
     if bets: to_call = float(bets[-1])
     return {'pos':pos,'hero':hero,'board':board,'street':street,'pot':pot,'to_call':to_call}
 
-print('Indexing 50000 RAG entries...')
+RAG_SIZE = len(train_data)
+print('Indexing %d RAG entries...' % RAG_SIZE)
 rag_index = []
-for i in range(50000):
+for i in range(RAG_SIZE):
     f = extract_features(train_data[i]['instruction'])
     f['answer'] = train_data[i]['output'].strip()
     rag_index.append(f)
