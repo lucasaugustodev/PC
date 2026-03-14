@@ -93,28 +93,45 @@ def decide(equity, pot, to_call, can_check, can_raise, num_opps, hero_cards, boa
                 return 'CHECK (free BB, tier %d)' % tier
 
         if facing_bet:
-            # Facing a raise
-            if tier == 1:
-                return 'RAISE (premium, tier 1)'
-            elif tier == 2:
-                if hu:
-                    return 'RAISE (strong hand HU, tier 2)'
+            # HU adjustments - much wider ranges
+            if hu:
+                if tier == 1:
+                    return 'RAISE (premium HU, tier 1)'
+                elif tier == 2:
+                    return 'RAISE (strong HU, tier 2)'
+                elif tier == 3:
+                    return 'CALL (playable HU, tier 3)'
+                elif tier == 4:
+                    if pot_odds < 0.35:
+                        return 'CALL (speculative HU, tier 4)'
+                    else:
+                        return 'FOLD (bad odds HU, tier 4)'
+                else:  # tier 5
+                    # HU: even trash can call if pot odds are good and has some equity
+                    if equity > 0.40 and pot_odds < 0.30:
+                        return 'CALL (HU wide call, equity %.0f%%, tier 5)' % (equity*100)
+                    elif hi >= 10 or (hi == 14):
+                        return 'CALL (HU has high card, tier 5)'
+                    else:
+                        return 'FOLD (trash HU, tier 5)'
+            else:
+                # Multiway - tighter
+                if tier == 1:
+                    return 'RAISE (premium, tier 1)'
+                elif tier == 2:
+                    return 'CALL (strong multiway, tier 2)'
+                elif tier == 3:
+                    if pot_odds < 0.25:
+                        return 'CALL (playable, good odds, tier 3)'
+                    else:
+                        return 'FOLD (marginal multiway, tier 3)'
+                elif tier == 4:
+                    if pot_odds < 0.15:
+                        return 'CALL (speculative, cheap, tier 4)'
+                    else:
+                        return 'FOLD (speculative, bad odds, tier 4)'
                 else:
-                    return 'CALL (strong hand multiway, tier 2)'
-            elif tier == 3:
-                if pot_odds < 0.25:
-                    return 'CALL (playable hand, good odds, tier 3)'
-                elif hu:
-                    return 'CALL (decent hand HU, tier 3)'
-                else:
-                    return 'FOLD (marginal multiway, tier 3)'
-            elif tier == 4:
-                if pot_odds < 0.15 and hu:
-                    return 'CALL (speculative, cheap, tier 4)'
-                else:
-                    return 'FOLD (speculative, bad odds, tier 4)'
-            else:  # tier 5
-                return 'FOLD (trash hand, tier 5)'
+                    return 'FOLD (trash multiway, tier 5)'
 
     # === POSTFLOP LOGIC ===
     if can_check and not facing_bet:
