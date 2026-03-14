@@ -532,7 +532,7 @@ ACTION: raise SIZE: 3BB | standard open with premium hand
 BAD RESPONSE (DO NOT DO THIS): any response with headers, bullet points, analysis, or more than 2 lines."""
 
 def ask_gto():
-    """Call Claude Haiku in background thread."""
+    """Call local Ollama poker-gto model in background thread."""
     try:
         prompt = build_gto_prompt()
         # Log prompt + available actions for debugging
@@ -541,16 +541,20 @@ def ask_gto():
                 f.write("[%s] avail=%s\n%s\n\n" % (time.strftime('%H:%M:%S'), state.get('available_actions', {}), prompt))
         except:
             pass
-        resp = llm_client.messages.create(
-            model='claude-haiku-4-5-20251001',
-            max_tokens=60,
-            system=GTO_SYSTEM,
-            messages=[
-                {'role': 'user', 'content': prompt},
-                {'role': 'assistant', 'content': 'ACTION:'},
-            ],
-        )
-        advice = 'ACTION:' + resp.content[0].text.strip()
+        resp = _requests.post(OLLAMA_URL, json={
+            'model': OLLAMA_MODEL,
+            'prompt': prompt,
+            'system': GTO_SYSTEM,
+            'stream': False,
+            'options': {'temperature': 0.1, 'top_p': 0.9, 'num_predict': 60},
+        }, timeout=15)
+        resp.raise_for_status()
+        raw = resp.json().get('response', '').strip()
+        # Ensure ACTION: prefix
+        if raw.upper().startswith('ACTION:'):
+            advice = raw
+        else:
+            advice = 'ACTION: ' + raw
         # Strip non-ASCII chars (emojis etc) to avoid terminal encoding errors
         advice = advice.encode('ascii', 'ignore').decode('ascii')
         state['gto_advice'] = advice
