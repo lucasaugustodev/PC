@@ -125,11 +125,38 @@ def detect_gto_action(advice):
     return action, size
 
 def auto_raise(size_x):
-    """Click Apostar, then select preset size, then Confirmar."""
+    """Click Apostar, then select best preset size, then Confirmar.
+
+    available_actions['raise'] comes as 'range,min,max,2X,val,3X,val,4X,val'
+    We pick the preset closest to requested size_x (in BB multiplier).
+    """
     click_game_button(BTN_BET, 'APOSTAR')
     time.sleep(0.8)
 
-    if size_x and size_x <= 2.5:
+    # Parse raise presets from available_actions
+    raise_info = state.get('available_actions', {}).get('raise', '')
+    presets = {}  # {multiplier: btn}
+    if isinstance(raise_info, str) and 'X' in raise_info:
+        parts = raise_info.split(',')
+        for i, p in enumerate(parts):
+            if p.endswith('X'):
+                try:
+                    mult = float(p.replace('X', ''))
+                    if mult <= 2.5:
+                        presets[mult] = BTN_PRESET1
+                    elif mult <= 3.5:
+                        presets[mult] = BTN_PRESET2
+                    else:
+                        presets[mult] = BTN_PRESET3
+                except ValueError:
+                    pass
+
+    if presets and size_x:
+        # Pick the preset closest to requested size
+        best = min(presets.keys(), key=lambda m: abs(m - size_x))
+        btn = presets[best]
+        click_game_button(btn, 'PRESET %.0fX' % best)
+    elif size_x and size_x <= 2.5:
         click_game_button(BTN_PRESET1, 'PRESET1')
     elif size_x and size_x <= 3.5:
         click_game_button(BTN_PRESET2, 'PRESET2')
