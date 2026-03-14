@@ -380,8 +380,10 @@ print(f"  Log: {LOG_FILE}")
 print("=" * 60)
 print("\033[0m")
 
-# Wait a moment for connection to stabilize
-time.sleep(2)
+# Wait for SSL traffic so lastSSL gets populated
+print("\nAguardando trafico SSL pra capturar o socket...")
+print("(Se nao aparecer nada, clique em algo no app Suprema)")
+time.sleep(5)
 
 # Step 1: Request room list for the Grand Union
 print("\n\033[93m[1] Requesting room list from GU...\033[0m")
