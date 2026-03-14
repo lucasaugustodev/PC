@@ -2,102 +2,67 @@
 .env
 .env.local
 .env.*.local
-.groq_key
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
 
 # OS
 Thumbs.db
-.DS_Store
-NTUSER.DAT*
-*.TM.blf
-*regtrans-ms
+Desktop.ini
+ntuser.ini
+ntuser.dat*
 
 # Logs
 *.log
 
-# Cache
-__pycache__/
-*.pyc
+# Temporary
+*.tmp
+*.temp
+.DS_Store
 
-# Claude/Cline
-.cline/
-.anthropic_key
-.agents/
-.apm/
-.aws/
-.basic-memory/
-.bun/
-.cache/
-.chocolatey/
-.claude-mem/
-.claude/
-.docker/
-.fly/
-.gemini/
-.kiro/
-.lmstudio/
-.local/
-.m2/
-.matplotlib/
-.ollama/
-.openfang/
-.pack/
-.paperclip/
-.playwright-cli/
-.ssh/
-.trae-aicc/
-.trae/
-.pack/
-
-# Config
-.config/
-.cursor/
-
-# Scoop
-scoop/
-
-# Windows
-"Ambiente de Impressão/"
-"Ambiente de Rede/"
-"Configurações Locais/"
-Cookies/
-Dados de Aplicativos/
-"Menu Iniciar/"
-"Meus Documentos/"
-Modelos/
-Recent/
-SendTo/
-AppData/
-3D Objects/
-Contacts/
-Desktop/
-Documents/
-Downloads/
-Favorites/
-Links/
-Music/
-Pictures/
-"Saved Games/"
-Searches/
-Videos/
-"WPS Cloud Files/"
-
-# Binários e executáveis
+# Binaries
+*.bin
 *.exe
-*.dll
+
+# Node/JS
+node_modules/
+dist/
+build/
+*.tgz
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# App data & cache
+.cache/
+.cline/
+.claude/
+.aws/
+.apm/
+.bun/
+.chocolatey/
+.apm/
+
+# Large files
 *.png
 *.jpg
 *.jpeg
 *.gif
 *.ico
 *.svg
+*.mp4
 
-# node_modules (exceto em projetos específicos)
-node_modules/
-
-
+# Local config
+Configurações Locais/
+Menu Iniciar/
+Meus Documentos/
+Saved Games/
+WPS Cloud Files/
+magentic-ui-env/
