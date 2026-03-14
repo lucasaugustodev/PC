@@ -290,8 +290,7 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
 test_ds = ds['test']
 
 # Pick 10 diverse spots from test set
-test_indices = [0, 3, 5, 6, 7, 9, 10, 15, 16, 19, 20, 22, 23, 25, 27]
-# Also use the exact spots we tested before
+test_indices = list(range(100))
 
 print()
 print('='*70)
