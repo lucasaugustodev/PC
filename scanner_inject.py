@@ -60,6 +60,25 @@ def process(raw, d):
                     route = bytes(pb[3:3+rl]).decode('utf-8', errors='replace')
                     print(f"  >>> [{rid}] {route}")
 
+        elif d == 'RECV' and ptype == 2:
+            # Response to a request
+            req_id = (frame[1]<<16)|(frame[2]<<8)|frame[3]
+            body = None
+            if len(frame) > 4:
+                try: body = msgpack.unpackb(frame[4:], raw=False)
+                except: pass
+            if isinstance(body, dict):
+                event = body.get('event', '')
+                print(f"\n  *** RESPONSE [#{req_id}]: event={event} keys={list(body.keys())[:8]} ***")
+                if 'roomList' in str(body) or 'initinfo' in str(body):
+                    print(f"  BODY: {json.dumps(body, default=str, ensure_ascii=False)[:500]}")
+                    got_response.set()
+                if event == 'error':
+                    print(f"  ERROR: {body.get('errorMessage', body)}")
+                    got_response.set()
+            elif body is not None:
+                print(f"\n  *** RESPONSE [#{req_id}]: {type(body).__name__} ***")
+
         elif d == 'RECV' and ptype == 4:
             plen = (frame[1]<<16)|(frame[2]<<8)|frame[3]
             pb = frame[4:4+plen]
