@@ -155,23 +155,27 @@ def capture_client_send(raw):
             else:
                 log(f"  [SEND] type={ptype} unknown format")
 
-req_counter = 100
+req_counter = 0x0200
 
 def build_pomelo_request(route, body_dict):
-    """Build a Pomelo REQUEST copying exact format from captured client messages."""
+    """Build Pomelo client message.
+    Real wire format: [type=4] [plen 3B] [reqId 2B] [flags=01] [routeLen] [route] [msgpack_body]
+    """
     global req_counter
     route_bytes = route.encode('utf-8')
     body_bytes = msgpack.packb(body_dict, use_bin_type=True)
     rlen = len(route_bytes)
     req_id = req_counter
     req_counter += 1
-    # type-0 REQUEST: [0] [reqId 3 bytes] [route_len] [route] [msgpack]
-    msg = bytes([0,
-                 (req_id >> 16) & 0xFF,
-                 (req_id >> 8) & 0xFF,
-                 req_id & 0xFF,
-                 rlen]) + route_bytes + body_bytes
-    return msg
+    # Inner: [reqId_hi] [reqId_lo] [flags=01] [routeLen] [route] [msgpack]
+    inner = bytes([(req_id >> 8) & 0xFF,
+                   req_id & 0xFF,
+                   0x01,
+                   rlen]) + route_bytes + body_bytes
+    plen = len(inner)
+    # Header: [type=4] [plen 3B]
+    header = bytes([4, (plen >> 16) & 0xFF, (plen >> 8) & 0xFF, plen & 0xFF])
+    return header + inner
 
 def build_ws_frame(payload, masked=True):
     """Wrap payload in a WebSocket binary frame."""
