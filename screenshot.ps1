@@ -1,10 +1,10 @@
-Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName System.Windows.Forms
-$screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
-$bitmap = New-Object System.Drawing.Bitmap($screen.Width, $screen.Height)
-$graphics = [System.Drawing.Graphics]::FromImage($bitmap)
-$graphics.CopyFromScreen($screen.Location, [System.Drawing.Point]::Empty, $screen.Size)
-$bitmap.Save("C:\Users\PC\rdp-progress.png")
-$graphics.Dispose()
-$bitmap.Dispose()
-Write-Host "Screenshot saved to C:\Users\PC\rdp-progress.png"
+Add-Type -AssemblyName System.Drawing
+Start-Sleep -Milliseconds 500
+$bmp = New-Object System.Drawing.Bitmap(1920,1080)
+$gfx = [System.Drawing.Graphics]::FromImage($bmp)
+$gfx.CopyFromScreen(0,0,0,0,[System.Drawing.Size]::new(1920,1080))
+$bmp.Save("C:\Users\PC\Downloads\suprema_now.png")
+$gfx.Dispose()
+$bmp.Dispose()
+Write-Output "SAVED"

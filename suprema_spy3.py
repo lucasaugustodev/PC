@@ -92,26 +92,54 @@ def decode_pomelo(payload, direction):
 
     ptype = payload[0]
 
-    # Server push (type 4) - same as suprema_realtime.py
+    # Type 4 - different format for client vs server
     if ptype == 4 and len(payload) >= 4:
         plen = (payload[1] << 16) | (payload[2] << 8) | payload[3]
         pbody = payload[4:4 + plen]
-        if len(pbody) < 2:
-            return {'type': 'PUSH', 'raw': payload[:50].hex()}
-        rlen = pbody[1]
-        off = 2 + rlen
-        route = ''
-        try:
-            route = bytes(pbody[2:2 + rlen]).decode('utf-8', errors='replace')
-        except:
-            pass
-        body = None
-        if off < len(pbody):
+
+        if direction == 'SEND':
+            # CLIENT: [reqId 2B] [routeLen 1B] [route] [JSON body]
+            if len(pbody) < 3:
+                return {'type': 'REQUEST', 'raw': payload[:50].hex()}
+            reqId = (pbody[0] << 8) | pbody[1]
+            rlen = pbody[2]
+            if 3 + rlen > len(pbody):
+                return {'type': 'REQUEST', 'reqId': reqId, 'raw': pbody[:50].hex()}
+            route = ''
             try:
-                body = msgpack.unpackb(pbody[off:], raw=False)
+                route = bytes(pbody[3:3+rlen]).decode('utf-8', errors='replace')
             except:
                 pass
-        return {'type': 'PUSH', 'route': route, 'body': body}
+            body = None
+            body_raw = pbody[3+rlen:]
+            if body_raw:
+                try:
+                    body = json.loads(body_raw.decode('utf-8', errors='replace'))
+                except:
+                    try:
+                        body = msgpack.unpackb(body_raw, raw=False)
+                    except:
+                        body = {'_hex': body_raw[:100].hex()}
+            return {'type': 'REQUEST', 'reqId': reqId, 'route': route, 'body': body}
+
+        else:
+            # SERVER: [flags 1B] [routeLen 1B] [route] [msgpack body]
+            if len(pbody) < 2:
+                return {'type': 'PUSH', 'raw': payload[:50].hex()}
+            rlen = pbody[1]
+            off = 2 + rlen
+            route = ''
+            try:
+                route = bytes(pbody[2:2 + rlen]).decode('utf-8', errors='replace')
+            except:
+                pass
+            body = None
+            if off < len(pbody):
+                try:
+                    body = msgpack.unpackb(pbody[off:], raw=False)
+                except:
+                    pass
+            return {'type': 'PUSH', 'route': route, 'body': body}
 
     # Client request (type 0) - has reqId
     if ptype == 0 and len(payload) >= 5:
