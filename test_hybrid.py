@@ -335,8 +335,8 @@ for idx in test_indices:
     print('Q%d: %s on %s | eq=%.0f%% | pot=%.0f call=%.0f' % (
         idx+1, ' '.join(feat['hero']), ' '.join(feat['board']) if feat['board'] else 'preflop',
         equity*100, feat['pot'], feat['to_call']))
-    print('  Expected: %-8s | eval7: %-8s | RAG: %-8s | LLM: %-8s' % (
-        expected, votes.get('eval7','?'), votes.get('rag','?') or 'n/a', votes.get('llm','?')))
+    print('  Expected: %-8s | eval7: %-8s | RAG: %-8s' % (
+        expected, votes.get('eval7','?'), votes.get('rag','?') or 'n/a'))
     if rag_dist:
         print('  RAG dist: %s' % rag_dist)
     print('  >>> HYBRID: %-8s %s  %s' % (final.upper(), method, tag))
