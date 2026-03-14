@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+.groq_key
 
 # IDE
 .vscode/
@@ -12,6 +13,9 @@
 # OS
 Thumbs.db
 .DS_Store
+NTUSER.DAT*
+*.TM.blf
+*regtrans-ms
 
 # Logs
 *.log
@@ -19,8 +23,81 @@ Thumbs.db
 # Cache
 __pycache__/
 *.pyc
-node_modules/
 
 # Claude/Cline
 .cline/
 .anthropic_key
+.agents/
+.apm/
+.aws/
+.basic-memory/
+.bun/
+.cache/
+.chocolatey/
+.claude-mem/
+.claude/
+.docker/
+.fly/
+.gemini/
+.kiro/
+.lmstudio/
+.local/
+.m2/
+.matplotlib/
+.ollama/
+.openfang/
+.pack/
+.paperclip/
+.playwright-cli/
+.ssh/
+.trae-aicc/
+.trae/
+.pack/
+
+# Config
+.config/
+.cursor/
+
+# Scoop
+scoop/
+
+# Windows
+"Ambiente de Impressão/"
+"Ambiente de Rede/"
+"Configurações Locais/"
+Cookies/
+Dados de Aplicativos/
+"Menu Iniciar/"
+"Meus Documentos/"
+Modelos/
+Recent/
+SendTo/
+AppData/
+3D Objects/
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+"Saved Games/"
+Searches/
+Videos/
+"WPS Cloud Files/"
+
+# Binários e executáveis
+*.exe
+*.dll
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+
+# node_modules (exceto em projetos específicos)
+node_modules/
+
+

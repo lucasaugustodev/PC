@@ -1,0 +1,48 @@
+{
+  "canvas": {
+    "width": 120,
+    "height": 120,
+    "viewBox": "0 0 120 120",
+    "units": "px",
+    "background": "none"
+  },
+  "elements": [
+    {
+      "type": "path",
+      "d": "M45 25 L15 60 L45 95",
+      "style": {
+        "fill": "none",
+        "stroke": "#89b4fa",
+        "strokeWidth": 4,
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round"
+      }
+    },
+    {
+      "type": "path",
+      "d": "M75 25 L105 60 L75 95",
+      "style": {
+        "fill": "none",
+        "stroke": "#89b4fa",
+        "strokeWidth": 4,
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round"
+      }
+    },
+    {
+      "type": "line",
+      "x1": 68,
+      "y1": 20,
+      "x2": 52,
+      "y2": 100,
+      "style": {
+        "stroke": "#a6e3a1",
+        "strokeWidth": 3,
+        "strokeLinecap": "round"
+      }
+    }
+  ],
+  "metadata": {
+    "title": "Code brackets icon"
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "canvas": {
+    "width": 1400,
+    "height": 200,
+    "viewBox": "0 0 1400 200",
+    "units": "px",
+    "background": "none"
+  },
+  "defs": {
+    "markers": [
+      {
+        "id": "arrow",
+        "markerWidth": 12,
+        "markerHeight": 12,
+        "refX": 10,
+        "refY": 6,
+        "orient": "auto",
+        "pathD": "M0 0 L12 6 L0 12 Z",
+        "style": {
+          "fill": "#89b4fa"
+        }
+      }
+    ],
+    "gradients": [
+      {
+        "type": "linear",
+        "id": "boxGrad",
+        "x1": 0,
+        "y1": 0,
+        "x2": 0,
+        "y2": 1,
+        "stops": [
+          {
+            "offset": 0,
+            "color": "#313244"
+          },
+          {
+            "offset": 1,
+            "color": "#1e1e2e"
+          }
+        ]
+      }
+    ]
+  },
+  "elements": [
+    {
+      "type": "rect",
+      "x": 20,
+      "y": 40,
+      "width": 240,
+      "height": 120,
+      "rx": 16,
+      "ry": 16,
+      "style": {
+        "fill": "url(#boxGrad)",
+        "stroke": "#89b4fa",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "text",
+      "x": 140,
+      "y": 90,
+      "text": "React JSX",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#89b4fa",
+        "fontSize": 26,
+        "fontWeight": 700,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "text",
+      "x": 140,
+      "y": 120,
+      "text": "Components",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#a6adc8",
+        "fontSize": 16,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "line",
+      "x1": 260,
+      "y1": 100,
+      "x2": 360,
+      "y2": 100,
+      "style": {
+        "stroke": "#89b4fa",
+        "strokeWidth": 3,
+        "markerEnd": "url(#arrow)"
+      }
+    },
+    {
+      "type": "rect",
+      "x": 370,
+      "y": 40,
+      "width": 240,
+      "height": 120,
+      "rx": 16,
+      "ry": 16,
+      "style": {
+        "fill": "url(#boxGrad)",
+        "stroke": "#a6e3a1",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "text",
+      "x": 490,
+      "y": 90,
+      "text": "Bundler",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#a6e3a1",
+        "fontSize": 26,
+        "fontWeight": 700,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "text",
+      "x": 490,
+      "y": 120,
+      "text": "Webpack",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#a6adc8",
+        "fontSize": 16,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "line",
+      "x1": 610,
+      "y1": 100,
+      "x2": 710,
+      "y2": 100,
+      "style": {
+        "stroke": "#a6e3a1",
+        "strokeWidth": 3,
+        "markerEnd": "url(#arrow)"
+      }
+    },
+    {
+      "type": "rect",
+      "x": 720,
+      "y": 40,
+      "width": 240,
+      "height": 120,
+      "rx": 16,
+      "ry": 16,
+      "style": {
+        "fill": "url(#boxGrad)",
+        "stroke": "#f9e2af",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "text",
+      "x": 840,
+      "y": 90,
+      "text": "Renderer",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#f9e2af",
+        "fontSize": 26,
+        "fontWeight": 700,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "text",
+      "x": 840,
+      "y": 120,
+      "text": "Headless Chrome",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#a6adc8",
+        "fontSize": 16,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "line",
+      "x1": 960,
+      "y1": 100,
+      "x2": 1060,
+      "y2": 100,
+      "style": {
+        "stroke": "#f9e2af",
+        "strokeWidth": 3,
+        "markerEnd": "url(#arrow)"
+      }
+    },
+    {
+      "type": "rect",
+      "x": 1070,
+      "y": 40,
+      "width": 240,
+      "height": 120,
+      "rx": 16,
+      "ry": 16,
+      "style": {
+        "fill": "url(#boxGrad)",
+        "stroke": "#f38ba8",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "text",
+      "x": 1190,
+      "y": 90,
+      "text": "MP4",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#f38ba8",
+        "fontSize": 30,
+        "fontWeight": 700,
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "type": "text",
+      "x": 1190,
+      "y": 120,
+      "text": "H.264 Video",
+      "anchor": "middle",
+      "baseline": "middle",
+      "style": {
+        "fill": "#a6adc8",
+        "fontSize": 16,
+        "fontFamily": "monospace"
+      }
+    }
+  ],
+  "metadata": {
+    "title": "Remotion render pipeline"
+  }
+}

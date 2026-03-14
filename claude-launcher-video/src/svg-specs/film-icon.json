@@ -1,0 +1,126 @@
+{
+  "canvas": {
+    "width": 120,
+    "height": 120,
+    "viewBox": "0 0 120 120",
+    "units": "px",
+    "background": "none"
+  },
+  "elements": [
+    {
+      "type": "rect",
+      "x": 15,
+      "y": 10,
+      "width": 90,
+      "height": 100,
+      "rx": 8,
+      "ry": 8,
+      "style": {
+        "fill": "none",
+        "stroke": "#cba6f7",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "type": "rect",
+      "x": 15,
+      "y": 10,
+      "width": 18,
+      "height": 100,
+      "style": {
+        "fill": "none",
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "rect",
+      "x": 87,
+      "y": 10,
+      "width": 18,
+      "height": 100,
+      "style": {
+        "fill": "none",
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 15,
+      "y1": 35,
+      "x2": 33,
+      "y2": 35,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 15,
+      "y1": 60,
+      "x2": 33,
+      "y2": 60,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 15,
+      "y1": 85,
+      "x2": 33,
+      "y2": 85,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 87,
+      "y1": 35,
+      "x2": 105,
+      "y2": 35,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 87,
+      "y1": 60,
+      "x2": 105,
+      "y2": 60,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "line",
+      "x1": 87,
+      "y1": 85,
+      "x2": 105,
+      "y2": 85,
+      "style": {
+        "stroke": "#cba6f7",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "type": "path",
+      "d": "M50 45 L50 75 L72 60 Z",
+      "style": {
+        "fill": "#cba6f7",
+        "stroke": "none"
+      }
+    }
+  ],
+  "metadata": {
+    "title": "Film reel icon"
+  }
+}
