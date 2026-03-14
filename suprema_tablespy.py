@@ -363,8 +363,15 @@ def inject_pomelo(route, body_dict):
     pomelo_payload = build_pomelo_request(route, body_dict)
     ws_frame = build_ws_frame(pomelo_payload, masked=True)
     hex_data = ws_frame.hex()
-    result = sc.exports_sync.inject(hex_data)
-    return result
+    print(f"  [DEBUG] Pomelo hex: {pomelo_payload[:20].hex()}...")
+    print(f"  [DEBUG] WS frame size: {len(ws_frame)}b")
+    try:
+        result = sc.exports_sync.inject(hex_data)
+        print(f"  [DEBUG] SSL_write returned: {result}")
+        return result
+    except Exception as e:
+        print(f"  [DEBUG] inject error: {e}")
+        return f"ERROR: {e}"
 
 print("\033[92m")
 print("=" * 60)
