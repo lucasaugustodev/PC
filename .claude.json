@@ -1,5 +1,5 @@
 {
-  "numStartups": 103,
+  "numStartups": 104,
   "installMethod": "global",
   "autoUpdates": false,
   "hasSeenTasksHint": true,
@@ -9,7 +9,7 @@
     "terminal-setup": 101,
     "memory-command": 97,
     "theme-command": 86,
-    "status-line": 79,
+    "status-line": 104,
     "prompt-queue": 3,
     "enter-to-steer-in-relatime": 86,
     "todo-list": 86,
@@ -25,7 +25,7 @@
     "web-app": 100,
     "mobile-app": 101,
     "frontend-design-plugin": 91,
-    "guest-passes": 101,
+    "guest-passes": 104,
     "custom-agents": 101,
     "agent-flag": 102,
     "permissions": 98,
@@ -35,7 +35,7 @@
     "desktop-shortcut": 90,
     "feedback-command": 90
   },
-  "promptQueueUseCount": 503,
+  "promptQueueUseCount": 505,
   "cachedGrowthBookFeatures": {
     "tengu_tst_kx7": false,
     "tengu_plan_mode_interview_phase": false,

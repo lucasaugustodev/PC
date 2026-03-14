@@ -160,7 +160,7 @@ def build_pomelo_request(route, body_dict):
     """
     global req_counter
     route_bytes = route.encode('utf-8')
-    body_bytes = msgpack.packb(body_dict, use_bin_type=True)
+    body_bytes = json.dumps(body_dict, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
     rlen = len(route_bytes)
     req_id = req_counter
     req_counter += 1
@@ -428,29 +428,10 @@ log("Capturando formato do protocolo...")
 log("SAI da mesa e ENTRA de novo pra capturar o JOIN!")
 log("(Esperando 30 segundos...)")
 
-# Phase 1: Capture real client messages for 30 seconds
-for i in range(30):
-    time.sleep(1)
-    if 'apiPlayer.playerHandler.joinGameRoom' in captured_templates:
-        log(f"  JOIN capturado em {i+1}s!")
-        break
-    if 'room.roomHandler.clientMessage' in captured_templates:
-        log(f"  ENTER capturado em {i+1}s!")
-    if i % 10 == 9:
-        log(f"  ... {i+1}s, templates capturados: {list(captured_templates.keys())}")
-
-log(f"\nTemplates capturados: {list(captured_templates.keys())}")
-
-# Show hex of captured templates
-for route, raw in captured_templates.items():
-    log(f"  {route}: type={raw[0]} hex={raw[:30].hex()} ({len(raw)}b)")
-
-# Phase 2: If we got templates, use them to spy
-if not captured_templates:
-    log("\nNenhum template capturado! Precisa sair e entrar numa mesa.")
-    log("Continuando monitoramento passivo...")
-else:
-    log("\n[PHASE 2] Tentando injetar com formato capturado...")
+# Wait 5s for SSL socket capture, then inject immediately
+log("Esperando 5s pra capturar socket SSL...")
+time.sleep(5)
+log("Injetando requests...")
 
     # Try inject with type-0 REQUEST format
     log("\n[1] Requesting room list from GU (type-0 REQUEST)...")
