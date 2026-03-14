@@ -199,21 +199,25 @@ def process_recv(raw):
 
             # Log all responses for debugging
             if msg_type == 'RESPONSE':
-                print(f"\033[96m  RESPONSE [#{req_id}]: {json.dumps(body, default=str, ensure_ascii=False)[:300]}\033[0m")
+                log(f"  RESPONSE [#{req_id}]: {json.dumps(body, default=str, ensure_ascii=False)[:300]}")
 
             event = body.get('event', '')
             route = body.get('route', '')
             data = body.get('data', body.get('apiData', {}))
 
+            # Log ALL events for debug
+            if event:
+                log(f"  [EVT] {event} (type={msg_type})")
+
             # joinGameRoom response - contains room list
             if event == 'apiPlayer.playerHandler.joinGameRoom':
                 api = body.get('apiData', {})
                 room_list = api.get('roomList', {})
-                print(f"\033[92m  Got roomList with {len(room_list)} rooms\033[0m")
+                log(f"  Got roomList with {len(room_list)} rooms")
                 for rid, rinfo in room_list.items():
                     if isinstance(rinfo, dict):
                         responses[f'roomList_{rid}'] = rinfo
-                        print(f"    Room {rid}: {json.dumps(rinfo, default=str)[:200]}")
+                        log(f"    Room {rid}: {json.dumps(rinfo, default=str)[:200]}")
 
             # initinfo - full room state when entering
             if event == 'initinfo':
