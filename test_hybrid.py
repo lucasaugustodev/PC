@@ -269,9 +269,9 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
         final = rules_action
         method = 'RULES'
     else:
-        # Weighted voting: eval7=2, rag=2, llm=1
+        # Weighted voting: eval7=3, rag=2 (eval7 is more reliable)
         tally = {}
-        weights = {'eval7': 2, 'rag': 2, 'llm': 1}
+        weights = {'eval7': 3, 'rag': 2}
         for src, act in votes.items():
             if act and act != 'error' and act != 'unknown':
                 tally[act] = tally.get(act, 0) + weights.get(src, 1)
