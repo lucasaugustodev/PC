@@ -433,25 +433,25 @@ log("Esperando 5s pra capturar socket SSL...")
 time.sleep(5)
 log("Injetando requests...")
 
-    # Try inject with type-0 REQUEST format
-    log("\n[1] Requesting room list from GU (type-0 REQUEST)...")
-    result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
-        "clubID": "14625",
-        "unionID": 113,
-        "myClubID": 377039,
-        "myUnionID": 106,
-        "matchID": 0,
-        "stakeRangeID": 1,
-        "matchType": 1,
-        "ver": 7288,
-        "lan": "pt"
-    })
-    log(f"  Inject result: {result}")
-    time.sleep(3)
+# Step 1: Request room list
+log("\n[1] Requesting room list from GU...")
+result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
+    "clubID": "14625",
+    "unionID": 113,
+    "myClubID": 377039,
+    "myUnionID": 106,
+    "matchID": 0,
+    "stakeRangeID": 1,
+    "matchType": 1,
+    "ver": 7288,
+    "lan": "pt"
+})
+log(f"  Inject result: {result}")
+time.sleep(3)
 
-    # Check if we got rooms from passive monitoring
-    test_rooms = list(responses.keys())
-    test_rooms = [k.replace('roomList_', '') for k in test_rooms if k.startswith('roomList_')]
+# Check if we got rooms from passive monitoring
+test_rooms = list(responses.keys())
+test_rooms = [k.replace('roomList_', '') for k in test_rooms if k.startswith('roomList_')]
 
 log(f"  Found {len(test_rooms)} rooms to spy on")
 
