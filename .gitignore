@@ -4,3 +4,26 @@
 
 # Ollama SSH keys
 .ollama/
+
+# Claude & Cline data
+.cline/
+.claude/
+.claude-mem/
+.agents/
+.basic-memory/
+
+# Cache & temp
+.cache/
+.apm/
+.aws/
+.bun/
+.chocolatey/
+
+# Logs
+*.log
+
+# Screenshots
+*.png
+!suprema_*.png
+!test-*.png
+!vultr_*.png

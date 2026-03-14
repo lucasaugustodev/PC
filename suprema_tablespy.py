@@ -407,13 +407,13 @@ result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
     "ver": 7288,
     "lan": "pt"
 })
-print(f"  Inject result: {result}")
+log(f"  Inject result: {result}")
 
 # Wait for response
 time.sleep(3)
 
 # Step 2: Get match list to find specific room IDs
-print("\n\033[93m[2] Requesting match list...\033[0m")
+log("[2] Requesting match list...")
 result = inject_pomelo("apiClubMatch.clubMatchHandler.matchGU", {
     "unionID": 113,
     "clubID": 14625,
