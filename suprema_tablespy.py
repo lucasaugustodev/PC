@@ -338,6 +338,8 @@ def on_msg(msg, data):
     direction = p.get('d', 'RECV')
     if direction == 'RECV':
         process_recv(bytes(data))
+    elif direction == 'SEND':
+        capture_client_send(bytes(data))
 
 # Clear log
 with open(LOG_FILE, 'w', encoding='utf-8') as f:
