@@ -73,28 +73,45 @@ def parse_ws_frames(buf):
         pos = total
     return frames, buf[pos:]
 
-def decode_pomelo_push(payload):
-    """Decode type-4 Pomelo push message."""
-    if len(payload) < 5 or payload[0] != 4:
+def decode_pomelo(payload):
+    """Decode Pomelo message (type 2=response, type 4=push)."""
+    if len(payload) < 2:
         return None
-    plen = (payload[1] << 16) | (payload[2] << 8) | payload[3]
-    pbody = payload[4:4 + plen]
-    if len(pbody) < 2:
-        return None
-    rlen = pbody[1]
-    off = 2 + rlen
-    route = ''
-    try:
-        route = bytes(pbody[2:2 + rlen]).decode('utf-8', errors='replace')
-    except:
-        pass
-    body = None
-    if off < len(pbody):
+    ptype = payload[0]
+
+    # Type 4: Server PUSH
+    if ptype == 4 and len(payload) >= 5:
+        plen = (payload[1] << 16) | (payload[2] << 8) | payload[3]
+        pbody = payload[4:4 + plen]
+        if len(pbody) < 2:
+            return None
+        rlen = pbody[1]
+        off = 2 + rlen
+        route = ''
         try:
-            body = msgpack.unpackb(pbody[off:], raw=False)
+            route = bytes(pbody[2:2 + rlen]).decode('utf-8', errors='replace')
         except:
             pass
-    return {'route': route, 'body': body}
+        body = None
+        if off < len(pbody):
+            try:
+                body = msgpack.unpackb(pbody[off:], raw=False)
+            except:
+                pass
+        return {'type': 'PUSH', 'route': route, 'body': body}
+
+    # Type 2: RESPONSE to our request
+    if ptype == 2 and len(payload) >= 4:
+        req_id = (payload[1] << 16) | (payload[2] << 8) | payload[3]
+        body = None
+        if len(payload) > 4:
+            try:
+                body = msgpack.unpackb(payload[4:], raw=False)
+            except:
+                pass
+        return {'type': 'RESPONSE', 'reqId': req_id, 'body': body}
+
+    return None
 
 req_counter = 1
 
