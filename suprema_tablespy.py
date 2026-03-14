@@ -122,24 +122,56 @@ def decode_pomelo(payload):
 
     return None
 
+send_buf = b''
+captured_templates = {}  # route -> raw pomelo bytes
+
+def capture_client_send(raw):
+    """Capture and log raw client SEND data to find message templates."""
+    global send_buf
+    with lock:
+        send_buf += raw
+        frames, send_buf = parse_ws_frames(send_buf)
+        for frame in frames:
+            if len(frame) < 5:
+                continue
+            # Log raw hex of every client frame
+            log(f"  [SEND RAW] {frame[:40].hex()} ({len(frame)}b)")
+            # Try to extract route for indexing
+            ptype = frame[0]
+            if ptype == 0 and len(frame) >= 5:
+                # type-0 REQUEST: [0] [reqId 3B] [rlen] [route] [msgpack]
+                rlen = frame[4]
+                if rlen < 100 and 5 + rlen <= len(frame):
+                    route = frame[5:5+rlen].decode('utf-8', errors='replace')
+                    log(f"  [SEND] type=0 REQUEST route={route} reqId={frame[1]<<16|frame[2]<<8|frame[3]}")
+                    captured_templates[route] = frame
+            elif ptype == 1 and len(frame) >= 3:
+                # type-1 NOTIFY: [1] [rlen] [route] [msgpack]
+                rlen = frame[1]
+                if rlen < 100 and 2 + rlen <= len(frame):
+                    route = frame[2:2+rlen].decode('utf-8', errors='replace')
+                    log(f"  [SEND] type=1 NOTIFY route={route}")
+                    captured_templates[route] = frame
+            else:
+                log(f"  [SEND] type={ptype} unknown format")
+
 req_counter = 100
 
 def build_pomelo_request(route, body_dict):
-    """Build a Pomelo type-4 message (same format client uses).
-    Wire format: [type=4] [plen_h] [plen_m] [plen_l] [flags=0x06] [route_len] [route] [msgpack]
-    """
+    """Build a Pomelo REQUEST copying exact format from captured client messages."""
     global req_counter
     route_bytes = route.encode('utf-8')
     body_bytes = msgpack.packb(body_dict, use_bin_type=True)
     rlen = len(route_bytes)
     req_id = req_counter
     req_counter += 1
-    # pbody: [flags] [route_len] [route] [msgpack]
-    pbody = bytes([req_id & 0xFF, rlen]) + route_bytes + body_bytes
-    plen = len(pbody)
-    # header: [type=4] [len 3 bytes]
-    header = bytes([4, (plen >> 16) & 0xFF, (plen >> 8) & 0xFF, plen & 0xFF])
-    return header + pbody
+    # type-0 REQUEST: [0] [reqId 3 bytes] [route_len] [route] [msgpack]
+    msg = bytes([0,
+                 (req_id >> 16) & 0xFF,
+                 (req_id >> 8) & 0xFF,
+                 req_id & 0xFF,
+                 rlen]) + route_bytes + body_bytes
+    return msg
 
 def build_ws_frame(payload, masked=True):
     """Wrap payload in a WebSocket binary frame."""
