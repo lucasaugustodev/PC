@@ -136,22 +136,19 @@ def capture_client_send(raw):
                 continue
             # Log raw hex of every client frame
             log(f"  [SEND RAW] {frame[:40].hex()} ({len(frame)}b)")
-            # Try to extract route for indexing
+            # Real format: [type=4] [plen 3B] [reqId 2B] [flags=01] [routeLen] [route] [body]
             ptype = frame[0]
-            if ptype == 0 and len(frame) >= 5:
-                # type-0 REQUEST: [0] [reqId 3B] [rlen] [route] [msgpack]
-                rlen = frame[4]
-                if rlen < 100 and 5 + rlen <= len(frame):
-                    route = frame[5:5+rlen].decode('utf-8', errors='replace')
-                    log(f"  [SEND] type=0 REQUEST route={route} reqId={frame[1]<<16|frame[2]<<8|frame[3]}")
+            if ptype == 4 and len(frame) >= 8:
+                plen = (frame[1] << 16) | (frame[2] << 8) | frame[3]
+                req_id = (frame[4] << 8) | frame[5]
+                flags = frame[6]
+                rlen = frame[7]
+                if rlen < 200 and 8 + rlen <= len(frame):
+                    route = frame[8:8+rlen].decode('utf-8', errors='replace')
+                    log(f"  [SEND] type=4 reqId={req_id} flags={flags} route={route}")
                     captured_templates[route] = frame
-            elif ptype == 1 and len(frame) >= 3:
-                # type-1 NOTIFY: [1] [rlen] [route] [msgpack]
-                rlen = frame[1]
-                if rlen < 100 and 2 + rlen <= len(frame):
-                    route = frame[2:2+rlen].decode('utf-8', errors='replace')
-                    log(f"  [SEND] type=1 NOTIFY route={route}")
-                    captured_templates[route] = frame
+                else:
+                    log(f"  [SEND] type=4 rlen={rlen} too big or truncated")
             else:
                 log(f"  [SEND] type={ptype} unknown format")
 
