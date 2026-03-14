@@ -270,7 +270,7 @@ print(f"Ultimo reqId agora: {last_reqid}")
 scanner_file = os.path.expanduser('~/suprema_scanner.json')
 target_matches = []
 if os.path.exists(scanner_file):
-    with open(scanner_file, 'r') as f:
+    with open(scanner_file, 'r', encoding='utf-8') as f:
         sdata = json.load(f)
     for mid, m in sdata.get('matches', {}).items():
         players = m.get('!!', 0)
