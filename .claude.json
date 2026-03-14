@@ -32,8 +32,8 @@
     "rename-conversation": 105,
     "custom-commands": 105,
     "git-worktrees": 98,
-    "desktop-shortcut": 90,
-    "feedback-command": 90
+    "desktop-shortcut": 105,
+    "feedback-command": 105
   },
   "promptQueueUseCount": 550,
   "cachedGrowthBookFeatures": {
