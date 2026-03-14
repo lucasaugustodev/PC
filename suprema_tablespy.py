@@ -20,7 +20,7 @@ def find_pid():
 
 pid = find_pid()
 if not pid:
-    print("SupremaPoker not running!")
+    log("SupremaPoker not running!")
     sys.exit(1)
 
 LOG_FILE = os.path.expanduser('~/suprema_tablespy.log')
@@ -230,10 +230,10 @@ def process_recv(raw):
                 gamers = room_data.get('gamer', {})
                 game_info = room_data.get('game_info', {})
 
-                print(f"\n\033[93m{'='*60}")
-                print(f"  MESA: {room_name} ({room_id})")
-                print(f"  Jogadores: {game_info.get('gamers_count', '?')} | Pot: {game_info.get('pot', 0)} | Hand #{game_info.get('game_counter', '?')}")
-                print(f"{'='*60}\033[0m")
+                log(f"\n\033[93m{'='*60}")
+                log(f"  MESA: {room_name} ({room_id})")
+                log(f"  Jogadores: {game_info.get('gamers_count', '?')} | Pot: {game_info.get('pot', 0)} | Hand #{game_info.get('game_counter', '?')}")
+                log(f"{'='*60}\033[0m")
 
                 players = []
                 for uid_str, seat_data in game_seat.items():
@@ -264,7 +264,7 @@ def process_recv(raw):
                     vpn_tag = " \033[95m[VPN]\033[0m" if p['country'] != p['countryIP'] else ""
                     win_color = '\033[92m' if p['winnings'] > 0 else '\033[91m' if p['winnings'] < 0 else '\033[97m'
 
-                    print(f"  Seat {p['seat']}: {p['name']:15s} | Stack: {p['coins']:6.2f} | {win_color}Win: {p['winnings']:+.2f}\033[0m | {p['country']}{agent_tag}{vpn_tag}")
+                    log(f"  Seat {p['seat']}: {p['name']:15s} | Stack: {p['coins']:6.2f} | {win_color}Win: {p['winnings']:+.2f}\033[0m | {p['country']}{agent_tag}{vpn_tag}")
 
                 rooms_data[room_id] = {
                     'name': room_name,
@@ -288,17 +288,17 @@ def process_recv(raw):
                 if event_inner in ('gamestart', 'moveturn') and room_id and current_spy_room and room_id != current_spy_room:
                     game_seat = data.get('game_seat', {})
                     if game_seat:
-                        print(f"\033[96m  [{room_id}] Live update: {len(game_seat)} players\033[0m")
+                        log(f"\033[96m  [{room_id}] Live update: {len(game_seat)} players\033[0m")
 
 def on_msg(msg, data):
     if msg['type'] != 'send':
         return
     p = msg['payload']
     if p.get('t') == 'ready':
-        print("\033[92mHOOK OK!\033[0m")
+        log("\033[92mHOOK OK!\033[0m")
         return
     if p.get('t') == 'fatal':
-        print(f"\033[91mFATAL: {p['e']}\033[0m")
+        log(f"\033[91mFATAL: {p['e']}\033[0m")
         return
     if not data:
         return
@@ -311,7 +311,7 @@ def on_msg(msg, data):
 with open(LOG_FILE, 'w', encoding='utf-8') as f:
     f.write(f"=== Suprema Table Spy - {time.strftime('%Y-%m-%d %H:%M:%S')} ===\n\n")
 
-print(f"Connecting to SupremaPoker (PID {pid})...")
+log(f"Connecting to SupremaPoker (PID {pid})...")
 sess = frida.attach(pid)
 
 # Frida script with ability to INJECT messages via SSL_write
@@ -424,13 +424,13 @@ result = inject_pomelo("apiClubMatch.clubMatchHandler.matchGU", {
     "ver": 7288,
     "lan": "pt"
 })
-print(f"  Inject result: {result}")
+log(f"  Inject result: {result}")
 
 time.sleep(3)
 
 # Step 3: Try entering specific rooms to get player data
 # We'll try some known room patterns
-print("\n\033[93m[3] Attempting to spy on rooms...\033[0m")
+log("\n\033[93m[3] Attempting to spy on rooms...\033[0m")
 
 # Try entering rooms we know exist from matchesStatusPushNotify
 # Room format: clubID_matchID
@@ -444,7 +444,7 @@ for key, val in responses.items():
 
 if not test_rooms:
     # Try common patterns based on what we've seen
-    print("  No rooms found in roomList, trying known patterns...")
+    log("  No rooms found in roomList, trying known patterns...")
     # From the matchesStatusPushNotify, we saw matchIDs like 43103465, 43100186, etc.
     test_rooms = [
         "14625_43103465",
@@ -452,10 +452,10 @@ if not test_rooms:
         "14625_43103022",
     ]
 
-print(f"  Found {len(test_rooms)} rooms to spy on")
+log(f"  Found {len(test_rooms)} rooms to spy on")
 
 for room_id in test_rooms[:5]:  # Limit to 5 rooms
-    print(f"\n\033[93m  Entering room {room_id}...\033[0m")
+    log(f"\n\033[93m  Entering room {room_id}...\033[0m")
     current_spy_room = room_id
 
     result = inject_pomelo("room.roomHandler.clientMessage", {
@@ -463,7 +463,7 @@ for room_id in test_rooms[:5]:  # Limit to 5 rooms
         "roomID": f"{room_id}#113@377039",
         "args": ""
     })
-    print(f"    Inject: {result}")
+    log(f"    Inject: {result}")
     time.sleep(2)  # Wait for room data
 
     # Leave the room
@@ -475,25 +475,25 @@ for room_id in test_rooms[:5]:  # Limit to 5 rooms
     time.sleep(1)
 
 # Summary
-print("\n\n\033[92m" + "=" * 60)
-print("  RESUMO DE TODAS AS MESAS ESPIONADAS")
-print("=" * 60 + "\033[0m\n")
+log("\n\n\033[92m" + "=" * 60)
+log("  RESUMO DE TODAS AS MESAS ESPIONADAS")
+log("=" * 60 + "\033[0m\n")
 
 for room_id, rdata in rooms_data.items():
-    print(f"\033[97m{rdata['name']} ({room_id})\033[0m")
+    log(f"\033[97m{rdata['name']} ({room_id})\033[0m")
     players = rdata['players']
     if players:
         biggest_winner = max(players, key=lambda p: p['winnings'])
         biggest_loser = min(players, key=lambda p: p['winnings'])
         bots = [p for p in players if p['agentID'] != 0]
 
-        print(f"  Maior ganhador: {biggest_winner['name']} ({biggest_winner['winnings']:+.2f})")
-        print(f"  Maior perdedor: {biggest_loser['name']} ({biggest_loser['winnings']:+.2f})")
+        log(f"  Maior ganhador: {biggest_winner['name']} ({biggest_winner['winnings']:+.2f})")
+        log(f"  Maior perdedor: {biggest_loser['name']} ({biggest_loser['winnings']:+.2f})")
         if bots:
-            print(f"  Bots detectados: {', '.join(b['name'] for b in bots)}")
-        print()
+            log(f"  Bots detectados: {', '.join(b['name'] for b in bots)}")
+        log()
 
-print("\n\033[93mContinuando monitoramento... Ctrl+C para parar\033[0m")
+log("\n\033[93mContinuando monitoramento... Ctrl+C para parar\033[0m")
 
 try:
     while True:
@@ -501,6 +501,6 @@ try:
 except KeyboardInterrupt:
     pass
 
-print("\nStopping...")
+log("\nStopping...")
 sc.unload()
 sess.detach()
