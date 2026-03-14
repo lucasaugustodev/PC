@@ -376,30 +376,26 @@ def inject_pomelo(route, body_dict):
     pomelo_payload = build_pomelo_request(route, body_dict)
     ws_frame = build_ws_frame(pomelo_payload, masked=True)
     hex_data = ws_frame.hex()
-    print(f"  [DEBUG] Pomelo hex: {pomelo_payload[:20].hex()}...")
-    print(f"  [DEBUG] WS frame size: {len(ws_frame)}b")
+    log(f"  [DEBUG] Pomelo hex: {pomelo_payload[:20].hex()}...")
+    log(f"  [DEBUG] WS frame size: {len(ws_frame)}b")
     try:
         result = sc.exports_sync.inject(hex_data)
-        print(f"  [DEBUG] SSL_write returned: {result}")
+        log(f"  [DEBUG] SSL_write returned: {result}")
         return result
     except Exception as e:
-        print(f"  [DEBUG] inject error: {e}")
+        log(f"  [DEBUG] inject error: {e}")
         return f"ERROR: {e}"
 
-print("\033[92m")
-print("=" * 60)
-print("  SUPREMA TABLE SPY - MULTI-ROOM INTEL")
-print(f"  Log: {LOG_FILE}")
-print("=" * 60)
-print("\033[0m")
+log("SUPREMA TABLE SPY - MULTI-ROOM INTEL")
+log(f"Log: {LOG_FILE}")
 
 # Wait for SSL traffic so lastSSL gets populated
-print("\nAguardando trafico SSL pra capturar o socket...")
-print("(Se nao aparecer nada, clique em algo no app Suprema)")
+log("Aguardando trafico SSL pra capturar o socket...")
+log("(Se nao aparecer nada, clique em algo no app Suprema)")
 time.sleep(5)
 
 # Step 1: Request room list for the Grand Union
-print("\n\033[93m[1] Requesting room list from GU...\033[0m")
+log("[1] Requesting room list from GU...")
 result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
     "clubID": "14625",
     "unionID": 113,
