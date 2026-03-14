@@ -592,27 +592,65 @@ def ask_gto():
             action, size = detect_gto_action(advice)
             # Safety: validate action against available actions
             avail = state.get('available_actions', {})
+            if not avail:
+                state['gto_advice'] = advice + ' [NO AUTO: avail empty]'
+                state['dirty'] = True
+                return
             can_check = 'check' in avail and avail['check'] is not None
             can_call = 'call' in avail and avail['call'] is not None
             can_raise = 'raise' in avail and avail['raise'] is not None
             can_allin = 'all_in' in avail and avail['all_in'] is not None
             can_fold = 'fold' in avail and avail['fold'] is not None
 
+            can_bet = 'bet' in avail and avail['bet'] is not None
+
             # Never fold when check is free
             if action == 'fold' and can_check:
                 action = 'check'
                 state['gto_advice'] = advice + ' [OVERRIDE: check > fold]'
                 state['dirty'] = True
-            # If raise/bet recommended but only fold+allin available, convert to allin or fold
-            if action == 'raise' and not can_raise and can_allin:
-                action = 'allin'
-                state['gto_advice'] = advice + ' [OVERRIDE: all-in (no raise)]'
-                state['dirty'] = True
-            # If call recommended but no call available, check if can check
-            if action == 'call' and not can_call and can_check:
-                action = 'check'
-                state['gto_advice'] = advice + ' [OVERRIDE: check (no call)]'
-                state['dirty'] = True
+            # Check recommended but not available — convert to call or fold
+            if action == 'check' and not can_check:
+                if can_call:
+                    action = 'call'
+                    state['gto_advice'] = advice + ' [OVERRIDE: call (no check)]'
+                    state['dirty'] = True
+                elif can_fold:
+                    action = 'fold'
+                    state['gto_advice'] = advice + ' [OVERRIDE: fold (no check/call)]'
+                    state['dirty'] = True
+            # Call recommended but not available
+            if action == 'call' and not can_call:
+                if can_check:
+                    action = 'check'
+                    state['gto_advice'] = advice + ' [OVERRIDE: check (no call)]'
+                    state['dirty'] = True
+                elif can_fold:
+                    action = 'fold'
+                    state['gto_advice'] = advice + ' [OVERRIDE: fold (no call)]'
+                    state['dirty'] = True
+            # Raise recommended but not available
+            if action == 'raise' and not can_raise and not can_bet:
+                if can_allin:
+                    action = 'allin'
+                    state['gto_advice'] = advice + ' [OVERRIDE: all-in (no raise)]'
+                    state['dirty'] = True
+                elif can_call:
+                    action = 'call'
+                    state['gto_advice'] = advice + ' [OVERRIDE: call (no raise)]'
+                    state['dirty'] = True
+            # Raise maps to bet when only bet available (postflop first to act)
+            if action == 'raise' and not can_raise and can_bet:
+                # bet uses same button flow as raise
+                pass
+            # Skip action entirely if not available at all
+            if action and action not in ('allin',) and avail:
+                valid = {'check': can_check, 'call': can_call, 'fold': can_fold,
+                         'raise': can_raise or can_bet, 'allin': can_allin}
+                if not valid.get(action, False):
+                    state['gto_advice'] = advice + ' [SKIP: %s not available]' % action
+                    state['dirty'] = True
+                    action = None
             if action:
                 time.sleep(3)  # wait before acting to look natural + let GTO think
                 result = auto_play(action, size)
