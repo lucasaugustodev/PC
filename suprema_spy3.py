@@ -8,20 +8,57 @@ except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'msgpack'])
     import msgpack
 
-def find_pid():
+def find_all_pids():
     r = subprocess.check_output(
         'tasklist /FI "IMAGENAME eq SupremaPoker.exe" /FO CSV /NH',
         shell=True, text=True
     ).strip()
+    pids = []
     for line in r.splitlines():
         if 'SupremaPoker' in line:
-            return int(line.split(',')[1].strip('"'))
-    return None
+            pids.append(int(line.split(',')[1].strip('"')))
+    return pids
 
-pid = find_pid()
-if not pid:
+def find_active_pid(pids):
+    """Find which PID has active SSL traffic."""
+    import frida as _frida
+    for pid in pids:
+        try:
+            sess = _frida.attach(pid)
+            sc = sess.create_script(r'''
+                var m = Process.findModuleByName("libssl-1_1.dll");
+                if (!m) { send({active: false}); } else {
+                    var count = 0;
+                    Interceptor.attach(m.findExportByName("SSL_read"), {
+                        onLeave: function(retval) {
+                            if (retval.toInt32() > 0 && count < 1) { count++; send({active: true}); }
+                        }
+                    });
+                    setTimeout(function() { if (count === 0) send({active: false}); }, 2000);
+                }
+            ''')
+            result = []
+            sc.on('message', lambda msg, data: result.append(msg.get('payload', {})))
+            sc.load()
+            time.sleep(2.5)
+            sc.unload()
+            sess.detach()
+            if result and result[0].get('active'):
+                print(f"Active SSL traffic on PID {pid}")
+                return pid
+        except:
+            continue
+    return pids[0] if pids else None
+
+all_pids = find_all_pids()
+if not all_pids:
     print("SupremaPoker not running!")
     sys.exit(1)
+print(f"Found PIDs: {all_pids}")
+pid = find_active_pid(all_pids)
+if not pid:
+    print("No active PID found, using first")
+    pid = all_pids[0]
 
 LOG_FILE = os.path.expanduser('~/suprema_spy3.log')
 lock = threading.Lock()
