@@ -35,37 +35,26 @@ Write-Output ""
 Write-Output "=== LARGE FILES (>500MB) in C:\Users\PC ==="
 Get-ChildItem 'C:\Users\PC' -Recurse -Force -File -ErrorAction SilentlyContinue | Where-Object { $_.Length -gt 500MB } | Sort-Object Length -Descending | Select-Object @{N='SizeMB';E={[math]::Round($_.Length/1MB,0)}}, FullName -First 30 | Format-Table -AutoSize
 
-Write-Output "=== npm/pip/node_modules CACHES ==="
-$npmCache = 'C:\Users\PC\AppData\Local\npm-cache'
-if (Test-Path $npmCache) {
-    $s = (Get-ChildItem $npmCache -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
-    Write-Output ("npm cache: {0:N1} MB" -f ($s/1MB))
+Write-Output "=== CACHES ==="
+$paths = @{
+    'npm cache' = 'C:\Users\PC\AppData\Local\npm-cache'
+    'pip cache' = 'C:\Users\PC\AppData\Local\pip\cache'
+    'nuget cache' = 'C:\Users\PC\.nuget'
+    '.claude' = 'C:\Users\PC\.claude'
+    'Docker' = 'C:\Users\PC\AppData\Local\Docker'
 }
-$pipCache = 'C:\Users\PC\AppData\Local\pip\cache'
-if (Test-Path $pipCache) {
-    $s = (Get-ChildItem $pipCache -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
-    Write-Output ("pip cache: {0:N1} MB" -f ($s/1MB))
+foreach ($entry in $paths.GetEnumerator()) {
+    if (Test-Path $entry.Value) {
+        $s = (Get-ChildItem $entry.Value -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
+        Write-Output ("{0}: {1:N0} MB" -f $entry.Key, ($s/1MB))
+    }
 }
 
 Write-Output ""
-Write-Output "=== node_modules FOLDERS ==="
+Write-Output "=== node_modules FOLDERS (>50MB) ==="
 Get-ChildItem 'C:\Users\PC' -Recurse -Directory -Force -ErrorAction SilentlyContinue -Filter 'node_modules' | ForEach-Object {
     $s = (Get-ChildItem $_.FullName -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
     if ($s -gt 50MB) {
         [PSCustomObject]@{SizeMB=[math]::Round($s/1MB,0); Path=$_.FullName}
     }
 } | Sort-Object SizeMB -Descending | Format-Table -AutoSize
-
-Write-Output "=== DOCKER ==="
-$dockerPath = 'C:\Users\PC\AppData\Local\Docker'
-if (Test-Path $dockerPath) {
-    $s = (Get-ChildItem $dockerPath -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
-    Write-Output ("Docker data: {0:N1} GB" -f ($s/1GB))
-}
-
-Write-Output "=== .claude CACHE ==="
-$claudePath = 'C:\Users\PC\.claude'
-if (Test-Path $claudePath) {
-    $s = (Get-ChildItem $claudePath -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
-    Write-Output (".claude: {0:N1} MB" -f ($s/1MB))
-}

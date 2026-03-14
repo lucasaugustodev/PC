@@ -96,17 +96,25 @@ def decode_pomelo_push(payload):
             pass
     return {'route': route, 'body': body}
 
-def build_pomelo_msg(route, body_dict):
-    """Build a Pomelo type-4 message (same format client uses)."""
+req_counter = 1
+
+def build_pomelo_request(route, body_dict):
+    """Build a Pomelo type-0 REQUEST message (client format).
+    Format: [type=0] [reqId_h] [reqId_m] [reqId_l] [route_len] [route] [msgpack]
+    """
+    global req_counter
     route_bytes = route.encode('utf-8')
     body_bytes = msgpack.packb(body_dict, use_bin_type=True)
+    req_id = req_counter
+    req_counter += 1
     rlen = len(route_bytes)
-    # pbody: [flags?=0x06] [route_len] [route] [msgpack]
-    pbody = bytes([0x06, rlen]) + route_bytes + body_bytes
-    plen = len(pbody)
-    # header: [type=4] [len_high] [len_mid] [len_low]
-    header = bytes([4, (plen >> 16) & 0xFF, (plen >> 8) & 0xFF, plen & 0xFF])
-    return header + pbody
+    # type-0 REQUEST: [0] [reqId 3 bytes] [route_len] [route] [msgpack_body]
+    msg = bytes([0,
+                 (req_id >> 16) & 0xFF,
+                 (req_id >> 8) & 0xFF,
+                 req_id & 0xFF,
+                 rlen]) + route_bytes + body_bytes
+    return msg
 
 def build_ws_frame(payload, masked=True):
     """Wrap payload in a WebSocket binary frame."""
