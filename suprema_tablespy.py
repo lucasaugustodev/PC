@@ -27,6 +27,15 @@ LOG_FILE = os.path.expanduser('~/suprema_tablespy.log')
 lock = threading.Lock()
 recv_buf = b''
 
+def log(msg):
+    """Print and log to file."""
+    print(msg)
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+        # Strip ANSI color codes for file
+        import re
+        clean = re.sub(r'\033\[[0-9;]*m', '', msg)
+        f.write(clean + '\n')
+
 # Collected data
 rooms_data = {}  # roomID -> game state
 responses = {}   # store responses by route
