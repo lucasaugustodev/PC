@@ -327,7 +327,7 @@ for idx in test_indices:
     if votes.get('rag') == expected: correct['rag'] += 1
     llm_norm = votes.get('llm','')
     if llm_norm == 'bet': llm_norm = 'raise'
-    if llm_norm == expected: correct['llm'] += 1
+    # llm disabled
 
     tag = '[OK]' if final == expected else '[X]'
 
