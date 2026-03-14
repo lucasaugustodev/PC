@@ -420,71 +420,56 @@ def inject_pomelo(route, body_dict):
         log(f"  [DEBUG] inject error: {e}")
         return f"ERROR: {e}"
 
-log("SUPREMA TABLE SPY - MULTI-ROOM INTEL")
+log("SUPREMA TABLE SPY - PHASE 1: CAPTURE")
 log(f"Log: {LOG_FILE}")
+log("")
+log("Capturando formato do protocolo...")
+log("SAI da mesa e ENTRA de novo pra capturar o JOIN!")
+log("(Esperando 30 segundos...)")
 
-# Wait for SSL traffic so lastSSL gets populated
-log("Aguardando trafico SSL pra capturar o socket...")
-log("(Se nao aparecer nada, clique em algo no app Suprema)")
-time.sleep(5)
+# Phase 1: Capture real client messages for 30 seconds
+for i in range(30):
+    time.sleep(1)
+    if 'apiPlayer.playerHandler.joinGameRoom' in captured_templates:
+        log(f"  JOIN capturado em {i+1}s!")
+        break
+    if 'room.roomHandler.clientMessage' in captured_templates:
+        log(f"  ENTER capturado em {i+1}s!")
+    if i % 10 == 9:
+        log(f"  ... {i+1}s, templates capturados: {list(captured_templates.keys())}")
 
-# Step 1: Request room list for the Grand Union
-log("[1] Requesting room list from GU...")
-result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
-    "clubID": "14625",
-    "unionID": 113,
-    "myClubID": 377039,
-    "myUnionID": 106,
-    "matchID": 0,
-    "stakeRangeID": 1,
-    "matchType": 1,
-    "ver": 7288,
-    "lan": "pt"
-})
-log(f"  Inject result: {result}")
+log(f"\nTemplates capturados: {list(captured_templates.keys())}")
 
-# Wait for response
-time.sleep(3)
+# Show hex of captured templates
+for route, raw in captured_templates.items():
+    log(f"  {route}: type={raw[0]} hex={raw[:30].hex()} ({len(raw)}b)")
 
-# Step 2: Get match list to find specific room IDs
-log("[2] Requesting match list...")
-result = inject_pomelo("apiClubMatch.clubMatchHandler.matchGU", {
-    "unionID": 113,
-    "clubID": 14625,
-    "matchID": 0,
-    "myClubID": 377039,
-    "myUnionID": 106,
-    "stakeRangeID": 0,
-    "ver": 7288,
-    "lan": "pt"
-})
-log(f"  Inject result: {result}")
+# Phase 2: If we got templates, use them to spy
+if not captured_templates:
+    log("\nNenhum template capturado! Precisa sair e entrar numa mesa.")
+    log("Continuando monitoramento passivo...")
+else:
+    log("\n[PHASE 2] Tentando injetar com formato capturado...")
 
-time.sleep(3)
+    # Try inject with type-0 REQUEST format
+    log("\n[1] Requesting room list from GU (type-0 REQUEST)...")
+    result = inject_pomelo("apiPlayer.playerHandler.joinGameRoom", {
+        "clubID": "14625",
+        "unionID": 113,
+        "myClubID": 377039,
+        "myUnionID": 106,
+        "matchID": 0,
+        "stakeRangeID": 1,
+        "matchType": 1,
+        "ver": 7288,
+        "lan": "pt"
+    })
+    log(f"  Inject result: {result}")
+    time.sleep(3)
 
-# Step 3: Try entering specific rooms to get player data
-# We'll try some known room patterns
-log("\n\033[93m[3] Attempting to spy on rooms...\033[0m")
-
-# Try entering rooms we know exist from matchesStatusPushNotify
-# Room format: clubID_matchID
-test_rooms = []
-
-# Collect room IDs from responses
-for key, val in responses.items():
-    if key.startswith('roomList_'):
-        rid = key.replace('roomList_', '')
-        test_rooms.append(rid)
-
-if not test_rooms:
-    # Try common patterns based on what we've seen
-    log("  No rooms found in roomList, trying known patterns...")
-    # From the matchesStatusPushNotify, we saw matchIDs like 43103465, 43100186, etc.
-    test_rooms = [
-        "14625_43103465",
-        "14625_43100186",
-        "14625_43103022",
-    ]
+    # Check if we got rooms from passive monitoring
+    test_rooms = list(responses.keys())
+    test_rooms = [k.replace('roomList_', '') for k in test_rooms if k.startswith('roomList_')]
 
 log(f"  Found {len(test_rooms)} rooms to spy on")
 
