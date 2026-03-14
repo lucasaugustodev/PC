@@ -239,29 +239,13 @@ def hybrid_decide(hero, board, pot, to_call, can_check, num_opps, pos):
             if votes[k] == 'fold':
                 votes[k] = 'check'
 
-    # Rule: TRAP/SLOW-PLAY - monster hand facing BIG bet in BIG pot -> call
+    # Rule: equity < 15% and facing big bet, fold (clear trash)
     bet_ratio = to_call / pot if pot > 0 else 0
-    if is_postflop and equity > 0.90 and facing_bet and bet_ratio > 0.35 and pot > 30:
-        rules_action = 'call'
-    # Rule: monster hand facing small bet or small pot -> raise for value
-    elif is_postflop and equity > 0.90 and facing_bet:
-        rules_action = 'raise'
-    # Rule: monster hand, can check, BIG pot -> check (induce bluff)
-    elif is_postflop and equity > 0.90 and not facing_bet and pot > 40:
-        rules_action = 'check'
-    # Rule: monster hand, can check, small pot -> raise for value
-    elif is_postflop and equity > 0.90 and not facing_bet:
-        rules_action = 'raise'
-    # Rule: strong hand preflop -> raise
-    elif not is_postflop and equity > 0.85:
-        rules_action = 'raise'
-
-    # Rule: equity < 20% and facing big bet, fold
-    if equity < 0.20 and pot_odds > 0.30 and not can_check:
+    if equity < 0.15 and pot_odds > 0.35 and not can_check:
         rules_action = 'fold'
 
-    # Rule: medium hand (70-90%) facing BIG bet (>40% pot) -> call (pot control)
-    if is_postflop and 0.70 < equity <= 0.90 and facing_bet and bet_ratio > 0.40:
+    # Rule: nuts (>95%) facing big bet in big pot -> call (trap only with near-nuts)
+    if is_postflop and equity > 0.95 and facing_bet and bet_ratio > 0.50 and pot > 50:
         rules_action = 'call'
 
     # Combine votes
@@ -325,8 +309,7 @@ for idx in test_indices:
     if final == expected: correct['hybrid'] += 1
     if votes.get('eval7') == expected: correct['eval7'] += 1
     if votes.get('rag') == expected: correct['rag'] += 1
-    llm_norm = votes.get('llm','')
-    if llm_norm == 'bet': llm_norm = 'raise'
+    # llm disabled
     # llm disabled
 
     tag = '[OK]' if final == expected else '[X]'
