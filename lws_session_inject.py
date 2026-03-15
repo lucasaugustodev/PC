@@ -65,7 +65,7 @@ for i in range(15):
     if i % 5 == 4:
         try:
             state = sc.exports_sync.getState()
-            print(f"  [{i+1}s] has_wsi={state['hasWsi']} writes={state['writes']} lastReqId={state['last_req_id']}")
+            print(f"  [{i+1}s] has_wsi={state['hasWsi']} writes={state['writes']} lastReqId={state['lastReqId']}")
         except Exception as e:
             print(f"  [{i+1}s] state error: {e}")
 
@@ -77,7 +77,7 @@ if not state['hasWsi']:
     sess.detach()
     sys.exit(1)
 
-lastId = state['last_req_id']
+lastId = state['lastReqId']
 if lastId == 0:
     lastId = 100
     print(f"No client requests seen. Using starting reqId={lastId+1}")
