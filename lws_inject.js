@@ -80,14 +80,14 @@ Interceptor.attach(ssl_read, {
 });
 
 rpc.exports = {
-    getState: function() {
+    status: function() {
         return {
-            lastReqId: lastReqId,
-            hasWsi: capturedWsi !== null,
-            writes: writeCount
+            rid: lastReqId,
+            wsi: capturedWsi !== null,
+            wc: writeCount
         };
     },
-    injectPomelo: function(route, bodyHexStr, reqId) {
+    inject: function(route, bodyHexStr, reqId) {
         if (!capturedWsi) return 'NO_WSI';
 
         var rb = [];
