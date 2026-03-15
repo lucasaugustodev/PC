@@ -3,7 +3,7 @@ import frida, sys, time, json, subprocess
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 import msgpack
 
-JS = open('C:/Users/PC/lws_inject5.js', 'r').read()
+JS = open('C:/Users/PC/lws_inject6.js', 'r').read()
 
 r = subprocess.check_output('tasklist /FI "IMAGENAME eq SupremaPoker.exe" /FO CSV /NH', shell=True, text=True).strip()
 pids = [int(l.split(',')[1].strip('"')) for l in r.splitlines() if 'SupremaPoker' in l]
