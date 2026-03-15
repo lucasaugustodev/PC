@@ -116,6 +116,7 @@ rpc.exports = {
         p[4] = rb.length;
         for (var i = 0; i < rb.length; i++) p[5+i] = rb[i];
         for (var i = 0; i < bb.length; i++) p[5+rb.length+i] = bb[i];
+        send({t:'CLIENT_REQ', reqId:reqId, route:route, bodyLen:bb.length, bodyStr:'(raw ' + bb.length + 'b)'});
         var wl = p.length;
         var wh = (wl <= 125) ? 6 : 8;
         var ws = new Uint8Array(wh + wl);
