@@ -93,3 +93,36 @@ claude-launcher-web/
 dyad-apps/
 paperclip/
 scoop/
+
+# Sensitive keys
+.anthropic_key
+.groq_key
+
+# Tool configs (local only)
+.basic-memory/
+.claude-mem/
+.cursor/
+.docker/
+.fly/
+.gemini/
+.kiro/
+.lmstudio/
+.local/
+.m2/
+.matplotlib/
+.ollama/
+.openfang/
+.pack/
+.paperclip/
+.playwright-cli/
+.trae-aicc/
+.trae/
+
+# Scripts (local use only)
+lws_inject2.js
+lws_inject3.js
+lws_session2.py
+heretic_save.py
+
+# SSH keys (sensitive)
+.ssh/
