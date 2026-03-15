@@ -109,7 +109,7 @@ tests = [
 for route, desc, body_hex in tests:
     print(f"\n>>> INJECT [{nextId}] {route} ({desc})")
     try:
-        result = sc.exports_sync.inject_pomelo(route, body_hex, nextId)
+        result = sc.exports_sync.injectPomelo(route, body_hex, nextId)
         print(f"  result: {result}")
     except Exception as e:
         print(f"  ERROR: {e}")
