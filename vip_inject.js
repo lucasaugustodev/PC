@@ -96,10 +96,17 @@ rpc.exports = {
     getState: function() {
         return {lastReqId: lastReqId, hasSSL: gameSSL !== null, routes: clientRoutes};
     },
-    injectWithId: function(route, jsonBody, reqId) {
+    injectRaw: function(route, bodyHexStr, reqId) {
         if (!gameSSL) return 'NO_SSL';
         var rb = []; for (var i = 0; i < route.length; i++) rb.push(route.charCodeAt(i));
-        var bb = []; for (var i = 0; i < jsonBody.length; i++) bb.push(jsonBody.charCodeAt(i));
+        // bodyHexStr is space-separated hex bytes, or empty string for no body
+        var bb = [];
+        if (bodyHexStr && bodyHexStr.length > 0) {
+            var parts = bodyHexStr.split(' ');
+            for (var i = 0; i < parts.length; i++) {
+                if (parts[i].length === 2) bb.push(parseInt(parts[i], 16));
+            }
+        }
         var pl = 1 + rb.length + bb.length;
         var p = new Uint8Array(4 + pl);
         p[0] = 0;
