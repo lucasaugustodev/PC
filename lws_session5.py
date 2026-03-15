@@ -196,6 +196,9 @@ if interesting:
         s = json.dumps(obj, default=str, ensure_ascii=False)[:400]
         print(f"  [{mid}] {ev} code={code} {s}")
 
-sc.unload()
-sess.detach()
+try:
+    sc.unload()
+    sess.detach()
+except:
+    pass
 print("\nDone.")
