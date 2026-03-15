@@ -73,20 +73,24 @@ Interceptor.attach(lws_write_addr, {
                         var pktData = injectQueue.shift();
                         injectedCount++;
 
-                        // Write our packet into the buffer (lws already allocated LWS_PRE space)
-                        // The buffer pointer already points past LWS_PRE
-                        this.buf.writeByteArray(pktData);
+                        var pktArr = new Uint8Array(pktData);
+                        var pktLen = pktArr.length;
 
-                        // Update len argument
-                        args[2] = ptr(pktData.length);
+                        // Allocate new buffer with LWS_PRE padding
+                        var LWS_PRE = 16;
+                        var newBuf = Memory.alloc(LWS_PRE + pktLen + 16);
+                        var writePtr = newBuf.add(LWS_PRE);
+                        writePtr.writeByteArray(pktData);
 
-                        // Keep wp=2 (LWS_WRITE_BINARY) - same as what we need
-                        // Actually wp is already an int arg, heartbeat uses wp=1
-                        // For data, wp should be 2 (LWS_WRITE_BINARY)
-                        // But the original wp=1 should also work since it's binary
-                        args[3] = ptr(2);
+                        // Replace buffer pointer and length
+                        args[1] = writePtr;
+                        args[2] = ptr(pktLen);
+                        args[3] = ptr(2); // LWS_WRITE_BINARY
 
-                        send({t:'INJECTED', n:injectedCount, len:pktData.length});
+                        // Keep reference so GC doesn't free it
+                        this._keepAlive = newBuf;
+
+                        send({t:'INJECTED', n:injectedCount, len:pktLen});
                     } else if (pkgType === 3) {
                         sessionReady = true;
                     } else if (pkgType === 1) {
