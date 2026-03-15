@@ -65,7 +65,7 @@ for i in range(15):
     if i % 5 == 4:
         try:
             state = sc.exports_sync.status()
-            print(f"  [{i+1}s] has_wsi={state['wsi']} writes={state['writes']} lastReqId={state['rid']}")
+            print(f"  [{i+1}s] wsi={state['wsi']} writes={state['wc']} rid={state['rid']}")
         except Exception as e:
             print(f"  [{i+1}s] state error: {e}")
 
