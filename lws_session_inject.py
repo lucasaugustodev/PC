@@ -64,12 +64,12 @@ for i in range(15):
     time.sleep(1)
     if i % 5 == 4:
         try:
-            state = sc.exports_sync.getState()
+            state = sc.exports_sync.status()
             print(f"  [{i+1}s] has_wsi={state['hasWsi']} writes={state['writes']} lastReqId={state['lastReqId']}")
         except Exception as e:
             print(f"  [{i+1}s] state error: {e}")
 
-state = sc.exports_sync.getState()
+state = sc.exports_sync.status()
 if not state['hasWsi']:
     print("FAILED: No WSI captured. lws_write not called.")
     print("Client may not be sending through lws_write.")
