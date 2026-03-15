@@ -90,7 +90,11 @@ Interceptor.attach(lws_write_addr, {
                     }
                 } else if (pkgType === 3) {
                     sessionReady = true;
-                    // Only inject on heartbeat AFTER reconnect+login sequence
+                    // If session is established and we haven't just reconnected,
+                    // consider it ready to inject
+                    if (!connectSeen) {
+                        readyToInject = true;
+                    }
                     if (readyToInject && pendingInject) {
                         this.isInjectableHeartbeat = true;
                     }
