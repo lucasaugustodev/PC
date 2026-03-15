@@ -66,3 +66,30 @@ Meus Documentos/
 Saved Games/
 WPS Cloud Files/
 magentic-ui-env/
+
+# Windows system folders
+AppData/
+Cookies/
+Dados de Aplicativos/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Recent/
+Searches/
+SendTo/
+
+# Development tools
+.scoop/
+.agents/
+.apm/
+.icube-remote-ssh/
+.vscode/
+
+# Project specific
+checkpoints/
+claude-launcher-web/
+dyad-apps/
+paperclip/
+scoop/
